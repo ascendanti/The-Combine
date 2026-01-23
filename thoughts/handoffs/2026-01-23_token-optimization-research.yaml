@@ -1,0 +1,160 @@
+session_id: token-optimization-research-20260123
+created_at: 2026-01-23T13:45:00
+context: Phase 10 research on book ingestion + token efficiency + LocalAI stack
+status: PAUSED - Token limit reached, resets 2pm ET
+
+---
+# CRITICAL HANDOFF - Token Optimization Research
+
+## User Hardware
+- CPU: 13th Gen Intel Core i5-13420H (2.10 GHz)
+- RAM: 16GB (15.6 GB usable)
+- GPU: Integrated (no dedicated GPU)
+- OS: Windows 64-bit
+- Note: Gaming PC coming in ~1 month
+
+## What Was Built This Session
+
+### 1. Book Ingestion Pipeline ✅
+- `.claude/scripts/book-ingest.py` - Hierarchical RAG
+- `.claude/scripts/book-query.py` - Query interface
+- `daemon/book_watcher.py` - Auto-detect new PDFs in folder
+- `daemon/controller.py` - MAPE adaptive control loop
+
+### 2. Research Documents Created
+- `thoughts/REPOSITORY-RESEARCH-2026-01-23.md` - 50+ repos categorized
+- `thoughts/LOCALAI-INTEGRATION-PLAN.md` - Full integration architecture
+
+## Key User Priorities
+
+### IMMEDIATE: Token Efficiency
+User observation: "If we reached 100K tokens for research, we're doing something wrong"
+- Need to optimize dragonfly/token-optimizer usage
+- Investigate if hybrid architecture is inefficient
+- Consider LocalAI for bulk processing
+
+### Priority Stack (User Approved)
+1. LocalAI (mudler/LocalAI) - Local LLM, no GPU needed
+2. LocalAGI (mudler/LocalAGI) - Agentic layer
+3. LocalRecall (mudler/LocalRecall) - Vector memory
+
+### Additional Repos to Evaluate
+- VectifyAI/PageIndex - May help with token issues
+- redis/redis vs dragonfly comparison
+- khoj-ai/khoj - Self-hosted RAG
+- Future-House/paper-qa - Academic papers
+
+## Token Efficiency Issues Identified
+
+1. **Research agents used ~100K tokens** - Too expensive
+2. **Dragonfly cache** - Not clear if it's helping
+3. **Token-optimizer MCP** - Not appearing in background tasks
+4. **Hybrid architecture** - May have inefficiencies
+
+## Recommendations for Next Session
+
+### Step 1: Audit Token Usage
+```bash
+# Check token-optimizer cache
+dir %USERPROFILE%\.token-optimizer-cache\
+
+# Check dragonfly status
+docker ps | findstr dragonfly
+```
+
+### Step 2: Try LocalAI (No GPU Needed!)
+```bash
+# CPU-only mode works on your hardware
+docker run -p 8080:8080 localai/localai:latest
+```
+
+### Step 3: Compare Memory Systems
+- Current: daemon/memory.py + dragonfly
+- Option: LocalRecall
+- Need: Benchmark comparison
+
+### Step 4: Reduce Agent Token Burn
+- Don't spawn 7 parallel research agents
+- Use targeted searches instead
+- Cache research results
+
+## Files to Read on Resume
+
+1. `thoughts/LOCALAI-INTEGRATION-PLAN.md` - Full architecture
+2. `thoughts/REPOSITORY-RESEARCH-2026-01-23.md` - Repo taxonomy
+3. `EVOLUTION-PLAN.md` - Updated to 85%, Phase 11 planned
+4. `task.md` - Updated with book pipeline
+
+## RAG Status (GAPS)
+
+| Component | Status |
+|-----------|--------|
+| Chunking | ✅ Done |
+| Storage | ✅ SQLite |
+| Keyword search | ✅ FTS5 |
+| **Embeddings** | ❌ MISSING |
+| **Vector search** | ❌ MISSING |
+| **Semantic retrieval** | ❌ MISSING |
+
+Options to fix:
+A) sentence-transformers (local, free)
+B) OpenAI embeddings (user has API key)
+C) LocalRecall (via LocalAI)
+
+## OpenAI API Key
+User shared: sk-proj-w-aot0... (DO NOT STORE IN FILES)
+Use via .env only if needed
+
+## Next Session Actions
+
+1. [ ] Audit why 100K tokens burned on research
+2. [ ] Test LocalAI on user's hardware (CPU mode)
+3. [ ] Implement embeddings (choose: local vs OpenAI vs LocalRecall)
+4. [ ] Wire book pipeline to use local processing
+5. [ ] Benchmark token savings
+
+## Quick Commands
+
+```bash
+# Start book watcher
+python daemon/book_watcher.py
+
+# Run MAPE controller
+python daemon/controller.py --status
+
+# Check token optimizer
+# (investigate why not in background)
+```
+
+---
+
+## LocalAI Research Results (Agent Completed)
+
+### Key Finding: LocalAI Stack is IDEAL for your setup
+
+**CPU-only performance (no GPU needed):**
+- 7B model Q4: ~11 tokens/sec on Ryzen
+- Your i5-13420H should get similar or better
+
+**Zero token costs** - all inference local
+
+### Quick Start
+```bash
+git clone https://github.com/mudler/LocalAGI
+cd LocalAGI
+docker compose up  # CPU mode, all 3 components
+```
+
+### MCP Support is NATIVE
+LocalAI has built-in MCP since Oct 2025 - can expose n8n workflows as tools
+
+### Integration Points
+1. LocalRecall hybrid search = similar to our daemon/memory.py
+2. LocalAGI agent teaming = could orchestrate multi-agent
+3. Could unify or bridge memory systems
+
+### Full research saved to:
+C:\Users\NEWEMP~1\AppData\Local\Temp\claude\...\tasks\a5a127a.output
+
+---
+END HANDOFF

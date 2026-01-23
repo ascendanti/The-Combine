@@ -1,91 +1,108 @@
 # Current Task Plan
 
 ## Objective
-Evolve Claude instance with autonomous async daemon capabilities.
+Evolve Claude instance with autonomous async daemon capabilities + adaptive learning architecture.
 
-## Status: Phase 5 Complete ✅
+## Status: Phase 10 - Ascension 🔄 IN PROGRESS (85%)
 
-## Completed
-- [x] Created slack-notify.py hook for automatic updates after each response
-- [x] Created slack-send.py for manual/proactive Slack messages
-- [x] Configured .env with Slack webhook URL
-- [x] **Integrated Continuous-Claude**: 48 agents, 116 skills, 12 rules
-- [x] **Integrated SuperClaude**: Confidence-check skill, PM patterns
-- [x] Copied hooks with compiled JS (dist/) for skill activation
-- [x] Set up thoughts/handoffs/ and thoughts/ledgers/ directories
-- [x] Updated settings.local.json with integrated hooks
-- [x] Updated CLAUDE.md with full documentation
-- [x] **Phase 3: Async Daemon** - Created daemon/ with queue.py, runner.py, submit.py
-- [x] **Phase 4: OpenMemory SDK** - Installed and integrated with auto-detection
-- [x] **Phase 5: Validation** - All systems verified working (2026-01-22)
-  - [x] Fixed Skill permissions (all skills now enabled)
-  - [x] OpenMemory backend confirmed active
-  - [x] Daemon queue tested (full lifecycle)
-  - [x] Handoff creation/resume tested
-  - [x] Discovered UTF research library (45+ papers)
+## Completed This Session (2026-01-23)
 
-## Next: Phase 6 - Expansion
-- [x] Validated UTF as unifying framework for personal AI
-- [x] Integrated deep-reading-analyst skill (10+ thinking frameworks)
-- [x] Integrated quant-methodology + risk simulator
-- [x] Added token-efficiency rules (parallel agents by default)
-- [ ] Build Goal Coherence Layer (from UTF validation)
-- [ ] Test quant risk simulator with real data
-- [ ] Set up GitHub async integration
-- [ ] Create module templates for Calendar, Finance, Tasks
+### Book Ingestion Pipeline ✅
+- [x] `book-ingest.py` - Hierarchical RAG for technical documents
+  - Smart chunking preserving formulas/concepts
+  - Multi-level summarization (paragraph → section → chapter → book)
+  - Concept extraction with relationship mapping
+  - Knowledge graph integration
+- [x] `book-query.py` - Query interface for ingested books
+- [x] `book_watcher.py` - File system watcher daemon
+  - Watchdog-based monitoring
+  - Background processing queue
+  - Deduplication via file hashing
+  - Memory system integration
 
-## Integrated Components
+### MAPE Controller Foundation ✅
+- [x] `daemon/controller.py` - Adaptive control system
+  - Monitor-Analyze-Plan-Execute cycle
+  - Metric tracking and trending
+  - Gap analysis (actual vs target)
+  - Action planning with predicted outcomes
+  - Confucius-style strategy introspection
+  - Feedback loop for learning
 
-### From Continuous-Claude
-- **48 agents**: kraken, architect, scout, sleuth, arbiter, oracle, etc.
-- **116 skills**: build, fix, premortem, handoff, tldr-code, etc.
-- **12 rules**: Memory recall, claim verification, delegation, etc.
-- **Hooks**: Skill activation, path rules, post-edit diagnostics
+### Hook Cleanup ✅
+- [x] Consolidated SessionStart hooks into `session-start-clean.py`
 
-### From SuperClaude
-- **Confidence checking**: Pre-execution confidence assessment
-- **Self-check protocol**: Post-implementation validation
-- **Reflexion pattern**: Error learning and prevention
+## Phase 11 Planning (Approved Stack)
 
-## How to Use
+Based on research synthesis - integrating:
+1. **claude-context-extender** - Semantic chunking + retrieval
+2. **Confucius pattern** - Tool/strategy introspection
+3. **MAPE control loop** - Adaptive optimization
 
-### Start Session
+### Next Actions
+1. [ ] Clone claude-context-extender, integrate with book pipeline
+2. [ ] Wire controller.py to book-ingest.py for adaptive chunking
+3. [ ] Add comprehension metrics (semantic coherence scoring)
+4. [ ] Create feedback integration with daemon/decisions.py
+
+## Book Watch Folder
+```
+~/Documents/Claude-Books/
+```
+Drop PDFs here → auto-ingested → queryable via `book-query.py`
+
+## Quick Commands
+
 ```bash
-cd "C:\Users\New Employee\Downloads\Atlas-OS-main\Claude n8n"
-claude
+# Start book watcher daemon
+python daemon/book_watcher.py
+
+# Manually ingest a book
+python .claude/scripts/book-ingest.py "path/to/book.pdf"
+
+# Query books
+python .claude/scripts/book-query.py "gradient descent"
+python .claude/scripts/book-query.py --summary <book_id>
+python .claude/scripts/book-query.py --concepts
+
+# Run MAPE controller cycle
+python daemon/controller.py --cycle
+python daemon/controller.py --status
+
+# Check watcher status
+python daemon/book_watcher.py --status
+python daemon/book_watcher.py --list-books
 ```
 
-### Key Agents
-- `kraken` - TDD implementation
-- `scout` - Codebase exploration
-- `architect` - Feature planning
-- `sleuth` - Bug investigation
+## Architecture Overview
 
-### Key Skills
-- `/build` - Feature development
-- `/fix` - Bug fixing
-- `/premortem` - Risk analysis
-- `create_handoff` - Save session state
+```
+┌─────────────────────────────────────────────────────────────┐
+│  FILE WATCHER (book_watcher.py)                             │
+│  Monitors ~/Documents/Claude-Books/ for new PDFs            │
+├─────────────────────────────────────────────────────────────┤
+│  BOOK INGEST PIPELINE (book-ingest.py)                      │
+│  Docling → Chunking → Summaries → Concepts → KG             │
+├─────────────────────────────────────────────────────────────┤
+│  MAPE CONTROLLER (controller.py)                            │
+│  Monitor metrics → Analyze gaps → Plan actions → Execute    │
+├─────────────────────────────────────────────────────────────┤
+│  STORAGE LAYER                                              │
+│  • books.db (chunks, summaries, concepts)                   │
+│  • knowledge-graph.jsonl (entities, relations)              │
+│  • daemon/memory.py (learnings, decisions)                  │
+├─────────────────────────────────────────────────────────────┤
+│  QUERY INTERFACE (book-query.py)                            │
+│  FTS search → Semantic retrieval → Concept lookup           │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### Slack Commands
+## Dependencies to Install
+
 ```bash
-python .claude/hooks/slack-send.py "Your message"
-python .claude/hooks/slack-send.py "Question?" --question
-```
+# Required
+pip install watchdog docling
 
-## Directory Structure
-```
-Claude n8n/
-├── .claude/
-│   ├── agents/       # 48 agents
-│   ├── skills/       # 116 skills
-│   ├── rules/        # 12 rules
-│   ├── hooks/        # Lifecycle hooks + Slack
-│   ├── scripts/      # Utilities
-│   └── CLAUDE.md     # Instructions
-├── thoughts/
-│   ├── handoffs/     # Session transfers
-│   └── ledgers/      # Continuity state
-├── .env              # Slack webhook
-└── task.md           # This file
+# Already installed
+# token-optimizer-mcp, dragonfly (docker), sqlite3
 ```

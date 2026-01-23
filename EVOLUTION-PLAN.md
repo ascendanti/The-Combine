@@ -202,7 +202,10 @@ See **REFERENCE-TAXONOMY.md** for full analysis of 36 reference frameworks.
 
 ### 10.2 Cross-Session Learning
 - [x] continuous-learning skill added (Stop hook pattern extraction)
-- [ ] Wire continuous-learning as Stop hook
+- [x] Wire continuous-learning as Stop hook (continuous-learning-stop.py)
+- [x] Memory router created (daemon/memory_router.py) - unified interface
+- [x] Knowledge graph MCP added (.mcp.json)
+- [x] Docling installed for PDF parsing
 - [ ] Pattern extraction from outcomes
 - [ ] Failure mode cataloging
 
@@ -211,6 +214,17 @@ See **REFERENCE-TAXONOMY.md** for full analysis of 36 reference frameworks.
 - [ ] Proactive task generation from pattern analysis
 - [ ] Autonomous goal refinement
 - [ ] Self-directed learning
+
+### 10.6 Book Ingestion Pipeline (NEW) ✅ COMPLETE
+- [x] book-ingest.py - Hierarchical RAG for technical documents
+- [x] Smart chunking with formula/concept preservation
+- [x] Hierarchical summarization (paragraph → section → chapter → book)
+- [x] Concept extraction with relationship mapping
+- [x] Knowledge graph integration
+- [x] book_watcher.py - File system watcher daemon
+- [x] Background processing queue
+- [x] Deduplication and status tracking
+- [x] Memory system integration
 
 ### 10.4 Token Optimization (NEW) ✅ COMPLETE
 - [x] token-optimizer-mcp installed (npm install -g @ooples/token-optimizer-mcp)
@@ -228,11 +242,55 @@ See **REFERENCE-TAXONOMY.md** for full analysis of 36 reference frameworks.
 
 ---
 
+---
+
+## Phase 11: Adaptive Learning Architecture 🆕 PLANNED
+
+**Based on research synthesis:** claude-context-extender + Confucius pattern + MAPE control loop
+
+### 11.1 Semantic Context Extension
+- [ ] Integrate claude-context-extender (DanielSuissa/claude-context-extender)
+- [ ] Overlapping chunk boundaries for formula preservation
+- [ ] Query-time semantic retrieval (not full context load)
+- [ ] Integration with dragonfly cache layer
+- [ ] Prompt caching for repeated book references
+
+### 11.2 Confucius Introspection Pattern
+- [ ] Tool/strategy effectiveness tracking
+- [ ] Failure introspection loop (learn from failures)
+- [ ] Proactive tool selection based on past performance
+- [ ] Integration with daemon/decisions.py outcome tracking
+- [ ] Strategy adaptation based on success rates
+
+### 11.3 MAPE Control Loop
+- [ ] daemon/controller.py - Adaptive control system
+- [ ] **Monitor**: Comprehension quality metrics (coherence scores)
+- [ ] **Analyze**: Understanding gaps, error signals
+- [ ] **Plan**: Chunk size adjustment, strategy selection
+- [ ] **Execute**: Apply new parameters, measure results
+- [ ] Feedback-driven prompt refinement
+- [ ] Stability guarantees via contraction theory (optional)
+
+### 11.4 Comprehension Metrics
+- [ ] BLEU/ROUGE scores for summary quality
+- [ ] Semantic coherence scoring
+- [ ] Token efficiency metrics (comprehension/token)
+- [ ] Difficulty estimation for adaptive chunking
+- [ ] Quality dashboard integration
+
+### 11.5 Control Theory Integration
+- [ ] PyDeePC for model-free predictive control (optional)
+- [ ] PID-style chunk size optimization
+- [ ] Convergence monitoring
+- [ ] Performance bounds tracking
+
+---
+
 ## Current Status
 
-**Phase:** 10 - Ascension 🔄 IN PROGRESS (70%)
-**Completed:** Self-improvement engine, thinking frameworks, continuous-learning skill, token optimization, hybrid architecture
-**Next Action:** Commit to The-Combine GitHub, create dev story narrative
+**Phase:** 10 - Ascension 🔄 IN PROGRESS (85%)
+**Completed:** Self-improvement engine, thinking frameworks, continuous-learning skill, token optimization, hybrid architecture, book ingestion pipeline
+**Next Action:** Complete Phase 10.3 emergent behaviors, then begin Phase 11
 
 ## Discovered Resources
 
@@ -257,6 +315,7 @@ Claude n8n/
 │   ├── runner.py             # ✅ Claude spawner daemon
 │   ├── submit.py             # ✅ Easy task submission
 │   ├── memory.py             # ✅ OpenMemory SDK integration
+│   ├── memory_router.py      # ✅ Unified memory interface
 │   ├── approvals.py          # ✅ Human sign-off queue
 │   ├── coherence.py          # ✅ Goal Coherence Layer (UTF)
 │   ├── registry.py           # ✅ Module Registry (cross-domain)
@@ -266,6 +325,8 @@ Claude n8n/
 │   ├── decisions.py          # ✅ Decision engine with uncertainty
 │   ├── metacognition.py      # ✅ Self-awareness module
 │   ├── self_improvement.py   # ✅ Phase 10 thinking frameworks
+│   ├── book_watcher.py       # ✅ PDF folder watcher daemon
+│   ├── books.db              # ✅ Book chunks + summaries + concepts
 │   ├── modules/              # ✅ Domain modules
 │   │   ├── base.py           # BaseModule + Finance/Calendar/Tasks
 │   │   └── __init__.py
@@ -274,6 +335,10 @@ Claude n8n/
 │   ├── mcp_server.py         # ✅ MCP protocol server
 │   ├── dashboard.html        # ✅ Web monitoring UI
 │   └── *.db                  # SQLite databases
+├── .claude/scripts/          # ✅ Utility scripts
+│   ├── book-ingest.py        # ✅ Hierarchical book RAG pipeline
+│   ├── book-query.py         # ✅ Query ingested books
+│   └── docling-ingest.py     # ✅ Document → knowledge graph
 ├── thoughts/                 # ✅ Handoffs & ledgers
 ├── EVOLUTION-PLAN.md         # THIS FILE
 ├── REFERENCE-TAXONOMY.md     # Framework analysis

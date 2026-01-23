@@ -37,12 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo [SuperClaude+Continuous] Session started - check thoughts/handoffs/ for previous state",
-            "timeout": 2
-          },
-          {
-            "type": "command",
-            "command": "python .claude/hooks/memory-recall-start.py 2>nul || echo Memory ready",
+            "command": "python .claude/hooks/session-start-clean.py 2>nul || echo Session ready",
             "timeout": 5
           }
         ]
@@ -61,8 +56,13 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Read|Edit|Write",
+        "matcher": "Read|Edit|Write|Grep|Glob",
         "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/smart-tool-redirect.py 2>nul || true",
+            "timeout": 3
+          },
           {
             "type": "command",
             "command": "node .claude/hooks/dist/path-rules.mjs 2>nul || true",
@@ -105,6 +105,11 @@
             "type": "command",
             "command": "python .claude/hooks/memory-store-stop.py 2>nul || true",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python .claude/hooks/continuous-learning-stop.py 2>nul || true",
+            "timeout": 15
           }
         ]
       }
