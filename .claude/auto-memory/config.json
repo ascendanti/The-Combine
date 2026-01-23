@@ -1,0 +1,5 @@
+{
+  "triggerMode": "default",
+  "autoSync": true,
+  "maxDirtyFiles": 50
+}

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  dragonfly-cache:
+    image: docker.dragonflydb.io/dragonflydb/dragonfly:latest
+    container_name: dragonfly-cache
+    ports:
+      - "6379:6379"
+    command:
+      - --cache_mode=true
+      - --maxmemory=4gb
+      - --proactor_threads=4
+      - --dbfilename=dump.rdb
+      - --dir=/data
+    volumes:
+      - dragonfly_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  dragonfly_data:
+    driver: local
+
+# Usage:
+#   docker-compose up -d        # Start Dragonfly cache
+#   docker-compose down         # Stop Dragonfly cache
+#   docker-compose logs -f      # View logs
+#
+# Benchmark (from Dragonfly):
+#   25x faster than Redis
+#   3.8M QPS peak throughput
+#   30% more memory efficient

@@ -1,0 +1,124 @@
+{
+  "env": {
+    "CLAUDE_PROJECT_DIR": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Claude n8n",
+    "ATLAS_ROOT": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Atlas-OS-main",
+    "UTF_RESEARCH": "C:\\Users\\New Employee\\Desktop\\UTF",
+    "REFERENCE_FRAMEWORKS": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Atlas-OS-main\\Reverse Engineer",
+    "MALAZAN_DIR": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Malazan"
+  },
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Edit",
+      "Write",
+      "Read",
+      "Glob",
+      "Grep",
+      "Task",
+      "WebSearch",
+      "mcp__claude_ai_n8n__get_workflow_details",
+      "mcp__claude_ai_n8n__search_workflows",
+      "mcp__claude_ai_n8n__execute_workflow",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:npmjs.com)",
+      "WebFetch(domain:pypi.org)",
+      "WebFetch(domain:docs.python.org)",
+      "WebFetch(domain:nodejs.org)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebFetch(domain:anthropic.com)",
+      "WebFetch(domain:dev.to)",
+      "Skill"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo [SuperClaude+Continuous] Session started - check thoughts/handoffs/ for previous state",
+            "timeout": 2
+          },
+          {
+            "type": "command",
+            "command": "python .claude/hooks/memory-recall-start.py 2>nul || echo Memory ready",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/dist/skill-activation-prompt.mjs 2>nul || echo Skills ready",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/dist/path-rules.mjs 2>nul || true",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/dist/post-edit-diagnostics.mjs 2>nul || true",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/post-tool-use-tracker.py 2>nul || true",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/stop-memory-sync.py 2>nul || true",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python .claude/hooks/memory-store-stop.py 2>nul || true",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/pre-compact-handoff.py 2>nul || true",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

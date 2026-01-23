@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Daemon Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #30363d; margin-bottom: 20px; }
+        h1 { font-size: 24px; }
+        .status { display: flex; align-items: center; gap: 8px; }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #238636; }
+        .status-dot.offline { background: #f85149; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; }
+        .card h2 { font-size: 16px; margin-bottom: 15px; color: #58a6ff; }
+        .stat { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #21262d; }
+        .stat:last-child { border-bottom: none; }
+        .stat-label { color: #8b949e; }
+        .stat-value { font-weight: 600; }
+        .list { max-height: 200px; overflow-y: auto; }
+        .list-item { padding: 10px; border-bottom: 1px solid #21262d; display: flex; justify-content: space-between; align-items: center; }
+        .list-item:last-child { border-bottom: none; }
+        .badge { font-size: 12px; padding: 2px 8px; border-radius: 12px; background: #21262d; }
+        .badge.high { background: #da3633; }
+        .badge.normal { background: #1f6feb; }
+        .badge.low { background: #238636; }
+        .input-group { display: flex; gap: 10px; margin-top: 15px; }
+        input[type="text"] { flex: 1; padding: 8px 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #c9d1d9; }
+        button { padding: 8px 16px; background: #238636; border: none; border-radius: 6px; color: white; cursor: pointer; }
+        button:hover { background: #2ea043; }
+        .refresh { background: #21262d; }
+        .refresh:hover { background: #30363d; }
+        .chart { height: 100px; display: flex; align-items: flex-end; gap: 4px; padding-top: 10px; }
+        .bar { flex: 1; background: #1f6feb; border-radius: 2px 2px 0 0; min-height: 4px; }
+        .error { color: #f85149; padding: 10px; background: rgba(248, 81, 73, 0.1); border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Claude Daemon Dashboard</h1>
+            <div class="status">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Connecting...</span>
+                <button class="refresh" onclick="refreshAll()">Refresh</button>
+            </div>
+        </header>
+
+        <div class="grid">
+            <!-- Tasks -->
+            <div class="card">
+                <h2>Task Queue</h2>
+                <div id="tasksStats">
+                    <div class="stat"><span class="stat-label">Pending</span><span class="stat-value" id="tasksPending">-</span></div>
+                    <div class="stat"><span class="stat-label">In Progress</span><span class="stat-value" id="tasksProgress">-</span></div>
+                    <div class="stat"><span class="stat-label">Completed Today</span><span class="stat-value" id="tasksCompleted">-</span></div>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="newTask" placeholder="New task...">
+                    <button onclick="submitTask()">Submit</button>
+                </div>
+                <div class="list" id="tasksList" style="margin-top: 15px;"></div>
+            </div>
+
+            <!-- Goals -->
+            <div class="card">
+                <h2>Goal Hierarchy</h2>
+                <div id="goalsStats">
+                    <div class="stat"><span class="stat-label">Long-term</span><span class="stat-value" id="goalsLong">-</span></div>
+                    <div class="stat"><span class="stat-label">Medium-term</span><span class="stat-value" id="goalsMedium">-</span></div>
+                    <div class="stat"><span class="stat-label">Short-term</span><span class="stat-value" id="goalsShort">-</span></div>
+                </div>
+                <div class="list" id="goalsList" style="margin-top: 15px;"></div>
+            </div>
+
+            <!-- Capabilities -->
+            <div class="card">
+                <h2>Capabilities</h2>
+                <div class="list" id="capabilitiesList"></div>
+            </div>
+
+            <!-- Knowledge Gaps -->
+            <div class="card">
+                <h2>Knowledge Gaps</h2>
+                <div class="list" id="gapsList"></div>
+            </div>
+
+            <!-- Calibration -->
+            <div class="card">
+                <h2>Confidence Calibration</h2>
+                <div id="calibrationStats">
+                    <div class="stat"><span class="stat-label">Accuracy</span><span class="stat-value" id="calAccuracy">-</span></div>
+                    <div class="stat"><span class="stat-label">Avg Confidence</span><span class="stat-value" id="calConfidence">-</span></div>
+                    <div class="stat"><span class="stat-label">Calibration</span><span class="stat-value" id="calStatus">-</span></div>
+                </div>
+            </div>
+
+            <!-- Domain Context -->
+            <div class="card">
+                <h2>Domain Context</h2>
+                <div id="contextList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000';
+        let isOnline = false;
+
+        async function fetchAPI(endpoint) {
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`);
+                return await response.json();
+            } catch (e) {
+                return { error: e.message };
+            }
+        }
+
+        async function postAPI(endpoint, data) {
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                return await response.json();
+            } catch (e) {
+                return { error: e.message };
+            }
+        }
+
+        async function checkHealth() {
+            const result = await fetchAPI('/health');
+            isOnline = !result.error;
+            document.getElementById('statusDot').className = 'status-dot' + (isOnline ? '' : ' offline');
+            document.getElementById('statusText').textContent = isOnline ? 'Online' : 'Offline';
+        }
+
+        async function loadTasks() {
+            const result = await fetchAPI('/tasks');
+            if (result.error) return;
+
+            const pending = result.tasks.filter(t => t.status === 'pending').length;
+            const inProgress = result.tasks.filter(t => t.status === 'in_progress').length;
+            const completed = result.tasks.filter(t => t.status === 'completed').length;
+
+            document.getElementById('tasksPending').textContent = pending;
+            document.getElementById('tasksProgress').textContent = inProgress;
+            document.getElementById('tasksCompleted').textContent = completed;
+
+            const list = document.getElementById('tasksList');
+            list.innerHTML = result.tasks.slice(0, 5).map(t => `
+                <div class="list-item">
+                    <span>${t.prompt.substring(0, 40)}${t.prompt.length > 40 ? '...' : ''}</span>
+                    <span class="badge ${t.priority}">${t.status}</span>
+                </div>
+            `).join('');
+        }
+
+        async function loadGoals() {
+            const result = await fetchAPI('/goals');
+            if (result.error) return;
+
+            const counts = { long: 0, medium: 0, short: 0, task: 0 };
+            result.goals.forEach(g => counts[g.timeframe]++);
+
+            document.getElementById('goalsLong').textContent = counts.long;
+            document.getElementById('goalsMedium').textContent = counts.medium;
+            document.getElementById('goalsShort').textContent = counts.short + counts.task;
+
+            const list = document.getElementById('goalsList');
+            list.innerHTML = result.goals.slice(0, 5).map(g => `
+                <div class="list-item">
+                    <span>${g.title}</span>
+                    <span class="badge">${g.timeframe}</span>
+                </div>
+            `).join('');
+        }
+
+        async function loadCapabilities() {
+            const result = await fetchAPI('/capabilities');
+            if (result.error) return;
+
+            const list = document.getElementById('capabilitiesList');
+            list.innerHTML = result.capabilities.map(c => `
+                <div class="list-item">
+                    <span>${c.name}</span>
+                    <span class="badge">${c.level}</span>
+                </div>
+            `).join('') || '<div class="list-item">No capabilities assessed</div>';
+        }
+
+        async function loadGaps() {
+            const result = await fetchAPI('/gaps');
+            if (result.error) return;
+
+            const list = document.getElementById('gapsList');
+            list.innerHTML = result.gaps.map(g => `
+                <div class="list-item">
+                    <span>${g.topic}</span>
+                    <span class="badge">${g.domain}</span>
+                </div>
+            `).join('') || '<div class="list-item">No gaps identified</div>';
+        }
+
+        async function loadCalibration() {
+            const result = await fetchAPI('/calibration');
+            if (result.error && result.error !== 'No resolved predictions to analyze') return;
+
+            if (result.total_predictions) {
+                document.getElementById('calAccuracy').textContent = (result.overall_accuracy * 100).toFixed(1) + '%';
+                document.getElementById('calConfidence').textContent = (result.average_confidence * 100).toFixed(1) + '%';
+                document.getElementById('calStatus').textContent = result.overconfident ? 'Overconfident' : result.underconfident ? 'Underconfident' : 'Calibrated';
+            } else {
+                document.getElementById('calAccuracy').textContent = 'N/A';
+                document.getElementById('calConfidence').textContent = 'N/A';
+                document.getElementById('calStatus').textContent = 'No data';
+            }
+        }
+
+        async function loadContext() {
+            const result = await fetchAPI('/context');
+            if (result.error) return;
+
+            const list = document.getElementById('contextList');
+            list.innerHTML = Object.entries(result).map(([domain, ctx]) => `
+                <div class="list-item">
+                    <span>${domain}</span>
+                    <span class="badge">${ctx.constraint || 'normal'}</span>
+                </div>
+            `).join('');
+        }
+
+        async function submitTask() {
+            const input = document.getElementById('newTask');
+            const prompt = input.value.trim();
+            if (!prompt) return;
+
+            const result = await postAPI('/tasks', { prompt });
+            if (!result.error) {
+                input.value = '';
+                loadTasks();
+            }
+        }
+
+        function refreshAll() {
+            checkHealth();
+            loadTasks();
+            loadGoals();
+            loadCapabilities();
+            loadGaps();
+            loadCalibration();
+            loadContext();
+        }
+
+        // Initial load
+        refreshAll();
+
+        // Auto-refresh every 30 seconds
+        setInterval(refreshAll, 30000);
+    </script>
+</body>
+</html>

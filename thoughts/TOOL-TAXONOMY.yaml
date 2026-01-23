@@ -1,0 +1,339 @@
+# Tool & Framework Taxonomy
+# Created: 2026-01-23
+# Purpose: Structured comparison for Phase 10 evolution decisions
+# Access: Read this file when selecting tools for specific tasks
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-01-23"
+  decision_principle: "Select tool with best benchmark for task, swap out inferior options"
+
+# =============================================================================
+# PRIORITY 1: TOKEN OPTIMIZATION (Critical for Phase 10)
+# =============================================================================
+token_optimization:
+  priority: CRITICAL
+  rationale: "Token efficiency is the bottleneck - enables more learning per session"
+
+  tools:
+    token-optimizer-mcp:
+      repo: "https://github.com/ooples/token-optimizer-mcp"
+      status: INSTALLED
+      benchmark: "60-90% token reduction, 38K+ ops tested"
+      features:
+        - "65 specialized tools (smart_read, smart_grep, etc.)"
+        - "Brotli compression (2-4x typical, up to 82x)"
+        - "SQLite persistent cache"
+        - "tiktoken for accurate counting"
+        - "7-phase hook system"
+        - "Multi-tier cache (L1/L2/L3)"
+        - "ML-based predictive caching (91% reduction)"
+      install: "npm install -g @ooples/token-optimizer-mcp"
+      integration: "Auto-hooks for Claude Code/Desktop/Cursor/Cline"
+      decision: "PRIMARY - use for all token optimization"
+
+    claudelytics:
+      repo: "https://github.com/nwiizo/claudelytics"
+      status: NOT_INSTALLED
+      benchmark: "Real-time tracking, Rust performance"
+      features:
+        - "Real-time token consumption tracking"
+        - "Cost projections"
+        - "Session-level breakdowns"
+        - "Daily/session reporting"
+      install: "cargo install claudelytics"
+      integration: "Complement to token-optimizer for monitoring"
+      decision: "INSTALL - for visibility into token usage patterns"
+
+# =============================================================================
+# PRIORITY 2: MEMORY SYSTEMS (Evaluate and swap if better option exists)
+# =============================================================================
+memory_systems:
+  priority: HIGH
+  rationale: "Cross-session learning requires persistent memory with good benchmarks"
+  current_solution: "daemon/memory.py with OpenMemory/SQLite backends"
+
+  candidates:
+    dragonfly:
+      repo: "https://github.com/dragonflydb/dragonfly"
+      status: CLONED
+      type: "In-memory datastore (Redis/Memcached compatible)"
+      benchmark: "25x faster than Redis, 1.8M ops/sec"
+      features:
+        - "Multi-threaded shared-nothing architecture"
+        - "Redis + Memcached API compatible"
+        - "Persistent storage options"
+        - "Low memory footprint"
+      use_case: "High-performance caching layer"
+      decision: "EVALUATE - potential replacement for SQLite cache layer"
+
+    localrecall:
+      repo: "https://github.com/mudler/LocalRecall"
+      status: NOT_CLONED
+      type: "Local RAG memory layer"
+      features:
+        - "RESTful API for knowledge management"
+        - "Multiple vector DB backends (Chromem, PostgreSQL)"
+        - "PDF/Markdown/text ingestion"
+        - "MCP server support"
+        - "External source monitoring (web, git, sitemaps)"
+        - "Hybrid search (BM25 + semantic)"
+      use_case: "Full RAG pipeline with MCP integration"
+      decision: "HIGH PRIORITY - best local memory option for Claude Code"
+
+    openmemory:
+      repo: "https://github.com/mem0ai/openmemory"
+      status: INSTALLED
+      type: "Cloud-first memory SDK"
+      features:
+        - "Semantic search"
+        - "Async API"
+        - "User-scoped memories"
+      limitation: "Cloud dependency, async complexity"
+      decision: "CURRENT - evaluate swap to LocalRecall"
+
+    khoj:
+      repo: "https://github.com/khoj-ai/khoj"
+      status: NOT_CLONED
+      type: "Personal AI with memory"
+      features:
+        - "PDF support"
+        - "Local or cloud"
+        - "Semantic search"
+        - "Multi-modal (text, images)"
+      decision: "EVALUATE - alternative to LocalRecall"
+
+# =============================================================================
+# PRIORITY 3: LOCAL LLM INFERENCE (Reduce token costs)
+# =============================================================================
+local_inference:
+  priority: HIGH
+  rationale: "Local inference eliminates API costs for certain tasks"
+
+  stack:
+    localai:
+      repo: "https://github.com/mudler/LocalAI"
+      status: NOT_CLONED
+      type: "Drop-in OpenAI replacement"
+      benchmark: "Zero token cost, local execution"
+      features:
+        - "GGUF model support (llama.cpp)"
+        - "OpenAI API compatible"
+        - "MCP support"
+        - "Whisper transcription"
+        - "Stable Diffusion"
+        - "CPU-only option (no GPU required)"
+        - "P2P distributed inference"
+      use_case: "Base inference layer for local processing"
+      decision: "INSTALL - foundation for local processing"
+
+    localagi:
+      repo: "https://github.com/mudler/LocalAGI"
+      status: NOT_CLONED
+      type: "Agent orchestration on LocalAI"
+      features:
+        - "Multi-agent coordination"
+        - "Agent orchestration platform"
+        - "Built on LocalAI"
+      use_case: "Delegate sub-tasks to local agents"
+      decision: "INSTALL - after LocalAI is working"
+
+# =============================================================================
+# PRIORITY 4: DOCUMENT PROCESSING (PDF/Academic Papers)
+# =============================================================================
+document_processing:
+  priority: HIGH
+  rationale: "Scientific paper comprehension needed for benchmarking tools"
+
+  tools:
+    docling:
+      repo: "https://github.com/DS4SD/docling"
+      status: NOT_CLONED
+      benchmark: "50.9k stars, MIT license"
+      features:
+        - "Advanced PDF parsing"
+        - "Layout recognition"
+        - "Table extraction"
+        - "Formula recognition"
+        - "Local execution"
+        - "LLM integration"
+      use_case: "Primary PDF processing"
+      decision: "INSTALL - best PDF parser for academic papers"
+
+    llamaindex:
+      repo: "https://github.com/run-llama/llama_index"
+      status: NOT_CLONED
+      type: "Data framework for LLM apps"
+      features:
+        - "Document ingestion"
+        - "Index creation"
+        - "Query interface"
+        - "Multiple vector stores"
+      use_case: "RAG pipeline orchestration"
+      decision: "EVALUATE - if needed beyond Docling"
+
+    paperqa:
+      repo: "https://github.com/whitead/paper-qa"
+      status: NOT_CLONED
+      type: "LLM QA on scientific papers"
+      features:
+        - "Citation-backed answers"
+        - "Multi-paper synthesis"
+        - "Scientific paper focus"
+      use_case: "Research paper Q&A"
+      decision: "INSTALL - for UTF research library integration"
+
+    haystack:
+      repo: "https://github.com/deepset-ai/haystack"
+      status: NOT_CLONED
+      type: "LLM orchestration framework"
+      features:
+        - "RAG pipelines"
+        - "Document processing"
+        - "Agent building"
+      decision: "DEFER - LlamaIndex covers similar ground"
+
+# =============================================================================
+# PRIORITY 5: CODE SEARCH & ANALYSIS
+# =============================================================================
+code_analysis:
+  priority: MEDIUM
+  rationale: "Efficient code search reduces token usage on codebase exploration"
+
+  tools:
+    deepcontext_mcp:
+      repo: "https://github.com/Wildcard-Official/deepcontext-mcp"
+      status: NOT_CLONED
+      type: "Symbol-aware semantic search"
+      features:
+        - "AST-based indexing"
+        - "Semantic code search"
+        - "MCP server"
+        - "Token-efficient results"
+      use_case: "Replace grep for code exploration"
+      decision: "INSTALL - MCP integration for code search"
+
+    ultrarag:
+      repo: "https://github.com/IAAR-Shanghai/UltraRAG"
+      status: NOT_CLONED
+      type: "Advanced RAG framework"
+      features:
+        - "Multi-strategy retrieval"
+        - "Knowledge graph integration"
+        - "Hybrid search"
+      decision: "EVALUATE - if LocalRecall insufficient"
+
+# =============================================================================
+# SKILLS & FRAMEWORKS (Already integrated or to evaluate)
+# =============================================================================
+skills_frameworks:
+  priority: MEDIUM
+
+  integrated:
+    deep_reading_analyst:
+      location: ".claude/skills/deep-reading-analyst/"
+      status: INTEGRATED
+      features:
+        - "10 thinking frameworks"
+        - "SCQA, 5W2H, Critical, Inversion"
+        - "Mental Models, First Principles, Systems Thinking, Six Hats"
+      use_case: "Self-analysis at low token cost"
+
+    continuous_learning:
+      location: ".claude/skills/continuous-learning/"
+      status: INTEGRATED_NOT_WIRED
+      features:
+        - "Pattern extraction at session end"
+        - "Stop hook integration"
+        - "Auto-save to ~/.claude/skills/learned/"
+      next_step: "Wire as Stop hook"
+
+  to_evaluate:
+    wardley_map_library:
+      repo: "https://github.com/tractorjuice/Wardley-Map-Library.git"
+      type: "Strategic mapping"
+      features:
+        - "Wardley Map analysis"
+        - "Strategy visualization"
+        - "Component mapping"
+      use_case: "Strategic planning for evolution"
+      decision: "CLONE - for strategic analysis capability"
+
+    everything_claude_code:
+      location: "../everything-claude-code-main/"
+      status: ANALYZED
+      overlap: "HIGH with current setup"
+      unique_value:
+        - "Cross-platform Node.js scripts"
+        - "eval-harness for verification"
+        - "strategic-compact for manual compaction"
+
+# =============================================================================
+# QUANTUM COMPUTING (Classification requested by user)
+# =============================================================================
+quantum_computing:
+  priority: LOW
+  rationale: "Future capability - classify now, integrate later"
+
+  frameworks:
+    # TODO: User to provide specific repos for classification
+    placeholder:
+      note: "Awaiting user's quantum computing repo list"
+      categories_to_create:
+        - "Quantum simulators"
+        - "Quantum ML"
+        - "Quantum optimization"
+        - "Quantum cryptography"
+
+# =============================================================================
+# DECISION MATRIX
+# =============================================================================
+decision_matrix:
+  immediate_actions:
+    - action: "token-optimizer-mcp"
+      status: "DONE - installed"
+      impact: "60-90% token reduction"
+
+    - action: "LocalRecall"
+      status: "TODO"
+      impact: "Better memory than OpenMemory, MCP native"
+
+    - action: "Docling"
+      status: "TODO"
+      impact: "PDF parsing for research papers"
+
+    - action: "LocalAI + LocalAGI"
+      status: "TODO"
+      impact: "Zero-cost local inference for sub-tasks"
+
+  evaluation_needed:
+    - candidate: "dragonfly vs SQLite cache"
+      question: "Is 25x speedup worth the complexity?"
+
+    - candidate: "LocalRecall vs OpenMemory"
+      question: "Run benchmarks on our workload"
+
+  defer:
+    - item: "Quantum computing frameworks"
+      reason: "Not blocking Phase 10"
+
+    - item: "Haystack"
+      reason: "Covered by LlamaIndex/LocalRecall"
+
+# =============================================================================
+# USAGE GUIDE
+# =============================================================================
+usage:
+  how_to_select:
+    1: "Identify task category (token optimization, memory, PDF, etc.)"
+    2: "Check decision_matrix.immediate_actions for prioritized tools"
+    3: "If tool status is INSTALLED, use it"
+    4: "If NOT_CLONED, clone and evaluate benchmarks first"
+    5: "Track performance, swap out if better option found"
+
+  recall_command: |
+    # Quick recall of this taxonomy
+    cat thoughts/TOOL-TAXONOMY.yaml | grep -A5 "decision:"
+
+    # Or search for specific category
+    cat thoughts/TOOL-TAXONOMY.yaml | grep -A20 "memory_systems:"

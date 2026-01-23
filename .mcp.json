@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "token-optimizer": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@ooples/token-optimizer-mcp"
+      ],
+      "env": {
+        "TOKEN_OPTIMIZER_CACHE_DIR": "C:\\Users\\New Employee\\.token-optimizer-cache"
+      }
+    }
+  }
+}
