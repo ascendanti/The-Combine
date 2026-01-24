@@ -1,0 +1,112 @@
+---
+date: 2026-01-24T00:00:00
+type: session-handoff
+status: pausing
+phase: "11 - UTF Knowledge Architecture"
+---
+
+# Handoff: Autonomous Ingest + UTF Integration
+
+## Completed This Session
+
+### 1. Docker Autonomous Ingest Container
+- Built and running: `autonomous-ingest` container
+- Processing 44 PDFs from GateofTruth folder
+- Uses LocalAI (Mistral 7B) - FREE
+- Dependencies: markitdown[pdf], pymupdf, watchdog
+- Notifications: only on completion, not per-file start
+
+### 2. UTF Research OS Spec
+- COMPLETE at `specs/UTF-RESEARCH-OS-SPEC.md` (61KB, 2121 lines)
+- All 10 deliverables + MVP Checklist
+- Ready for implementation
+
+### 3. Fixes Applied
+- book_watcher.py: Unicode encoding (UTF-8 stdout)
+- book_watcher.py: watchdog import fallback
+- autonomous_ingest.py: BOOK_WATCH_FOLDER env var support
+- autonomous_ingest.py: removed per-file notification
+- Dockerfile: added PDF dependencies
+- docker-compose.yaml: added autonomous-ingest service
+- .env: added Telegram credentials
+
+### 4. Git Commits
+- `c1d501d`: UTF Research OS Spec + Book Watcher fixes
+- `f5c0c31`: Autonomous PDF ingest container + dependencies
+
+## Docker Status
+```
+RUNNING:
+- localai (Mistral 7B) - healthy
+- dragonfly-cache (8GB) - healthy
+- kg-summary-worker - healthy
+- synthesis-worker - healthy
+- autonomous-ingest - processing 44 PDFs
+```
+
+## Task Queue (Paused)
+
+| Priority | Task | Status |
+|----------|------|--------|
+| 1 | UTF taxonomy → autonomous_ingest integration | TODO |
+| 2 | Token efficiency optimization | PAUSED |
+| 3 | Docker worker enhancements | PAUSED |
+| 4 | LocalAI integration improvements | PAUSED |
+
+## UTF Taxonomy Integration (TODO)
+
+The UTF spec is complete but NOT YET integrated into autonomous_ingest.py.
+
+### What Needs Doing
+1. Update autonomous_ingest.py to extract according to UTF schema:
+   - L0-L6 abstraction levels
+   - Node types: Source, Excerpt, Claim, Concept, Model, Framework
+   - Edge types: cites, supports, contradicts, etc.
+   - 7-slot comprehension scaffold
+   - Assumption ledger
+   - Evidence grades
+
+2. Update Obsidian vault structure to match UTF spec:
+   - Folders: 00_Sources/, 01_Excerpts/, 02_Claims/, etc.
+   - Templates with YAML frontmatter
+   - Wikilinks for relationships
+
+3. Use UTF operators in extraction:
+   - ATOMIZE (excerpt → claims)
+   - DEFINE (claims → concepts)
+   - MODELIZE (concepts → models)
+
+### Implementation Notes
+- LocalAI can do the extraction with structured prompts
+- Reference: `specs/UTF-RESEARCH-OS-SPEC.md` Section 10 (Implementation Notes)
+- MVP subset: Source, Claim, Concept nodes + basic edges
+
+## Resume Instructions
+
+1. Check autonomous-ingest container:
+   ```bash
+   docker logs autonomous-ingest --tail 50
+   ```
+
+2. If PDFs finished processing, proceed with UTF integration
+
+3. Key files to modify:
+   - `daemon/autonomous_ingest.py` - add UTF schema extraction
+   - `specs/UTF-RESEARCH-OS-SPEC.md` - reference for schema
+
+4. Telegram bot is "Hohenheim" - same credentials
+
+## Quick Commands
+```bash
+# Check ingest progress
+docker logs autonomous-ingest --tail 50
+
+# Check ingest status
+docker exec autonomous-ingest python autonomous_ingest.py --status
+
+# Query ingested content
+docker exec autonomous-ingest python autonomous_ingest.py --query "continual learning"
+
+# Restart if needed
+docker-compose up -d --force-recreate autonomous-ingest
+```
