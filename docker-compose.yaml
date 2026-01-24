@@ -8,9 +8,9 @@ services:
       - "6379:6379"
     command:
       - --cache_mode=true
-      - --maxmemory=4gb
-      - --proactor_threads=4
-      - --dbfilename=dump.rdb
+      - --maxmemory=8gb
+      - --proactor_threads=8
+      - --dbfilename=dump
       - --dir=/data
     volumes:
       - dragonfly_data:/data
@@ -21,16 +21,96 @@ services:
       timeout: 5s
       retries: 3
 
+  localai:
+    image: localai/localai:latest
+    container_name: localai
+    ports:
+      - "8080:8080"
+    volumes:
+      - localai_models:/models
+    environment:
+      - THREADS=4
+      - CONTEXT_SIZE=2048
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  kg-summary-worker:
+    build:
+      context: ./daemon
+      dockerfile: Dockerfile
+    container_name: kg-summary-worker
+    command: python kg_summary_worker.py --watch --interval 7200
+    volumes:
+      - ./daemon:/app
+      - ~/.claude/memory:/root/.claude/memory
+    environment:
+      - LOCALAI_URL=http://localai:8080/v1
+    depends_on:
+      localai:
+        condition: service_healthy
+    restart: unless-stopped
+
+  synthesis-worker:
+    build:
+      context: ./daemon
+      dockerfile: Dockerfile
+    container_name: synthesis-worker
+    command: python synthesis_worker.py --watch --interval 24
+    volumes:
+      - ./daemon:/app
+      - ./.claude:/root/.claude
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LOCALAI_URL=http://localai:8080/v1
+    depends_on:
+      localai:
+        condition: service_healthy
+    restart: unless-stopped
+
+  autonomous-ingest:
+    build:
+      context: ./daemon
+      dockerfile: Dockerfile
+    container_name: autonomous-ingest
+    command: python autonomous_ingest.py --watch --interval 300
+    volumes:
+      - ./daemon:/app
+      - ~/.claude/memory:/root/.claude/memory
+      - /c/Users/New Employee/Documents/GateofTruth:/watch
+    environment:
+      - LOCALAI_URL=http://localai:8080/v1
+      - BOOK_WATCH_FOLDER=/watch
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    depends_on:
+      localai:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+
 volumes:
   dragonfly_data:
     driver: local
+  localai_models:
+    driver: local
 
 # Usage:
-#   docker-compose up -d        # Start Dragonfly cache
-#   docker-compose down         # Stop Dragonfly cache
-#   docker-compose logs -f      # View logs
+#   docker-compose up -d                    # Start all services
+#   docker-compose up -d dragonfly-cache    # Start cache only
+#   docker-compose up -d localai            # Start LocalAI only
+#   docker-compose logs -f kg-summary-worker # Watch worker logs
+#   docker-compose down                     # Stop all
 #
-# Benchmark (from Dragonfly):
-#   25x faster than Redis
-#   3.8M QPS peak throughput
-#   30% more memory efficient
+# Services:
+#   - dragonfly-cache: 25x faster than Redis (cache layer)
+#   - localai: Local LLM inference (FREE tokens)
+#   - kg-summary-worker: Async file summarization

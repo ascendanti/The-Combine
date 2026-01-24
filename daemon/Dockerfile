@@ -13,15 +13,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -fsSL https://claude.ai/install.sh | sh || true
 
 # Copy daemon files
-COPY queue.py memory.py runner.py submit.py approvals.py ./
+COPY task_queue.py memory.py runner.py submit.py approvals.py ./
 COPY coherence.py registry.py github_webhook.py ./
+COPY model_router.py controller.py decisions.py feedback_bridge.py ./
+COPY kg_summary_worker.py vector_store.py synthesis_worker.py ./
+COPY autonomous_ingest.py telegram_notify.py ./
 COPY modules/ ./modules/
 
 # Install Python dependencies
 RUN pip install --no-cache-dir \
     openmemory-py \
     requests \
-    pyyaml
+    pyyaml \
+    "markitdown[pdf]" \
+    pymupdf \
+    watchdog
 
 # Create data directories
 RUN mkdir -p /data /logs
