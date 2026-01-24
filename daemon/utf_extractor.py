@@ -131,24 +131,32 @@ class UTFExtractionResult:
 # LocalAI Interface
 # ============================================================================
 
-def localai_complete(prompt: str, max_tokens: int = 1000) -> str:
-    """Call LocalAI for completion."""
-    try:
-        response = requests.post(
-            f"{LOCALAI_URL}/chat/completions",
-            json={
-                "model": LOCALAI_MODEL,
-                "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": max_tokens,
-                "temperature": 0.3
-            },
-            timeout=120
-        )
-        response.raise_for_status()
-        return response.json()["choices"][0]["message"]["content"]
-    except Exception as e:
-        print(f"[LocalAI Error] {e}")
-        return ""
+def localai_complete(prompt: str, max_tokens: int = 1000, retries: int = 2) -> str:
+    """Call LocalAI for completion with retry logic."""
+    for attempt in range(retries + 1):
+        try:
+            response = requests.post(
+                f"{LOCALAI_URL}/chat/completions",
+                json={
+                    "model": LOCALAI_MODEL,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "max_tokens": max_tokens,
+                    "temperature": 0.3
+                },
+                timeout=300  # 5 minutes for large documents
+            )
+            response.raise_for_status()
+            return response.json()["choices"][0]["message"]["content"]
+        except requests.exceptions.Timeout:
+            if attempt < retries:
+                print(f"[LocalAI] Timeout, retrying ({attempt + 1}/{retries})...")
+                continue
+            print(f"[LocalAI Error] Timeout after {retries + 1} attempts")
+            return ""
+        except Exception as e:
+            print(f"[LocalAI Error] {e}")
+            return ""
+    return ""
 
 # ============================================================================
 # Extraction Prompts (Optimized for Mistral 7B)
@@ -332,14 +340,14 @@ def extract_metadata(text: str, file_hash: str) -> UTFSource:
         keywords=data.get("keywords", [])
     )
 
-def extract_excerpts(text: str, source_id: str, chunk_size: int = 4000) -> List[UTFExcerpt]:
+def extract_excerpts(text: str, source_id: str, chunk_size: int = 2000) -> List[UTFExcerpt]:
     """Extract excerpts from text chunks."""
     excerpts = []
 
-    # Process in chunks
+    # Process in smaller chunks for LocalAI performance
     chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
 
-    for i, chunk in enumerate(chunks[:5]):  # Limit to first 5 chunks
+    for i, chunk in enumerate(chunks[:3]):  # Limit to first 3 chunks for speed
         prompt = PROMPT_EXTRACT_EXCERPTS.format(text=chunk)
         response = localai_complete(prompt, max_tokens=800)
 
@@ -420,7 +428,7 @@ def extract_concepts(claims: List[UTFClaim]) -> List[UTFConcept]:
 
 def extract_assumptions(text: str, source_id: str) -> List[UTFAssumption]:
     """Extract assumptions from text."""
-    prompt = PROMPT_EXTRACT_ASSUMPTIONS.format(text=text[:4000])
+    prompt = PROMPT_EXTRACT_ASSUMPTIONS.format(text=text[:2500])
     response = localai_complete(prompt, max_tokens=600)
 
     data = parse_json_response(response)
@@ -443,7 +451,7 @@ def extract_assumptions(text: str, source_id: str) -> List[UTFAssumption]:
 
 def extract_limitations(text: str, source_id: str) -> List[UTFLimitation]:
     """Extract limitations from text."""
-    prompt = PROMPT_EXTRACT_LIMITATIONS.format(text=text[:4000])
+    prompt = PROMPT_EXTRACT_LIMITATIONS.format(text=text[:2500])
     response = localai_complete(prompt, max_tokens=500)
 
     data = parse_json_response(response)

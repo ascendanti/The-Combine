@@ -1,7 +1,7 @@
 ---
-date: 2026-01-24T00:00:00
+date: 2026-01-24T01:30:00
 type: session-handoff
-status: pausing
+status: in-progress
 phase: "11 - UTF Knowledge Architecture"
 ---
 
@@ -9,104 +9,100 @@ phase: "11 - UTF Knowledge Architecture"
 
 ## Completed This Session
 
-### 1. Docker Autonomous Ingest Container
-- Built and running: `autonomous-ingest` container
-- Processing 44 PDFs from GateofTruth folder
-- Uses LocalAI (Mistral 7B) - FREE
-- Dependencies: markitdown[pdf], pymupdf, watchdog
-- Notifications: only on completion, not per-file start
+### 1. UTF Extractor Optimization
+- Increased timeout from 120s to 300s (5 minutes)
+- Added retry logic (2 retries on timeout)
+- Reduced chunk sizes:
+  - Excerpts: 4000 -> 2000 chars
+  - Assumptions/Limitations: 4000 -> 2500 chars
+  - Max chunks: 5 -> 3 for excerpts
 
-### 2. UTF Research OS Spec
-- COMPLETE at `specs/UTF-RESEARCH-OS-SPEC.md` (61KB, 2121 lines)
-- All 10 deliverables + MVP Checklist
-- Ready for implementation
+### 2. Container Rebuild and Restart
+- Rebuilt autonomous-ingest container with optimizations
+- Container running and processing
 
-### 3. Fixes Applied
-- book_watcher.py: Unicode encoding (UTF-8 stdout)
-- book_watcher.py: watchdog import fallback
-- autonomous_ingest.py: BOOK_WATCH_FOLDER env var support
-- autonomous_ingest.py: removed per-file notification
-- Dockerfile: added PDF dependencies
-- docker-compose.yaml: added autonomous-ingest service
-- .env: added Telegram credentials
+## Current Status
 
-### 4. Git Commits
-- `c1d501d`: UTF Research OS Spec + Book Watcher fixes
-- `f5c0c31`: Autonomous PDF ingest container + dependencies
-
-## Docker Status
+### Docker Containers
 ```
 RUNNING:
-- localai (Mistral 7B) - healthy
+- localai (Mistral 7B) - 394% CPU, 5.3GB RAM (working)
 - dragonfly-cache (8GB) - healthy
 - kg-summary-worker - healthy
 - synthesis-worker - healthy
-- autonomous-ingest - processing 44 PDFs
+- autonomous-ingest - processing PDF #1/45
 ```
 
-## Task Queue (Paused)
+### UTF Extraction Progress
+```
+File: 2209.10652v1.pdf (159,175 chars)
+- Pass 1: Metadata - COMPLETE
+- Pass 2: Excerpts - IN PROGRESS
+- Pass 3: Claims/Concepts - PENDING
+- Pass 4: Assumptions/Limitations - PENDING
+```
+
+### Performance Notes
+- LocalAI with Mistral 7B is CPU-bound (~400% CPU)
+- Each pass takes 1-3 minutes depending on text size
+- Full extraction per PDF: ~8-15 minutes
+- Total estimated time for 45 PDFs: 6-12 hours
+
+## Task Queue
 
 | Priority | Task | Status |
 |----------|------|--------|
-| 1 | UTF taxonomy → autonomous_ingest integration | TODO |
-| 2 | Token efficiency optimization | PAUSED |
-| 3 | Docker worker enhancements | PAUSED |
-| 4 | LocalAI integration improvements | PAUSED |
+| 1 | UTF schema extraction via LocalAI | IN PROGRESS |
+| 2 | Token optimizer MCP verification | PENDING (needs CLI restart) |
+| 3 | Model router enhancements | PENDING |
+| 4 | Emergent behaviors (Phase 10.3) | PENDING |
 
-## UTF Taxonomy Integration (TODO)
+## Key Files Modified
 
-The UTF spec is complete but NOT YET integrated into autonomous_ingest.py.
-
-### What Needs Doing
-1. Update autonomous_ingest.py to extract according to UTF schema:
-   - L0-L6 abstraction levels
-   - Node types: Source, Excerpt, Claim, Concept, Model, Framework
-   - Edge types: cites, supports, contradicts, etc.
-   - 7-slot comprehension scaffold
-   - Assumption ledger
-   - Evidence grades
-
-2. Update Obsidian vault structure to match UTF spec:
-   - Folders: 00_Sources/, 01_Excerpts/, 02_Claims/, etc.
-   - Templates with YAML frontmatter
-   - Wikilinks for relationships
-
-3. Use UTF operators in extraction:
-   - ATOMIZE (excerpt → claims)
-   - DEFINE (claims → concepts)
-   - MODELIZE (concepts → models)
-
-### Implementation Notes
-- LocalAI can do the extraction with structured prompts
-- Reference: `specs/UTF-RESEARCH-OS-SPEC.md` Section 10 (Implementation Notes)
-- MVP subset: Source, Claim, Concept nodes + basic edges
+1. `daemon/utf_extractor.py`
+   - Line 145: timeout 120 -> 300
+   - Line 145+: Added retry logic
+   - Line 335: chunk_size 4000 -> 2000
+   - Line 342: chunks[:5] -> chunks[:3]
+   - Line 423: text[:4000] -> text[:2500]
+   - Line 445: text[:4000] -> text[:2500]
 
 ## Resume Instructions
 
-1. Check autonomous-ingest container:
+1. Check container progress:
    ```bash
-   docker logs autonomous-ingest --tail 50
+   docker logs autonomous-ingest --tail 30
    ```
 
-2. If PDFs finished processing, proceed with UTF integration
+2. If first PDF completed, check Obsidian vault:
+   ```
+   ~/Documents/Obsidian/ClaudeKnowledge/00_Sources/
+   ~/Documents/Obsidian/ClaudeKnowledge/02_Claims/
+   ~/Documents/Obsidian/ClaudeKnowledge/03_Concepts/
+   ```
 
-3. Key files to modify:
-   - `daemon/autonomous_ingest.py` - add UTF schema extraction
-   - `specs/UTF-RESEARCH-OS-SPEC.md` - reference for schema
+3. Monitor LocalAI performance:
+   ```bash
+   docker stats --no-stream
+   ```
 
-4. Telegram bot is "Hohenheim" - same credentials
+4. Next tasks after ingest stabilizes:
+   - Restart CLI for token-optimizer MCP
+   - Verify token savings with smart tools
+   - Enable model router optimizations
 
 ## Quick Commands
+
 ```bash
 # Check ingest progress
 docker logs autonomous-ingest --tail 50
 
-# Check ingest status
-docker exec autonomous-ingest python autonomous_ingest.py --status
+# Check LocalAI load
+docker stats --no-stream localai
 
-# Query ingested content
-docker exec autonomous-ingest python autonomous_ingest.py --query "continual learning"
+# Send Telegram update
+python daemon/telegram_notify.py "Message here"
 
-# Restart if needed
+# Force restart if needed
 docker-compose up -d --force-recreate autonomous-ingest
 ```
