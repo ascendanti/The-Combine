@@ -1,7 +1,7 @@
 ---
 date: 2026-01-24T01:30:00
 type: session-handoff
-status: in-progress
+status: validated-working
 phase: "11 - UTF Knowledge Architecture"
 ---
 
@@ -35,11 +35,15 @@ RUNNING:
 
 ### UTF Extraction Progress
 ```
-File: 2209.10652v1.pdf (159,175 chars)
-- Pass 1: Metadata - COMPLETE
-- Pass 2: Excerpts - IN PROGRESS
-- Pass 3: Claims/Concepts - PENDING
-- Pass 4: Assumptions/Limitations - PENDING
+COMPLETED: 2209.10652v1.pdf (159,175 chars)
+  - Title: "Neural Network Polysemanticity: A Toy Model Approach"
+  - 17 excerpts, 10 claims, 10 concepts, 5 assumptions, 61 edges
+  - Quality: ACCEPTED
+  - Obsidian notes exported
+
+IN PROGRESS: PDF #2/44
+  - "A Review of Topological Data Analysis..." (109,657 chars)
+  - Pass 1: Metadata - IN PROGRESS
 ```
 
 ### Performance Notes
