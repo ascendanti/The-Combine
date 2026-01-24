@@ -359,9 +359,264 @@ Claude n8n/
 └── task.md                   # Current objectives
 ```
 
+---
+
+## Phase 12: Research Integration Layer 🆕 PLANNED
+
+**Goal:** Integrate findings from 44 research papers into core system architecture
+
+### Research Domains & Papers
+
+| Domain | Papers | Core Concepts |
+|--------|--------|---------------|
+| **Bisimulation & State Abstraction** | 1 | Behavior equivalence, MDP abstraction, analogical transfer |
+| **Goal-Conditioned RL** | 7 | GCRL, hindsight, virtual experiences, causal reasoning |
+| **Bounded Rationality** | 4 | Satisficing, information-theoretic optimality, hierarchical abstraction |
+| **Continual Learning** | 8 | Catastrophic forgetting, knowledge retention, lifelong learning |
+| **Hierarchical Decision** | 2 | Policy subspaces, temporal abstraction |
+| **Coherence & Topology** | 6 | Semantic coherence, topological data analysis, multimodal |
+| **Other Research** | 16+ | Chaos control, matrix coherence, federated learning |
+
+### 12.1 Bisimulation-Based State Abstraction 🎯 PRIORITY
+
+**Source:** "Bisimulation Makes Analogies in Goal-Conditioned Reinforcement Learning"
+
+**Key Insight:** Bisimulation metrics enable behavior-preserving state abstraction, allowing:
+- Transfer learning between similar goals
+- Reduced state space for faster learning
+- Analogical reasoning (if states are bisimilar, apply same policy)
+
+**Implementation Plan:**
+- [ ] daemon/bisimulation.py - State equivalence metrics
+- [ ] Goal-conditioned MDP abstraction layer
+- [ ] Integration with daemon/coherence.py goal hierarchy
+- [ ] Analogical policy transfer for similar tasks
+- [ ] Behavior-based clustering of system states
+
+**Mapping to System:**
+```
+User Goals (coherence.py) → Bisimulation Abstraction → Policy Selection
+                                    ↓
+                          State Equivalence Classes
+                                    ↓
+                          Transfer Prior Solutions
+```
+
+### 12.2 Goal-Conditioned Reinforcement Learning
+
+**Sources:** 7 GCRL papers
+
+**Key Concepts:**
+- **GCHR (Hindsight Regularization):** Learn from failed attempts by relabeling goals
+- **Variational Causal Reasoning:** Identify causal factors for goal achievement
+- **Virtual Experiences:** Augment learning with imagined trajectories
+- **On-Policy GCRL:** Stable learning with goal-conditioned policies
+
+**Implementation Plan:**
+- [ ] daemon/gcrl.py - Goal-conditioned learning engine
+- [ ] Hindsight relabeling for failed task attempts
+- [ ] Virtual experience generation for rare scenarios
+- [ ] Causal factor extraction from task outcomes
+- [ ] Integration with daemon/decisions.py for outcome learning
+
+**Mapping to System:**
+```
+Task Outcome (success/fail) → Hindsight Relabeling → Learn What Goal WAS Achieved
+         ↓                            ↓
+   Store in Memory            Update Policy for Future
+```
+
+### 12.3 Bounded Rationality Architecture
+
+**Sources:** 4 bounded rationality papers
+
+**Key Concepts:**
+- **Satisficing:** "Good enough" decisions under resource constraints
+- **Information-Theoretic Optimality:** Balance accuracy vs. computational cost
+- **Hierarchical Abstraction:** Coarse-to-fine decision making
+
+**Implementation Plan:**
+- [ ] daemon/satisficing.py - Resource-bounded decision making
+- [ ] Extend daemon/decisions.py with computational budget
+- [ ] Hierarchical abstraction for complex decisions
+- [ ] Anytime algorithms (return best answer available when interrupted)
+- [ ] Trust calibration under bounded rationality
+
+**Mapping to System:**
+```
+Decision Request → Check Computational Budget
+       ↓                    ↓
+  Full Analysis ←── High Budget
+       ↓                    ↓
+  Satisficing ←─── Low Budget / Time Pressure
+```
+
+### 12.4 Continual Learning Integration
+
+**Sources:** 8 continual learning papers
+
+**Key Concepts:**
+- **Catastrophic Forgetting Prevention:** Preserve old knowledge when learning new
+- **Knowledge Retention:** Model-based memory consolidation
+- **Hierarchical Policy Subspaces:** Separate policies for different domains
+- **Lifelong Learning Metrics:** Measure forward/backward transfer
+
+**Implementation Plan:**
+- [ ] Extend daemon/memory.py with forgetting-resistant storage
+- [ ] daemon/consolidation.py - Knowledge distillation during sleep
+- [ ] Policy subspaces for domain-specific behaviors
+- [ ] Transfer metrics tracking (forward: new helps old; backward: old helps new)
+- [ ] Integration with continuous-learning skill
+
+**Mapping to System:**
+```
+Session End → Extract Learnings → Consolidate to Long-Term Memory
+                    ↓                        ↓
+            Check for Conflicts      Replay Important Memories
+                    ↓                        ↓
+            Elastic Weight Update    Prevent Forgetting
+```
+
+### 12.5 Hierarchical Decision Framework
+
+**Sources:** 2 hierarchical papers
+
+**Key Concepts:**
+- **Temporal Abstraction:** Multi-timescale planning (now vs. later)
+- **Option Framework:** Reusable sub-policies for common patterns
+- **Policy Subspaces:** Separate skill modules that compose
+
+**Implementation Plan:**
+- [ ] Extend daemon/coherence.py with temporal goal hierarchy
+- [ ] daemon/options.py - Reusable skill primitives
+- [ ] Multi-timescale planning (immediate/session/long-term)
+- [ ] Automatic option discovery from repeated patterns
+
+### 12.6 Coherence & Semantic Integration
+
+**Sources:** 6 coherence/topology papers
+
+**Key Concepts:**
+- **Semantic Coherence Scoring:** Measure consistency of outputs
+- **Topological Data Analysis:** Persistent homology for structure
+- **Multimodal Coherence:** Cross-modal consistency
+
+**Implementation Plan:**
+- [ ] daemon/semantic_coherence.py - Output consistency scoring
+- [ ] Topological features for knowledge graph analysis
+- [ ] Integration with UTF schema for coherent knowledge extraction
+
+---
+
+### Research Paper → System Component Mapping
+
+| Paper | Target Component | Integration Type |
+|-------|------------------|------------------|
+| Bisimulation Makes Analogies | daemon/bisimulation.py | NEW |
+| GCHR | daemon/decisions.py | EXTEND |
+| Bounded Rationality + Abstraction | daemon/satisficing.py | NEW |
+| Continual RL Survey | daemon/consolidation.py | NEW |
+| Hierarchical Subspaces | daemon/coherence.py | EXTEND |
+| Goal-Conditioned Problems | daemon/gcrl.py | NEW |
+| Knowledge Retention | daemon/memory.py | EXTEND |
+| Coherence in Explainable AI | daemon/semantic_coherence.py | NEW |
+
+---
+
+### Integration Priority Queue
+
+| Priority | Component | Papers | Impact |
+|----------|-----------|--------|--------|
+| 1 | Bisimulation State Abstraction | 1 | High - enables analogical transfer |
+| 2 | Goal-Conditioned Learning | 7 | High - improves task success rate |
+| 3 | Bounded Rationality | 4 | Medium - resource efficiency |
+| 4 | Continual Learning | 8 | High - prevents forgetting |
+| 5 | Semantic Coherence | 6 | Medium - output quality |
+
+---
+
+## Current Status
+
+**Phase:** 10 - Ascension 🔄 IN PROGRESS (90%)
+**Completed:** Self-improvement engine, thinking frameworks, continuous-learning skill, hybrid architecture, book ingestion pipeline, UTF spec
+**In Progress:**
+- Token optimization (MCP config fixed, needs CLI restart)
+- Autonomous PDF ingest (44 files processing via LocalAI)
+- **Phase 12 Research Integration plan created**
+**Next Action:**
+1. Restart CLI to activate token-optimizer-mcp
+2. Complete Phase 10.3 emergent behaviors
+3. Begin Phase 12.1 Bisimulation implementation after papers fully ingested
+
+**Model Router Architecture** (daemon/model_router.py):
+- LocalAI ($0): summarize, embed, translate, simple Q&A
+- Codex ($): code generation, routine tasks
+- Claude ($$$): architecture, complex reasoning only
+
+## Discovered Resources
+
+- **UTF Research Library**: 45+ papers on continual learning, coherence, goal-conditioned RL
+- **Location**: C:\Users\New Employee\Desktop\UTF
+- **Status**: Validated as strong framework for unified personal AI
+- **Paper Domains**: Bisimulation, GCRL, Bounded Rationality, Continual Learning, Coherence
+
+## File Map
+
+```
+Claude n8n/
+├── .claude/
+│   ├── settings.local.json   # ✅ Full permissions
+│   ├── auto-memory/          # ✅ Created
+│   ├── hooks/                # ✅ Wired
+│   ├── agents/               # ✅ 48 agents
+│   ├── skills/               # ✅ 118 skills (added deep-reading-analyst, continuous-learning)
+│   ├── rules/                # ✅ 12+ rules
+│   └── cache/agents/         # ✅ Agent output cache
+├── daemon/                   # ✅ COMPLETE: Full cognitive architecture
+│   ├── queue.py              # ✅ SQLite task queue
+│   ├── runner.py             # ✅ Claude spawner daemon
+│   ├── submit.py             # ✅ Easy task submission
+│   ├── memory.py             # ✅ OpenMemory SDK integration
+│   ├── memory_router.py      # ✅ Unified memory interface
+│   ├── approvals.py          # ✅ Human sign-off queue
+│   ├── coherence.py          # ✅ Goal Coherence Layer (UTF)
+│   ├── registry.py           # ✅ Module Registry (cross-domain)
+│   ├── github_webhook.py     # ✅ GitHub async integration
+│   ├── email_trigger.py      # ✅ IMAP email → tasks
+│   ├── scheduler.py          # ✅ Cron-like scheduling
+│   ├── decisions.py          # ✅ Decision engine with uncertainty
+│   ├── metacognition.py      # ✅ Self-awareness module
+│   ├── self_improvement.py   # ✅ Phase 10 thinking frameworks
+│   ├── book_watcher.py       # ✅ PDF folder watcher daemon
+│   ├── books.db              # ✅ Book chunks + summaries + concepts
+│   ├── bisimulation.py       # 🆕 Phase 12.1 - State abstraction
+│   ├── gcrl.py               # 🆕 Phase 12.2 - Goal-conditioned learning
+│   ├── satisficing.py        # 🆕 Phase 12.3 - Bounded rationality
+│   ├── consolidation.py      # 🆕 Phase 12.4 - Knowledge consolidation
+│   ├── modules/              # ✅ Domain modules
+│   │   ├── base.py           # BaseModule + Finance/Calendar/Tasks
+│   │   └── __init__.py
+│   ├── Dockerfile            # ✅ Container config
+│   ├── api.py                # ✅ Unified REST API
+│   ├── mcp_server.py         # ✅ MCP protocol server
+│   ├── dashboard.html        # ✅ Web monitoring UI
+│   └── *.db                  # SQLite databases
+├── .claude/scripts/          # ✅ Utility scripts
+│   ├── book-ingest.py        # ✅ Hierarchical book RAG pipeline
+│   ├── book-query.py         # ✅ Query ingested books
+│   └── docling-ingest.py     # ✅ Document → knowledge graph
+├── thoughts/                 # ✅ Handoffs & ledgers
+├── specs/                    # 🆕 Research specifications
+│   └── UTF-RESEARCH-OS-SPEC.md # ✅ Complete UTF schema (61KB)
+├── EVOLUTION-PLAN.md         # THIS FILE
+├── REFERENCE-TAXONOMY.md     # Framework analysis
+└── task.md                   # Current objectives
+```
+
 ## Principles
 
 1. **Iterative accretion** - One capability at a time
 2. **No clashes** - Each addition validates before next
 3. **Root-level preferred** - Scripts over hooks when possible
 4. **Selective integration** - Only what adds power
+5. **Research-driven** - Ground implementations in validated research
