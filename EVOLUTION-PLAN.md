@@ -226,12 +226,15 @@ See **REFERENCE-TAXONOMY.md** for full analysis of 36 reference frameworks.
 - [x] Deduplication and status tracking
 - [x] Memory system integration
 
-### 10.4 Token Optimization (NEW) ✅ COMPLETE
+### 10.4 Token Optimization (NEW) 🔄 PARTIAL
 - [x] token-optimizer-mcp installed (npm install -g @ooples/token-optimizer-mcp)
-- [x] MCP config created (.mcp.json)
+- [x] MCP config created (.mcp.json) - FIXED 2026-01-24
+- [ ] **CLI restart required** to activate MCP server
 - [x] 65 specialized tools available (smart_read, smart_grep, etc.)
 - [x] Brotli compression (2-4x typical, up to 82x)
 - [x] SQLite persistent cache with ML-based predictive caching
+- [ ] Verify tools working after restart
+- [ ] Measure actual token savings
 
 ### 10.5 Hybrid Architecture (NEW) ✅ COMPLETE
 - [x] Dragonfly cache layer deployed (docker-compose.yaml)
@@ -288,9 +291,20 @@ See **REFERENCE-TAXONOMY.md** for full analysis of 36 reference frameworks.
 
 ## Current Status
 
-**Phase:** 10 - Ascension 🔄 IN PROGRESS (85%)
-**Completed:** Self-improvement engine, thinking frameworks, continuous-learning skill, token optimization, hybrid architecture, book ingestion pipeline
-**Next Action:** Complete Phase 10.3 emergent behaviors, then begin Phase 11
+**Phase:** 10 - Ascension 🔄 IN PROGRESS (90%)
+**Completed:** Self-improvement engine, thinking frameworks, continuous-learning skill, hybrid architecture, book ingestion pipeline, UTF spec
+**In Progress:**
+- Token optimization (MCP config fixed, needs CLI restart)
+- Autonomous PDF ingest (44 files processing via LocalAI)
+**Next Action:**
+1. Restart CLI to activate token-optimizer-mcp
+2. Complete Phase 10.3 emergent behaviors
+3. Integrate UTF taxonomy with autonomous_ingest.py
+
+**Model Router Architecture** (daemon/model_router.py):
+- LocalAI ($0): summarize, embed, translate, simple Q&A
+- Codex ($): code generation, routine tasks
+- Claude ($$$): architecture, complex reasoning only
 
 ## Discovered Resources
 
