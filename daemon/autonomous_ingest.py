@@ -36,6 +36,13 @@ try:
 except ImportError:
     MARKITDOWN_AVAILABLE = False
 
+# UTF Schema Extractor
+try:
+    from utf_extractor import extract_utf_schema, export_to_obsidian, UTFExtractionResult
+    UTF_AVAILABLE = True
+except ImportError:
+    UTF_AVAILABLE = False
+
 # Fallback to PyMuPDF
 try:
     import fitz
@@ -46,6 +53,8 @@ except ImportError:
 # Configuration
 WATCH_FOLDER = Path(os.environ.get("BOOK_WATCH_FOLDER", str(Path.home() / "Documents" / "GateofTruth")))
 LOCALAI_URL = os.environ.get("LOCALAI_URL", "http://localhost:8080/v1")
+USE_UTF_SCHEMA = os.environ.get("USE_UTF_SCHEMA", "true").lower() == "true"
+OBSIDIAN_VAULT = Path(os.environ.get("OBSIDIAN_VAULT", str(Path.home() / "Documents" / "Obsidian" / "ClaudeKnowledge")))
 LOCALAI_MODEL = "mistral-7b-instruct-v0.3"
 KG_PATH = Path.home() / ".claude" / "memory" / "knowledge-graph.jsonl"
 DB_PATH = Path(__file__).parent / "ingest.db"
@@ -585,7 +594,6 @@ def process_document(path: Path, conn: sqlite3.Connection) -> Dict:
     # Notification only on completion, not start
 
     doc_id = path.stem
-    total_tokens = 0
 
     # 1. Extract document text (MarkItDown preferred)
     print("    [1/5] Extracting text...")
@@ -593,6 +601,131 @@ def process_document(path: Path, conn: sqlite3.Connection) -> Dict:
     if not text or len(text) < 200:
         return {"success": False, "error": "No text extracted"}
     print(f"    Extracted {len(text)} chars (using {'MarkItDown' if MARKITDOWN_AVAILABLE else 'PyMuPDF'})")
+
+    # Use UTF Schema extraction if enabled and available
+    if USE_UTF_SCHEMA and UTF_AVAILABLE:
+        return process_document_utf(path, text, conn)
+    else:
+        return process_document_legacy(path, text, conn)
+
+
+def process_document_utf(path: Path, text: str, conn: sqlite3.Connection) -> Dict:
+    """Process document using UTF Research OS schema."""
+    print("    [UTF MODE] Using UTF Research OS extraction...")
+
+    fhash = file_hash(path)
+
+    # Run UTF extraction
+    result = extract_utf_schema(text, fhash)
+
+    # Export to Obsidian vault
+    if OBSIDIAN_VAULT.exists():
+        export_to_obsidian(result, OBSIDIAN_VAULT)
+        print(f"    [UTF] Exported to Obsidian: {OBSIDIAN_VAULT}")
+
+    # Store to Knowledge Graph
+    store_utf_to_kg(result)
+
+    # Record processed
+    c = conn.cursor()
+    c.execute("""
+        INSERT OR REPLACE INTO processed_files
+        (file_hash, file_path, file_name, processed_at, token_cost, status)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (fhash, str(path), path.name, datetime.now().isoformat(), 0, 'completed'))
+    conn.commit()
+
+    stats = result.extraction_stats
+    print(f"    [OK] UTF extraction: {stats['claims']} claims, {stats['concepts']} concepts")
+
+    # Send completion notification
+    notify_complete(f"UTF Ingested: {path.name}", {
+        "title": result.source.title,
+        "claims": stats['claims'],
+        "concepts": stats['concepts'],
+        "quality": "PASSED" if result.quality_gate_passed else "REVIEW"
+    })
+
+    return {
+        "success": True,
+        "doc_id": result.source.source_id,
+        "title": result.source.title,
+        "claims": stats['claims'],
+        "concepts": stats['concepts'],
+        "quality_gate": result.quality_gate_passed
+    }
+
+
+def store_utf_to_kg(result: 'UTFExtractionResult'):
+    """Store UTF extraction result to knowledge graph."""
+    import json
+    from dataclasses import asdict
+
+    # Store source
+    source_entity = {
+        "name": result.source.title,
+        "entityType": "Source",
+        "observations": [
+            f"Authors: {', '.join(result.source.authors)}",
+            f"Year: {result.source.year}",
+            f"Domain: {result.source.domain}",
+            f"Abstract: {result.source.abstract[:500] if result.source.abstract else 'N/A'}",
+            f"Quality: {result.source.quality_status}",
+            f"SOURCE_ID:{result.source.source_id}"
+        ]
+    }
+
+    with open(KG_PATH, 'a', encoding='utf-8') as f:
+        f.write(json.dumps(source_entity) + '\n')
+
+        # Store claims
+        for claim in result.claims:
+            claim_entity = {
+                "name": f"Claim: {claim.statement[:50]}...",
+                "entityType": "Claim",
+                "observations": [
+                    f"Statement: {claim.statement}",
+                    f"Form: {claim.claim_form}",
+                    f"Grounding: {claim.grounding}",
+                    f"Confidence: {claim.confidence}",
+                    f"SOURCE_ID:{claim.source_id}",
+                    f"CLAIM_ID:{claim.claim_id}"
+                ]
+            }
+            f.write(json.dumps(claim_entity) + '\n')
+
+        # Store concepts
+        for concept in result.concepts:
+            concept_entity = {
+                "name": concept.name,
+                "entityType": "Concept",
+                "observations": [
+                    f"Definition: {concept.definition_1liner}",
+                    f"Domain: {concept.domain}",
+                    f"CONCEPT_ID:{concept.concept_id}"
+                ]
+            }
+            f.write(json.dumps(concept_entity) + '\n')
+
+        # Store assumptions
+        for assumption in result.assumptions:
+            assumption_entity = {
+                "name": f"Assumption: {assumption.statement[:40]}...",
+                "entityType": "Assumption",
+                "observations": [
+                    f"Statement: {assumption.statement}",
+                    f"Type: {assumption.assumption_type}",
+                    f"Violations: {assumption.violations}",
+                    f"ASSUMPTION_ID:{assumption.assumption_id}"
+                ]
+            }
+            f.write(json.dumps(assumption_entity) + '\n')
+
+
+def process_document_legacy(path: Path, text: str, conn: sqlite3.Connection) -> Dict:
+    """Legacy HiRAG/LeanRAG processing pipeline."""
+    doc_id = path.stem
+    total_tokens = 0
 
     # 2. Academic structure extraction (gpt_academic pattern)
     print("    [2/5] Extracting academic structure...")

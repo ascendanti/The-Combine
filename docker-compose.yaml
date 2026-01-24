@@ -82,9 +82,12 @@ services:
       - ./daemon:/app
       - ~/.claude/memory:/root/.claude/memory
       - /c/Users/New Employee/Documents/GateofTruth:/watch
+      - /c/Users/New Employee/Documents/Obsidian/ClaudeKnowledge:/obsidian
     environment:
       - LOCALAI_URL=http://localai:8080/v1
       - BOOK_WATCH_FOLDER=/watch
+      - USE_UTF_SCHEMA=true
+      - OBSIDIAN_VAULT=/obsidian
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
     depends_on:

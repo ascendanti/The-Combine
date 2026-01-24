@@ -17,7 +17,7 @@ COPY task_queue.py memory.py runner.py submit.py approvals.py ./
 COPY coherence.py registry.py github_webhook.py ./
 COPY model_router.py controller.py decisions.py feedback_bridge.py ./
 COPY kg_summary_worker.py vector_store.py synthesis_worker.py ./
-COPY autonomous_ingest.py telegram_notify.py ./
+COPY autonomous_ingest.py telegram_notify.py utf_extractor.py ./
 COPY modules/ ./modules/
 
 # Install Python dependencies
