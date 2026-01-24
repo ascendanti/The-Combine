@@ -1,15 +1,24 @@
 {
   "mcpServers": {
-    "token-optimizer": {
-      "command": "cmd",
+    "knowledge-graph": {
+      "command": "mcp-knowledge-graph",
       "args": [
-        "/c",
-        "npx",
+        "--memory-path",
+        "C:/Users/New Employee/.claude/memory/knowledge-graph.jsonl"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "token-optimizer": {
+      "command": "npx",
+      "args": [
         "-y",
         "@ooples/token-optimizer-mcp"
       ],
       "env": {
-        "TOKEN_OPTIMIZER_CACHE_DIR": "C:\\Users\\New Employee\\.token-optimizer-cache"
+        "CACHE_DIR": "C:/Users/New Employee/.claude/cache/token-optimizer",
+        "COMPRESSION_LEVEL": "high"
       }
     }
   }
