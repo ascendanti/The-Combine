@@ -41,6 +41,10 @@ try:
     WATCHDOG_AVAILABLE = True
 except ImportError:
     WATCHDOG_AVAILABLE = False
+    # Dummy base class when watchdog not available
+    class FileSystemEventHandler:
+        pass
+    Observer = None
 
 # Add project paths
 DAEMON_DIR = Path(__file__).parent
@@ -50,7 +54,7 @@ sys.path.insert(0, str(DAEMON_DIR))
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 # Configuration
-DEFAULT_WATCH_FOLDER = Path.home() / "Documents" / "Claude-Books"
+DEFAULT_WATCH_FOLDER = Path.home() / "Documents" / "GateofTruth"
 SUPPORTED_EXTENSIONS = {'.pdf', '.docx', '.pptx', '.epub', '.html', '.md'}
 WATCHER_DB = DAEMON_DIR / "book_watcher.db"
 PROCESSING_QUEUE = Queue()
@@ -215,18 +219,18 @@ class BackgroundProcessor(threading.Thread):
             if result.get("success"):
                 update_file_status(self.conn, file_hash, "completed",
                                    book_id=result.get("book_id"))
-                print(f"[processor] ✓ Completed: {file_path.name} → {result.get('book_id')}")
+                print(f"[processor] DONE: {file_path.name} -> {result.get('book_id')}")
 
                 # Store in memory system
                 self._add_to_memory(file_path, result)
             else:
                 update_file_status(self.conn, file_hash, "failed",
                                    error=result.get("error", "Unknown error"))
-                print(f"[processor] ✗ Failed: {file_path.name}")
+                print(f"[processor] FAIL: {file_path.name}")
 
         except Exception as e:
             update_file_status(self.conn, file_hash, "failed", error=str(e))
-            print(f"[processor] ✗ Exception: {e}")
+            print(f"[processor] ERROR: {e}")
 
     def _add_to_memory(self, file_path: Path, result: dict):
         """Add ingestion record to memory system."""
@@ -319,13 +323,13 @@ def start_watcher(watch_folder: Path):
     watch_folder.mkdir(parents=True, exist_ok=True)
 
     print(f"""
-╔══════════════════════════════════════════════════════════════╗
-║  📚 Book Watcher Daemon                                       ║
-╠══════════════════════════════════════════════════════════════╣
-║  Watching: {str(watch_folder)[:45]:<45} ║
-║  Extensions: {', '.join(SUPPORTED_EXTENSIONS):<43} ║
-║  Database: {str(WATCHER_DB.name):<46} ║
-╚══════════════════════════════════════════════════════════════╝
+========================================
+  Book Watcher Daemon
+========================================
+  Watching: {str(watch_folder)[:45]}
+  Extensions: {', '.join(SUPPORTED_EXTENSIONS)}
+  Database: {str(WATCHER_DB.name)}
+========================================
     """)
 
     # Initialize
@@ -400,7 +404,7 @@ def main():
         print("\nTracked Books:")
         print("-" * 70)
         for row in c.fetchall():
-            status_icon = {"completed": "✓", "failed": "✗", "pending": "○", "processing": "◐"}.get(row[1], "?")
+            status_icon = {"completed": "+", "failed": "x", "pending": "o", "processing": "*"}.get(row[1], "?")
             print(f"  {status_icon} {row[0][:40]:<40} [{row[2] or 'N/A'}]")
         conn.close()
     else:
