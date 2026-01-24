@@ -1,0 +1,124 @@
+---
+date: 2026-01-23T17:45:00
+session_name: utf-embeddings-remote-setup
+status: in_progress
+priority: HIGH
+---
+
+# Handoff: UTF Embeddings + Remote Access Setup
+
+## Summary
+Implemented UTF taxonomy specification, iterative ingest, and semantic vector search using sentence-transformers. User requests Claude-Code-Remote + Telegram integration for remote access.
+
+## Completed This Session
+- [x] UTF Research OS Specification (`specs/UTF-RESEARCH-OS-SPEC.md`)
+  - 10-section comprehensive spec
+  - L0-L6 abstraction ladder
+  - 20+ node types, claim forms, comprehension scaffolds
+  - DKCS coordinate system
+  - MVP checklist
+- [x] UTF Iterative Ingest (`.claude/scripts/utf-ingest.py`)
+  - Page-by-page processing (LocalAI memory friendly)
+  - Extracts Claims, Concepts, Assumptions, Limitations
+  - Quality gates, checkpoint/resume
+- [x] UTF Enhancer (`daemon/utf_enhancer.py`)
+  - Post-processing layer for Docker workers
+  - Classifies claim forms, extracts assumptions
+  - Scaffold completion using OpenAI (sparingly)
+- [x] UTF Embeddings (`.claude/scripts/utf-embeddings.py`)
+  - sentence-transformers (all-MiniLM-L6-v2, 80MB)
+  - Vector storage in SQLite
+  - Semantic search with domain/type filtering
+  - Compact context output (200 tokens vs 5000 raw)
+- [x] UTF Semantic RAG Hook (`.claude/hooks/utf-semantic-rag.py`)
+  - PreToolUse hook for Read operations
+  - Injects pre-processed knowledge as context
+- [x] Updated settings.local.json with new hooks
+
+## In Progress / Next Session
+- [ ] Test sentence-transformers model loading
+- [ ] Build vector index from existing knowledge
+- [ ] Claude-Code-Remote + Telegram setup (USER REQUEST)
+  - Repo: https://github.com/JessyTsui/Claude-Code-Remote
+  - Need to link to Telegram for remote access
+
+## User Requests Pending
+1. **Remote Access via Telegram** - Priority
+   - Clone Claude-Code-Remote repo
+   - Configure for Telegram integration
+   - Enable remote session control
+
+## Architecture Summary
+```
+GateofTruth (PDF drop)
+       |
+       v
+autonomous_ingest.py (Docker, LocalAI)
+       |
+       v
+HiRAG/LeanRAG facts (ingest.db)
+       |
+       v
+utf_enhancer.py (classify + scaffold)
+       |
+       v
+UTF Knowledge (utf_knowledge.db)
+       |
+       v
+utf-embeddings.py (sentence-transformers)
+       |
+       v
+Vector Index (utf_vectors.db)
+       |
+       v
+utf-semantic-rag.py (PreToolUse hook)
+       |
+       v
+Claude reads get 200-token context
+(instead of 5000-token raw PDF)
+```
+
+## Files Created This Session
+- `specs/UTF-RESEARCH-OS-SPEC.md` - Full specification
+- `.claude/scripts/utf-ingest.py` - Iterative extraction
+- `.claude/scripts/utf-embeddings.py` - Vector search
+- `.claude/hooks/utf-context-filter.py` - Taxonomy filter
+- `.claude/hooks/utf-semantic-rag.py` - Semantic RAG hook
+- `daemon/utf_enhancer.py` - Post-processing layer
+- `thoughts/handoffs/2026-01-23_phase11-utf-architecture.yaml`
+
+## Files Modified
+- `.claude/settings.local.json` - Added new hooks
+- `task.md` - Updated to Phase 11
+
+## Quick Commands
+```bash
+# Index UTF knowledge for vector search
+python .claude/scripts/utf-embeddings.py --index
+
+# Semantic search
+python .claude/scripts/utf-embeddings.py --search "attention mechanism" --compact
+
+# Run UTF enhancer
+python daemon/utf_enhancer.py --status
+
+# Check vector index status
+python .claude/scripts/utf-embeddings.py --status
+```
+
+## Key Architecture Decisions
+1. UTF enhancer is POST-PROCESSING, not replacement for HiRAG
+2. sentence-transformers for embeddings (local, no API cost)
+3. Hooks inject context, don't block reads
+4. Target: 200 tokens context vs 5000 raw PDF
+
+## Environment
+- Docker: Running
+- LocalAI: http://localhost:8080/v1 (Mistral 7B)
+- OpenAI API: Configured (use sparingly for scaffold completion)
+- sentence-transformers: Installed (all-MiniLM-L6-v2)
+
+## Resume Instructions
+1. Test vector indexing: `python .claude/scripts/utf-embeddings.py --index`
+2. Clone Claude-Code-Remote for Telegram access
+3. Complete the embedding pipeline test

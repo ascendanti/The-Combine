@@ -1,0 +1,74 @@
+session_id: "2026-01-23_phase12"
+timestamp: "2026-01-23T23:50:00"
+context_usage: "moderate"
+
+completed:
+  - Phase 10.4 Claim Classification:
+      - UTFClaim extended with slug_code, taxonomy_tags
+      - claim_similarity.py for cross-paper matching
+      - UTF closeness values implemented
+      - Obsidian export with classification metadata
+
+  - Phase 12.1 Bisimulation Foundation:
+      - daemon/bisimulation.py (500+ lines)
+      - BisimulationState and BisimulationMetric dataclasses
+      - Goal-conditioned distance computation
+      - State abstraction (equivalence classes)
+      - Policy transfer validation
+
+  - Phase 12.2 Goal-Conditioned RL:
+      - daemon/gcrl.py (500+ lines)
+      - Hindsight Experience Replay (HER)
+      - Causal factor extraction
+      - Policy learning from trajectories
+      - Virtual experience generation
+
+  - Phase 12.4 Integration Wiring:
+      - coherence.py: find_similar_goals(), suggest_policy_transfer()
+      - decisions.py: get_policy_guided_decision(), record_outcome_with_trajectory()
+      - decisions.py: find_similar_decisions()
+
+  - Infrastructure:
+      - Freqtrade module added as git submodule
+      - Container rebuilt with claim classification
+      - All modules tested and working
+
+in_progress:
+  - PDF Ingestion:
+      status: "35 files remaining"
+      container: "autonomous-ingest running"
+      features: "UTF schema + claim classification enabled"
+
+blocked: []
+
+next_steps:
+  - Connect claim_similarity to memory.py for semantic retrieval
+  - Dashboard visualization of state abstractions
+  - Metrics collection (Transfer Rate, Abstraction Ratio, HER improvement)
+  - Monitor PDF ingest completion
+  - Phase 11 Adaptive Learning (when ready)
+
+key_decisions:
+  - Bisimulation uses weighted composite: 40% features, 20% reward, 30% actions, 10% goal
+  - GCRL hindsight relabeling creates synthetic goals from achieved states
+  - Integration keeps modules loosely coupled (try/except imports)
+
+files_created:
+  - daemon/bisimulation.py
+  - daemon/gcrl.py
+  - daemon/claim_similarity.py
+  - daemon/freqtrade_bridge.py (on hold per user request)
+  - thoughts/handoffs/2026-01-23_phase12-complete.yaml
+
+files_modified:
+  - daemon/utf_extractor.py (slug_code, taxonomy_tags, classification prompts)
+  - daemon/coherence.py (bisimulation integration)
+  - daemon/decisions.py (GCRL integration)
+  - EVOLUTION-PLAN.md (Phase 12 added)
+  - task.md (Phase 12 progress)
+
+notes:
+  - User requested Telegram updates only for phase completions
+  - Freqtrade integration module created but set aside until requested
+  - PDF ingest container uses new classification (Pass 5)
+  - All cognitive modules now interconnected

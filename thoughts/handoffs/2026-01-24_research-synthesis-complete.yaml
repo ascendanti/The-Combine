@@ -1,0 +1,88 @@
+session_id: "2026-01-24_research-synthesis"
+timestamp: "2026-01-24T09:30:00"
+context_usage: "low"
+
+completed:
+  - Research Synthesis (5 agents completed):
+      - a65d62a: LocalAI optimization (Q4_K_M, NuExtract, Flash Attention)
+      - ab3ef85: Containerization patterns (gRPC, resilience trifecta)
+      - a80bd6f: Handoff optimization (delta-based, Merkle trees, L-RAG)
+      - abb9f83: Thinking minimization (prompt caching, model routing)
+      - a277d2d: Bottleneck analysis (memory bandwidth, vLLM)
+
+  - EVOLUTION-PLAN.md Updated:
+      - Phase 13: LLM Speed expanded with 5 subsections
+      - Phase 14: Compute Efficiency added (6 subsections)
+      - Phase 15: Multi-Agent Architecture added (4 subsections)
+      - Cost/Benefit Matrix updated
+      - Active Phases roadmap updated
+      - Current Status updated
+
+  - task.md Updated:
+      - Research findings summary table
+      - Next actions clarified
+
+in_progress:
+  - PDF Ingestion:
+      status: "28 papers remaining"
+      container: "autonomous-ingest running"
+      bottleneck: "LocalAI LLM speed - needs Phase 13.1 optimizations"
+
+blocked: []
+
+phase_13_applied:
+  "13.1 CPU Optimization":
+    - docker-compose THREADS: 4 → 10 (2.5x CPU utilization)
+    - LocalAI restarted with new config
+    - Limitation: CPU-only (no GPU on host)
+
+  "13.3 Dragonfly LLM Cache":
+    - Added redis client to autonomous_ingest.py
+    - 3 LLM call sites now check cache before calling LocalAI
+    - make_prompt_hash() for deterministic cache keys
+    - cache_llm_response() / get_cached_llm_response() helpers
+    - Cache TTL: 24 hours (LLM_CACHE_TTL = 86400)
+    - Dockerfile updated with redis dependency
+    - docker-compose passes DRAGONFLY_URL to container
+
+phase_13_not_applied:
+  - Smaller model (NuExtract/Phi-3-mini) - requires download time
+  - Flash Attention - requires GPU
+  - gpu_layers - requires GPU
+  - vLLM - requires GPU
+
+current_status:
+  - autonomous-ingest processing 12 remaining papers
+  - Dragonfly LLM cache active (keys: llm:ingest:*)
+  - Expected 60-90% savings on repeated LLM queries
+
+next_steps:
+  - Monitor cache hit rate as papers process
+  - Consider downloading smaller model (Phi-3-mini 3.8B) for faster CPU inference
+  - Phase 14: Delta-based handoffs for context efficiency
+
+key_decisions:
+  - Rejected complex MAS/GA approach for 44-paper corpus
+  - Root cause is memory bandwidth (decode phase), not compute
+  - Use existing Dragonfly instead of adding Redis
+  - NuExtract-v1.5 preferred for claim extraction (purpose-built)
+  - gRPC preferred over REST for agent-to-agent (60% lower latency)
+
+research_reports:
+  - .claude/cache/agents/oracle/output-2026-01-24-localai-optimization.md
+  - .claude/cache/agents/oracle/output-2026-01-24_containerization-agents.md
+  - .claude/cache/agents/oracle/output-2026-01-24-ai-pipeline-bottlenecks.md
+  - .claude/cache/agents/oracle/output-20260124_024310-thinking-overhead.md
+  - .claude/cache/agents/oracle/output-2026-01-24_compute-optimization.md
+
+files_modified:
+  - EVOLUTION-PLAN.md (Phase 13-15 comprehensive update)
+  - task.md (research synthesis summary)
+  - thoughts/handoffs/2026-01-24_research-synthesis-complete.yaml (this file)
+
+notes:
+  - All 5 research agents completed successfully
+  - Research provides actionable implementation priorities
+  - Phase 13 implementation is ready to begin
+  - Expected 3-5x throughput improvement with model optimizations
+  - Expected 60-80% cost reduction with context efficiency

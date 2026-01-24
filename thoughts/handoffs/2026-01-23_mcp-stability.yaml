@@ -1,0 +1,31 @@
+session: 2026-01-23_mcp-stability
+phase: 10 (Ascension - 90%)
+
+completed:
+  - MCP stability fix:
+    - Installed mcp-knowledge-graph globally (npm install -g)
+    - Created global config: ~/.claude/.mcp.json
+    - Updated project .mcp.json to use global install (no npx)
+  - Dragonfly cache: 8GB maxmemory, 8 proactor_threads
+  - Reference frameworks cloned:
+    - reference-frameworks/claude-context-extender (RAG)
+    - reference-frameworks/claude-modular (token patterns)
+  - Container cleanup: removed orphan gallant_bhabha
+
+pending:
+  - Restart Claude to load new MCP config
+  - Adapt useful patterns from claude-modular:
+    - Token thresholds (context_window_warning, auto_clear)
+    - Quality gates (require_tests, security_scan)
+  - Wire claude-context-extender to book pipeline (leave book pipeline)
+
+key_files_changed:
+  - ~/.claude/.mcp.json (NEW - global MCP config)
+  - .mcp.json (uses global install now)
+  - docker-compose.yaml (8GB memory)
+  - task.md (updated to 90%)
+
+next_session:
+  1. Verify MCP loads without disconnects
+  2. Continue claude-modular pattern adaptation
+  3. Check token usage post-restart

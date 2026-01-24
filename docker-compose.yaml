@@ -29,8 +29,9 @@ services:
     volumes:
       - localai_models:/models
     environment:
-      - THREADS=4
+      - THREADS=10
       - CONTEXT_SIZE=2048
+      - DEBUG=false
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
@@ -85,6 +86,7 @@ services:
       - /c/Users/New Employee/Documents/Obsidian/ClaudeKnowledge:/obsidian
     environment:
       - LOCALAI_URL=http://localai:8080/v1
+      - DRAGONFLY_URL=redis://dragonfly-cache:6379
       - BOOK_WATCH_FOLDER=/watch
       - USE_UTF_SCHEMA=true
       - OBSIDIAN_VAULT=/obsidian
@@ -92,6 +94,8 @@ services:
       - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
     depends_on:
       localai:
+        condition: service_healthy
+      dragonfly-cache:
         condition: service_healthy
     restart: unless-stopped
     healthcheck:

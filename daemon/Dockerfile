@@ -27,7 +27,8 @@ RUN pip install --no-cache-dir \
     pyyaml \
     "markitdown[pdf]" \
     pymupdf \
-    watchdog
+    watchdog \
+    redis
 
 # Create data directories
 RUN mkdir -p /data /logs

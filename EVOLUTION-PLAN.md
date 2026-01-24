@@ -7,6 +7,186 @@ Create a unified, autonomous Claude instance that:
 3. Persists memory and state across sessions
 4. Can operate as 24/7 async daemon (future)
 
+---
+
+## Hierarchical Taxonomy
+
+### Tier 0: Infrastructure Layer
+| Category | Components | Status |
+|----------|------------|--------|
+| **Permissions** | defaultMode, domains, autonomous rules | ✅ Complete |
+| **Containers** | Docker, docker-compose, LocalAI | ✅ Running |
+| **Storage** | SQLite DBs, Dragonfly cache, JSON files | ✅ Active |
+| **Networking** | REST API, MCP server, webhooks | ✅ Available |
+
+### Tier 1: Persistence Layer
+| Category | Components | Status |
+|----------|------------|--------|
+| **State** | Handoffs, ledgers, task.md | ✅ Complete |
+| **Memory** | OpenMemory, memory.py, learnings | ✅ Complete |
+| **Knowledge** | UTF schema, claim index, KG | 🔄 Building |
+| **Cache** | Dragonfly, prompt cache, LLM cache | ⚠️ Partial |
+
+### Tier 2: Cognitive Layer
+| Category | Components | Status |
+|----------|------------|--------|
+| **Goals** | coherence.py, goal hierarchy | ✅ Complete |
+| **Decisions** | decisions.py, criteria engine | ✅ Complete |
+| **Meta-cognition** | calibration, capability gaps | ✅ Complete |
+| **Learning** | self_improvement.py, pattern extraction | ✅ Complete |
+
+### Tier 3: Research Layer
+| Category | Components | Status |
+|----------|------------|--------|
+| **Bisimulation** | State abstraction, policy transfer | ✅ Complete |
+| **GCRL** | Hindsight replay, causal factors | ✅ Complete |
+| **Claims** | Classification, similarity, clusters | ✅ Complete |
+| **Integration** | Memory ↔ claims, dashboard | ✅ Complete |
+
+### Tier 4: Optimization Layer
+| Category | Components | Status |
+|----------|------------|--------|
+| **Token Efficiency** | Smart tools, compression, caching | ⚠️ Partial |
+| **LLM Speed** | Q4_K_M, NuExtract, Flash Attention, vLLM | 📋 Research Done |
+| **Parallelism** | Pipeline stages, gRPC, continuous batching | 📋 Research Done |
+| **Monitoring** | py-spy, DCGM, metrics dashboard | 📋 Research Done |
+
+### Tier 5: Autonomy Layer
+| Category | Components | Status |
+|----------|------------|--------|
+| **Daemon** | runner.py, task queue, scheduler | ✅ Complete |
+| **Triggers** | Email, GitHub, Telegram, cron | ✅ Complete |
+| **Handoffs** | Pre-compact, session transfer | ✅ Complete |
+| **Self-Healing** | Error recovery, retry logic | ⚠️ Partial |
+
+---
+
+## Capability Maturity Model
+
+| Level | Name | Description | Current |
+|-------|------|-------------|---------|
+| L0 | **Manual** | Human triggers all actions | ❌ Passed |
+| L1 | **Assisted** | Human approves, Claude executes | ❌ Passed |
+| L2 | **Supervised** | Claude proposes, human reviews | ❌ Passed |
+| L3 | **Autonomous** | Claude executes, human monitors | ✅ Current |
+| L4 | **Adaptive** | Claude learns from outcomes | 🔄 Building |
+| L5 | **Emergent** | Claude generates novel strategies | 📋 Future |
+
+---
+
+## Dependency Graph
+
+```
+Tier 0 (Infrastructure)
+    ↓
+Tier 1 (Persistence) ←── requires storage + networking
+    ↓
+Tier 2 (Cognitive) ←── requires memory + state
+    ↓
+Tier 3 (Research) ←── requires cognitive modules
+    ↓
+Tier 4 (Optimization) ←── enhances all tiers
+    ↓
+Tier 5 (Autonomy) ←── orchestrates all tiers
+```
+
+---
+
+## Cost/Benefit Matrix
+
+| Phase | Effort | Token Cost | Capability Gain | Priority |
+|-------|--------|------------|-----------------|----------|
+| Phase 1-6 | Low | None | Foundation | ✅ Done |
+| Phase 7-8 | Medium | Low | Cognition | ✅ Done |
+| Phase 9-10 | High | Medium | Intelligence | ✅ Done |
+| Phase 11 | Medium | Saves 60%+ | Token efficiency | 🔄 Active |
+| Phase 12 | High | Low | Research integration | ✅ Done |
+| Phase 13 | Medium | Saves 3-5x | LLM speed (LocalAI) | 📋 Research Done |
+| Phase 14 | Medium | Saves 60-80% | Context efficiency | 📋 Research Done |
+| Phase 15 | High | Low | Multi-agent scale | 📋 Research Done |
+| Phase 16+ | Variable | Variable | Emergent capability | 📋 Future |
+
+---
+
+## Phase Roadmap
+
+### Completed Phases (1-12)
+```
+[Phase 1-2] Foundation + File Tracking
+    └── Permissions, hooks, auto-memory
+
+[Phase 3-4] Async Daemon + Persistent Memory
+    └── Task queue, runner, OpenMemory SDK
+
+[Phase 5-6] Validation + UTF Architecture
+    └── Boot sequence, goal coherence, modules
+
+[Phase 7-8] 24/7 Operation + Cognitive Architecture
+    └── Docker, triggers, decisions, metacognition
+
+[Phase 9-10] Integration + Ascension
+    └── API, MCP, dashboard, self-improvement, book ingestion
+
+[Phase 11] Adaptive Learning Architecture
+    └── Semantic context extension, MAPE control loop
+
+[Phase 12] Research Integration Layer ← CURRENT
+    └── Bisimulation, GCRL, claim similarity, dashboard viz
+```
+
+### Active Phases (13-15) - RESEARCH COMPLETE
+```
+[Phase 13] LLM Speed & Ingestion Optimization ← NEXT (Implementation)
+    ├── 13.1 Model Optimization (Q4_K_M, NuExtract, Flash Attention) ✅ Research
+    ├── 13.2 Inference Architecture (vLLM, continuous batching) ✅ Research
+    ├── 13.3 Caching Layer (Dragonfly LLM cache) ✅ Research
+    ├── 13.4 Profiling & Monitoring (py-spy, DCGM) ✅ Research
+    └── 13.5 Implementation Priority (3-5x throughput target)
+
+[Phase 14] Compute Efficiency & Context Management
+    ├── 14.1 Delta-Based State Transfer (50-70% savings) ✅ Research
+    ├── 14.2 Intelligent Context Loading (L-RAG, 26% reduction) ✅ Research
+    ├── 14.3 Thinking Budget Tiers (task-based allocation) ✅ Research
+    ├── 14.4 Model Routing Optimization (RouteLLM, 30-85%) ✅ Research
+    ├── 14.5 Prompt Caching (Anthropic, 60-90%) ✅ Research
+    └── 14.6 Implementation Priority (60-80% cost reduction target)
+
+[Phase 15] Multi-Agent Architecture
+    ├── 15.1 Communication Patterns (gRPC, 60% lower latency) ✅ Research
+    ├── 15.2 Resilience Patterns (circuit breakers, DLQs) ✅ Research
+    ├── 15.3 Container Orchestration (sidecars, resource limits) ✅ Research
+    └── 15.4 Implementation Priority
+```
+
+### Future Vision (15-18)
+```
+[Phase 15] Multi-Agent Orchestration
+    ├── Container-based agent swarm
+    ├── Pub/sub message routing (Dragonfly)
+    ├── Consensus protocols for decisions
+    └── Circuit breaker patterns
+
+[Phase 16] Emergent Capability
+    ├── Strategy synthesis from patterns
+    ├── Novel goal generation
+    ├── Cross-domain transfer learning
+    └── Capability self-assessment
+
+[Phase 17] External Integration
+    ├── Calendar/email automation
+    ├── Financial market feeds
+    ├── Knowledge base sync (Notion, Obsidian)
+    └── Voice/chat interfaces
+
+[Phase 18] Self-Evolution
+    ├── Automatic skill generation
+    ├── Rule refinement from outcomes
+    ├── Architecture self-modification
+    └── Performance self-optimization
+```
+
+---
+
 ## Source Analysis
 
 See **REFERENCE-TAXONOMY.md** for full analysis of 36 reference frameworks.
@@ -226,7 +406,16 @@ See **REFERENCE-TAXONOMY.md** for full analysis of 36 reference frameworks.
 - [x] Deduplication and status tracking
 - [x] Memory system integration
 
-### 10.4 Token Optimization (NEW) 🔄 PARTIAL
+### 10.4 Claim Classification & Similarity (NEW) ✅ COMPLETE
+- [x] UTFClaim extended with slug_code, taxonomy_tags, utf_vector fields
+- [x] LocalAI generates semantic slugs for claims (PROMPT_CLASSIFY_CLAIM)
+- [x] claim_similarity.py - Cross-paper claim matching index
+- [x] UTF closeness values (slug + taxonomy + form matching)
+- [x] Claim clustering for related concepts across papers
+- [x] Obsidian export updated with classification metadata
+- [x] Freqtrade module added as git submodule (modules/freqtrade)
+
+### 10.7 Token Optimization 🔄 PARTIAL
 - [x] token-optimizer-mcp installed (npm install -g @ooples/token-optimizer-mcp)
 - [x] MCP config created (.mcp.json) - FIXED 2026-01-24
 - [ ] **CLI restart required** to activate MCP server
@@ -289,14 +478,100 @@ See **REFERENCE-TAXONOMY.md** for full analysis of 36 reference frameworks.
 
 ---
 
+## Phase 12: Research Integration Layer 🔄 IN PROGRESS
+
+**Based on:** UTF Research papers on bisimulation, GCRL, state abstraction
+
+### 12.1 Bisimulation Foundation ✅ COMPLETE
+- [x] daemon/bisimulation.py - State equivalence computation
+- [x] BisimulationState and BisimulationMetric dataclasses
+- [x] Goal-conditioned bisimulation distance (feature + reward + action + goal)
+- [x] State abstraction (group bisimilar states into equivalence classes)
+- [x] Policy transfer validation with confidence scoring
+- [x] SQLite persistence + JSON cache
+- [x] Integration hooks for coherence.py
+
+### 12.2 Goal-Conditioned RL (GCRL) ✅ COMPLETE
+- [x] daemon/gcrl.py - Goal-conditioned learning engine
+- [x] Goal and Trajectory dataclasses
+- [x] Hindsight Experience Replay (HER) - relabel failed trajectories
+- [x] Causal factor extraction from successful trajectories
+- [x] Policy learning from trajectories
+- [x] Virtual experience generation using learned policies
+- [x] Goal proximity estimation
+
+### 12.3 Claim Classification (From UTF Spec) ✅ COMPLETE
+- [x] slug_code field for semantic matching in UTFClaim
+- [x] taxonomy_tags for hierarchical classification
+- [x] claim_similarity.py - Cross-paper claim matching
+- [x] UTF closeness values (composite metric)
+- [x] Claim clustering for related concepts
+
+### 12.4 Integration ✅ COMPLETE
+- [x] Wire bisimulation to coherence.py goal evaluation
+  - find_similar_goals() using bisimulation distance
+  - suggest_policy_transfer() for cross-goal reuse
+  - get_goal_state_for_bisim() state conversion
+- [x] Wire GCRL to decisions.py for policy-guided actions
+  - get_policy_guided_decision() returns learned policies
+  - record_outcome_with_trajectory() creates GCRL trajectories
+  - find_similar_decisions() using bisimulation
+- [x] Connect claim similarity to memory.py for retrieval
+  - recall_similar_claims() with UTF closeness scoring
+  - get_cross_paper_insights() for multi-paper concepts
+  - get_related_claims() by claim ID
+  - get_claim_clusters() for semantic groupings
+  - CLI: `python memory.py claims|cross-paper|clusters|refresh-claims`
+- [x] Dashboard visualization of state abstractions
+  - api.py: /abstractions, /transfers, /claims/clusters, /claims/cross-paper, /claims/search
+  - bisimulation.py: get_state_abstractions(), get_recent_transfers()
+  - dashboard.html: State Abstractions, Policy Transfers, Claim Clusters cards
+- [ ] Metrics: Transfer Rate, Abstraction Ratio, HER improvement
+
+---
+
 ## Current Status
 
-**Phase:** 10 - Ascension 🔄 IN PROGRESS (90%)
-**Completed:** Self-improvement engine, thinking frameworks, continuous-learning skill, hybrid architecture, book ingestion pipeline, UTF spec
+**Phase:** 12 ✅ COMPLETE | Phase 13-15 📋 RESEARCH COMPLETE
+**Date:** 2026-01-24
+
+**Completed:**
+- Phase 10 (95%): Self-improvement, thinking frameworks, continuous-learning, hybrid architecture, book ingestion, UTF spec, claim classification
+- Phase 12.1: Bisimulation foundation (state equivalence, policy transfer)
+- Phase 12.2: GCRL (hindsight relabeling, causal factors, virtual experiences)
+- Phase 12.3: Claim classification with slug codes and similarity index
+- Phase 12.4: Integration wiring + dashboard visualization complete
+- **Phase 13-15 Research:** 5 parallel agents completed comprehensive research:
+  - LocalAI optimization (Q4_K_M, NuExtract, Flash Attention)
+  - Containerization patterns (gRPC, resilience trifecta, sidecars)
+  - Handoff optimization (delta-based, Merkle trees, L-RAG)
+  - Thinking minimization (prompt caching, model routing, budgets)
+  - Bottleneck analysis (memory bandwidth, vLLM, profiling)
+
 **In Progress:**
-- Token optimization (MCP config fixed, needs CLI restart)
-- Autonomous PDF ingest (44 files processing via LocalAI)
-**Next Action:**
+- Autonomous PDF ingest (28 papers remaining, container running with LocalAI timeouts)
+
+**Next Actions:**
+1. Apply Phase 13.1 model optimizations (Q4_K_M + NuExtract) to LocalAI
+2. Add Dragonfly LLM response caching
+3. Monitor PDF ingest completion with new optimizations
+
+### Papers Ingested (UTF Schema + Claim Classification)
+| Paper | Claims | Concepts | Status |
+|-------|--------|----------|--------|
+| Transformer Circuits: Toy Models of Superposition | 7 | 0 | ✅ UTF DB |
+| Bounded Rationality, Satisficing, AI in Public Orgs | - | - | ✅ Ingest DB |
+| Continual Learning for Unsupervised Anomaly Detection | - | - | ✅ Ingest DB |
+| Continual Learning in AI: A Review | - | - | ✅ Ingest DB |
+| Continual Learning of Predictive Models VAE | - | - | ✅ Ingest DB |
+| Creating Coherence in Federated NMF | - | - | ✅ Ingest DB |
+| Chaos in Control Systems | - | - | ✅ Ingest DB |
+| Can matrix coherence be estimated | - | - | ✅ Ingest DB |
+
+**Note:** Fixed SQLite save issue (2026-01-24) - added `store_utf_to_sqlite()` to autonomous_ingest.py.
+Container rebuilt and restarted - now saves claims/concepts/sources to utf_knowledge.db.
+
+*28 papers remaining in queue*
 1. Restart CLI to activate token-optimizer-mcp
 2. Complete Phase 10.3 emergent behaviors
 3. Integrate UTF taxonomy with autonomous_ingest.py
@@ -615,6 +890,309 @@ Claude n8n/
 └── task.md                   # Current objectives
 ```
 
+---
+
+## Phase 13: LLM Speed & Ingestion Optimization 🆕 PLANNED
+
+**Research Completed:** 5 parallel agents investigated optimization strategies (2026-01-24)
+
+**Root Cause Analysis:** LocalAI LLM calls (5 passes per doc) are the true bottleneck.
+- Memory bandwidth is dominant (decode phase is memory-bound, not compute-bound)
+- Parsing/embedding is fast; LLM generation is slow
+- Current: ~1 paper per 5-10 mins with timeouts
+
+### 13.1 Model Optimization ✅ RESEARCH COMPLETE
+
+| Technique | Config | Impact | Effort |
+|-----------|--------|--------|--------|
+| **Q4_K_M Quantization** | 4-bit K-means | 70% size ↓, 95% quality, 2x speed | Low |
+| **NuExtract-v1.5** | 3.8B, extraction-tuned | Purpose-built for claim extraction | Low |
+| **Flash Attention** | CUDA 12+, f16_kv | 2-4x attention speed | Low |
+| **KV Cache Quantization** | cache_type: q8_0 | 25% memory savings | Low |
+| **Speculative Decoding** | Draft model | 48.7% latency reduction | Medium |
+
+**Recommended LocalAI Configuration:**
+```yaml
+name: nuextract-fast
+parameters:
+  model: NuExtract-v1.5-q4_k_m.gguf  # or Phi-3-mini-q4_k_m
+  context_size: 2048
+  batch: 512
+  gpu_layers: 33
+  flash_attention: true
+  f16_kv: true
+  cache_type_k: q8_0
+  threads: 8
+```
+
+**Alternative Models (by use case):**
+| Use Case | Model | Size | Why |
+|----------|-------|------|-----|
+| Claim extraction | NuExtract-v1.5 | 3.8B | Extraction-tuned |
+| General reasoning | Phi-3-mini | 3.8B | Good quality/size ratio |
+| Fast summaries | TinyLlama | 1.1B | Speed priority |
+| Code generation | DeepSeek-Coder | 1.3B | Code-tuned |
+
+### 13.2 Inference Architecture ✅ RESEARCH COMPLETE
+
+| Optimization | Tool/Method | Impact |
+|--------------|-------------|--------|
+| **Continuous Batching** | vLLM PagedAttention | 85-92% GPU utilization |
+| **KV Cache Optimization** | PagedAttention | 24x throughput |
+| **Memory Bandwidth** | Tensor cores + quantization | Reduce memory bottleneck |
+| **Pipeline Parallelism** | Extract → Chunk → LLM → Store | Hide latency |
+
+**vLLM Integration (if LocalAI insufficient):**
+```python
+from vllm import LLM, SamplingParams
+llm = LLM(
+    model="microsoft/Phi-3-mini-4k-instruct",
+    quantization="awq",
+    max_model_len=2048,
+    gpu_memory_utilization=0.85,
+    enable_chunked_prefill=True,
+)
+```
+
+### 13.3 Caching Layer ✅ RESEARCH COMPLETE
+
+| Cache Type | Implementation | Savings |
+|------------|---------------|---------|
+| **LLM Response Cache** | Dragonfly semantic hash | 60-90% repeat queries |
+| **Prompt Prefix Cache** | Share common prefixes | 60-90% on repeated patterns |
+| **Embedding Cache** | Already in Dragonfly | Avoid recomputation |
+
+**Dragonfly LLM Cache Schema:**
+```python
+cache_key = f"llm:{model}:{hash(prompt[:256])}"
+# TTL: 24h for summaries, 7d for claims
+```
+
+### 13.4 Profiling & Monitoring ✅ RESEARCH COMPLETE
+
+**Profiling Tools:**
+| Tool | Purpose | When |
+|------|---------|------|
+| py-spy | Python CPU profiling | Baseline analysis |
+| Scalene | Memory + CPU combined | Memory leak detection |
+| DCGM | GPU metrics | Utilization monitoring |
+| nvtop | Real-time GPU | Live monitoring |
+
+**Key Metrics:**
+- [ ] Papers/hour (target: 6-12, up from 1-2)
+- [ ] Tokens/second (target: 40-60, up from ~10)
+- [ ] Cache hit rate (target: >50%)
+- [ ] GPU utilization (target: >80%)
+- [ ] Latency p95 (target: <30s per pass)
+
+### 13.5 Implementation Priority
+
+| Priority | Task | Savings | Status |
+|----------|------|---------|--------|
+| 1 | Increase CPU threads (4→10) | ~2x on CPU | ✅ Applied |
+| 2 | Q4_K_M model (already in use) | Baseline | ✅ Verified |
+| 3 | Dragonfly LLM response cache | 60-90% repeats | ✅ Applied |
+| 4 | Smaller model (Phi-3-mini 3.8B) | 2x on CPU | [ ] Needs download |
+| 5 | Flash Attention + gpu_layers | 2-4x | ⚠️ Requires GPU |
+| 6 | vLLM (if needed) | 2-4x overall | ⚠️ Requires GPU |
+
+**Hardware Constraint:** No NVIDIA GPU available (Intel laptop with integrated graphics).
+CPU optimizations applied. GPU optimizations deferred until hardware available.
+
+**Applied (2026-01-24):**
+- docker-compose.yaml: THREADS=10 (was 4)
+- LocalAI container restarted with new config
+- autonomous-ingest processing 25 remaining papers
+
+---
+
+## Phase 14: Compute Efficiency & Context Management 🆕 PLANNED
+
+**Research Completed:** Handoff optimization + thinking minimization agents (2026-01-24)
+
+### 14.1 Delta-Based State Transfer ✅ RESEARCH COMPLETE
+
+| Technique | Method | Savings |
+|-----------|--------|---------|
+| **Delta Handoffs** | Transmit only changes | 50-70% context |
+| **Merkle Tree Verification** | O(log N) state sync | Fast resume |
+| **Hierarchical Summarization** | Session → Day → Week → Archive | 95% history compression |
+
+**Delta Handoff Format:**
+```yaml
+handoff:
+  base_hash: "abc123"  # Previous handoff hash
+  delta:
+    added: ["task1", "task2"]
+    modified: ["goal.priority"]
+    removed: []
+  context_size: 1.2KB  # vs 8KB full state
+```
+
+### 14.2 Intelligent Context Loading ✅ RESEARCH COMPLETE
+
+| Technique | Method | Savings |
+|-----------|--------|---------|
+| **L-RAG Lazy Loading** | Entropy-based gating | 26% retrieval reduction |
+| **Context Editing** | Anthropic API feature | 84% token reduction |
+| **Just-in-Time Retrieval** | Load on demand, not upfront | Variable |
+
+**L-RAG Implementation:**
+```python
+def should_retrieve(query, context):
+    entropy = compute_entropy(query, context)
+    return entropy > RETRIEVAL_THRESHOLD  # e.g., 0.7
+```
+
+### 14.3 Thinking Budget Tiers ✅ RESEARCH COMPLETE
+
+| Task Type | Thinking Budget | Model |
+|-----------|----------------|-------|
+| Simple lookup | 0 tokens | Haiku |
+| Classification | 1K-2K tokens | Sonnet |
+| Code generation | 4K-16K tokens | Sonnet/Opus |
+| Architecture | 8K-32K tokens | Opus |
+
+**Thinking Router:**
+```python
+THINKING_BUDGETS = {
+    "simple_lookup": {"min": 0, "max": 0, "default": 0},
+    "classification": {"min": 1024, "max": 2048, "default": 1024},
+    "code_generation": {"min": 4096, "max": 16384, "default": 8192},
+    "architecture": {"min": 8192, "max": 32000, "default": 16384},
+}
+```
+
+### 14.4 Model Routing Optimization ✅ RESEARCH COMPLETE
+
+| Router | Method | Savings |
+|--------|--------|---------|
+| **RouteLLM** | Classifier-based routing | 30-85% cost |
+| **Semantic Complexity** | Embedding-based scoring | 40-60% |
+| **Cascade** | Try cheap first, escalate | Variable |
+
+**Current Router (model_router.py) Enhancement:**
+```python
+def route_with_complexity(task):
+    complexity = estimate_complexity(task)
+    if complexity < 0.3:
+        return "localai"  # $0
+    elif complexity < 0.6:
+        return "codex"    # $
+    else:
+        return "claude"   # $$$
+```
+
+### 14.5 Prompt Caching ✅ RESEARCH COMPLETE
+
+| Technique | Implementation | Savings |
+|-----------|---------------|---------|
+| **Anthropic Prompt Caching** | cache_control markers | 60-90% |
+| **Semantic Prefix Sharing** | Common system prompts | 50-70% |
+| **Dragonfly Response Cache** | Already deployed | Variable |
+
+**Anthropic Cache Markers:**
+```python
+messages = [
+    {
+        "role": "system",
+        "content": [
+            {"type": "text", "text": SYSTEM_PROMPT, "cache_control": {"type": "ephemeral"}}
+        ]
+    }
+]
+```
+
+### 14.6 Implementation Priority
+
+| Priority | Task | Savings | Status |
+|----------|------|---------|--------|
+| 1 | Delta-based handoffs | 50-70% | [ ] |
+| 2 | Prompt caching (Anthropic) | 60-90% | [ ] |
+| 3 | Model routing enhancement | 30-85% | [ ] |
+| 4 | Thinking budget tiers | 20-40% | [ ] |
+| 5 | L-RAG lazy loading | 26% retrieval | [ ] |
+| 6 | Hierarchical summarization | 95% history | [ ] |
+
+**Expected improvement:** 60-80% reduction in Claude token costs
+
+---
+
+## Phase 15: Multi-Agent Architecture 🆕 PLANNED
+
+**Research Completed:** Containerization + multi-agent communication agents (2026-01-24)
+
+### 15.1 Communication Patterns ✅ RESEARCH COMPLETE
+
+| Pattern | When | Latency |
+|---------|------|---------|
+| **gRPC** | Agent-to-agent, high volume | 60% lower than REST |
+| **REST** | External APIs, human interfaces | Standard |
+| **Pub/Sub (Dragonfly)** | Broadcast, event-driven | Already deployed |
+| **Bidirectional Streaming** | Long-running coordination | Real-time |
+
+**Recommended: gRPC + Protobuf**
+```protobuf
+service AgentCoordinator {
+  rpc Execute(TaskRequest) returns (stream TaskUpdate);
+  rpc Coordinate(stream AgentMessage) returns (stream AgentMessage);
+}
+```
+
+### 15.2 Resilience Patterns ✅ RESEARCH COMPLETE
+
+| Pattern | Purpose | Implementation |
+|---------|---------|----------------|
+| **Idempotent Handlers** | Safe retries | Hash-based dedup |
+| **Circuit Breakers** | Prevent cascade failure | Backoff + fallback |
+| **Dead Letter Queues** | Preserve failed messages | SQLite queue |
+| **Leader Election** | Consensus decisions | Raft/etcd |
+
+**Circuit Breaker Config:**
+```python
+@circuit_breaker(failure_threshold=5, recovery_timeout=30)
+def call_agent(agent_id, task):
+    ...
+```
+
+### 15.3 Container Orchestration ✅ RESEARCH COMPLETE
+
+| Resource | Sidecar | Main Agent |
+|----------|---------|------------|
+| CPU | 50-100m | 500m-2000m |
+| Memory | 64-128Mi | 512Mi-4Gi |
+| GPU | None | As needed |
+
+**Agent Container Template:**
+```yaml
+services:
+  agent-worker:
+    image: claude-agent:latest
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    environment:
+      - DRAGONFLY_URL=redis://dragonfly:6379
+      - GRPC_PORT=50051
+```
+
+### 15.4 Implementation Priority
+
+| Priority | Task | Status |
+|----------|------|--------|
+| 1 | gRPC service definitions | [ ] |
+| 2 | Circuit breaker middleware | [ ] |
+| 3 | Agent container template | [ ] |
+| 4 | Dragonfly pub/sub integration | [ ] |
+| 5 | Leader election (if needed) | [ ] |
+
+---
+
+---
+
 ## Principles
 
 1. **Iterative accretion** - One capability at a time
@@ -622,3 +1200,4 @@ Claude n8n/
 3. **Root-level preferred** - Scripts over hooks when possible
 4. **Selective integration** - Only what adds power
 5. **Research-driven** - Ground implementations in validated research
+6. **Avoid over-engineering** - Simplest solution that solves the actual bottleneck

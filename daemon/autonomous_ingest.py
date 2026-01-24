@@ -50,14 +50,24 @@ try:
 except ImportError:
     PYMUPDF_AVAILABLE = False
 
+# Dragonfly/Redis cache (Phase 13.3)
+try:
+    import redis
+    REDIS_AVAILABLE = True
+except ImportError:
+    REDIS_AVAILABLE = False
+
 # Configuration
 WATCH_FOLDER = Path(os.environ.get("BOOK_WATCH_FOLDER", str(Path.home() / "Documents" / "GateofTruth")))
 LOCALAI_URL = os.environ.get("LOCALAI_URL", "http://localhost:8080/v1")
 USE_UTF_SCHEMA = os.environ.get("USE_UTF_SCHEMA", "true").lower() == "true"
 OBSIDIAN_VAULT = Path(os.environ.get("OBSIDIAN_VAULT", str(Path.home() / "Documents" / "Obsidian" / "ClaudeKnowledge")))
-LOCALAI_MODEL = "mistral-7b-instruct-v0.3"
+LOCALAI_MODEL = "mistral-7b-instruct-v0.3"  # Phase 13.1: docker-compose now uses THREADS=10
+DRAGONFLY_URL = os.environ.get("DRAGONFLY_URL", "redis://localhost:6379")
+LLM_CACHE_TTL = 86400  # 24 hours for LLM response cache
 KG_PATH = Path.home() / ".claude" / "memory" / "knowledge-graph.jsonl"
 DB_PATH = Path(__file__).parent / "ingest.db"
+UTF_DB_PATH = Path(__file__).parent / "utf_knowledge.db"
 
 SUPPORTED_EXTENSIONS = {'.pdf', '.txt', '.md', '.docx', '.pptx', '.html', '.epub'}
 
@@ -72,6 +82,53 @@ except ImportError:
     def notify_complete(*args, **kwargs): pass
     def notify_error(*args, **kwargs): pass
     def notify_localai_summary(*args, **kwargs): pass
+
+# ============================================================================
+# Phase 13.3: Dragonfly LLM Response Cache
+# ============================================================================
+
+_dragonfly_client = None
+
+def get_dragonfly():
+    """Get or create Dragonfly connection."""
+    global _dragonfly_client
+    if _dragonfly_client is None and REDIS_AVAILABLE:
+        try:
+            _dragonfly_client = redis.from_url(DRAGONFLY_URL)
+            _dragonfly_client.ping()
+        except Exception:
+            _dragonfly_client = None
+    return _dragonfly_client
+
+def cache_llm_response(prompt_hash: str, response: str, ttl: int = LLM_CACHE_TTL):
+    """Cache LLM response in Dragonfly."""
+    client = get_dragonfly()
+    if client:
+        try:
+            cache_key = f"llm:ingest:{prompt_hash}"
+            client.setex(cache_key, ttl, json.dumps(response))
+            return True
+        except Exception:
+            pass
+    return False
+
+def get_cached_llm_response(prompt_hash: str) -> Optional[Dict]:
+    """Get cached LLM response from Dragonfly."""
+    client = get_dragonfly()
+    if client:
+        try:
+            cache_key = f"llm:ingest:{prompt_hash}"
+            result = client.get(cache_key)
+            if result:
+                return json.loads(result.decode())
+        except Exception:
+            pass
+    return None
+
+def make_prompt_hash(prompt: str, model: str = LOCALAI_MODEL) -> str:
+    """Create deterministic hash for prompt caching."""
+    key = f"{model}:{prompt[:1000]}"  # First 1000 chars for key
+    return hashlib.sha256(key.encode()).hexdigest()[:16]
 
 # ============================================================================
 # LeanRAG: Knowledge Structures (Semantic Aggregation)
@@ -266,6 +323,12 @@ FUTURE_WORK: <suggested future directions>
 DOMAIN: <research domain: ML, NLP, CV, systems, theory, etc.>
 """
 
+    # Phase 13.3: Check cache first
+    prompt_hash = make_prompt_hash(prompt)
+    cached = get_cached_llm_response(prompt_hash)
+    if cached:
+        return {"raw": cached.get("content", ""), "tokens": 0, "success": True, "cached": True}
+
     try:
         response = requests.post(
             f"{LOCALAI_URL}/chat/completions",
@@ -281,7 +344,10 @@ DOMAIN: <research domain: ML, NLP, CV, systems, theory, etc.>
         content = result['choices'][0]['message']['content']
         tokens = result['usage']['total_tokens']
 
-        return {"raw": content, "tokens": tokens, "success": True}
+        # Cache successful response
+        cache_llm_response(prompt_hash, {"content": content, "tokens": tokens})
+
+        return {"raw": content, "tokens": tokens, "success": True, "cached": False}
     except Exception as e:
         return {"raw": "", "tokens": 0, "success": False, "error": str(e)}
 
@@ -334,39 +400,49 @@ FACT: <atomic fact>
 KEYWORDS: <relevant keywords for this chunk, comma-separated>
 """
 
-    try:
-        response = requests.post(
-            f"{LOCALAI_URL}/chat/completions",
-            json={
-                "model": LOCALAI_MODEL,
-                "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": 500
-            },
-            timeout=120
-        )
+    # Phase 13.3: Check cache first
+    prompt_hash = make_prompt_hash(prompt)
+    cached = get_cached_llm_response(prompt_hash)
+    if cached:
+        content = cached.get("content", "")
+        tokens = 0
+    else:
+        try:
+            response = requests.post(
+                f"{LOCALAI_URL}/chat/completions",
+                json={
+                    "model": LOCALAI_MODEL,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "max_tokens": 500
+                },
+                timeout=120
+            )
 
-        result = response.json()
-        content = result['choices'][0]['message']['content']
-        tokens = result['usage']['total_tokens']
+            result = response.json()
+            content = result['choices'][0]['message']['content']
+            tokens = result['usage']['total_tokens']
 
-        # Parse facts
-        facts = []
-        keywords = []
-        for line in content.split('\n'):
-            line = line.strip()
-            if line.upper().startswith('FACT:'):
-                facts.append(line[5:].strip())
-            elif line.upper().startswith('KEYWORDS:'):
-                keywords = [k.strip() for k in line[9:].split(',')]
+            # Cache successful response
+            cache_llm_response(prompt_hash, {"content": content, "tokens": tokens})
+        except Exception as e:
+            return {"facts": [], "keywords": [], "tokens": 0, "success": False}
 
-        return {
-            "facts": facts,
-            "keywords": keywords,
-            "tokens": tokens,
-            "chunk_index": chunk['index']
-        }
-    except Exception as e:
-        return {"facts": [], "keywords": [], "tokens": 0, "error": str(e)}
+    # Parse facts
+    facts = []
+    keywords = []
+    for line in content.split('\n'):
+        line = line.strip()
+        if line.upper().startswith('FACT:'):
+            facts.append(line[5:].strip())
+        elif line.upper().startswith('KEYWORDS:'):
+            keywords = [k.strip() for k in line[9:].split(',')]
+
+    return {
+        "facts": facts,
+        "keywords": keywords,
+        "tokens": tokens,
+        "chunk_index": chunk['index']
+    }
 
 
 def aggregate_to_global(local_facts: List[Dict], doc_id: str, level: int = 1) -> Dict:
@@ -395,6 +471,18 @@ SYNTHESIS: <2-3 paragraph summary that integrates the facts>
 KEY_INSIGHT: <the single most important takeaway>
 """
 
+    # Phase 13.3: Check cache first
+    prompt_hash = make_prompt_hash(prompt)
+    cached = get_cached_llm_response(prompt_hash)
+    if cached:
+        return {
+            "summary": cached.get("content", ""),
+            "tokens": 0,
+            "level": level,
+            "fact_count": len(all_facts),
+            "cached": True
+        }
+
     try:
         response = requests.post(
             f"{LOCALAI_URL}/chat/completions",
@@ -410,11 +498,15 @@ KEY_INSIGHT: <the single most important takeaway>
         content = result['choices'][0]['message']['content']
         tokens = result['usage']['total_tokens']
 
+        # Cache successful response
+        cache_llm_response(prompt_hash, {"content": content, "tokens": tokens})
+
         return {
             "summary": content,
             "tokens": tokens,
             "level": level,
-            "fact_count": len(all_facts)
+            "fact_count": len(all_facts),
+            "cached": False
         }
     except Exception as e:
         return {"summary": "", "tokens": 0, "error": str(e)}
@@ -623,8 +715,11 @@ def process_document_utf(path: Path, text: str, conn: sqlite3.Connection) -> Dic
         export_to_obsidian(result, OBSIDIAN_VAULT)
         print(f"    [UTF] Exported to Obsidian: {OBSIDIAN_VAULT}")
 
-    # Store to Knowledge Graph
+    # Store to Knowledge Graph (JSON)
     store_utf_to_kg(result)
+
+    # Store to SQLite for claim similarity
+    store_utf_to_sqlite(result)
 
     # Record processed
     c = conn.cursor()
@@ -654,6 +749,114 @@ def process_document_utf(path: Path, text: str, conn: sqlite3.Connection) -> Dic
         "concepts": stats['concepts'],
         "quality_gate": result.quality_gate_passed
     }
+
+
+def init_utf_db():
+    """Initialize UTF knowledge SQLite database for claim similarity."""
+    conn = sqlite3.connect(UTF_DB_PATH)
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS sources (
+        source_id TEXT PRIMARY KEY,
+        title TEXT,
+        authors TEXT,
+        year INTEGER,
+        domain TEXT,
+        abstract TEXT,
+        quality_status TEXT,
+        created_at TEXT
+    )''')
+
+    c.execute('''CREATE TABLE IF NOT EXISTS claims (
+        claim_id TEXT PRIMARY KEY,
+        source_id TEXT,
+        statement TEXT,
+        claim_form TEXT,
+        grounding TEXT,
+        confidence REAL,
+        stability_class TEXT,
+        evidence_grade TEXT,
+        excerpt_ids TEXT,
+        domain TEXT,
+        scope TEXT,
+        created_at TEXT,
+        slug_code TEXT,
+        taxonomy_tags TEXT,
+        FOREIGN KEY (source_id) REFERENCES sources(source_id)
+    )''')
+
+    c.execute('''CREATE TABLE IF NOT EXISTS concepts (
+        concept_id TEXT PRIMARY KEY,
+        source_id TEXT,
+        name TEXT,
+        definition_1liner TEXT,
+        domain TEXT,
+        created_at TEXT,
+        FOREIGN KEY (source_id) REFERENCES sources(source_id)
+    )''')
+
+    c.execute('''CREATE TABLE IF NOT EXISTS excerpts (
+        excerpt_id TEXT PRIMARY KEY,
+        source_id TEXT,
+        content TEXT,
+        page_num INTEGER,
+        created_at TEXT,
+        FOREIGN KEY (source_id) REFERENCES sources(source_id)
+    )''')
+
+    conn.commit()
+    conn.close()
+
+
+def store_utf_to_sqlite(result: 'UTFExtractionResult'):
+    """Store UTF extraction result to SQLite for claim similarity."""
+    import json
+
+    init_utf_db()
+    conn = sqlite3.connect(UTF_DB_PATH)
+    c = conn.cursor()
+
+    # Store source
+    c.execute('''INSERT OR REPLACE INTO sources
+        (source_id, title, authors, year, domain, abstract, quality_status, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+        (result.source.source_id, result.source.title,
+         json.dumps(result.source.authors), result.source.year,
+         result.source.domain, result.source.abstract,
+         result.source.quality_status, datetime.now().isoformat()))
+
+    # Store claims
+    for claim in result.claims:
+        c.execute('''INSERT OR REPLACE INTO claims
+            (claim_id, source_id, statement, claim_form, grounding, confidence,
+             stability_class, evidence_grade, excerpt_ids, domain, scope, created_at,
+             slug_code, taxonomy_tags)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+            (claim.claim_id, claim.source_id, claim.statement, claim.claim_form,
+             claim.grounding, claim.confidence, claim.stability_class,
+             claim.evidence_grade, json.dumps(claim.excerpt_ids),
+             claim.domain, claim.scope, datetime.now().isoformat(),
+             getattr(claim, 'slug_code', None),
+             json.dumps(getattr(claim, 'taxonomy_tags', []))))
+
+    # Store concepts
+    for concept in result.concepts:
+        c.execute('''INSERT OR REPLACE INTO concepts
+            (concept_id, source_id, name, definition_1liner, domain, created_at)
+            VALUES (?, ?, ?, ?, ?, ?)''',
+            (concept.concept_id, concept.source_id, concept.name,
+             concept.definition_1liner, concept.domain, datetime.now().isoformat()))
+
+    # Store excerpts
+    for excerpt in result.excerpts:
+        c.execute('''INSERT OR REPLACE INTO excerpts
+            (excerpt_id, source_id, content, page_num, created_at)
+            VALUES (?, ?, ?, ?, ?)''',
+            (excerpt.excerpt_id, excerpt.source_id, excerpt.text,
+             excerpt.location, datetime.now().isoformat()))
+
+    conn.commit()
+    conn.close()
 
 
 def store_utf_to_kg(result: 'UTFExtractionResult'):
@@ -844,7 +1047,11 @@ def run_ingest(watch: bool = False, interval: int = 300):
                 try:
                     result = process_document(path, conn)
                     if result.get('success'):
-                        print(f"    Stored: {result['facts']} facts, {result['chunks']} chunks")
+                        # Handle both UTF and legacy mode outputs
+                        if 'claims' in result:
+                            print(f"    Stored: {result['claims']} claims, {result['concepts']} concepts")
+                        else:
+                            print(f"    Stored: {result['facts']} facts, {result['chunks']} chunks")
                 except Exception as e:
                     print(f"    [ERR] {e}")
 

@@ -1,0 +1,3 @@
+[submodule "modules/freqtrade"]
+	path = modules/freqtrade
+	url = https://github.com/freqtrade/freqtrade.git

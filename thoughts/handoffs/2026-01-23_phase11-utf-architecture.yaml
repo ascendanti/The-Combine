@@ -1,0 +1,107 @@
+---
+date: 2026-01-23T17:30:00
+session_name: phase11-utf-architecture
+status: in_progress
+---
+
+# Handoff: UTF Knowledge Architecture Implementation
+
+## Summary
+Created comprehensive UTF Research Program OS specification and began implementing iterative knowledge extraction tools. The spec defines a multi-dimensional taxonomy (L0-L6 abstraction ladder, claim forms, comprehension scaffolds) for organizing knowledge from ingested documents. Built iterative ingest tool that processes page-by-page to respect LocalAI memory limits.
+
+## Completed
+- [x] Full UTF Research OS Specification (specs/UTF-RESEARCH-OS-SPEC.md)
+  - UTF Knowledge Theory (State/Event/Projection/Lens)
+  - Full ontology with 20+ node types
+  - DKCS v2 coordinate system (8+ dimensions)
+  - Morphological layer (claim forms, stability, integration modes)
+  - UTF Operator Library (INGEST, IMBIBE, INTEGRATE + micro-operators)
+  - Obsidian vault architecture + templates
+  - MVP checklist for implementation
+- [x] UTF Iterative Ingest tool (.claude/scripts/utf-ingest.py)
+  - Page-by-page processing (memory friendly for LocalAI)
+  - Extracts: Claims (L2), Concepts (L3), Assumptions, Limitations
+  - Implements quality gates (source acceptance, claim validity)
+  - 7-slot comprehension scaffold extraction
+  - Checkpoint/resume support
+  - Taxonomy-filtered retrieval queries
+- [x] UTF Context Filter hook (.claude/hooks/utf-context-filter.py)
+  - PreToolUse hook for Read operations
+  - Injects relevant UTF knowledge as context
+  - Domain inference from file paths
+
+## In Progress
+- [ ] Wire UTF context filter into settings.local.json
+- [ ] Test end-to-end UTF extraction on a real book
+- [ ] Build scaffold completion worker (fill 7-slot gaps iteratively)
+
+## Blocked
+- Nothing currently blocked
+
+## Next Steps
+1. Register utf-context-filter.py hook in settings.local.json
+2. Run utf-ingest.py on a test PDF from GateofTruth
+3. Verify taxonomy-filtered retrieval works correctly
+4. Consider building a scaffold-completion worker that:
+   - Queries concepts with incomplete scaffolds
+   - Uses OpenAI to fill missing slots
+   - Updates concepts iteratively
+
+## Key Decisions
+- UTF spec follows prompt requirements exactly
+- Iterative processing (not batch) due to LocalAI memory limits
+- Quality gates enforce what counts as "knowledge" vs just text
+- Claims require grounding (anchored or marked as hypothesis)
+- Concepts require 7-slot comprehension scaffold
+
+## Files Modified/Created
+- specs/UTF-RESEARCH-OS-SPEC.md (NEW) - Full 10-section spec
+- .claude/scripts/utf-ingest.py (NEW) - Iterative extraction tool
+- .claude/hooks/utf-context-filter.py (NEW) - Context augmentation hook
+- task.md (UPDATED) - Now at Phase 11
+
+## Architecture
+```
+PDF -> utf-ingest.py (page-by-page)
+         |
+         v
+    LocalAI (Mistral 7B)
+         |
+         +--> Claims (L2) with claim_form, confidence
+         +--> Concepts (L3) with 7-slot scaffold
+         +--> Assumptions with violation notes
+         +--> Limitations with severity
+         |
+         v
+    utf_knowledge.db (SQLite)
+         |
+         +--> FTS indexes for fast search
+         +--> Taxonomy filters (domain, form, level)
+         |
+         v
+    utf-context-filter.py (hook)
+         |
+         v
+    Context augmentation for Claude reads
+```
+
+## Resources Available
+- Docker: Running
+- LocalAI: http://localhost:8080/v1 (Mistral 7B)
+- OpenAI API: Configured (use sparingly)
+- Watch folder: ~/Documents/GateofTruth/
+
+## Quick Commands
+```bash
+# Run UTF ingest on a PDF
+python .claude/scripts/utf-ingest.py "path/to/book.pdf"
+
+# Resume interrupted ingest
+python .claude/scripts/utf-ingest.py "path/to/book.pdf" --resume
+
+# Query with taxonomy filters
+python .claude/scripts/utf-ingest.py --query "attention" --domain machine_learning --level L2
+
+# Check knowledge base status
+python .claude/scripts/utf-ingest.py --status
+```

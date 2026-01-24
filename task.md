@@ -3,11 +3,122 @@
 ## Objective
 Evolve Claude instance with autonomous async daemon capabilities + adaptive learning architecture.
 
-## Status: Phase 11 - UTF Knowledge Architecture -> IN PROGRESS
+## Status: Phase 12 Complete, Phase 13 Planned
+
+## Completed This Session (2026-01-24)
+
+### Phase 12.4 Completion
+- [x] **Memory Integration** (daemon/memory.py)
+  - recall_similar_claims() with UTF closeness scoring
+  - get_cross_paper_insights() for multi-paper concepts
+  - get_related_claims() by claim ID
+  - get_claim_clusters() for semantic groupings
+  - CLI: claims, cross-paper, clusters, refresh-claims
+
+- [x] **SQLite Save Fix** (daemon/autonomous_ingest.py)
+  - Added store_utf_to_sqlite() - saves claims to utf_knowledge.db
+  - init_utf_db() creates proper tables
+  - Container rebuilt with fix
+
+- [x] **Dashboard Visualization**
+  - api.py: 5 new endpoints (/abstractions, /transfers, /claims/*)
+  - bisimulation.py: get_state_abstractions(), get_recent_transfers()
+  - dashboard.html: 3 new cards (State Abstractions, Transfers, Clusters)
+
+### Phase 13 Planning
+- [x] Assessed Telegram proposal (Multi-Agent Swarm with GA)
+- [x] Counter-proposed simpler solution targeting actual bottleneck (LLM speed)
+- [x] Added Phase 13 to EVOLUTION-PLAN
+
+### Research Synthesis Complete (2026-01-24)
+- 5 research agents completed with comprehensive findings
+- Reports saved to `.claude/cache/agents/oracle/`
+- EVOLUTION-PLAN.md updated with Phase 13-15 implementation details
+
+**Key Research Findings:**
+| Area | Technique | Impact |
+|------|-----------|--------|
+| LocalAI Speed | Q4_K_M + NuExtract + Flash Attention | 3-5x throughput |
+| Context Efficiency | Delta handoffs + L-RAG | 50-70% savings |
+| Token Cost | Prompt caching + model routing | 60-90% reduction |
+| Multi-Agent | gRPC + circuit breakers | 60% lower latency |
+| Profiling | vLLM PagedAttention + py-spy | 85-92% GPU util |
+
+### Phase 13 Implementation Applied (2026-01-24)
+
+**13.1 CPU Optimization:**
+- docker-compose THREADS: 4 → 10 (2.5x CPU utilization)
+- LocalAI restarted with optimized config
+
+**13.3 Dragonfly LLM Cache:**
+- Added redis client to autonomous_ingest.py
+- 3 LLM call sites now check cache before calling LocalAI
+- Cache TTL: 24 hours (LLM_CACHE_TTL = 86400)
+- Dockerfile updated with redis dependency
+- Container rebuilt and restarted
+
+### Phase 13 Complete (2026-01-24)
+
+**Ingestion Pipeline:**
+- [x] 45 papers processed (all complete)
+- [x] 0 papers remaining in watch folder
+- [x] SQLite schema fixes (abstract, quality_status, created_at, content, page_num)
+- [x] UTFExcerpt attribute mapping fixed (text/location vs content/page_num)
+- [x] Logging updated to handle both UTF and legacy modes
+
+**Infrastructure:**
+- [x] Dragonfly LLM cache: 41 keys cached
+- [x] All containers healthy (autonomous-ingest, localai, kg-summary-worker, synthesis-worker, dragonfly-cache)
+
+### Telegram Proposal Response (2026-01-24)
+
+Received local agents architecture proposal. Assessment:
+
+| Proposed | Already Have | Status |
+|----------|--------------|--------|
+| explorer/ | utf_extractor + memory.py | Done |
+| historian/ | thoughts/handoffs/ + hooks | Done |
+| research_documenter/ | autonomous_ingest + synthesis_worker | Done |
+| Local model rules | model_router.py | Done |
+
+**New addition from proposal:**
+- [x] Created `.claude/hooks/git-post-commit.py` - Historian checkpoint on commits
+
+---
 
 ## Phase 10 Complete (Ascension) - 2026-01-23
 
 ## Completed This Session (2026-01-23)
+
+### Phase 10.4: Claim Classification & Similarity ✅ NEW
+- [x] UTFClaim extended with slug_code, taxonomy_tags, utf_vector fields
+- [x] LocalAI generates semantic slugs (PROMPT_CLASSIFY_CLAIM in utf_extractor.py)
+- [x] claim_similarity.py created - Cross-paper claim matching index
+  - UTF closeness values (slug + taxonomy + form matching)
+  - Claim clustering for related concepts across papers
+  - find_similar(), find_similar_by_id(), get_cross_paper_links()
+- [x] Obsidian export updated with classification metadata
+- [x] Freqtrade module added as git submodule (modules/freqtrade)
+- [x] UTF DB schema updated with slug_code, taxonomy_tags columns
+- [x] EVOLUTION-PLAN.md updated to 95%
+
+### Phase 12: Research Integration Layer ✅ COMPLETE
+- [x] **12.1 Bisimulation Foundation** (daemon/bisimulation.py)
+  - BisimulationState and BisimulationMetric dataclasses
+  - Goal-conditioned bisimulation distance computation
+  - State abstraction (group bisimilar states)
+  - Policy transfer validation with confidence scoring
+  - SQLite persistence + JSON cache
+- [x] **12.2 Goal-Conditioned RL** (daemon/gcrl.py)
+  - Goal and Trajectory dataclasses
+  - Hindsight Experience Replay (HER) - relabel failed trajectories
+  - Causal factor extraction from successful trajectories
+  - Policy learning and recommendation
+  - Virtual experience generation
+- [x] **12.4 Integration Wiring**
+  - coherence.py: find_similar_goals(), suggest_policy_transfer()
+  - decisions.py: get_policy_guided_decision(), record_outcome_with_trajectory()
+  - decisions.py: find_similar_decisions() using bisimulation
 
 ### KG Token Efficiency (Phase 11 Foundation) ✅
 - [x] Fixed all TypeScript hook compilation errors

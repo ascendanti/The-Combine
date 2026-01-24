@@ -18,11 +18,19 @@ Reference: specs/UTF-RESEARCH-OS-SPEC.md
 import os
 import re
 import json
+import hashlib
 import requests
 from datetime import datetime
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict, field
 from pathlib import Path
+
+# Dragonfly/Redis cache (Phase 13.3)
+try:
+    import redis
+    REDIS_AVAILABLE = True
+except ImportError:
+    REDIS_AVAILABLE = False
 
 # ============================================================================
 # Configuration
@@ -30,6 +38,51 @@ from pathlib import Path
 
 LOCALAI_URL = os.environ.get("LOCALAI_URL", "http://localhost:8080/v1")
 LOCALAI_MODEL = "mistral-7b-instruct-v0.3"
+DRAGONFLY_URL = os.environ.get("DRAGONFLY_URL", "redis://localhost:6379")
+LLM_CACHE_TTL = 86400  # 24 hours
+
+# ============================================================================
+# Phase 13.3: Dragonfly LLM Cache
+# ============================================================================
+
+_dragonfly_client = None
+
+def get_dragonfly():
+    """Get or create Dragonfly connection."""
+    global _dragonfly_client
+    if _dragonfly_client is None and REDIS_AVAILABLE:
+        try:
+            _dragonfly_client = redis.from_url(DRAGONFLY_URL)
+            _dragonfly_client.ping()
+        except Exception:
+            _dragonfly_client = None
+    return _dragonfly_client
+
+def make_prompt_hash(prompt: str) -> str:
+    """Create deterministic hash for prompt caching."""
+    key = f"{LOCALAI_MODEL}:{prompt[:1000]}"
+    return hashlib.sha256(key.encode()).hexdigest()[:16]
+
+def cache_get(prompt_hash: str) -> Optional[str]:
+    """Get cached LLM response."""
+    client = get_dragonfly()
+    if client:
+        try:
+            result = client.get(f"llm:utf:{prompt_hash}")
+            if result:
+                return result.decode()
+        except Exception:
+            pass
+    return None
+
+def cache_set(prompt_hash: str, response: str):
+    """Cache LLM response."""
+    client = get_dragonfly()
+    if client:
+        try:
+            client.setex(f"llm:utf:{prompt_hash}", LLM_CACHE_TTL, response)
+        except Exception:
+            pass
 
 # ============================================================================
 # UTF Data Classes (MVP Node Types)
@@ -73,6 +126,10 @@ class UTFClaim:
     excerpt_ids: List[str] = field(default_factory=list)
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
     validity_status: str = "valid"  # valid, needs_atomization, needs_grounding
+    # Claim classification fields (Phase 10.4)
+    slug_code: Optional[str] = None  # Unique semantic slug for similarity matching
+    taxonomy_tags: List[str] = field(default_factory=list)  # Hierarchical classification
+    utf_vector: Optional[List[float]] = None  # Embedding for closeness calculation
 
 @dataclass
 class UTFConcept:
@@ -131,8 +188,15 @@ class UTFExtractionResult:
 # LocalAI Interface
 # ============================================================================
 
-def localai_complete(prompt: str, max_tokens: int = 1000, retries: int = 2) -> str:
-    """Call LocalAI for completion with retry logic."""
+def localai_complete(prompt: str, max_tokens: int = 500, retries: int = 2) -> str:
+    """Call LocalAI for completion with retry logic and caching."""
+    # Phase 13.3: Check cache first
+    prompt_hash = make_prompt_hash(prompt)
+    cached = cache_get(prompt_hash)
+    if cached:
+        print(f"[Cache HIT] {prompt_hash[:8]}...")
+        return cached
+
     for attempt in range(retries + 1):
         try:
             response = requests.post(
@@ -143,10 +207,14 @@ def localai_complete(prompt: str, max_tokens: int = 1000, retries: int = 2) -> s
                     "max_tokens": max_tokens,
                     "temperature": 0.3
                 },
-                timeout=300  # 5 minutes for large documents
+                timeout=180  # 3 minutes - reduced chunks should be faster
             )
             response.raise_for_status()
-            return response.json()["choices"][0]["message"]["content"]
+            content = response.json()["choices"][0]["message"]["content"]
+            # Cache successful response
+            cache_set(prompt_hash, content)
+            print(f"[Cache SET] {prompt_hash[:8]}...")
+            return content
         except requests.exceptions.Timeout:
             if attempt < retries:
                 print(f"[LocalAI] Timeout, retrying ({attempt + 1}/{retries})...")
@@ -272,6 +340,53 @@ Return JSON array:
 
 JSON:"""
 
+# Claim Classification Prompt (Phase 10.4)
+PROMPT_CLASSIFY_CLAIM = """Classify this claim with a unique semantic slug and taxonomy tags.
+
+CLAIM: {claim}
+CLAIM_FORM: {claim_form}
+DOMAIN: {domain}
+
+Generate:
+1. A unique slug_code (3-5 lowercase words joined by hyphens) that captures the core semantic meaning
+   - Format: domain-action-subject-qualifier
+   - Examples: "ml-attention-mechanism-scaling", "cog-memory-retrieval-decay", "math-convergence-proof-technique"
+2. Taxonomy tags (hierarchical classification path)
+   - Format: ["Level1", "Level2", "Level3"]
+   - Examples: ["Machine Learning", "Transformers", "Attention"], ["Cognitive Science", "Memory", "Working Memory"]
+
+Return JSON:
+{{
+  "slug_code": "domain-action-subject-qualifier",
+  "taxonomy_tags": ["Level1", "Level2", "Level3"]
+}}
+
+JSON:"""
+
+PROMPT_COMPUTE_SIMILARITY = """Compare these two claims and rate their semantic similarity.
+
+CLAIM_A: {claim_a}
+SLUG_A: {slug_a}
+
+CLAIM_B: {claim_b}
+SLUG_B: {slug_b}
+
+Rate similarity from 0.0 (completely different) to 1.0 (same meaning):
+- 0.0-0.2: Unrelated claims
+- 0.2-0.4: Same domain, different topics
+- 0.4-0.6: Related topics, different claims
+- 0.6-0.8: Similar claims, different framing
+- 0.8-1.0: Nearly identical semantic meaning
+
+Return JSON:
+{{
+  "similarity": 0.X,
+  "relationship": "unrelated|same_domain|related|similar|equivalent",
+  "common_concepts": ["concept1", "concept2"]
+}}
+
+JSON:"""
+
 # ============================================================================
 # Extraction Functions
 # ============================================================================
@@ -312,7 +427,7 @@ def parse_json_response(response: str) -> Any:
 
 def extract_metadata(text: str, file_hash: str) -> UTFSource:
     """Extract source metadata using LocalAI."""
-    prompt = PROMPT_EXTRACT_METADATA.format(text=text[:3000])
+    prompt = PROMPT_EXTRACT_METADATA.format(text=text[:1500])  # Reduced for CPU speed
     response = localai_complete(prompt, max_tokens=500)
 
     data = parse_json_response(response)
@@ -340,7 +455,7 @@ def extract_metadata(text: str, file_hash: str) -> UTFSource:
         keywords=data.get("keywords", [])
     )
 
-def extract_excerpts(text: str, source_id: str, chunk_size: int = 2000) -> List[UTFExcerpt]:
+def extract_excerpts(text: str, source_id: str, chunk_size: int = 1200) -> List[UTFExcerpt]:  # Reduced for CPU
     """Extract excerpts from text chunks."""
     excerpts = []
 
@@ -428,7 +543,7 @@ def extract_concepts(claims: List[UTFClaim]) -> List[UTFConcept]:
 
 def extract_assumptions(text: str, source_id: str) -> List[UTFAssumption]:
     """Extract assumptions from text."""
-    prompt = PROMPT_EXTRACT_ASSUMPTIONS.format(text=text[:2500])
+    prompt = PROMPT_EXTRACT_ASSUMPTIONS.format(text=text[:1200])  # Reduced for CPU
     response = localai_complete(prompt, max_tokens=600)
 
     data = parse_json_response(response)
@@ -451,7 +566,7 @@ def extract_assumptions(text: str, source_id: str) -> List[UTFAssumption]:
 
 def extract_limitations(text: str, source_id: str) -> List[UTFLimitation]:
     """Extract limitations from text."""
-    prompt = PROMPT_EXTRACT_LIMITATIONS.format(text=text[:2500])
+    prompt = PROMPT_EXTRACT_LIMITATIONS.format(text=text[:1200])  # Reduced for CPU
     response = localai_complete(prompt, max_tokens=500)
 
     data = parse_json_response(response)
@@ -469,6 +584,101 @@ def extract_limitations(text: str, source_id: str) -> List[UTFLimitation]:
                 limitations.append(limitation)
 
     return limitations
+
+# ============================================================================
+# Claim Classification (Phase 10.4)
+# ============================================================================
+
+def classify_claim(claim: UTFClaim, domain: str = None) -> UTFClaim:
+    """Generate semantic slug and taxonomy tags for a claim."""
+    prompt = PROMPT_CLASSIFY_CLAIM.format(
+        claim=claim.statement,
+        claim_form=claim.claim_form,
+        domain=domain or "general"
+    )
+    response = localai_complete(prompt, max_tokens=200)
+
+    data = parse_json_response(response)
+    if data:
+        claim.slug_code = data.get("slug_code", generate_fallback_slug(claim.statement))
+        claim.taxonomy_tags = data.get("taxonomy_tags", [])
+    else:
+        # Fallback slug generation
+        claim.slug_code = generate_fallback_slug(claim.statement)
+        claim.taxonomy_tags = [claim.claim_form]
+
+    return claim
+
+def generate_fallback_slug(statement: str) -> str:
+    """Generate a fallback slug from the statement."""
+    import re
+    # Extract key words (nouns and verbs)
+    words = re.findall(r'\b[a-z]{4,}\b', statement.lower())
+    # Take first 4 unique words
+    seen = set()
+    slug_parts = []
+    for w in words:
+        if w not in seen and w not in {'that', 'this', 'which', 'with', 'from', 'have', 'been'}:
+            seen.add(w)
+            slug_parts.append(w)
+            if len(slug_parts) >= 4:
+                break
+    return '-'.join(slug_parts) if slug_parts else f"claim-{hash(statement) % 10000:04d}"
+
+def compute_claim_similarity(claim_a: UTFClaim, claim_b: UTFClaim) -> Dict[str, Any]:
+    """Compute semantic similarity between two claims."""
+    prompt = PROMPT_COMPUTE_SIMILARITY.format(
+        claim_a=claim_a.statement,
+        slug_a=claim_a.slug_code or "unknown",
+        claim_b=claim_b.statement,
+        slug_b=claim_b.slug_code or "unknown"
+    )
+    response = localai_complete(prompt, max_tokens=150)
+
+    data = parse_json_response(response)
+    if data:
+        return {
+            "similarity": data.get("similarity", 0.0),
+            "relationship": data.get("relationship", "unknown"),
+            "common_concepts": data.get("common_concepts", []),
+            "claim_a_id": claim_a.claim_id,
+            "claim_b_id": claim_b.claim_id
+        }
+
+    # Fallback: simple slug-based similarity
+    if claim_a.slug_code and claim_b.slug_code:
+        a_parts = set(claim_a.slug_code.split('-'))
+        b_parts = set(claim_b.slug_code.split('-'))
+        overlap = len(a_parts & b_parts) / max(len(a_parts | b_parts), 1)
+        return {
+            "similarity": overlap,
+            "relationship": "slug_match" if overlap > 0.5 else "different",
+            "common_concepts": list(a_parts & b_parts),
+            "claim_a_id": claim_a.claim_id,
+            "claim_b_id": claim_b.claim_id
+        }
+
+    return {"similarity": 0.0, "relationship": "unknown", "common_concepts": []}
+
+def batch_classify_claims(claims: List[UTFClaim], domain: str = None) -> List[UTFClaim]:
+    """Classify multiple claims efficiently."""
+    classified = []
+    for i, claim in enumerate(claims):
+        print(f"    [Classify] Claim {i+1}/{len(claims)}: {claim.statement[:40]}...")
+        classified.append(classify_claim(claim, domain))
+    return classified
+
+def find_similar_claims(target_claim: UTFClaim, all_claims: List[UTFClaim],
+                        threshold: float = 0.5) -> List[Dict[str, Any]]:
+    """Find claims similar to target above threshold."""
+    similar = []
+    for claim in all_claims:
+        if claim.claim_id == target_claim.claim_id:
+            continue
+        result = compute_claim_similarity(target_claim, claim)
+        if result["similarity"] >= threshold:
+            similar.append(result)
+    return sorted(similar, key=lambda x: x["similarity"], reverse=True)
 
 def create_edges(source: UTFSource, excerpts: List[UTFExcerpt],
                  claims: List[UTFClaim], concepts: List[UTFConcept],
@@ -527,7 +737,7 @@ def check_quality_gate(source: UTFSource, excerpts: List[UTFExcerpt],
 # Main Extraction Function
 # ============================================================================
 
-def extract_utf_schema(text: str, file_hash: str) -> UTFExtractionResult:
+def extract_utf_schema(text: str, file_hash: str, classify: bool = True) -> UTFExtractionResult:
     """
     Full UTF extraction pipeline.
 
@@ -535,6 +745,7 @@ def extract_utf_schema(text: str, file_hash: str) -> UTFExtractionResult:
     Pass 2: Excerpt extraction
     Pass 3: Claim atomization + concepts
     Pass 4: Assumptions + limitations
+    Pass 5: Claim classification with slug codes (optional)
     """
     print("    [UTF Pass 1] Extracting metadata...")
     source = extract_metadata(text, file_hash)
@@ -549,6 +760,11 @@ def extract_utf_schema(text: str, file_hash: str) -> UTFExtractionResult:
     print("    [UTF Pass 4] Extracting assumptions + limitations...")
     assumptions = extract_assumptions(text, source.source_id)
     limitations = extract_limitations(text, source.source_id)
+
+    # Pass 5: Claim classification with slug codes
+    if classify and claims:
+        print("    [UTF Pass 5] Classifying claims with slug codes...")
+        claims = batch_classify_claims(claims, source.domain)
 
     print("    [UTF] Creating edges...")
     edges = create_edges(source, excerpts, claims, concepts, assumptions)
@@ -637,9 +853,11 @@ created_at: {result.source.created_at}
         claim_note = f"""---
 type: Claim
 claim_id: {claim.claim_id}
+slug_code: {claim.slug_code or "unclassified"}
 claim_form: {claim.claim_form}
 grounding: {claim.grounding}
 confidence: {claim.confidence}
+taxonomy: {claim.taxonomy_tags}
 source_id: {claim.source_id}
 created_at: {claim.created_at}
 ---
@@ -648,6 +866,10 @@ created_at: {claim.created_at}
 
 ## Full Statement
 {claim.statement}
+
+## Classification
+- **Slug Code**: `{claim.slug_code or "unclassified"}`
+- **Taxonomy**: {' > '.join(claim.taxonomy_tags) if claim.taxonomy_tags else "Unclassified"}
 
 ## Metadata
 - **Form**: {claim.claim_form}

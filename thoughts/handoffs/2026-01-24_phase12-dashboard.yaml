@@ -1,0 +1,67 @@
+session_id: "2026-01-24_phase12-dashboard"
+timestamp: "2026-01-24T07:30:00"
+context_usage: "moderate"
+
+completed:
+  - Phase 12.4 Memory Integration:
+      - memory.py: Added claim similarity integration
+      - recall_similar_claims(), get_cross_paper_insights()
+      - get_related_claims(), get_claim_clusters()
+      - refresh_claim_index() for rebuilding
+      - CLI commands: claims, cross-paper, clusters, refresh-claims
+
+  - Phase 12.4 SQLite Save Fix:
+      - autonomous_ingest.py: Added store_utf_to_sqlite()
+      - init_utf_db() creates sources, claims, concepts, excerpts tables
+      - Container rebuilt and restarted
+
+  - Phase 12.4 Dashboard Visualization:
+      - api.py: Added 5 new endpoints
+        - /abstractions (state abstraction classes)
+        - /transfers (policy transfer history)
+        - /claims/clusters
+        - /claims/cross-paper
+        - /claims/search
+      - bisimulation.py: get_state_abstractions(), get_recent_transfers()
+      - dashboard.html: 3 new cards (Abstractions, Transfers, Clusters)
+
+  - Phase 13 Planning:
+      - Assessed Telegram proposal (Multi-Agent Swarm with GA)
+      - Counter-proposed simpler solution focusing on actual bottleneck (LLM)
+      - Added Phase 13 to EVOLUTION-PLAN with optimized approach
+
+in_progress:
+  - PDF Ingestion:
+      status: "28 papers remaining"
+      container: "autonomous-ingest running (slow - LocalAI bottleneck)"
+      current: "GCHR Goal-Conditioned Hindsight paper at Pass 2"
+
+blocked: []
+
+next_steps:
+  - Monitor PDF ingest completion
+  - Phase 13.1: Implement batch LLM prompts
+  - Phase 13.2: Add Dragonfly LLM response caching
+  - Complete remaining metrics (Transfer Rate, Abstraction Ratio)
+
+key_decisions:
+  - Counter-proposed simpler Phase 13 over complex MAS/GA approach
+  - Root cause: LocalAI LLM speed, not parsing/embedding
+  - Use existing Dragonfly instead of adding Redis
+  - Avoid over-engineering for 44-paper corpus
+
+files_created:
+  - thoughts/handoffs/2026-01-24_phase12-dashboard.yaml
+
+files_modified:
+  - daemon/memory.py (claim similarity integration)
+  - daemon/autonomous_ingest.py (SQLite save, UTF_DB_PATH)
+  - daemon/api.py (5 new endpoints)
+  - daemon/bisimulation.py (dashboard query methods)
+  - daemon/dashboard.html (3 new cards)
+  - EVOLUTION-PLAN.md (Phase 12.4 complete, Phase 13 planned)
+
+notes:
+  - Container needs time - LocalAI processes ~1 paper per 5-10 mins
+  - Claim index will populate as papers complete
+  - Dashboard accessible at http://localhost:5000 when api.py running
