@@ -294,23 +294,26 @@ class ContextBuilder:
 class LocalAIClient:
     """Client for LocalAI inference."""
 
-    def __init__(self, base_url: str, model: str):
+    def __init__(self, base_url: str, model: str, timeout: float = 10.0):
         self.base_url = base_url
         self.model = model
+        self.timeout = timeout
         self.client = None
         if OPENAI_AVAILABLE:
             self.client = openai.OpenAI(
                 base_url=base_url,
-                api_key="not-needed"
+                api_key="not-needed",
+                timeout=timeout  # Fast timeout for local inference
             )
 
     def available(self) -> bool:
-        """Check if LocalAI is running."""
+        """Check if LocalAI is running (fast check with 2s timeout)."""
         if not self.client:
             return False
         try:
-            self.client.models.list()
-            return True
+            import httpx
+            resp = httpx.get(f"{self.base_url}/models", timeout=2.0)
+            return resp.status_code == 200
         except:
             return False
 
