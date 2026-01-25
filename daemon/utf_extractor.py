@@ -126,6 +126,10 @@ class UTFClaim:
     excerpt_ids: List[str] = field(default_factory=list)
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
     validity_status: str = "valid"  # valid, needs_atomization, needs_grounding
+    stability_class: str = "unknown"  # stable, evolving, contested, unknown
+    evidence_grade: str = "ungraded"  # A (strong), B (moderate), C (weak), ungraded
+    domain: Optional[str] = None  # research domain
+    scope: str = "local"  # local, general, universal
     # Claim classification fields (Phase 10.4)
     slug_code: Optional[str] = None  # Unique semantic slug for similarity matching
     taxonomy_tags: List[str] = field(default_factory=list)  # Hierarchical classification

@@ -1107,7 +1107,7 @@ messages = [
 
 | Priority | Task | Savings | Status |
 |----------|------|---------|--------|
-| 1 | Delta-based handoffs | 50-70% | [ ] |
+| 1 | Delta-based handoffs | 50-70% | ✅ daemon/delta_handoff.py |
 | 2 | Prompt caching (Anthropic) | 60-90% | [ ] |
 | 3 | Model routing enhancement | 30-85% | [ ] |
 | 4 | Thinking budget tiers | 20-40% | [ ] |
@@ -1315,5 +1315,11 @@ routing:
 ## Current Status
 
 **Phase 13:** ✅ COMPLETE (LLM caching, 45 papers processed)
-**Phase 14:** 📋 PLANNED (Semantic Router)
+**Phase 13.6:** ✅ COMPLETE (Google Drive Integration - 2026-01-25)
+  - OAuth connected (Adam Bensaid, 2TB storage)
+  - Drive structure: /Atlas/Inbox/PDFs, /Atlas/Models, /Atlas/Cache/Embeddings
+  - Bidirectional sync: handoffs, embeddings backed up
+  - Scheduled: 6-hour auto-sync
+  - daemon/gdrive/ module (client.py, sync.py)
+**Phase 14:** 🔄 IN PROGRESS (Compute Efficiency)
 **Capability Level:** L3 Autonomous → L4 Adaptive (building)

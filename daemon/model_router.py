@@ -47,16 +47,17 @@ ROUTER_DB = Path(__file__).parent / "router.db"
 # ============================================================================
 
 class Provider(str, Enum):
-    LOCALAI = "localai"      # Free, local inference
-    CLAUDE = "claude"        # Default for complex tasks
-    OPENAI = "openai"        # Fallback/escalation
+    LOCALAI = "localai"      # Free, local inference ($0)
+    CODEX = "codex"          # Code tasks, cheaper than Claude ($)
+    OPENAI = "openai"        # General fallback ($$)
+    CLAUDE = "claude"        # Premium, complex tasks ($$$)
 
 @dataclass
 class RoutingConfig:
     """Configuration for model routing."""
-    localai_url: str = "http://localhost:8080/v1"
-    openai_api_key: Optional[str] = None
-    dragonfly_url: str = "redis://localhost:6379"
+    localai_url: str = os.environ.get("LOCALAI_URL", "http://localhost:8080/v1")
+    openai_api_key: Optional[str] = os.environ.get("OPENAI_API_KEY")
+    dragonfly_url: str = os.environ.get("DRAGONFLY_URL", "redis://localhost:6379")
 
     # Token budgets
     max_context_tokens: int = 8000
@@ -66,10 +67,14 @@ class RoutingConfig:
     complexity_threshold: float = 0.7  # Above this → Claude
     cost_sensitivity: float = 0.5      # Higher = prefer LocalAI
 
-    # Model mappings
-    localai_model: str = "mistral-7b-instruct"
-    openai_model: str = "gpt-4o-mini"
-    claude_model: str = "claude-sonnet-4-20250514"
+    # Model mappings (ordered by cost: LocalAI < Codex < OpenAI < Claude)
+    localai_model: str = "mistral-7b-instruct-v0.3"
+    codex_model: str = "gpt-4o-mini"       # Best for code tasks, cheaper than Claude
+    openai_model: str = "gpt-4o"           # General fallback
+    claude_model: str = "claude-sonnet-4-20250514"  # Premium, complex only
+
+    # Token-precious mode: aggressively prefer cheaper providers
+    token_precious_mode: bool = True
 
 # ============================================================================
 # Task Classification
@@ -87,22 +92,65 @@ class TaskType(str, Enum):
     REASONING = "reasoning"           # → Claude
     UNKNOWN = "unknown"               # → Claude (safe default)
 
-# Task → Provider mapping
+# Task → Provider mapping (Token-Precious: prefer cheaper when capable)
+# Cost order: LocalAI ($0) < Codex ($) < OpenAI ($$) < Claude ($$$)
 TASK_ROUTING = {
+    # FREE tier (LocalAI)
     TaskType.SUMMARIZE: Provider.LOCALAI,
     TaskType.EMBED: Provider.LOCALAI,
     TaskType.TRANSLATE: Provider.LOCALAI,
     TaskType.QA_SIMPLE: Provider.LOCALAI,
+    # CHEAP tier (Codex/gpt-4o-mini) - code tasks
+    TaskType.CODE_GENERATE: Provider.CODEX,
+    TaskType.CODE_REVIEW: Provider.CODEX,
+    # PREMIUM tier (Claude) - complex reasoning only
     TaskType.QA_COMPLEX: Provider.CLAUDE,
-    TaskType.CODE_GENERATE: Provider.CLAUDE,
-    TaskType.CODE_REVIEW: Provider.CLAUDE,
     TaskType.ARCHITECTURE: Provider.CLAUDE,
     TaskType.REASONING: Provider.CLAUDE,
-    TaskType.UNKNOWN: Provider.CLAUDE,
+    TaskType.UNKNOWN: Provider.CODEX,  # Default to cheaper, escalate if needed
 }
 
+# Fallback chain for when preferred provider is unavailable
+FALLBACK_CHAIN = {
+    Provider.LOCALAI: [Provider.CODEX, Provider.OPENAI, Provider.CLAUDE],
+    Provider.CODEX: [Provider.OPENAI, Provider.CLAUDE],
+    Provider.OPENAI: [Provider.CLAUDE],
+    Provider.CLAUDE: [],  # No fallback, it's the last resort
+}
+
+def estimate_complexity(task: str, content: str) -> float:
+    """Estimate task complexity (0-1). Higher = needs Claude."""
+    score = 0.0
+
+    # Content size factor
+    content_len = len(content)
+    if content_len > 10000:
+        score += 0.3
+    elif content_len > 5000:
+        score += 0.15
+
+    # Complexity keywords in task
+    complex_keywords = [
+        "complex", "sophisticated", "intricate", "multi-step", "architectural",
+        "refactor entire", "redesign", "optimize performance", "security audit",
+        "debug race condition", "memory leak", "concurrent", "distributed"
+    ]
+    if any(kw in task.lower() for kw in complex_keywords):
+        score += 0.4
+
+    # Code complexity indicators in content
+    complexity_indicators = [
+        "async", "await", "threading", "multiprocess", "mutex", "semaphore",
+        "decorator", "metaclass", "generics", "type system", "dependency injection"
+    ]
+    indicator_count = sum(1 for ind in complexity_indicators if ind in content.lower())
+    score += min(0.3, indicator_count * 0.05)
+
+    return min(1.0, score)
+
+
 def classify_task(task: str, content: str = "") -> TaskType:
-    """Classify task to determine routing."""
+    """Classify task to determine routing. Uses complexity for escalation."""
     task_lower = task.lower()
 
     # Summarization patterns
@@ -124,13 +172,32 @@ def classify_task(task: str, content: str = "") -> TaskType:
             return TaskType.QA_SIMPLE
         return TaskType.QA_COMPLEX
 
-    # Code patterns
-    if any(kw in task_lower for kw in ["implement", "write code", "create function", "generate"]):
-        return TaskType.CODE_GENERATE
-    if any(kw in task_lower for kw in ["review", "audit", "check code"]):
-        return TaskType.CODE_REVIEW
+    # Code patterns - Codex handles most, Claude for complex
+    code_keywords = [
+        "implement", "write code", "create function", "generate",
+        "write a function", "write function", "code this", "build a",
+        "create a class", "write a script", "fix this code", "add feature"
+    ]
+    if any(kw in task_lower for kw in code_keywords):
+        complexity = estimate_complexity(task, content)
+        if complexity > 0.6:  # High complexity → Claude
+            return TaskType.ARCHITECTURE  # Routes to Claude
+        return TaskType.CODE_GENERATE  # Routes to Codex
 
-    # Architecture patterns
+    # Refactoring - check complexity for routing
+    if any(kw in task_lower for kw in ["refactor", "rewrite", "optimize code"]):
+        complexity = estimate_complexity(task, content)
+        if complexity > 0.5:
+            return TaskType.ARCHITECTURE  # Complex refactor → Claude
+        return TaskType.CODE_GENERATE  # Simple refactor → Codex
+
+    if any(kw in task_lower for kw in ["review", "audit", "check code", "analyze code"]):
+        complexity = estimate_complexity(task, content)
+        if complexity > 0.6:
+            return TaskType.REASONING  # Complex review → Claude
+        return TaskType.CODE_REVIEW  # Routine review → Codex
+
+    # Architecture patterns (always Claude)
     if any(kw in task_lower for kw in ["architect", "design", "plan", "structure"]):
         return TaskType.ARCHITECTURE
 
@@ -569,6 +636,179 @@ class ModelRouter:
 # ============================================================================
 # CLI
 # ============================================================================
+
+# ============================================================================
+# Phase 14.4: Thinking Budget Tiers & Cascade Routing
+# ============================================================================
+
+THINKING_BUDGETS = {
+    # Task type → (min_tokens, max_tokens, default_tokens)
+    TaskType.SUMMARIZE: (0, 1024, 512),
+    TaskType.EMBED: (0, 0, 0),
+    TaskType.TRANSLATE: (0, 512, 256),
+    TaskType.QA_SIMPLE: (0, 1024, 0),
+    TaskType.QA_COMPLEX: (1024, 4096, 2048),
+    TaskType.CODE_GENERATE: (2048, 16384, 4096),
+    TaskType.CODE_REVIEW: (1024, 8192, 2048),
+    TaskType.ARCHITECTURE: (4096, 32000, 8192),
+    TaskType.REASONING: (2048, 16384, 4096),
+    TaskType.UNKNOWN: (1024, 8192, 2048),
+}
+
+
+def get_thinking_budget(task_type: TaskType, complexity: float = 0.5) -> int:
+    """Get thinking token budget based on task type and complexity."""
+    min_t, max_t, default = THINKING_BUDGETS.get(task_type, (1024, 8192, 2048))
+    # Scale by complexity (0-1)
+    budget = int(min_t + (max_t - min_t) * complexity)
+    return max(min_t, min(max_t, budget))
+
+
+class CascadeRouter:
+    """
+    Cascade routing: Try cheap providers first, escalate on failure.
+
+    Pattern:
+    1. Start with LocalAI (free)
+    2. If quality check fails → escalate to Codex
+    3. If still fails → escalate to Claude
+
+    Quality checks:
+    - Response length > minimum
+    - No error indicators
+    - Coherence score (optional)
+    """
+
+    def __init__(self, base_router: ModelRouter):
+        self.router = base_router
+        self.quality_threshold = 0.6
+
+    def route_with_cascade(self, task: str, content: str = "",
+                           min_response_length: int = 50) -> Dict[str, Any]:
+        """Route with automatic escalation on quality failure."""
+        task_type = classify_task(task, content)
+        complexity = estimate_complexity(task, content)
+
+        # Determine cascade order based on task type
+        if task_type in [TaskType.SUMMARIZE, TaskType.TRANSLATE, TaskType.QA_SIMPLE]:
+            cascade = [Provider.LOCALAI, Provider.CODEX, Provider.CLAUDE]
+        elif task_type in [TaskType.CODE_GENERATE, TaskType.CODE_REVIEW]:
+            cascade = [Provider.CODEX, Provider.CLAUDE]
+        else:
+            # Complex tasks go straight to premium
+            cascade = [Provider.CLAUDE]
+
+        # Try each provider in order
+        last_result = None
+        for provider in cascade:
+            result = self.router.route(task, content, force_provider=provider)
+            last_result = result
+
+            # Check quality
+            if self._check_quality(result, min_response_length):
+                result["cascade_attempts"] = cascade.index(provider) + 1
+                result["thinking_budget"] = get_thinking_budget(task_type, complexity)
+                return result
+
+            # Log escalation
+            if provider != cascade[-1]:
+                self._log_escalation(task_type, provider, cascade[cascade.index(provider) + 1])
+
+        # Return last result even if quality check failed
+        last_result["cascade_attempts"] = len(cascade)
+        last_result["quality_warning"] = True
+        return last_result
+
+    def _check_quality(self, result: Dict, min_length: int) -> bool:
+        """Check if response meets quality threshold."""
+        if result.get("error"):
+            return False
+
+        response = result.get("response")
+        if not response:
+            return False
+
+        # Length check
+        if len(response) < min_length:
+            return False
+
+        # Error indicator check
+        error_indicators = ["I cannot", "I'm unable", "Error:", "Exception:"]
+        if any(ind in response for ind in error_indicators):
+            return False
+
+        return True
+
+    def _log_escalation(self, task_type: TaskType, from_provider: Provider, to_provider: Provider):
+        """Log escalation event for analysis."""
+        conn = sqlite3.connect(ROUTER_DB)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS escalations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
+                task_type TEXT,
+                from_provider TEXT,
+                to_provider TEXT
+            )
+        """)
+        conn.execute("""
+            INSERT INTO escalations (task_type, from_provider, to_provider)
+            VALUES (?, ?, ?)
+        """, (task_type.value, from_provider.value, to_provider.value))
+        conn.commit()
+        conn.close()
+
+
+def get_routing_summary() -> Dict[str, Any]:
+    """Get comprehensive routing statistics including savings."""
+    conn = sqlite3.connect(ROUTER_DB)
+
+    # Total by provider
+    cursor = conn.execute("""
+        SELECT provider, COUNT(*), SUM(cost_estimate),
+               SUM(input_tokens), SUM(output_tokens)
+        FROM routing_stats GROUP BY provider
+    """)
+    by_provider = {}
+    total_localai_tokens = 0
+    for row in cursor.fetchall():
+        by_provider[row[0]] = {
+            "calls": row[1],
+            "cost": row[2] or 0,
+            "input_tokens": row[3] or 0,
+            "output_tokens": row[4] or 0
+        }
+        if row[0] == "localai":
+            total_localai_tokens = (row[3] or 0) + (row[4] or 0)
+
+    # Calculate savings (what LocalAI calls would have cost on Claude)
+    claude_equivalent = total_localai_tokens * 0.009 / 1000  # ~$9/M tokens average
+    actual_cost = sum(p.get("cost", 0) for p in by_provider.values())
+
+    # Escalation stats
+    try:
+        cursor = conn.execute("""
+            SELECT from_provider, to_provider, COUNT(*)
+            FROM escalations GROUP BY from_provider, to_provider
+        """)
+        escalations = [{"from": r[0], "to": r[1], "count": r[2]} for r in cursor.fetchall()]
+    except:
+        escalations = []
+
+    conn.close()
+
+    return {
+        "by_provider": by_provider,
+        "savings": {
+            "localai_tokens": total_localai_tokens,
+            "claude_equivalent_cost": round(claude_equivalent, 4),
+            "actual_cost": round(actual_cost, 4),
+            "saved": round(claude_equivalent - actual_cost, 4),
+            "savings_percent": round((1 - actual_cost / claude_equivalent) * 100, 1) if claude_equivalent > 0 else 0
+        },
+        "escalations": escalations
+    }
+
 
 def main():
     import argparse

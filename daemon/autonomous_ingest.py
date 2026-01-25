@@ -50,6 +50,14 @@ try:
 except ImportError:
     PYMUPDF_AVAILABLE = False
 
+# MinerU for superior PDF extraction (Phase 14)
+try:
+    from magic_pdf.tools.common import do_parse
+    import tempfile
+    MINERU_AVAILABLE = True
+except ImportError:
+    MINERU_AVAILABLE = False
+
 # Dragonfly/Redis cache (Phase 13.3)
 try:
     import redis
@@ -88,6 +96,7 @@ except ImportError:
 # ============================================================================
 
 _dragonfly_client = None
+_cache_stats = {"hits": 0, "misses": 0, "writes": 0}
 
 def get_dragonfly():
     """Get or create Dragonfly connection."""
@@ -100,13 +109,27 @@ def get_dragonfly():
             _dragonfly_client = None
     return _dragonfly_client
 
+def get_cache_stats() -> Dict:
+    """Get cache efficiency statistics."""
+    total = _cache_stats["hits"] + _cache_stats["misses"]
+    hit_rate = (_cache_stats["hits"] / total * 100) if total > 0 else 0
+    return {
+        "hits": _cache_stats["hits"],
+        "misses": _cache_stats["misses"],
+        "writes": _cache_stats["writes"],
+        "hit_rate": f"{hit_rate:.1f}%",
+        "total_queries": total
+    }
+
 def cache_llm_response(prompt_hash: str, response: str, ttl: int = LLM_CACHE_TTL):
     """Cache LLM response in Dragonfly."""
+    global _cache_stats
     client = get_dragonfly()
     if client:
         try:
             cache_key = f"llm:ingest:{prompt_hash}"
             client.setex(cache_key, ttl, json.dumps(response))
+            _cache_stats["writes"] += 1
             return True
         except Exception:
             pass
@@ -114,15 +137,20 @@ def cache_llm_response(prompt_hash: str, response: str, ttl: int = LLM_CACHE_TTL
 
 def get_cached_llm_response(prompt_hash: str) -> Optional[Dict]:
     """Get cached LLM response from Dragonfly."""
+    global _cache_stats
     client = get_dragonfly()
     if client:
         try:
             cache_key = f"llm:ingest:{prompt_hash}"
             result = client.get(cache_key)
             if result:
+                _cache_stats["hits"] += 1
                 return json.loads(result.decode())
+            _cache_stats["misses"] += 1
         except Exception:
-            pass
+            _cache_stats["misses"] += 1
+    else:
+        _cache_stats["misses"] += 1
     return None
 
 def make_prompt_hash(prompt: str, model: str = LOCALAI_MODEL) -> str:
@@ -239,15 +267,71 @@ def file_hash(path: Path) -> str:
 
 
 def is_processed(conn: sqlite3.Connection, fhash: str) -> bool:
-    """Check if file already processed."""
+    """Check if file already successfully processed (not pending/failed)."""
     c = conn.cursor()
-    c.execute("SELECT 1 FROM processed_files WHERE file_hash = ?", (fhash,))
-    return c.fetchone() is not None
+    c.execute("SELECT status FROM processed_files WHERE file_hash = ?", (fhash,))
+    row = c.fetchone()
+    # Only skip if status is 'completed' - reprocess pending/failed
+    return row is not None and row[0] == 'completed'
 
 
 # ============================================================================
-# Document Extraction (MarkItDown preferred)
+# Document Extraction (MinerU > MarkItDown > PyMuPDF)
 # ============================================================================
+
+def extract_with_mineru(path: Path) -> str:
+    """Extract PDF using MinerU (best for academic papers, tables, figures)."""
+    if not MINERU_AVAILABLE:
+        return ""
+
+    try:
+        # Read PDF bytes
+        pdf_bytes = path.read_bytes()
+
+        # Create temp output directory
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_path = Path(tmp_dir)
+
+            # Use do_parse for extraction (auto method = automatic detection)
+            try:
+                do_parse(
+                    output_dir=str(tmp_path),
+                    pdf_file_name=path.stem,
+                    pdf_bytes_or_dataset=pdf_bytes,
+                    model_list=[],  # Empty = use defaults
+                    parse_method="auto",  # Auto-detect text vs OCR
+                    f_dump_md=True,
+                    f_dump_middle_json=False,
+                    f_dump_model_json=False,
+                    f_dump_orig_pdf=False,
+                    f_dump_content_list=False,
+                    f_draw_span_bbox=False,
+                    f_draw_layout_bbox=False,
+                    f_make_md_mode="mm_markdown"
+                )
+
+                # Read the generated markdown
+                md_file = tmp_path / "auto" / f"{path.stem}.md"
+                if not md_file.exists():
+                    # Try alternate paths
+                    for subdir in ["txt", "ocr"]:
+                        alt_file = tmp_path / subdir / f"{path.stem}.md"
+                        if alt_file.exists():
+                            md_file = alt_file
+                            break
+
+                if md_file.exists():
+                    md_content = md_file.read_text(encoding='utf-8', errors='replace')
+                    if md_content and len(md_content) > 100:
+                        return md_content
+            except Exception as e:
+                print(f"    [MinerU] Parse error: {e}")
+
+        return ""
+    except Exception as e:
+        print(f"    [MinerU] Extraction failed: {e}")
+        return ""
+
 
 def extract_with_markitdown(path: Path) -> str:
     """Extract text using MarkItDown (structure-preserving)."""
@@ -275,27 +359,39 @@ def extract_with_pymupdf(path: Path, max_pages: int = 30) -> str:
     return '\n'.join(text_parts)
 
 
-def extract_document(path: Path) -> str:
-    """Extract document text using best available method."""
+def extract_document(path: Path) -> tuple[str, str]:
+    """Extract document text using best available method.
+
+    Priority for PDFs: MinerU > MarkItDown > PyMuPDF
+    MinerU provides structured markdown with tables/figures preserved.
+
+    Returns: (text, extraction_method)
+    """
     ext = path.suffix.lower()
 
-    # Try MarkItDown first (better structure preservation)
+    # For PDFs: Try MinerU first (best for academic papers)
+    if ext == '.pdf' and MINERU_AVAILABLE:
+        text = extract_with_mineru(path)
+        if text and len(text) > 200:
+            return text.encode('ascii', 'replace').decode('ascii'), "MinerU"
+
+    # Try MarkItDown for various formats
     if MARKITDOWN_AVAILABLE and ext in {'.pdf', '.docx', '.pptx', '.html', '.epub'}:
         text = extract_with_markitdown(path)
         if text:
-            return text.encode('ascii', 'replace').decode('ascii')
+            return text.encode('ascii', 'replace').decode('ascii'), "MarkItDown"
 
     # Fallback to PyMuPDF for PDFs
     if ext == '.pdf' and PYMUPDF_AVAILABLE:
         text = extract_with_pymupdf(path)
         if text:
-            return text.encode('ascii', 'replace').decode('ascii')
+            return text.encode('ascii', 'replace').decode('ascii'), "PyMuPDF"
 
     # Plain text files
     if ext in {'.txt', '.md'}:
-        return path.read_text(encoding='utf-8', errors='replace')
+        return path.read_text(encoding='utf-8', errors='replace'), "PlainText"
 
-    return ""
+    return "", "None"
 
 
 # ============================================================================
@@ -687,23 +783,23 @@ def process_document(path: Path, conn: sqlite3.Connection) -> Dict:
 
     doc_id = path.stem
 
-    # 1. Extract document text (MarkItDown preferred)
+    # 1. Extract document text (MinerU > MarkItDown > PyMuPDF)
     print("    [1/5] Extracting text...")
-    text = extract_document(path)
+    text, method = extract_document(path)
     if not text or len(text) < 200:
         return {"success": False, "error": "No text extracted"}
-    print(f"    Extracted {len(text)} chars (using {'MarkItDown' if MARKITDOWN_AVAILABLE else 'PyMuPDF'})")
+    print(f"    Extracted {len(text)} chars via {method}")
 
     # Use UTF Schema extraction if enabled and available
     if USE_UTF_SCHEMA and UTF_AVAILABLE:
-        return process_document_utf(path, text, conn)
+        return process_document_utf(path, text, conn, method)
     else:
-        return process_document_legacy(path, text, conn)
+        return process_document_legacy(path, text, conn, method)
 
 
-def process_document_utf(path: Path, text: str, conn: sqlite3.Connection) -> Dict:
+def process_document_utf(path: Path, text: str, conn: sqlite3.Connection, method: str = "Unknown") -> Dict:
     """Process document using UTF Research OS schema."""
-    print("    [UTF MODE] Using UTF Research OS extraction...")
+    print(f"    [UTF MODE] Using UTF Research OS extraction (text via {method})...")
 
     fhash = file_hash(path)
 
@@ -747,7 +843,8 @@ def process_document_utf(path: Path, text: str, conn: sqlite3.Connection) -> Dic
         "title": result.source.title,
         "claims": stats['claims'],
         "concepts": stats['concepts'],
-        "quality_gate": result.quality_gate_passed
+        "quality_gate": result.quality_gate_passed,
+        "extraction_method": method
     }
 
 
@@ -841,10 +938,12 @@ def store_utf_to_sqlite(result: 'UTFExtractionResult'):
 
     # Store concepts
     for concept in result.concepts:
+        # source_ids is a list, use first or join
+        source_id = concept.source_ids[0] if concept.source_ids else result.source.source_id
         c.execute('''INSERT OR REPLACE INTO concepts
             (concept_id, source_id, name, definition_1liner, domain, created_at)
             VALUES (?, ?, ?, ?, ?, ?)''',
-            (concept.concept_id, concept.source_id, concept.name,
+            (concept.concept_id, source_id, concept.name,
              concept.definition_1liner, concept.domain, datetime.now().isoformat()))
 
     # Store excerpts
@@ -859,10 +958,172 @@ def store_utf_to_sqlite(result: 'UTFExtractionResult'):
     conn.close()
 
 
+# ============================================================================
+# Self-Model: System knows itself to recognize improvements
+# ============================================================================
+
+SELF_MODEL_PATH = Path(__file__).parent / "SELF_MODEL.json"
+METRICS_DB = Path(__file__).parent / "ingest.db"  # Use existing DB, not new one
+_self_model = None
+_session_metrics = {"docs_processed": 0, "tokens_used": 0, "cache_hits": 0,
+                    "upgrades_found": 0, "start_time": None}
+
+def get_self_model() -> Dict:
+    """Load the system's self-model (cached)."""
+    global _self_model
+    if _self_model is None:
+        if SELF_MODEL_PATH.exists():
+            _self_model = json.loads(SELF_MODEL_PATH.read_text())
+        else:
+            _self_model = {"capabilities": {}}
+    return _self_model
+
+
+def track_metric(name: str, value: float, conn: Optional[sqlite3.Connection] = None):
+    """Track performance metric - built into core flow, not separate.
+
+    Metrics are stored in existing ingest.db to avoid database proliferation.
+    """
+    if conn is None:
+        conn = sqlite3.connect(METRICS_DB)
+        close_after = True
+    else:
+        close_after = False
+
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS performance_metrics (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp TEXT,
+        metric_name TEXT,
+        value REAL
+    )''')
+    c.execute('INSERT INTO performance_metrics (timestamp, metric_name, value) VALUES (?, ?, ?)',
+              (datetime.now().isoformat(), name, value))
+    conn.commit()
+
+    if close_after:
+        conn.close()
+
+
+def get_efficiency_trend(metric: str, days: int = 7) -> Dict:
+    """Get efficiency trend for a metric - detect bloat or improvement."""
+    conn = sqlite3.connect(METRICS_DB)
+    c = conn.cursor()
+
+    try:
+        c.execute('''SELECT value, timestamp FROM performance_metrics
+                     WHERE metric_name = ? ORDER BY timestamp DESC LIMIT 100''', (metric,))
+        rows = c.fetchall()
+    except:
+        rows = []
+    conn.close()
+
+    if len(rows) < 2:
+        return {"trend": "insufficient_data", "values": []}
+
+    values = [r[0] for r in rows]
+    recent_avg = sum(values[:10]) / min(10, len(values[:10]))
+    older_avg = sum(values[-10:]) / min(10, len(values[-10:]))
+
+    if recent_avg > older_avg * 1.2:
+        trend = "increasing"  # Could be bloat if it's cost/time
+    elif recent_avg < older_avg * 0.8:
+        trend = "decreasing"  # Could be good if it's cost/time
+    else:
+        trend = "stable"
+
+    return {"trend": trend, "recent": recent_avg, "older": older_avg, "change_pct": (recent_avg - older_avg) / older_avg * 100 if older_avg else 0}
+
+
+def check_system_health() -> Dict:
+    """Self-aware health check - knows when efficiency is dropping."""
+    health = {"status": "healthy", "issues": [], "metrics": {}}
+
+    # Check token efficiency trend
+    token_trend = get_efficiency_trend("tokens_per_doc")
+    health["metrics"]["tokens_per_doc"] = token_trend
+    if token_trend.get("trend") == "increasing" and token_trend.get("change_pct", 0) > 20:
+        health["issues"].append(f"Token usage increasing {token_trend['change_pct']:.0f}% - possible bloat")
+        health["status"] = "degraded"
+
+    # Check processing time trend
+    time_trend = get_efficiency_trend("processing_time")
+    health["metrics"]["processing_time"] = time_trend
+    if time_trend.get("trend") == "increasing" and time_trend.get("change_pct", 0) > 30:
+        health["issues"].append(f"Processing time increasing {time_trend['change_pct']:.0f}% - investigate")
+        health["status"] = "degraded"
+
+    # Check cache hit rate
+    cache_trend = get_efficiency_trend("cache_hit_rate")
+    health["metrics"]["cache_hit_rate"] = cache_trend
+    if cache_trend.get("recent", 0) < 0.3:
+        health["issues"].append("Cache hit rate below 30% - cache may be ineffective")
+
+    return health
+
+
+def detect_upgrade_potential(claim_statement: str, source_id: str) -> Optional[Dict]:
+    """Check if a claim suggests an upgrade to our current methods.
+
+    Uses SELF_MODEL.json to know what the system is and what could improve it.
+    This runs on EVERY input - the architecture inherently seeks self-improvement.
+    """
+    UPGRADE_INDICATORS = ["improves", "outperforms", "better than", "state-of-the-art",
+                          "novel approach", "more efficient", "faster", "reduces",
+                          "10x", "2x", "order of magnitude", "significantly"]
+
+    model = get_self_model()
+    capabilities = model.get("capabilities", {})
+
+    statement_lower = claim_statement.lower()
+
+    # Check for upgrade indicators
+    has_upgrade_signal = any(ind in statement_lower for ind in UPGRADE_INDICATORS)
+
+    # Match against our capabilities (from self-model)
+    for cap_name, cap_info in capabilities.items():
+        keywords = cap_info.get("keywords", [])
+        triggers = cap_info.get("upgrade_triggers", [])
+        limitations = cap_info.get("limitations", [])
+
+        # Check if claim relates to this capability
+        keyword_match = any(kw.lower() in statement_lower for kw in keywords)
+
+        if keyword_match:
+            # Check if it addresses a known limitation or matches upgrade trigger
+            addresses_limitation = any(lim.lower() in statement_lower for lim in limitations)
+            matches_trigger = any(trig.lower() in statement_lower for trig in triggers)
+
+            if has_upgrade_signal or addresses_limitation or matches_trigger:
+                return {
+                    "capability": cap_name,
+                    "current_method": cap_info.get("current_method"),
+                    "claim": claim_statement[:300],
+                    "source": source_id,
+                    "detected_at": datetime.now().isoformat(),
+                    "trigger_type": "limitation" if addresses_limitation else ("trigger" if matches_trigger else "indicator"),
+                    "priority": "high" if addresses_limitation else "medium"
+                }
+
+    return None
+
+
 def store_utf_to_kg(result: 'UTFExtractionResult'):
     """Store UTF extraction result to knowledge graph."""
     import json
     from dataclasses import asdict
+
+    # Check claims for upgrade potential (integrated, not separate)
+    upgrades = []
+    for claim in result.claims:
+        upgrade = detect_upgrade_potential(claim.statement, result.source.source_id)
+        if upgrade:
+            upgrades.append(upgrade)
+
+    if upgrades:
+        print(f"    [UPGRADE] Found {len(upgrades)} potential improvements:")
+        for u in upgrades[:3]:
+            print(f"      → {u['method']}: {u['claim'][:60]}...")
 
     # Store source
     source_entity = {
@@ -874,7 +1135,8 @@ def store_utf_to_kg(result: 'UTFExtractionResult'):
             f"Domain: {result.source.domain}",
             f"Abstract: {result.source.abstract[:500] if result.source.abstract else 'N/A'}",
             f"Quality: {result.source.quality_status}",
-            f"SOURCE_ID:{result.source.source_id}"
+            f"SOURCE_ID:{result.source.source_id}",
+            f"UPGRADES:{len(upgrades)}"
         ]
     }
 
@@ -925,8 +1187,9 @@ def store_utf_to_kg(result: 'UTFExtractionResult'):
             f.write(json.dumps(assumption_entity) + '\n')
 
 
-def process_document_legacy(path: Path, text: str, conn: sqlite3.Connection) -> Dict:
+def process_document_legacy(path: Path, text: str, conn: sqlite3.Connection, method: str = "Unknown") -> Dict:
     """Legacy HiRAG/LeanRAG processing pipeline."""
+    print(f"    [LEGACY MODE] HiRAG/LeanRAG (text via {method})")
     doc_id = path.stem
     total_tokens = 0
 
@@ -990,7 +1253,8 @@ def process_document_legacy(path: Path, text: str, conn: sqlite3.Connection) -> 
         "doc_id": doc_id,
         "tokens": total_tokens,
         "facts": total_facts,
-        "chunks": len(chunks)
+        "chunks": len(chunks),
+        "extraction_method": method
     }
 
 
@@ -1003,8 +1267,8 @@ def check_localai() -> bool:
         return False
 
 
-def scan_folder(conn: sqlite3.Connection) -> List[Path]:
-    """Scan folder for new files."""
+def scan_folder(conn: sqlite3.Connection, min_size_kb: int = 10) -> List[Path]:
+    """Scan folder for new files, prioritized by size (larger = more content)."""
     if not WATCH_FOLDER.exists():
         WATCH_FOLDER.mkdir(parents=True)
         return []
@@ -1012,22 +1276,34 @@ def scan_folder(conn: sqlite3.Connection) -> List[Path]:
     new_files = []
     for path in WATCH_FOLDER.iterdir():
         if path.suffix.lower() in SUPPORTED_EXTENSIONS:
+            # Skip tiny files (likely incomplete or placeholders)
+            if path.stat().st_size < min_size_kb * 1024:
+                continue
             fhash = file_hash(path)
             if not is_processed(conn, fhash):
                 new_files.append(path)
 
+    # Sort by size (process larger documents first - more likely to be valuable)
+    new_files.sort(key=lambda p: p.stat().st_size, reverse=True)
     return new_files
 
 
 def run_ingest(watch: bool = False, interval: int = 300):
     """Run the autonomous ingestion."""
     print("=" * 60)
-    print("Autonomous Ingestion (HiRAG + LeanRAG + MarkItDown)")
+    print("Autonomous Ingestion (HiRAG + LeanRAG + MinerU)")
     print("=" * 60)
     print(f"Watch folder: {WATCH_FOLDER}")
     print(f"LocalAI URL: {LOCALAI_URL}")
-    print(f"MarkItDown: {'Available' if MARKITDOWN_AVAILABLE else 'Not installed'}")
-    print(f"PyMuPDF: {'Available' if PYMUPDF_AVAILABLE else 'Not installed'}")
+    print()
+    print("Extraction Stack (priority order):")
+    print(f"  1. MinerU:     {'[OK] Best for PDFs with tables/figures' if MINERU_AVAILABLE else '[--] Not installed'}")
+    print(f"  2. MarkItDown: {'[OK] Structure-preserving' if MARKITDOWN_AVAILABLE else '[--] Not installed'}")
+    print(f"  3. PyMuPDF:    {'[OK] Fallback text extraction' if PYMUPDF_AVAILABLE else '[--] Not installed'}")
+    print()
+    print("Efficiency Features:")
+    print(f"  - Dragonfly Cache: {'[OK] 24h TTL' if REDIS_AVAILABLE and get_dragonfly() else '[--] Disabled'}")
+    print(f"  - UTF Schema:      {'[OK] Enabled' if USE_UTF_SCHEMA and UTF_AVAILABLE else '[--] Disabled'}")
     print()
 
     if not check_localai():
@@ -1047,11 +1323,14 @@ def run_ingest(watch: bool = False, interval: int = 300):
                 try:
                     result = process_document(path, conn)
                     if result.get('success'):
+                        method = result.get('extraction_method', 'Unknown')
                         # Handle both UTF and legacy mode outputs
                         if 'claims' in result:
-                            print(f"    Stored: {result['claims']} claims, {result['concepts']} concepts")
+                            print(f"    [OK] {result['claims']} claims, {result['concepts']} concepts [{method}]")
                         else:
-                            print(f"    Stored: {result['facts']} facts, {result['chunks']} chunks")
+                            print(f"    [OK] {result['facts']} facts, {result['chunks']} chunks [{method}]")
+                    else:
+                        print(f"    [SKIP] {result.get('error', 'Unknown error')}")
                 except Exception as e:
                     print(f"    [ERR] {e}")
 
@@ -1110,6 +1389,9 @@ def show_status():
 
     conn.close()
 
+    # Cache stats
+    cache = get_cache_stats()
+
     print("=" * 50)
     print("Knowledge Base Status")
     print("=" * 50)
@@ -1118,6 +1400,15 @@ def show_status():
     print(f"Local facts stored: {local_count}")
     print(f"Global summaries: {global_count}")
     print(f"\nHierarchy: Local ({local_count}) -> Global ({global_count})")
+    print()
+    print("Extraction Stack:")
+    print(f"  MinerU:     {'Available' if MINERU_AVAILABLE else 'Not installed'}")
+    print(f"  MarkItDown: {'Available' if MARKITDOWN_AVAILABLE else 'Not installed'}")
+    print(f"  PyMuPDF:    {'Available' if PYMUPDF_AVAILABLE else 'Not installed'}")
+    print()
+    print("Cache Efficiency (this session):")
+    print(f"  Hit rate: {cache['hit_rate']}")
+    print(f"  Hits: {cache['hits']} | Misses: {cache['misses']} | Writes: {cache['writes']}")
 
 
 if __name__ == "__main__":
