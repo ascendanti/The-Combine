@@ -68,6 +68,11 @@
             "type": "command",
             "command": "python daemon/self_continue.py resume 2>nul || true",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python .claude/hooks/module-reminder.py 2>nul || true",
+            "timeout": 3
           }
         ]
       }
