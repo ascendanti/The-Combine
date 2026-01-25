@@ -33,6 +33,19 @@ PROJECT_DIR = SCRIPT_DIR.parent.parent
 DAEMON_DIR = PROJECT_DIR / "daemon"
 sys.path.insert(0, str(DAEMON_DIR))
 
+# Import controller and feedback bridge for adaptive settings
+try:
+    from controller import MAPEController, Metric, MetricType
+    CONTROLLER_AVAILABLE = True
+except ImportError:
+    CONTROLLER_AVAILABLE = False
+
+try:
+    from feedback_bridge import FeedbackBridge
+    BRIDGE_AVAILABLE = True
+except ImportError:
+    BRIDGE_AVAILABLE = False
+
 # Storage paths
 BOOKS_DB = PROJECT_DIR / "daemon" / "books.db"
 KNOWLEDGE_GRAPH = Path.home() / ".claude" / "memory" / "knowledge-graph.jsonl"
@@ -678,23 +691,105 @@ def query_book(book_id: str, query: str, conn: sqlite3.Connection) -> dict:
 # Main Pipeline
 # ============================================================================
 
+def get_adaptive_settings() -> dict:
+    """Get chunk settings from MAPE controller (adaptive)."""
+    defaults = {"chunk_size": 500, "chunk_overlap": 50, "retrieval_k": 5}
+
+    if not CONTROLLER_AVAILABLE:
+        return defaults
+
+    try:
+        ctrl = MAPEController()
+        state = ctrl.state
+        return {
+            "chunk_size": state.chunk_size,
+            "chunk_overlap": state.chunk_overlap,
+            "retrieval_k": state.retrieval_k
+        }
+    except Exception:
+        return defaults
+
+
+def report_metrics_to_controller(book_id: str, chunks: list, concepts: list, summaries: list):
+    """Report ingestion metrics to MAPE controller for learning."""
+    if not CONTROLLER_AVAILABLE:
+        return
+
+    try:
+        # Calculate quality metrics
+        avg_chunk_tokens = sum(c.token_count for c in chunks) / len(chunks) if chunks else 0
+        concept_density = len(concepts) / len(chunks) if chunks else 0
+        formula_count = sum(len(c.metadata.get("formulas", [])) for c in chunks)
+
+        # Estimate comprehension (heuristic: more concepts + summaries = better structure)
+        comprehension_score = min(1.0, (len(concepts) + len(summaries)) / (len(chunks) * 0.5))
+
+        # Token efficiency: comprehension per token
+        total_tokens = sum(c.token_count for c in chunks)
+        efficiency = comprehension_score / total_tokens if total_tokens > 0 else 0
+
+        # Chunk quality: variance in chunk size (lower = more consistent = better)
+        token_counts = [c.token_count for c in chunks]
+        if len(token_counts) > 1:
+            import statistics
+            variance = statistics.variance(token_counts)
+            chunk_quality = max(0, 1 - variance / 10000)  # Normalize
+        else:
+            chunk_quality = 0.5
+
+        metrics = [
+            Metric(type=MetricType.COMPREHENSION, value=comprehension_score, book_id=book_id),
+            Metric(type=MetricType.TOKEN_EFFICIENCY, value=efficiency, book_id=book_id),
+            Metric(type=MetricType.CHUNK_QUALITY, value=chunk_quality, book_id=book_id,
+                   context={"avg_tokens": avg_chunk_tokens, "concepts": len(concepts)}),
+        ]
+
+        print(f"    [CTRL] Reported metrics: comprehension={comprehension_score:.2f}, chunk_quality={chunk_quality:.2f}")
+
+        # Use feedback bridge if available (decision-informed control)
+        if BRIDGE_AVAILABLE:
+            bridge = FeedbackBridge()
+            result = bridge.run_cycle(metrics)
+
+            if result.get("selected_action"):
+                action = result["selected_action"]
+                print(f"    [BRIDGE] Decision-informed action: {action['type']}")
+                print(f"    [BRIDGE] Rationale: {action['rationale']}")
+        else:
+            # Fallback to direct controller
+            ctrl = MAPEController()
+            ctrl.monitor(metrics)
+            result = ctrl.run_cycle()
+
+            if result.get("executed_actions"):
+                print(f"    [CTRL] Controller adapted: {len(result['executed_actions'])} actions")
+
+    except Exception as e:
+        print(f"    [CTRL] Warning: Could not report metrics: {e}")
+
+
 def ingest_book(pdf_path: str, title: Optional[str] = None) -> dict:
     """Main ingestion pipeline."""
-    print(f"📚 Ingesting: {pdf_path}")
+    print(f"[BOOK] Ingesting: {pdf_path}")
 
     # Initialize database
     conn = init_db()
+
+    # Get adaptive settings from controller
+    settings = get_adaptive_settings()
+    chunk_size = settings["chunk_size"]
+    print(f"  [CTRL] Using chunk_size={chunk_size} (adaptive)")
 
     # Generate book ID
     book_id = hashlib.md5(pdf_path.encode()).hexdigest()[:12]
 
     # Step 1: Convert PDF to markdown
-    print("  → Converting PDF to Markdown...")
+    print("  -> Converting PDF to Markdown...")
     markdown, metadata = convert_pdf_to_markdown(pdf_path)
-    print(f"    ✓ Converted ({len(markdown)} chars)")
+    print(f"    [OK] Converted ({len(markdown)} chars)")
 
     # Step 2: Build document hierarchy
-    print("  → Building document hierarchy...")
+    print("  -> Building document hierarchy...")
     hierarchy = build_hierarchy(markdown)
 
     # Use first header as title if not provided
@@ -704,22 +799,22 @@ def ingest_book(pdf_path: str, title: Optional[str] = None) -> dict:
         else:
             title = Path(pdf_path).stem
     hierarchy["title"] = title
-    print(f"    ✓ Title: {title}")
+    print(f"    [OK] Title: {title}")
 
-    # Step 3: Smart chunking
-    print("  → Chunking content...")
-    chunks = smart_chunk(markdown)
+    # Step 3: Smart chunking (using adaptive settings)
+    print("  -> Chunking content...")
+    chunks = smart_chunk(markdown, max_tokens=chunk_size)
     for chunk in chunks:
         chunk.book_id = book_id
-    print(f"    ✓ Created {len(chunks)} chunks")
+    print(f"    [OK] Created {len(chunks)} chunks (target: {chunk_size} tokens)")
 
     # Step 4: Generate embeddings (if available)
-    print("  → Generating embeddings...")
+    print("  -> Generating embeddings...")
     chunks = generate_embeddings(chunks)
-    print("    ✓ Embeddings complete")
+    print("    [OK] Embeddings complete")
 
     # Step 5: Store chunks
-    print("  → Storing chunks...")
+    print("  -> Storing chunks...")
     c = conn.cursor()
     for chunk in chunks:
         c.execute('''INSERT OR REPLACE INTO chunks
@@ -735,22 +830,22 @@ def ingest_book(pdf_path: str, title: Optional[str] = None) -> dict:
             VALUES ((SELECT rowid FROM chunks WHERE id = ?), ?, ?, ?)''',
             (chunk.id, chunk.content, chunk.chunk_type, chunk.book_id))
     conn.commit()
-    print(f"    ✓ Stored {len(chunks)} chunks")
+    print(f"    [OK] Stored {len(chunks)} chunks")
 
     # Step 6: Create hierarchical summaries
-    print("  → Creating hierarchical summaries...")
+    print("  -> Creating hierarchical summaries...")
     summaries = create_hierarchical_summaries(hierarchy, book_id, conn)
-    print(f"    ✓ Created {len(summaries)} summaries")
+    print(f"    [OK] Created {len(summaries)} summaries")
 
     # Step 7: Extract concepts
-    print("  → Extracting concepts...")
+    print("  -> Extracting concepts...")
     concepts = extract_concepts(chunks, book_id, conn)
-    print(f"    ✓ Extracted {len(concepts)} concepts")
+    print(f"    [OK] Extracted {len(concepts)} concepts")
 
     # Step 8: Export to knowledge graph
-    print("  → Exporting to knowledge graph...")
+    print("  -> Exporting to knowledge graph...")
     export_to_knowledge_graph(book_id, title, concepts, summaries)
-    print("    ✓ Knowledge graph updated")
+    print("    [OK] Knowledge graph updated")
 
     # Step 9: Store book metadata
     book_summary = ""
@@ -767,6 +862,10 @@ def ingest_book(pdf_path: str, title: Optional[str] = None) -> dict:
          book_summary, json.dumps(metadata)))
     conn.commit()
 
+    # Step 10: Report metrics to controller for adaptive learning
+    print("  -> Reporting to controller...")
+    report_metrics_to_controller(book_id, chunks, concepts, summaries)
+
     # Report
     result = {
         "success": True,
@@ -775,12 +874,13 @@ def ingest_book(pdf_path: str, title: Optional[str] = None) -> dict:
         "chunks": len(chunks),
         "summaries": len(summaries),
         "concepts": len(concepts),
-        "storage": str(BOOKS_DB)
+        "storage": str(BOOKS_DB),
+        "chunk_size_used": chunk_size
     }
 
-    print(f"\n✅ Ingestion complete!")
+    print(f"\n[DONE] Ingestion complete!")
     print(f"   Book ID: {book_id}")
-    print(f"   Chunks: {len(chunks)}")
+    print(f"   Chunks: {len(chunks)} (chunk_size={chunk_size})")
     print(f"   Summaries: {len(summaries)}")
     print(f"   Concepts: {len(concepts)}")
 
@@ -799,7 +899,7 @@ def list_books():
         print("No books ingested yet.")
         return
 
-    print("\n📚 Ingested Books:")
+    print("\n[BOOKS] Ingested Books:")
     print("-" * 60)
     for book in books:
         print(f"  [{book[0]}] {book[1]}")

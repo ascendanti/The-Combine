@@ -1,10 +1,33 @@
 {
   "env": {
     "CLAUDE_PROJECT_DIR": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Claude n8n",
-    "ATLAS_ROOT": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Atlas-OS-main",
+    "ATLAS_ROOT": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main",
     "UTF_RESEARCH": "C:\\Users\\New Employee\\Desktop\\UTF",
-    "REFERENCE_FRAMEWORKS": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Atlas-OS-main\\Reverse Engineer",
-    "MALAZAN_DIR": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Malazan"
+    "REFERENCE_FRAMEWORKS": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Reverse Engineer",
+    "MALAZAN_DIR": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Malazan",
+    "RESOURCE_MAP": ".claude/RESOURCE-MAP.md",
+    "CODEBASE_INDEX": ".claude/CODEBASE-INDEX.md",
+    "EVOLUTION_PLAN": "EVOLUTION-PLAN.md",
+    "DAEMON_DIR": "daemon",
+    "HOOKS_DIR": ".claude/hooks",
+    "SCRIPTS_DIR": ".claude/scripts",
+    "AGENTS_DIR": ".claude/agents",
+    "HANDOFFS_DIR": "thoughts/handoffs",
+    "ORACLE_CACHE": ".claude/cache/agents/oracle",
+    "NEXT_HORIZONS": ".claude/NEXT-HORIZONS.md",
+    "ASCENSION_MANIFESTO": ".claude/ASCENSION-MANIFESTO.md",
+    "ISSUES": ".claude/ISSUES.md",
+    "TECH_TREE": ".claude/TECH-TREE.md",
+    "SPECS_DIR": "specs",
+    "PROFILE": "specs/ADAM-BENSAID-PROFILE.md",
+    "CRM_SPEC": "specs/ATLAS-CRM-SPEC.md",
+    "REVENUE_STRATEGIES": "specs/REVENUE-STRATEGIES.md",
+    "RUMSFELD_MATRIX": ".claude/RUMSFELD-MATRIX.md",
+    "SCIFI_ROADMAP": ".claude/SCI-FI-TECHNICAL-ROADMAP.md",
+    "PRIME_DIRECTIVE": ".claude/PRIME-DIRECTIVE.md",
+    "UNIFIED_ARCH": ".claude/UNIFIED-ARCHITECTURE.md",
+    "STRATEGY_DB": "daemon/strategies.db",
+    "OUTCOMES_DB": "daemon/outcomes.db"
   },
   "permissions": {
     "allow": [
@@ -16,18 +39,9 @@
       "Grep",
       "Task",
       "WebSearch",
-      "mcp__claude_ai_n8n__get_workflow_details",
-      "mcp__claude_ai_n8n__search_workflows",
-      "mcp__claude_ai_n8n__execute_workflow",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:npmjs.com)",
-      "WebFetch(domain:pypi.org)",
-      "WebFetch(domain:docs.python.org)",
-      "WebFetch(domain:nodejs.org)",
-      "WebFetch(domain:stackoverflow.com)",
-      "WebFetch(domain:anthropic.com)",
-      "WebFetch(domain:dev.to)",
-      "Skill"
+      "WebFetch",
+      "Skill",
+      "mcp__*"
     ],
     "defaultMode": "bypassPermissions"
   },
@@ -37,8 +51,23 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python .claude/hooks/cleanup-mcp.py 2>nul || true",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": "python .claude/hooks/session-start-clean.py 2>nul || echo Session ready",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python .claude/scripts/pool-loader.py 2>nul || true",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python daemon/self_continue.py resume 2>nul || true",
+            "timeout": 10
           }
         ]
       }
@@ -48,6 +77,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python .claude/scripts/context-router-v2.py 2>nul || true",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": "node .claude/hooks/dist/skill-activation-prompt.mjs 2>nul || echo Skills ready",
             "timeout": 10
           }
@@ -55,6 +89,31 @@
       }
     ],
     "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/kg-context-gate.py 2>nul || true",
+            "timeout": 2
+          },
+          {
+            "type": "command",
+            "command": "python .claude/hooks/utf-semantic-rag.py 2>nul || true",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/auto-cache-pre.py 2>nul || true",
+            "timeout": 2
+          }
+        ]
+      },
       {
         "matcher": "Read|Edit|Write|Grep|Glob",
         "hooks": [
@@ -72,6 +131,26 @@
       }
     ],
     "PostToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/kg-context-store.py 2>nul || true",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/auto-cache-post.py 2>nul || true",
+            "timeout": 3
+          }
+        ]
+      },
       {
         "matcher": "Edit|Write",
         "hooks": [
@@ -96,6 +175,11 @@
     "Stop": [
       {
         "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/scripts/pool-extractor.py 2>nul || true",
+            "timeout": 5
+          },
           {
             "type": "command",
             "command": "python .claude/hooks/stop-memory-sync.py 2>nul || true",
@@ -125,5 +209,9 @@
         ]
       }
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "knowledge-graph"
+  ],
+  "enableAllProjectMcpServers": true
 }

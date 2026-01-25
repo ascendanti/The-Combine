@@ -1,0 +1,54 @@
+# Claude Code Ignore - Reduce context loading
+# Prevents these from being auto-loaded into context
+
+# Cache and temp
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/node_modules/
+**/.git/
+*.log
+*.tmp
+
+# Large generated files
+**/*.db
+**/*.db-shm
+**/*.db-wal
+*.sqlite
+*.sqlite3
+
+# Build artifacts
+**/dist/
+**/build/
+**/*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Media (unless explicitly needed)
+*.mp4
+*.mp3
+*.wav
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# Documentation (load on demand)
+# thoughts/handoffs/*.yaml  # Keep - needed for continuity
+# *.md  # Keep - needed for context
+
+# Secrets
+.env
+*.pem
+*.key
+credentials.json

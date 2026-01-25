@@ -1201,3 +1201,119 @@ services:
 4. **Selective integration** - Only what adds power
 5. **Research-driven** - Ground implementations in validated research
 6. **Avoid over-engineering** - Simplest solution that solves the actual bottleneck
+
+---
+
+## Technology Tree Reference
+
+See `.claude/TECH-TREE.md` for full visual dependency graph.
+
+### 5 Emergent Development Pathways
+
+```
+PATHWAY 1: Semantic Router ──────────────────────────────────┐
+  Intent classification → Model/Skill/Agent auto-selection  │
+  Unlocks: 70% token savings, cost tracking                  │
+                                                             │
+PATHWAY 2: Agentic Mesh ─────────────────────────────────────┤
+  gRPC agent bus → Parallel execution → Swarm patterns       │
+  Unlocks: 10x throughput, emergent coordination             │
+                                                             ├── EMERGENT
+PATHWAY 3: Knowledge Synthesis ──────────────────────────────┤    AUTONOMY
+  Cross-paper links → Contradiction detection → Hypotheses   │
+  Unlocks: Novel insights, auto-research loops               │
+                                                             │
+PATHWAY 4: Adaptive Learning ────────────────────────────────┤
+  Outcome tracking → Strategy evolution → Self-modification  │
+  Unlocks: Continuous improvement, prompt optimization       │
+                                                             │
+PATHWAY 5: External Integration ─────────────────────────────┘
+  Webhook mesh → Proactive scheduling → Workflow composition
+  Unlocks: Full automation, self-directed tasks
+```
+
+---
+
+## Next 5 Phases (14-18)
+
+### Phase 14: Semantic Router
+**Status:** PLANNED | **Prerequisites:** Phase 13 ✅
+
+Core: MCP auto-router for hooks, skills, agents with model tiering.
+
+| Component | Purpose | Model Tier |
+|-----------|---------|------------|
+| `semantic-router.py` | Intent classification | LocalAI (FREE) |
+| `skill-selector.py` | Match intent to skill | LocalAI |
+| `agent-dispatcher.py` | Route complex tasks | Codex |
+| `cost-optimizer.py` | Track & minimize cost | LocalAI |
+
+**MCP Router Config:**
+```yaml
+routing:
+  summarize: {model: localai, skill: null}
+  search: {skill: search-router, agent: scout}
+  code: {model: codex, agent: kraken}
+  reason: {model: claude}
+  research: {agent: oracle}
+```
+
+### Phase 15: Knowledge Synthesis
+**Status:** PLANNED | **Prerequisites:** Phase 14
+
+| Component | Purpose |
+|-----------|---------|
+| `contradiction-finder.py` | Identify conflicting claims |
+| `agreement-linker.py` | Strengthen consistent claims |
+| `hypothesis-generator.py` | Novel claims from patterns |
+| `research-gap-finder.py` | Identify missing knowledge |
+
+### Phase 16: Adaptive Learning
+**Status:** PLANNED | **Prerequisites:** Phase 15
+
+| Component | Purpose |
+|-----------|---------|
+| `outcome-tracker.py` | Success/fail per strategy |
+| `pattern-extractor.py` | Successful approach patterns |
+| `strategy-evolver.py` | Generate new strategies |
+| `prompt-optimizer.py` | Self-modify prompts |
+
+### Phase 17: Agentic Mesh
+**Status:** PLANNED | **Prerequisites:** Phase 16
+
+| Component | Purpose |
+|-----------|---------|
+| `agent-bus.py` | gRPC inter-agent communication |
+| `capability-registry.py` | Dynamic agent discovery |
+| `contract-validator.py` | Enforce agent contracts |
+| `swarm-coordinator.py` | Emergent multi-agent patterns |
+
+### Phase 18: Emergent Autonomy
+**Status:** PLANNED | **Prerequisites:** Phase 17
+
+| Component | Purpose |
+|-----------|---------|
+| `proactive-planner.py` | Self-generate tasks |
+| `goal-evolver.py` | Refine goals from outcomes |
+| `workflow-composer.py` | Create new workflows |
+| `self-monitor.py` | Detect & correct issues |
+
+---
+
+## Quick Reference Files
+
+| File | Purpose |
+|------|---------|
+| `.claude/RESOURCE-MAP.md` | When to use what resource |
+| `.claude/CODEBASE-INDEX.md` | Rapid file/function lookup |
+| `.claude/TECH-TREE.md` | Full technology dependency tree |
+| `task.md` | Current objectives |
+| `thoughts/handoffs/` | Session state transfers |
+
+---
+
+## Current Status
+
+**Phase 13:** ✅ COMPLETE (LLM caching, 45 papers processed)
+**Phase 14:** 📋 PLANNED (Semantic Router)
+**Capability Level:** L3 Autonomous → L4 Adaptive (building)

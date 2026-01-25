@@ -218,3 +218,99 @@ Running containers?
 | Architecture | Claude | $$$ |
 
 The `model_router.py` automatically selects based on task complexity.
+
+---
+
+## Business Specs (specs/)
+
+### Company Visions
+
+| Document | Company | Revenue Target |
+|----------|---------|----------------|
+| `ATLAS-ANALYTICS-VISION.md` | Intelligence firm | $2M Y5 |
+| `ATLAS-INSTRUMENTS-VISION.md` | Verification tools | $1M Y5 |
+| `ATLAS-PUBLISHING-VISION.md` | Book publishing | $200K Y5 |
+| `ATLAS-CONTENT-COMPANY-VISION.md` | Media properties | $1M Y5 |
+| `ATLAS-MEDIA-PRODUCTION-VISION.md` | Documentary | $1M Y5 |
+| `ALGIERS-BAY-COMPANY-VISION.md` | Import/export | $2M Y5 |
+
+### Strategy & Operations
+
+| Document | Purpose | Usage |
+|----------|---------|-------|
+| `ADAM-BENSAID-PROFILE.md` | Principal profile | Career analysis, leverage points |
+| `REVENUE-STRATEGIES.md` | 10 quick + 10 long-term | Revenue roadmap |
+| `CRM-ANALYSIS-DECISION.md` | CRM comparison | Twenty CRM selected |
+| `ATLAS-CRM-SPEC.md` | CRM integration spec | Lead gen, proposals, deals |
+| `INBOX-ZERO-INTEGRATION.md` | Email automation | AI email management |
+| `CAREER-MANAGER-SPEC.md` | Career orchestration | Future implementation |
+| `LOCAL-DEPLOYMENT-GUIDE.md` | Self-hosted setup | $2K PC + voice/hologram |
+
+---
+
+## Planning Documents (.claude/)
+
+| Document | Purpose |
+|----------|---------|
+| `PRIME-DIRECTIVE.md` | 9-domain mastery architecture |
+| `ASCENSION-MANIFESTO.md` | Sci-fi capability vision |
+| `SCI-FI-TECHNICAL-ROADMAP.md` | Hierarchical capability matrix |
+| `RUMSFELD-MATRIX.md` | Known/unknown analysis |
+| `UNIFIED-ARCHITECTURE.md` | Coherent subsystem design |
+| `NEXT-HORIZONS.md` | Unexplored development paths |
+| `TECH-TREE.md` | Development pathways |
+
+---
+
+## Tracking Systems
+
+| System | Database | Purpose |
+|--------|----------|---------|
+| Strategy Evolution | `strategies.db` | Track strategy fitness |
+| Outcome Tracker | `outcomes.db` | Record action results |
+| Evolution Tracker | `evolution_tracker.py` | Link strategy→plan→sci-fi |
+| Self-Continue | `self_continue.py` | Resume after compaction |
+
+### Commands
+
+```bash
+# Strategy tracking
+python daemon/strategy_evolution.py list
+python daemon/evolution_tracker.py status
+python daemon/evolution_tracker.py progress
+
+# Outcome tracking
+python daemon/outcome_tracker.py stats
+python daemon/outcome_tracker.py patterns
+
+# Self-continue
+python daemon/self_continue.py resume
+python daemon/self_continue.py checkpoint --phase "X" --task "Y"
+```
+
+---
+
+## Git Repos (Telegram Inbox History)
+
+| Repo | Purpose | Status |
+|------|---------|--------|
+| `twentyhq/twenty` | CRM (39K stars) | Selected for deployment |
+| `elie222/inbox-zero` | Email AI (9.9K stars) | Spec created |
+
+---
+
+## Quick Commands (Business)
+
+```bash
+# Check revenue strategies
+cat specs/REVENUE-STRATEGIES.md
+
+# View company visions
+ls specs/ATLAS-*.md
+
+# Check CRM spec
+cat specs/ATLAS-CRM-SPEC.md
+
+# Evolution progress
+python daemon/evolution_tracker.py progress
+```
