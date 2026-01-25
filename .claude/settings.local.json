@@ -1,4 +1,4 @@
-{
+﻿{
   "env": {
     "CLAUDE_PROJECT_DIR": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Claude n8n",
     "ATLAS_ROOT": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main",
@@ -51,7 +51,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/cleanup-mcp.py 2>nul || true",
+            "command": "python .claude/hooks/cleanup-mcp.py 2>nul || echo.",
             "timeout": 5
           },
           {
@@ -61,22 +61,22 @@
           },
           {
             "type": "command",
-            "command": "python .claude/scripts/pool-loader.py 2>nul || true",
+            "command": "python .claude/scripts/pool-loader.py 2>nul || echo.",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "python daemon/self_continue.py resume 2>nul || true",
+            "command": "python daemon/self_continue.py resume 2>nul || echo.",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python .claude/hooks/module-reminder.py 2>nul || true",
+            "command": "python .claude/hooks/module-reminder.py 2>nul || echo.",
             "timeout": 3
           },
           {
             "type": "command",
-            "command": "python daemon/activate_all.py 2>nul || true",
+            "command": "python daemon/activate_all.py 2>nul || echo.",
             "timeout": 15
           }
         ]
@@ -87,7 +87,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/scripts/context-router-v2.py 2>nul || true",
+            "command": "python .claude/scripts/context-router-v2.py 2>nul || echo.",
             "timeout": 5
           },
           {
@@ -104,7 +104,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/orchestrator-route.py 2>nul || true",
+            "command": "python .claude/hooks/orchestrator-route.py 2>nul || echo.",
             "timeout": 2
           }
         ]
@@ -114,12 +114,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/kg-context-gate.py 2>nul || true",
+            "command": "python .claude/hooks/kg-context-gate.py 2>nul || echo.",
             "timeout": 2
           },
           {
             "type": "command",
-            "command": "python .claude/hooks/utf-semantic-rag.py 2>nul || true",
+            "command": "python .claude/hooks/utf-semantic-rag.py 2>nul || echo.",
             "timeout": 3
           }
         ]
@@ -129,7 +129,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/auto-cache-pre.py 2>nul || true",
+            "command": "python .claude/hooks/auto-cache-pre.py 2>nul || echo.",
             "timeout": 2
           }
         ]
@@ -139,12 +139,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/smart-tool-redirect.py 2>nul || true",
+            "command": "python .claude/hooks/smart-tool-redirect.py 2>nul || echo.",
             "timeout": 3
           },
           {
             "type": "command",
-            "command": "node .claude/hooks/dist/path-rules.mjs 2>nul || true",
+            "command": "node .claude/hooks/dist/path-rules.mjs 2>nul || echo.",
             "timeout": 5
           }
         ]
@@ -156,7 +156,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/kg-context-store.py 2>nul || true",
+            "command": "python .claude/hooks/kg-context-store.py 2>nul || echo.",
             "timeout": 3
           }
         ]
@@ -166,7 +166,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/auto-cache-post.py 2>nul || true",
+            "command": "python .claude/hooks/auto-cache-post.py 2>nul || echo.",
             "timeout": 3
           }
         ]
@@ -176,7 +176,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/dist/post-edit-diagnostics.mjs 2>nul || true",
+            "command": "node .claude/hooks/dist/post-edit-diagnostics.mjs 2>nul || echo.",
             "timeout": 10
           }
         ]
@@ -186,7 +186,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/post-tool-use-tracker.py 2>nul || true",
+            "command": "python .claude/hooks/post-tool-use-tracker.py 2>nul || echo.",
             "timeout": 5
           }
         ]
@@ -197,22 +197,22 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/scripts/pool-extractor.py 2>nul || true",
+            "command": "python .claude/scripts/pool-extractor.py 2>nul || echo.",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "python .claude/hooks/stop-memory-sync.py 2>nul || true",
+            "command": "python .claude/hooks/stop-memory-sync.py 2>nul || echo.",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python .claude/hooks/memory-store-stop.py 2>nul || true",
+            "command": "python .claude/hooks/memory-store-stop.py 2>nul || echo.",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "python .claude/hooks/continuous-learning-stop.py 2>nul || true",
+            "command": "python .claude/hooks/continuous-learning-stop.py 2>nul || echo.",
             "timeout": 15
           }
         ]
@@ -223,7 +223,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/pre-compact-handoff.py 2>nul || true",
+            "command": "python .claude/hooks/pre-compact-handoff.py 2>nul || echo.",
             "timeout": 15
           }
         ]
