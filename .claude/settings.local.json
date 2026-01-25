@@ -152,21 +152,11 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "Read",
+        "matcher": "Read|Grep|Glob|Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/kg-context-store.py 2>nul || echo.",
-            "timeout": 3
-          }
-        ]
-      },
-      {
-        "matcher": "Read|Grep|Glob",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python .claude/hooks/auto-cache-post.py 2>nul || echo.",
+            "command": "python .claude/hooks/unified-post-tool-tracker.py 2>nul || echo.",
             "timeout": 3
           }
         ]
