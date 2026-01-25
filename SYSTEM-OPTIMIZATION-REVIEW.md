@@ -159,3 +159,102 @@ Reduce token use, expand *effective* context window, and make setup more powerfu
 - [x] Master Activation (daemon/activate_all.py) - ensures 8/8 systems operational
 - [x] Hook blocking fixed - smart-tool-redirect now logs instead of blocks
 - [x] Strategy Evolution active with fitness tracking (3 strategies at 0.85 fitness)
+- [x] Execution Spine (daemon/execution_spine.py) - unified orchestration pipeline
+
+---
+
+## Autonomous Wiring Addendum (from Telegram)
+
+### Scope Overview (Systems That Should Interlock)
+
+**Autonomy & Orchestration**
+- Daemon runner, scheduler, task queue, triggers, and webhook flow
+- Files: daemon/runner.py, daemon/scheduler.py, daemon/task_queue.py, daemon/github_webhook.py
+
+**Self-Improvement + Evolution**
+- Continuous learning and strategy evolution components
+- Files: daemon/self_improvement.py, daemon/strategy_evolution.py, daemon/evolution_tracker.py
+
+**Memory + Context Handoffs**
+- Persistent memory, delta handoffs, and memory routing
+- Files: daemon/memory.py, daemon/delta_handoff.py
+
+**Retrieval + Ingestion**
+- Ingest pipeline, vector store, and LazyRAG gating
+- Files: daemon/autonomous_ingest.py, daemon/vector_store.py, daemon/lazy_rag.py
+
+**Ops + Infra**
+- Compose stacks, LocalAI/Dragonfly, and workers
+- Files: docker-compose.yaml
+
+### Cohesion Gaps (Wiring Issues) - ADDRESSED
+
+1. ~~No single "execution spine"~~ → **FIXED**: daemon/execution_spine.py
+   - Flow: TaskGenerator → RetrievalPolicy → Executor → OutcomeTracker → MemoryStore → DeltaHandoff
+
+2. ~~Self-improvement loop not wired to outcomes~~ → **FIXED**: execution_spine.py records outcomes
+   - Every task writes outcome + confidence to outcome_tracker.py
+
+3. ~~Multiple memory/retrieval paths lack unified policy~~ → **FIXED**: RetrievalPolicy class
+   - Single entry point applies LazyRAG gating and routes to vector_store or memory FTS
+
+4. ~~Ops split across two compose stacks~~ → **TODO**: Merge compose files with profiles
+
+### Recommendations Status
+
+| Recommendation | Status | Implementation |
+|----------------|--------|----------------|
+| Create unified orchestration pipeline | ✅ DONE | daemon/execution_spine.py |
+| Insert retrieval policy layer | ✅ DONE | RetrievalPolicy class |
+| Close self-improvement feedback loop | ✅ DONE | OutcomeTracker integration |
+| Standardize memory updates | ✅ DONE | All through spine |
+| Consolidate runtime stack | 🔄 TODO | Merge compose files |
+
+### Wiring Verification
+
+```bash
+# Test execution spine
+python daemon/execution_spine.py stats
+
+# Submit autonomous task
+python daemon/execution_spine.py submit --task "process next item" --source autonomous
+
+# Process pending
+python daemon/execution_spine.py process --limit 5
+```
+
+### Continuous Workflow Analysis
+
+The continuous-executor hook signals pending work but Claude's behavioral pattern is to stop after each response. True continuous execution requires:
+
+1. **External trigger**: daemon/runner.py or scheduler.py to re-invoke Claude
+2. **Task queue**: Persistent queue that survives session boundaries
+3. **Sisyphus pattern**: Background task persistence from hooks-mastery
+
+Current implementation logs "[CONTINUE] Pending: X tasks" to stderr but requires human acknowledgment to continue. Full autonomy requires headless/daemon mode with external orchestration.
+
+### Suggested Wiring Plan (Pragmatic Order)
+
+1. ✅ Build RetrievalPolicy wrapper - DONE (execution_spine.py)
+2. ✅ Introduce minimal "execution spine" - DONE (execution_spine.py)
+3. ✅ Route outcomes through outcome_tracker.py - DONE
+4. 🔄 Merge compose stacks - TODO
+5. 🔄 Add token-ops dashboard - TODO
+
+### Documentation Follow-up
+
+Keep this review updated as wiring is implemented to avoid divergence from the live system.
+
+---
+
+## Metrics Summary (2026-01-25)
+
+| Metric | Value |
+|--------|-------|
+| LocalAI calls | 163 |
+| Tokens saved | ~95K |
+| Claude equivalent cost | $0.42 |
+| Actual cost | $0.00 |
+| Systems active | 8/8 |
+| Strategies at fitness >0.5 | 3 |
+| Pending tasks | 104 |
