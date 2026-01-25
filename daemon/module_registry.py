@@ -234,7 +234,7 @@ def surface_forgotten() -> str:
     lines = ["FORGOTTEN CAPABILITIES (unused 7+ days):"]
     for m in dormant:
         lines.append(f"  [{m['id']}] {m['name']} ({m['source']})")
-        lines.append(f"    → {m['desc']}")
+        lines.append(f"    -> {m['desc']}")  # ASCII arrow for Windows
     return "\n".join(lines)
 
 if __name__ == "__main__":

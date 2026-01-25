@@ -112,11 +112,9 @@ def main():
 
         log_usage(tool_name, path, blocked=True, redirected_to=smart_tool)
 
-        # BLOCK and redirect
-        print(json.dumps({
-            "continue": False,
-            "reason": f"TOKEN OPTIMIZATION: Use smart tool for 70-80% savings.\n\n**Use instead:**\n```\n{smart_cmd}\n```\n\nOr add path to SKIP_PATTERNS in smart-tool-redirect.py if this file needs exact content."
-        }))
+        # LOG but don't block (MCP may be unavailable)
+        print(f"[TokenOpt] Consider: {smart_tool}", file=sys.stderr)
+        print(json.dumps({"continue": True}))
 
     except Exception as e:
         # On error, allow through
