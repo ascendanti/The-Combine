@@ -90,6 +90,16 @@
     ],
     "PreToolUse": [
       {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/orchestrator-route.py 2>nul || true",
+            "timeout": 2
+          }
+        ]
+      },
+      {
         "matcher": "Read",
         "hooks": [
           {
