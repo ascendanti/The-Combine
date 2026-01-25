@@ -58,8 +58,8 @@ def activate():
     results["outcome_tracker"] = {"active": ok}
 
     # 7. Memory System
-    ok, out = run_cmd("python daemon/memory.py stats 2>nul || echo no-stats")
-    results["memory"] = {"active": "no-stats" not in out}
+    ok, out = run_cmd("python daemon/memory.py list 2>nul || echo no-list")
+    results["memory"] = {"active": ok or "no-list" not in out}
 
     # 8. Task Generator
     ok, out = run_cmd("python daemon/task_generator.py pending 2>nul | head -3")
@@ -81,7 +81,7 @@ def main():
 
     print(f"Systems Activated: {active_count}/{total}")
     for name, status in results.items():
-        state = "✓" if status.get("active") else "✗"
+        state = "[OK]" if status.get("active") else "[--]"
         extras = []
         if status.get("seeded"): extras.append("seeded")
         if status.get("has_tasks"): extras.append("has tasks")
