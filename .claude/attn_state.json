@@ -1,0 +1,11 @@
+{
+  "scores": {
+    "EVOLUTION-PLAN.md": 0.24009999999999992,
+    "task.md": 0.09227120256517106,
+    "daemon/memory.py": 6.571236236353417e-05,
+    "daemon/self_improvement.py": 2.363600740332786e-05,
+    "thoughts/handoffs": 5.4116956037952e-06
+  },
+  "turn_count": 87,
+  "last_update": "2026-01-25T18:18:53.254118"
+}

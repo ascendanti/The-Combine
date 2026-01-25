@@ -1,0 +1,30 @@
+name: Python Virtual Environment
+description: Python venv activation and pip issues
+
+patterns:
+  - "activate.ps1 cannot be loaded"
+  - "execution of scripts is disabled"
+  - "no module named"
+  - "pip is not recognized"
+  - "python is not recognized"
+  - "ModuleNotFoundError"
+
+diagnosis: |
+  Python venv issues usually mean:
+  1. Venv not activated
+  2. PowerShell execution policy blocks activate.ps1
+  3. Package not installed in active venv
+  4. Wrong Python version
+
+fix: |
+  1. Create venv: python -m venv .venv
+  2. Activate (PowerShell): .\.venv\Scripts\Activate.ps1
+  3. Activate (cmd): .\.venv\Scripts\activate.bat
+  4. If blocked: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+  5. Install package: pip install <package>
+
+commands:
+  - 'python --version'
+  - 'pip list'
+  - 'Get-ExecutionPolicy'
+  - 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser'

@@ -1,0 +1,8127 @@
+{
+  "files": {
+    ".claude/ASCENSION-MANIFESTO.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Ascension Manifesto: From Tool to Collaborator to Partner",
+      "size": 16101
+    },
+    ".claude/CLAUDE.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docs"
+      ],
+      "description": "Project Instructions",
+      "size": 11563
+    },
+    ".claude/CODEBASE-INDEX.md": {
+      "tags": [
+        "api",
+        "docker",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Codebase Index - Rapid Retrieval",
+      "size": 4692
+    },
+    ".claude/EVOLUTION-PROGRESS.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Evolution Progress",
+      "size": 0
+    },
+    ".claude/ISSUES.md": {
+      "tags": [
+        "api",
+        "docker",
+        "sqlite",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Known Issues & Development Opportunities",
+      "size": 5167
+    },
+    ".claude/NEXT-HORIZONS.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docs"
+      ],
+      "description": "Next Horizons: Unexplored Development Paths",
+      "size": 8497
+    },
+    ".claude/PRIME-DIRECTIVE.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docs"
+      ],
+      "description": "Prime Directive: Total Domain Mastery",
+      "size": 11626
+    },
+    ".claude/RESOURCE-MAP.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docker",
+        "docs"
+      ],
+      "description": "Resource Map - When to Use What",
+      "size": 14833
+    },
+    ".claude/RUMSFELD-MATRIX.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docker",
+        "docs"
+      ],
+      "description": "Rumsfeld Matrix: Sci-Fi Plan Uncertainty Analysis",
+      "size": 9070
+    },
+    ".claude/SCI-FI-TECHNICAL-ROADMAP.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docker",
+        "docs"
+      ],
+      "description": "Sci-Fi Technical Roadmap: Hierarchical Capability Matrix",
+      "size": 29506
+    },
+    ".claude/TECH-TREE.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docs"
+      ],
+      "description": "Technology Tree - Emergent Development Pathways",
+      "size": 14417
+    },
+    ".claude/UNIFIED-ARCHITECTURE.md": {
+      "tags": [
+        "claude-config",
+        "code",
+        "docs"
+      ],
+      "description": "Unified Architecture: Coherence & Emergence",
+      "size": 16263
+    },
+    ".claude/agents/aegis.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Aegis",
+      "size": 472
+    },
+    ".claude/agents/aegis.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Aegis",
+      "size": 4055
+    },
+    ".claude/agents/agentica-agent.md": {
+      "tags": [
+        "agents",
+        "async",
+        "api",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Agentica Agent",
+      "size": 5577
+    },
+    ".claude/agents/arbiter.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Arbiter",
+      "size": 464
+    },
+    ".claude/agents/arbiter.md": {
+      "tags": [
+        "agents",
+        "code",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Arbiter",
+      "size": 3618
+    },
+    ".claude/agents/architect.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Architect",
+      "size": 511
+    },
+    ".claude/agents/architect.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Architect",
+      "size": 7985
+    },
+    ".claude/agents/atlas.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Atlas",
+      "size": 437
+    },
+    ".claude/agents/atlas.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Atlas",
+      "size": 4298
+    },
+    ".claude/agents/braintrust-analyst.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Braintrust Analyst Agent",
+      "size": 1794
+    },
+    ".claude/agents/chronicler.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Chronicler",
+      "size": 1392
+    },
+    ".claude/agents/context-query-agent.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Context Query Agent",
+      "size": 1259
+    },
+    ".claude/agents/critic.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Critic",
+      "size": 3772
+    },
+    ".claude/agents/debug-agent.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Debug Agent",
+      "size": 4038
+    },
+    ".claude/agents/herald.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Herald",
+      "size": 4726
+    },
+    ".claude/agents/judge.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Judge",
+      "size": 4357
+    },
+    ".claude/agents/kraken.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Kraken",
+      "size": 530
+    },
+    ".claude/agents/kraken.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Kraken",
+      "size": 7099
+    },
+    ".claude/agents/liaison.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Liaison",
+      "size": 5538
+    },
+    ".claude/agents/maestro.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Maestro",
+      "size": 469
+    },
+    ".claude/agents/maestro.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Maestro",
+      "size": 6213
+    },
+    ".claude/agents/memory-extractor.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Memory Extractor Agent",
+      "size": 5696
+    },
+    ".claude/agents/onboard.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Onboard Agent",
+      "size": 4199
+    },
+    ".claude/agents/oracle.json": {
+      "tags": [
+        "agents",
+        "config",
+        "api",
+        "claude-config"
+      ],
+      "description": "Oracle",
+      "size": 455
+    },
+    ".claude/agents/oracle.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Oracle",
+      "size": 4072
+    },
+    ".claude/agents/pathfinder.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Pathfinder",
+      "size": 454
+    },
+    ".claude/agents/pathfinder.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Pathfinder",
+      "size": 1438
+    },
+    ".claude/agents/phoenix.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Phoenix",
+      "size": 438
+    },
+    ".claude/agents/phoenix.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Phoenix",
+      "size": 9431
+    },
+    ".claude/agents/plan-agent.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Plan Agent",
+      "size": 3178
+    },
+    ".claude/agents/plan-reviewer.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Plan Reviewer",
+      "size": 5923
+    },
+    ".claude/agents/profiler.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Profiler",
+      "size": 444
+    },
+    ".claude/agents/profiler.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Profiler",
+      "size": 4378
+    },
+    ".claude/agents/research-codebase.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Research Codebase Agent",
+      "size": 1940
+    },
+    ".claude/agents/review-agent.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Review Agent",
+      "size": 8330
+    },
+    ".claude/agents/scout.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Scout",
+      "size": 418
+    },
+    ".claude/agents/scout.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Scout",
+      "size": 4645
+    },
+    ".claude/agents/scribe.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Scribe",
+      "size": 437
+    },
+    ".claude/agents/scribe.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Scribe Agent",
+      "size": 3208
+    },
+    ".claude/agents/sentinel.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Sentinel",
+      "size": 476
+    },
+    ".claude/agents/session-analyst.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Session Analyst Agent",
+      "size": 767
+    },
+    ".claude/agents/sleuth.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Sleuth",
+      "size": 448
+    },
+    ".claude/agents/sleuth.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Sleuth",
+      "size": 3183
+    },
+    ".claude/agents/spark.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Spark",
+      "size": 439
+    },
+    ".claude/agents/spark.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Spark",
+      "size": 2153
+    },
+    ".claude/agents/surveyor.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Surveyor",
+      "size": 4823
+    },
+    ".claude/agents/validate-agent.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Validate Agent",
+      "size": 3135
+    },
+    ".claude/agents/warden.json": {
+      "tags": [
+        "agents",
+        "config",
+        "claude-config"
+      ],
+      "description": "Warden",
+      "size": 445
+    },
+    ".claude/auto-memory/config.json": {
+      "tags": [
+        "claude-config",
+        "config"
+      ],
+      "description": "Config",
+      "size": 74
+    },
+    ".claude/cache/agents/oracle/output-2026-01-22-openmemory-sdk.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Research Report: OpenMemory Python SDK",
+      "size": 41
+    },
+    ".claude/cache/agents/scout/output-20260122-223000.md": {
+      "tags": [
+        "agents",
+        "api",
+        "docker",
+        "sqlite",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Reverse Engineer Folder Taxonomy",
+      "size": 6686
+    },
+    ".claude/hooks/CONFIG.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docs",
+        "hooks"
+      ],
+      "description": "Hooks Configuration Guide",
+      "size": 10145
+    },
+    ".claude/hooks/CONTINUITY_CLAUDE-open-source-release.md": {
+      "tags": [
+        "claude-config",
+        "docs",
+        "hooks"
+      ],
+      "description": "Test ledger",
+      "size": 14
+    },
+    ".claude/hooks/DISABLED-task-router-hook.json": {
+      "tags": [
+        "claude-config",
+        "config",
+        "hooks"
+      ],
+      "description": "Disabled Task Router Hook",
+      "size": 529
+    },
+    ".claude/hooks/README.md": {
+      "tags": [
+        "claude-config",
+        "docs",
+        "hooks"
+      ],
+      "description": "Hooks",
+      "size": 3902
+    },
+    ".claude/hooks/arch-context-inject.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 213
+    },
+    ".claude/hooks/auto-cache-post.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 2766
+    },
+    ".claude/hooks/auto-cache-pre.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 3737
+    },
+    ".claude/hooks/auto-handoff-stop.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env -S uv run",
+      "size": 1512
+    },
+    ".claude/hooks/braintrust_hooks.py": {
+      "tags": [
+        "python",
+        "hooks",
+        "api",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 23794
+    },
+    ".claude/hooks/build.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 350
+    },
+    ".claude/hooks/cleanup-mcp.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1242
+    },
+    ".claude/hooks/compiler-in-the-loop-stop.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 466
+    },
+    ".claude/hooks/compiler-in-the-loop.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 589
+    },
+    ".claude/hooks/context-router.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1937
+    },
+    ".claude/hooks/continuous-learning-stop.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 4833
+    },
+    ".claude/hooks/dist/__tests__/composition-gate.test.js": {
+      "tags": [
+        "tests",
+        "hooks",
+        "api",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Types under test (will fail until we create them)",
+      "size": 16462
+    },
+    ".claude/hooks/dist/__tests__/daemon-client.test.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Import the actual implementation",
+      "size": 16290
+    },
+    ".claude/hooks/dist/__tests__/extractLedgerSection.test.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "tests",
+        "hooks"
+      ],
+      "description": "# Ledger",
+      "size": 5629
+    },
+    ".claude/hooks/dist/__tests__/findSessionHandoff.test.js": {
+      "tags": [
+        "tests",
+        "async",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Import the function under test",
+      "size": 14739
+    },
+    ".claude/hooks/dist/__tests__/hooks-daemon-migration.test.js": {
+      "tags": [
+        "tests",
+        "hooks",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "Test fixtures",
+      "size": 20865
+    },
+    ".claude/hooks/dist/__tests__/mainHandoffFirst.test.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "tests",
+        "hooks"
+      ],
+      "description": "# Ledger",
+      "size": 14905
+    },
+    ".claude/hooks/dist/__tests__/pattern-orchestrator.test.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Test fixtures",
+      "size": 16533
+    },
+    ".claude/hooks/dist/__tests__/skill-backward-compat.test.js": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Phase 1: Backward Compatibility Tests",
+      "size": 3228
+    },
+    ".claude/hooks/dist/__tests__/skill-coactivation.test.js": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Phase 3: Co-activation Resolution Tests",
+      "size": 4395
+    },
+    ".claude/hooks/dist/__tests__/skill-loading.test.js": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Phase 4: Loading Mode Tests",
+      "size": 4698
+    },
+    ".claude/hooks/dist/__tests__/skill-prerequisites.test.js": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Phase 2: Prerequisite Resolution Tests",
+      "size": 8724
+    },
+    ".claude/hooks/dist/__tests__/skill-router-integration.test.js": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Phase 6: Integration Tests",
+      "size": 8090
+    },
+    ".claude/hooks/dist/__tests__/skill-toposort.test.js": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Phase 5: Topological Sort Tests",
+      "size": 6296
+    },
+    ".claude/hooks/dist/__tests__/skill-validation-prompt.test.js": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Tests for prompt-based skill validation",
+      "size": 15860
+    },
+    ".claude/hooks/dist/__tests__/tldr-hooks.test.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Test fixtures",
+      "size": 22235
+    },
+    ".claude/hooks/dist/__tests__/user-confirm-learning.test.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Mock the learning-extractor module",
+      "size": 6669
+    },
+    ".claude/hooks/dist/__tests__/workflow-erotetic.test.js": {
+      "tags": [
+        "tests",
+        "hooks",
+        "api",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "============================================================",
+      "size": 13600
+    },
+    ".claude/hooks/dist/agent-state-broadcast.js": {
+      "tags": [
+        "agents",
+        "async",
+        "hooks",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 3549
+    },
+    ".claude/hooks/dist/agent-state-broadcast.mjs": {
+      "tags": [
+        "agents",
+        "async",
+        "hooks",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 2371
+    },
+    ".claude/hooks/dist/arch-context-inject.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Planning-related keywords that trigger arch injection",
+      "size": 4806
+    },
+    ".claude/hooks/dist/arch-context-inject.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/arch-context-inject.ts",
+      "size": 11081
+    },
+    ".claude/hooks/dist/archive/agent-state-broadcast.js": {
+      "tags": [
+        "agents",
+        "async",
+        "hooks",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 3549
+    },
+    ".claude/hooks/dist/archive/agent-state-broadcast.mjs": {
+      "tags": [
+        "agents",
+        "async",
+        "hooks",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 2371
+    },
+    ".claude/hooks/dist/archive/blackboard-poll.mjs": {
+      "tags": [
+        "claude-config",
+        "async",
+        "hooks"
+      ],
+      "description": "src/blackboard-poll.ts",
+      "size": 4724
+    },
+    ".claude/hooks/dist/archive/edit-context-inject.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Pre-Edit Context Injection Hook",
+      "size": 2681
+    },
+    ".claude/hooks/dist/archive/edit-context-inject.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/edit-context-inject.ts",
+      "size": 2212
+    },
+    ".claude/hooks/dist/archive/failure-detection.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 6056
+    },
+    ".claude/hooks/dist/archive/failure-detection.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 3703
+    },
+    ".claude/hooks/dist/archive/import-error-detector.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 2920
+    },
+    ".claude/hooks/dist/archive/import-error-detector.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 2608
+    },
+    ".claude/hooks/dist/archive/post-task-complete.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 3355
+    },
+    ".claude/hooks/dist/archive/post-task-complete.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 2701
+    },
+    ".claude/hooks/dist/archive/post-tool-use.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 3734
+    },
+    ".claude/hooks/dist/archive/post-tool-use.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 26786
+    },
+    ".claude/hooks/dist/archive/pre-tool-use.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 9036
+    },
+    ".claude/hooks/dist/archive/pre-tool-use.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 19860
+    },
+    ".claude/hooks/dist/archive/resource-gate.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "Resource Gate Hook (Gate 2)",
+      "size": 1938
+    },
+    ".claude/hooks/dist/archive/resource-gate.mjs": {
+      "tags": [
+        "claude-config",
+        "async",
+        "hooks"
+      ],
+      "description": "src/resource-gate.ts",
+      "size": 1606
+    },
+    ".claude/hooks/dist/archive/session-end-cleanup-swarms.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 4104
+    },
+    ".claude/hooks/dist/archive/session-end-cleanup-swarms.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 3099
+    },
+    ".claude/hooks/dist/archive/skill-router.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "skills",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 15429
+    },
+    ".claude/hooks/dist/archive/skill-router.mjs": {
+      "tags": [
+        "skills",
+        "async",
+        "hooks",
+        "claude-config",
+        "code"
+      ],
+      "description": "Add project to path for imports",
+      "size": 21529
+    },
+    ".claude/hooks/dist/archive/skill-validation-prompt.js": {
+      "tags": [
+        "skills",
+        "hooks",
+        "api",
+        "docker",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Prompt-Based Skill Validation",
+      "size": 8665
+    },
+    ".claude/hooks/dist/archive/stop-learnings.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Stop Learnings Hook - Claude-native session learning extraction",
+      "size": 4221
+    },
+    ".claude/hooks/dist/archive/stop-learnings.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/stop-learnings.ts",
+      "size": 2930
+    },
+    ".claude/hooks/dist/archive/stop-swarm-coordinator.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 4065
+    },
+    ".claude/hooks/dist/archive/stop-swarm-coordinator.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 2990
+    },
+    ".claude/hooks/dist/archive/subagent-start-swarm.js": {
+      "tags": [
+        "agents",
+        "javascript",
+        "claude-config",
+        "hooks"
+      ],
+      "description": "Subagent Start Swarm",
+      "size": 1373
+    },
+    ".claude/hooks/dist/archive/subagent-start-swarm.mjs": {
+      "tags": [
+        "agents",
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/subagent-start-swarm.ts",
+      "size": 931
+    },
+    ".claude/hooks/dist/archive/subagent-stop-swarm.js": {
+      "tags": [
+        "agents",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 5029
+    },
+    ".claude/hooks/dist/archive/subagent-stop-swarm.mjs": {
+      "tags": [
+        "agents",
+        "sqlite",
+        "claude-config",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 3722
+    },
+    ".claude/hooks/dist/archive/task-router.mjs": {
+      "tags": [
+        "claude-config",
+        "code",
+        "async",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 7178
+    },
+    ".claude/hooks/dist/auto-learning.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "Auto-Learning Hook (PostToolUse)",
+      "size": 8023
+    },
+    ".claude/hooks/dist/auto-learning.mjs": {
+      "tags": [
+        "claude-config",
+        "async",
+        "hooks"
+      ],
+      "description": "src/auto-learning.ts",
+      "size": 7875
+    },
+    ".claude/hooks/dist/compiler-in-the-loop-stop.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Max age for state (5 minutes) - ignore stale state",
+      "size": 2904
+    },
+    ".claude/hooks/dist/compiler-in-the-loop-stop.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/compiler-in-the-loop-stop.ts",
+      "size": 2352
+    },
+    ".claude/hooks/dist/compiler-in-the-loop.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "LMStudio endpoint for Goedel-Prover-V2-8B",
+      "size": 9801
+    },
+    ".claude/hooks/dist/compiler-in-the-loop.mjs": {
+      "tags": [
+        "claude-config",
+        "async",
+        "hooks"
+      ],
+      "description": "src/compiler-in-the-loop.ts",
+      "size": 7680
+    },
+    ".claude/hooks/dist/composition-gate-hook.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "Composition Gate Hook (Gate 3)",
+      "size": 1224
+    },
+    ".claude/hooks/dist/composition-gate-hook.mjs": {
+      "tags": [
+        "claude-config",
+        "code",
+        "async",
+        "hooks"
+      ],
+      "description": "src/composition-gate-hook.ts",
+      "size": 3840
+    },
+    ".claude/hooks/dist/daemon-client.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Shared TypeScript client for TLDR daemon.",
+      "size": 16058
+    },
+    ".claude/hooks/dist/daemon-client.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/daemon-client.ts",
+      "size": 14441
+    },
+    ".claude/hooks/dist/drift-detector.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Drift Detector (PostToolUse:Edit Hook)",
+      "size": 2041
+    },
+    ".claude/hooks/dist/drift-detector.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/drift-detector.ts",
+      "size": 4153
+    },
+    ".claude/hooks/dist/edit-context-inject.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Pre-Edit Context Injection Hook",
+      "size": 2531
+    },
+    ".claude/hooks/dist/edit-context-inject.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/edit-context-inject.ts",
+      "size": 10572
+    },
+    ".claude/hooks/dist/epistemic-reminder.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "PostToolUse:Grep|Read Hook - Epistemic confidence reminder.",
+      "size": 2860
+    },
+    ".claude/hooks/dist/epistemic-reminder.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/epistemic-reminder.ts",
+      "size": 2039
+    },
+    ".claude/hooks/dist/erotetic-clarification.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 5367
+    },
+    ".claude/hooks/dist/erotetic-clarification.mjs": {
+      "tags": [
+        "claude-config",
+        "api",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 4270
+    },
+    ".claude/hooks/dist/explore-to-scout.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Agent types that should be used instead of Explore",
+      "size": 1787
+    },
+    ".claude/hooks/dist/explore-to-scout.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/explore-to-scout.ts",
+      "size": 1208
+    },
+    ".claude/hooks/dist/failure-detection.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 6056
+    },
+    ".claude/hooks/dist/failure-detection.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 3703
+    },
+    ".claude/hooks/dist/file-claims.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Get session ID from environment (set by session-register hook)",
+      "size": 2337
+    },
+    ".claude/hooks/dist/file-claims.mjs": {
+      "tags": [
+        "claude-config",
+        "code",
+        "async",
+        "hooks"
+      ],
+      "description": "Add opc to path for imports",
+      "size": 7092
+    },
+    ".claude/hooks/dist/handoff-index.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "Handoff Index",
+      "size": 3644
+    },
+    ".claude/hooks/dist/handoff-index.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "async",
+        "hooks"
+      ],
+      "description": "src/handoff-index.ts",
+      "size": 5150
+    },
+    ".claude/hooks/dist/heartbeat.js": {
+      "tags": [
+        "async",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "Heartbeat Hook (PostToolUse:",
+      "size": 2094
+    },
+    ".claude/hooks/dist/heartbeat.mjs": {
+      "tags": [
+        "claude-config",
+        "code",
+        "async",
+        "hooks"
+      ],
+      "description": "Add opc to path for imports",
+      "size": 2289
+    },
+    ".claude/hooks/dist/impact-refactor.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Keywords that trigger impact analysis",
+      "size": 6100
+    },
+    ".claude/hooks/dist/impact-refactor.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/impact-refactor.ts",
+      "size": 12280
+    },
+    ".claude/hooks/dist/import-error-detector.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 2920
+    },
+    ".claude/hooks/dist/import-error-detector.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 2608
+    },
+    ".claude/hooks/dist/import-validator.js": {
+      "tags": [
+        "claude-config",
+        "code",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Import Validator Hook (PostToolUse)",
+      "size": 3599
+    },
+    ".claude/hooks/dist/import-validator.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/import-validator.ts",
+      "size": 10385
+    },
+    ".claude/hooks/dist/memory-awareness.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Memory Awareness Hook (UserPromptSubmit)",
+      "size": 6470
+    },
+    ".claude/hooks/dist/memory-awareness.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/memory-awareness.ts",
+      "size": 5679
+    },
+    ".claude/hooks/dist/path-rules.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Path patterns \u00e2\u2020\u2019 skill mappings",
+      "size": 3142
+    },
+    ".claude/hooks/dist/path-rules.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/path-rules.ts",
+      "size": 2719
+    },
+    ".claude/hooks/dist/pattern-orchestrator.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Pattern tag regex: [PATTERN:type-id:stage]",
+      "size": 17686
+    },
+    ".claude/hooks/dist/pattern-orchestrator.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "# Previous Stage Output",
+      "size": 13172
+    },
+    ".claude/hooks/dist/patterns/adversarial.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Import shared utilities",
+      "size": 13335
+    },
+    ".claude/hooks/dist/patterns/blackboard.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 16931
+    },
+    ".claude/hooks/dist/patterns/chain-of-responsibility.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 15321
+    },
+    ".claude/hooks/dist/patterns/circuit-breaker.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 15207
+    },
+    ".claude/hooks/dist/patterns/event-driven.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 13352
+    },
+    ".claude/hooks/dist/patterns/generator-critic.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 12099
+    },
+    ".claude/hooks/dist/patterns/hierarchical-test-harness.js": {
+      "tags": [
+        "tests",
+        "async",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Test harness for hierarchical pattern handlers.",
+      "size": 1641
+    },
+    ".claude/hooks/dist/patterns/hierarchical.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 15532
+    },
+    ".claude/hooks/dist/patterns/jury.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 10614
+    },
+    ".claude/hooks/dist/patterns/map-reduce.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 14873
+    },
+    ".claude/hooks/dist/patterns/pipeline.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Import shared utilities",
+      "size": 16456
+    },
+    ".claude/hooks/dist/patterns/swarm.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 12985
+    },
+    ".claude/hooks/dist/phase-gate.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Phase Gate (Stop Hook)",
+      "size": 2037
+    },
+    ".claude/hooks/dist/phase-gate.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/phase-gate.ts",
+      "size": 3728
+    },
+    ".claude/hooks/dist/post-edit-diagnostics.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/post-edit-diagnostics.ts",
+      "size": 10179
+    },
+    ".claude/hooks/dist/post-edit-notify.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/post-edit-notify.ts",
+      "size": 8601
+    },
+    ".claude/hooks/dist/post-task-complete.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 3355
+    },
+    ".claude/hooks/dist/post-task-complete.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 2701
+    },
+    ".claude/hooks/dist/post-tool-use.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 3734
+    },
+    ".claude/hooks/dist/post-tool-use.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 26786
+    },
+    ".claude/hooks/dist/pre-compact-continuity.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "Pre Compact Continuity",
+      "size": 7604
+    },
+    ".claude/hooks/dist/pre-compact-continuity.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/pre-compact-continuity.ts",
+      "size": 13390
+    },
+    ".claude/hooks/dist/pre-edit-context.js": {
+      "tags": [
+        "async",
+        "hooks",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "Cross-platform: ~/.claude/cache/symbol-index/",
+      "size": 5740
+    },
+    ".claude/hooks/dist/pre-edit-context.mjs": {
+      "tags": [
+        "claude-config",
+        "code",
+        "async",
+        "hooks"
+      ],
+      "description": "src/pre-edit-context.ts",
+      "size": 4711
+    },
+    ".claude/hooks/dist/pre-tool-use-broadcast.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 3773
+    },
+    ".claude/hooks/dist/pre-tool-use-broadcast.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 2983
+    },
+    ".claude/hooks/dist/pre-tool-use.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 9036
+    },
+    ".claude/hooks/dist/pre-tool-use.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 19860
+    },
+    ".claude/hooks/dist/resource-gate.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "Resource Gate Hook (Gate 2)",
+      "size": 1938
+    },
+    ".claude/hooks/dist/resource-gate.mjs": {
+      "tags": [
+        "claude-config",
+        "async",
+        "hooks"
+      ],
+      "description": "src/resource-gate.ts",
+      "size": 1606
+    },
+    ".claude/hooks/dist/session-end-cleanup-swarms.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 4104
+    },
+    ".claude/hooks/dist/session-end-cleanup-swarms.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 3099
+    },
+    ".claude/hooks/dist/session-end-cleanup.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "Session End Cleanup",
+      "size": 4181
+    },
+    ".claude/hooks/dist/session-end-cleanup.mjs": {
+      "tags": [
+        "claude-config",
+        "api",
+        "async",
+        "hooks"
+      ],
+      "description": "src/session-end-cleanup.ts",
+      "size": 4386
+    },
+    ".claude/hooks/dist/session-outcome.js": {
+      "tags": [
+        "async",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Session Outcome",
+      "size": 3686
+    },
+    ".claude/hooks/dist/session-outcome.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "async",
+        "hooks"
+      ],
+      "description": "src/session-outcome.ts",
+      "size": 3430
+    },
+    ".claude/hooks/dist/session-register.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Generate a short session ID from environment or random",
+      "size": 2730
+    },
+    ".claude/hooks/dist/session-register.mjs": {
+      "tags": [
+        "claude-config",
+        "code",
+        "async",
+        "hooks"
+      ],
+      "description": "Add opc to path for imports",
+      "size": 8215
+    },
+    ".claude/hooks/dist/session-start-continuity.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "============================================",
+      "size": 22536
+    },
+    ".claude/hooks/dist/session-start-continuity.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/session-start-continuity.ts",
+      "size": 17176
+    },
+    ".claude/hooks/dist/session-start-dead-code.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Query daemon for dead code analysis (fast - uses in-memory indexes)",
+      "size": 3193
+    },
+    ".claude/hooks/dist/session-start-dead-code.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/session-start-dead-code.ts",
+      "size": 9772
+    },
+    ".claude/hooks/dist/session-start-recall.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "SessionStart Hook: Learning Injection",
+      "size": 5176
+    },
+    ".claude/hooks/dist/session-start-recall.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/session-start-recall.ts",
+      "size": 4570
+    },
+    ".claude/hooks/dist/session-start-tldr-cache.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "SessionStart Hook: TLDR Cache Awareness",
+      "size": 2821
+    },
+    ".claude/hooks/dist/session-start-tldr-cache.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/session-start-tldr-cache.ts",
+      "size": 1400
+    },
+    ".claude/hooks/dist/shared/composition-gate.js": {
+      "tags": [
+        "claude-config",
+        "code",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Composition Gate (Gate 3)",
+      "size": 1812
+    },
+    ".claude/hooks/dist/shared/db-utils-pg.js": {
+      "tags": [
+        "async",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "Add opc to path for imports",
+      "size": 20497
+    },
+    ".claude/hooks/dist/shared/db-utils.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Re-export SAFE_ID_PATTERN and isValidId from pattern-router for convenience",
+      "size": 12358
+    },
+    ".claude/hooks/dist/shared/erotetic-questions.js": {
+      "tags": [
+        "claude-config",
+        "api",
+        "javascript",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 15145
+    },
+    ".claude/hooks/dist/shared/erotetic-termination.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 3824
+    },
+    ".claude/hooks/dist/shared/index.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Workflow erotetic gate utilities",
+      "size": 1779
+    },
+    ".claude/hooks/dist/shared/learning-extractor.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Learning Extractor - Shared module for auto-learning hooks",
+      "size": 4692
+    },
+    ".claude/hooks/dist/shared/memory-client.js": {
+      "tags": [
+        "async",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "Add project to path for imports",
+      "size": 10597
+    },
+    ".claude/hooks/dist/shared/pattern-router.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Pattern Router - Shared module for pattern detection in hooks",
+      "size": 2052
+    },
+    ".claude/hooks/dist/shared/pattern-selector.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Pattern Selector",
+      "size": 2817
+    },
+    ".claude/hooks/dist/shared/project-state.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Project State Management",
+      "size": 3620
+    },
+    ".claude/hooks/dist/shared/python-bridge.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Get project root - from .claude/hooks/src/shared/ go up 4 levels",
+      "size": 3672
+    },
+    ".claude/hooks/dist/shared/resource-reader.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 3494
+    },
+    ".claude/hooks/dist/shared/resource-utils.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "System Resource Query Utility",
+      "size": 1106
+    },
+    ".claude/hooks/dist/shared/skill-router-types.js": {
+      "tags": [
+        "skills",
+        "hooks",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "=============================================================================",
+      "size": 917
+    },
+    ".claude/hooks/dist/shared/spec-context.js": {
+      "tags": [
+        "claude-config",
+        "specs",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Spec file utilities",
+      "size": 7326
+    },
+    ".claude/hooks/dist/shared/task-detector.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Task Detector - Phase 7 of Self-Improving Skill System",
+      "size": 7739
+    },
+    ".claude/hooks/dist/shared/types.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Shared type definitions for Claude Code hooks.",
+      "size": 363
+    },
+    ".claude/hooks/dist/shared/workflow-erotetic.js": {
+      "tags": [
+        "hooks",
+        "api",
+        "sqlite",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "============================================================",
+      "size": 8135
+    },
+    ".claude/hooks/dist/signature-helper.js": {
+      "tags": [
+        "claude-config",
+        "code",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Keywords and builtins to skip",
+      "size": 3960
+    },
+    ".claude/hooks/dist/signature-helper.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/signature-helper.ts",
+      "size": 10813
+    },
+    ".claude/hooks/dist/skill-activation-prompt.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "skills",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 18647
+    },
+    ".claude/hooks/dist/skill-activation-prompt.mjs": {
+      "tags": [
+        "skills",
+        "hooks",
+        "api",
+        "docker",
+        "claude-config"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 19533
+    },
+    ".claude/hooks/dist/skill-context-inject.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "skills",
+        "hooks"
+      ],
+      "description": "Skills that need plan context when forked",
+      "size": 2457
+    },
+    ".claude/hooks/dist/skill-context-inject.mjs": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "hooks"
+      ],
+      "description": "src/skill-context-inject.ts",
+      "size": 3792
+    },
+    ".claude/hooks/dist/skill-router.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "skills",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 15429
+    },
+    ".claude/hooks/dist/skill-router.mjs": {
+      "tags": [
+        "skills",
+        "async",
+        "hooks",
+        "claude-config",
+        "code"
+      ],
+      "description": "Add project to path for imports",
+      "size": 21529
+    },
+    ".claude/hooks/dist/skill-validation-prompt.js": {
+      "tags": [
+        "skills",
+        "hooks",
+        "api",
+        "docker",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Prompt-Based Skill Validation",
+      "size": 8665
+    },
+    ".claude/hooks/dist/skill-validation-prompt.mjs": {
+      "tags": [
+        "skills",
+        "async",
+        "hooks",
+        "api",
+        "docker",
+        "claude-config"
+      ],
+      "description": "src/skill-validation-prompt.ts",
+      "size": 5701
+    },
+    ".claude/hooks/dist/smart-search-router.js": {
+      "tags": [
+        "claude-config",
+        "code",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Verb prefixes AND standalone verbs that indicate a function (not a variable)",
+      "size": 16506
+    },
+    ".claude/hooks/dist/smart-search-router.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/smart-search-router.ts",
+      "size": 23374
+    },
+    ".claude/hooks/dist/spec-anchor.js": {
+      "tags": [
+        "claude-config",
+        "specs",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Spec Anchor (PreToolUse:Edit Hook)",
+      "size": 1612
+    },
+    ".claude/hooks/dist/spec-anchor.mjs": {
+      "tags": [
+        "claude-config",
+        "specs",
+        "hooks"
+      ],
+      "description": "src/spec-anchor.ts",
+      "size": 3082
+    },
+    ".claude/hooks/dist/spec-intent-detector.js": {
+      "tags": [
+        "claude-config",
+        "specs",
+        "javascript",
+        "hooks"
+      ],
+      "description": "Action words that indicate implementation intent",
+      "size": 6885
+    },
+    ".claude/hooks/dist/spec-intent-detector.mjs": {
+      "tags": [
+        "claude-config",
+        "specs",
+        "hooks"
+      ],
+      "description": "src/spec-intent-detector.ts",
+      "size": 8016
+    },
+    ".claude/hooks/dist/stop-coordinator.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 28953
+    },
+    ".claude/hooks/dist/stop-coordinator.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 28953
+    },
+    ".claude/hooks/dist/stop-swarm-coordinator.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 4065
+    },
+    ".claude/hooks/dist/stop-swarm-coordinator.mjs": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 2990
+    },
+    ".claude/hooks/dist/subagent-learning.js": {
+      "tags": [
+        "agents",
+        "async",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Subagent Learning Hook (SubagentStop)",
+      "size": 3497
+    },
+    ".claude/hooks/dist/subagent-learning.mjs": {
+      "tags": [
+        "agents",
+        "async",
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/subagent-learning.ts",
+      "size": 3545
+    },
+    ".claude/hooks/dist/subagent-start-swarm.js": {
+      "tags": [
+        "agents",
+        "javascript",
+        "claude-config",
+        "hooks"
+      ],
+      "description": "Subagent Start Swarm",
+      "size": 1373
+    },
+    ".claude/hooks/dist/subagent-start-swarm.mjs": {
+      "tags": [
+        "agents",
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/subagent-start-swarm.ts",
+      "size": 931
+    },
+    ".claude/hooks/dist/subagent-start.js": {
+      "tags": [
+        "agents",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "src/subagent-start.ts",
+      "size": 21205
+    },
+    ".claude/hooks/dist/subagent-start.mjs": {
+      "tags": [
+        "agents",
+        "async",
+        "hooks",
+        "claude-config",
+        "code"
+      ],
+      "description": "Add opc to path for imports",
+      "size": 18706
+    },
+    ".claude/hooks/dist/subagent-stop-continuity.js": {
+      "tags": [
+        "agents",
+        "async",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Subagent Stop Continuity",
+      "size": 7246
+    },
+    ".claude/hooks/dist/subagent-stop-continuity.mjs": {
+      "tags": [
+        "agents",
+        "async",
+        "claude-config",
+        "hooks"
+      ],
+      "description": "## ${agentInfo.agentName} (${timestamp})",
+      "size": 5783
+    },
+    ".claude/hooks/dist/subagent-stop-swarm.js": {
+      "tags": [
+        "agents",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 5029
+    },
+    ".claude/hooks/dist/subagent-stop-swarm.mjs": {
+      "tags": [
+        "agents",
+        "sqlite",
+        "claude-config",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 3722
+    },
+    ".claude/hooks/dist/subagent-stop.js": {
+      "tags": [
+        "agents",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 29047
+    },
+    ".claude/hooks/dist/subagent-stop.mjs": {
+      "tags": [
+        "agents",
+        "async",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "Add opc to path for imports",
+      "size": 29582
+    },
+    ".claude/hooks/dist/task-router.js": {
+      "tags": [
+        "async",
+        "hooks",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 6884
+    },
+    ".claude/hooks/dist/test-multi-agent.js": {
+      "tags": [
+        "agents",
+        "tests",
+        "hooks",
+        "claude-config",
+        "javascript"
+      ],
+      "description": "Run the hook",
+      "size": 836
+    },
+    ".claude/hooks/dist/test-multi-agent.mjs": {
+      "tags": [
+        "agents",
+        "claude-config",
+        "tests",
+        "hooks"
+      ],
+      "description": "src/test-multi-agent.ts",
+      "size": 438
+    },
+    ".claude/hooks/dist/tldr-context-inject.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "TLDR installation path",
+      "size": 15122
+    },
+    ".claude/hooks/dist/tldr-context-inject.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/tldr-context-inject.ts",
+      "size": 20806
+    },
+    ".claude/hooks/dist/tldr-read-enforcer.js": {
+      "tags": [
+        "hooks",
+        "docker",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "TLDR installation path",
+      "size": 13468
+    },
+    ".claude/hooks/dist/tldr-read-enforcer.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/tldr-read-enforcer.ts",
+      "size": 19998
+    },
+    ".claude/hooks/dist/tldr-rebuild-prompt.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "PostToolUse Hook: TLDR Index Rebuild Prompt",
+      "size": 3951
+    },
+    ".claude/hooks/dist/tldr-rebuild-prompt.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/tldr-rebuild-prompt.ts",
+      "size": 3079
+    },
+    ".claude/hooks/dist/transcript-parser.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "hooks"
+      ],
+      "description": "============================================================================",
+      "size": 10599
+    },
+    ".claude/hooks/dist/transcript-parser.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "src/transcript-parser.ts",
+      "size": 7753
+    },
+    ".claude/hooks/dist/typescript-preflight.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "PostToolUse Hook: TypeScript Pre-flight Check",
+      "size": 5275
+    },
+    ".claude/hooks/dist/typescript-preflight.mjs": {
+      "tags": [
+        "claude-config",
+        "async",
+        "hooks"
+      ],
+      "description": "src/typescript-preflight.ts",
+      "size": 3560
+    },
+    ".claude/hooks/dist/user-confirm-learning.js": {
+      "tags": [
+        "claude-config",
+        "javascript",
+        "async",
+        "hooks"
+      ],
+      "description": "Recency threshold: only consider edits from last 10 minutes",
+      "size": 5010
+    },
+    ".claude/hooks/dist/user-confirm-learning.mjs": {
+      "tags": [
+        "claude-config",
+        "async",
+        "hooks"
+      ],
+      "description": "src/user-confirm-learning.ts",
+      "size": 4807
+    },
+    ".claude/hooks/dist/working-on-sync.js": {
+      "tags": [
+        "async",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "code",
+        "javascript"
+      ],
+      "description": "Working On Sync Hook (PostToolUse:TodoWrite)",
+      "size": 2614
+    },
+    ".claude/hooks/dist/working-on-sync.mjs": {
+      "tags": [
+        "claude-config",
+        "code",
+        "async",
+        "hooks"
+      ],
+      "description": "Add opc to path for imports",
+      "size": 3037
+    },
+    ".claude/hooks/edit-context-inject.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 80
+    },
+    ".claude/hooks/file-claims.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 62
+    },
+    ".claude/hooks/git-post-commit.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1951
+    },
+    ".claude/hooks/handoff-index.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 320
+    },
+    ".claude/hooks/hook_launcher.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 11510
+    },
+    ".claude/hooks/impact-refactor.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 174
+    },
+    ".claude/hooks/import-error-detector.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 100
+    },
+    ".claude/hooks/import-validator.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 77
+    },
+    ".claude/hooks/kg-context-gate.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 3767
+    },
+    ".claude/hooks/kg-context-store.py": {
+      "tags": [
+        "python",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 3619
+    },
+    ".claude/hooks/memory-awareness.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 175
+    },
+    ".claude/hooks/memory-recall-start.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1297
+    },
+    ".claude/hooks/memory-store-stop.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1645
+    },
+    ".claude/hooks/n8n-notify.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 3681
+    },
+    ".claude/hooks/package-lock.json": {
+      "tags": [
+        "claude-config",
+        "config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Package Lock",
+      "size": 92728
+    },
+    ".claude/hooks/package.json": {
+      "tags": [
+        "claude-config",
+        "config",
+        "sqlite",
+        "hooks"
+      ],
+      "description": ".ts --bundle --platform=node --format=esm --outdir=dist --out-extension:.js=.mjs --external:better-s",
+      "size": 778
+    },
+    ".claude/hooks/path-rules.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 90
+    },
+    ".claude/hooks/persist-project-dir.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 527
+    },
+    ".claude/hooks/post-compact-continue.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1259
+    },
+    ".claude/hooks/post-edit-diagnostics.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 152
+    },
+    ".claude/hooks/post-edit-notify.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 147
+    },
+    ".claude/hooks/post-tool-use-tracker.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 12290
+    },
+    ".claude/hooks/post_tool_use_tracker.py": {
+      "tags": [
+        "python",
+        "hooks",
+        "api",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 8523
+    },
+    ".claude/hooks/pre-compact-continuity.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 81
+    },
+    ".claude/hooks/pre-compact-handoff.py": {
+      "tags": [
+        "python",
+        "hooks",
+        "api",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 2912
+    },
+    ".claude/hooks/pre-tool-use-broadcast.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 138
+    },
+    ".claude/hooks/pre_compact_continuity.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 15350
+    },
+    ".claude/hooks/premortem-suggest.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 4118
+    },
+    ".claude/hooks/run-python.mjs": {
+      "tags": [
+        "claude-config",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 745
+    },
+    ".claude/hooks/session-end-cleanup.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 78
+    },
+    ".claude/hooks/session-outcome.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 74
+    },
+    ".claude/hooks/session-register.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 67
+    },
+    ".claude/hooks/session-start-clean.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1255
+    },
+    ".claude/hooks/session-start-continuity.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 83
+    },
+    ".claude/hooks/session-start-dead-code.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 223
+    },
+    ".claude/hooks/session-start-tldr-cache.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 220
+    },
+    ".claude/hooks/session-symbol-index.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 2011
+    },
+    ".claude/hooks/session-symbol-index.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 842
+    },
+    ".claude/hooks/session_start_continuity.py": {
+      "tags": [
+        "python",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 29294
+    },
+    ".claude/hooks/signature-helper.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 77
+    },
+    ".claude/hooks/skill-activation-prompt.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "skills",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 169
+    },
+    ".claude/hooks/slack-notify.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 5648
+    },
+    ".claude/hooks/slack-send.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 3136
+    },
+    ".claude/hooks/smart-search-router.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 301
+    },
+    ".claude/hooks/smart-tool-redirect.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 2561
+    },
+    ".claude/hooks/src/__tests__/composition-gate.test.ts": {
+      "tags": [
+        "tests",
+        "hooks",
+        "api",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Types under test (will fail until we create them)",
+      "size": 15217
+    },
+    ".claude/hooks/src/__tests__/daemon-client.test.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Import the actual implementation",
+      "size": 15334
+    },
+    ".claude/hooks/src/__tests__/extractLedgerSection.test.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "# Ledger",
+      "size": 5469
+    },
+    ".claude/hooks/src/__tests__/findSessionHandoff.test.ts": {
+      "tags": [
+        "tests",
+        "async",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Import the function under test",
+      "size": 13951
+    },
+    ".claude/hooks/src/__tests__/hooks-daemon-migration.test.ts": {
+      "tags": [
+        "tests",
+        "hooks",
+        "typescript",
+        "claude-config",
+        "code"
+      ],
+      "description": "Test fixtures",
+      "size": 19427
+    },
+    ".claude/hooks/src/__tests__/mainHandoffFirst.test.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "# Ledger",
+      "size": 14122
+    },
+    ".claude/hooks/src/__tests__/pattern-orchestrator.test.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Test fixtures",
+      "size": 17131
+    },
+    ".claude/hooks/src/__tests__/session-affinity.test.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Note: We can't easily test the actual getPpid/getTerminalShellPid functions",
+      "size": 4319
+    },
+    ".claude/hooks/src/__tests__/session-id-persistence.test.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Import actual implementations from shared module",
+      "size": 7241
+    },
+    ".claude/hooks/src/__tests__/skill-backward-compat.test.ts": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Phase 1: Backward Compatibility Tests",
+      "size": 3067
+    },
+    ".claude/hooks/src/__tests__/skill-coactivation.test.ts": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Phase 3: Co-activation Resolution Tests",
+      "size": 4015
+    },
+    ".claude/hooks/src/__tests__/skill-loading.test.ts": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Phase 4: Loading Mode Tests",
+      "size": 4298
+    },
+    ".claude/hooks/src/__tests__/skill-prerequisites.test.ts": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Phase 2: Prerequisite Resolution Tests",
+      "size": 7757
+    },
+    ".claude/hooks/src/__tests__/skill-router-integration.test.ts": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Phase 6: Integration Tests",
+      "size": 7275
+    },
+    ".claude/hooks/src/__tests__/skill-toposort.test.ts": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Phase 5: Topological Sort Tests",
+      "size": 5600
+    },
+    ".claude/hooks/src/__tests__/skill-validation-prompt.test.ts": {
+      "tags": [
+        "skills",
+        "tests",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Tests for prompt-based skill validation",
+      "size": 14227
+    },
+    ".claude/hooks/src/__tests__/tldr-hooks.test.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Test fixtures",
+      "size": 20602
+    },
+    ".claude/hooks/src/__tests__/user-confirm-learning.test.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "Mock the learning-extractor module",
+      "size": 6014
+    },
+    ".claude/hooks/src/__tests__/workflow-erotetic.test.ts": {
+      "tags": [
+        "tests",
+        "hooks",
+        "api",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "============================================================",
+      "size": 12925
+    },
+    ".claude/hooks/src/arch-context-inject.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Planning-related keywords that trigger arch injection",
+      "size": 5517
+    },
+    ".claude/hooks/src/compiler-in-the-loop-stop.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Max age for state (5 minutes) - ignore stale state",
+      "size": 3154
+    },
+    ".claude/hooks/src/compiler-in-the-loop.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "async",
+        "hooks"
+      ],
+      "description": "LMStudio endpoint for Goedel-Prover-V2-8B",
+      "size": 10223
+    },
+    ".claude/hooks/src/daemon-client.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Shared TypeScript client for TLDR daemon.",
+      "size": 28798
+    },
+    ".claude/hooks/src/edit-context-inject.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Pre-Edit Context Injection Hook",
+      "size": 4557
+    },
+    ".claude/hooks/src/file-claims.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Run if executed directly",
+      "size": 2195
+    },
+    ".claude/hooks/src/handoff-index.ts": {
+      "tags": [
+        "async",
+        "hooks",
+        "typescript",
+        "sqlite",
+        "claude-config"
+      ],
+      "description": "Get parent PID using ps command (Unix only).",
+      "size": 7089
+    },
+    ".claude/hooks/src/impact-refactor.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Keywords that trigger impact analysis",
+      "size": 6349
+    },
+    ".claude/hooks/src/import-error-detector.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 3074
+    },
+    ".claude/hooks/src/import-validator.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "code",
+        "hooks"
+      ],
+      "description": "Import Validator Hook (PostToolUse)",
+      "size": 4188
+    },
+    ".claude/hooks/src/memory-awareness.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Memory Awareness Hook (UserPromptSubmit)",
+      "size": 7078
+    },
+    ".claude/hooks/src/path-rules.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Path patterns \u00e2\u2020\u2019 skill mappings",
+      "size": 3273
+    },
+    ".claude/hooks/src/patterns/adversarial.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Import shared utilities",
+      "size": 13363
+    },
+    ".claude/hooks/src/patterns/blackboard.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 16815
+    },
+    ".claude/hooks/src/patterns/chain-of-responsibility.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 15345
+    },
+    ".claude/hooks/src/patterns/circuit-breaker.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 15099
+    },
+    ".claude/hooks/src/patterns/event-driven.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 13422
+    },
+    ".claude/hooks/src/patterns/generator-critic.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 12127
+    },
+    ".claude/hooks/src/patterns/hierarchical-test-harness.ts": {
+      "tags": [
+        "tests",
+        "async",
+        "hooks",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Test harness for hierarchical pattern handlers.",
+      "size": 1490
+    },
+    ".claude/hooks/src/patterns/hierarchical.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 15509
+    },
+    ".claude/hooks/src/patterns/jury.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 10729
+    },
+    ".claude/hooks/src/patterns/map-reduce.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 14855
+    },
+    ".claude/hooks/src/patterns/pipeline.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Import shared utilities",
+      "size": 16695
+    },
+    ".claude/hooks/src/patterns/swarm.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Set busy_timeout to prevent indefinite blocking (Finding 3: STARVATION_FINDINGS.md)",
+      "size": 12949
+    },
+    ".claude/hooks/src/post-edit-diagnostics.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Post-Edit Diagnostics Hook",
+      "size": 3901
+    },
+    ".claude/hooks/src/post-edit-notify.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Post-Edit Notification Hook",
+      "size": 1850
+    },
+    ".claude/hooks/src/pre-compact-continuity.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "async",
+        "hooks"
+      ],
+      "description": "Pre Compact Continuity",
+      "size": 7176
+    },
+    ".claude/hooks/src/pre-tool-use-broadcast.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 4019
+    },
+    ".claude/hooks/src/session-end-cleanup.ts": {
+      "tags": [
+        "async",
+        "hooks",
+        "api",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "Lock file to prevent multiple concurrent braintrust extractors",
+      "size": 6526
+    },
+    ".claude/hooks/src/session-outcome.ts": {
+      "tags": [
+        "async",
+        "hooks",
+        "typescript",
+        "sqlite",
+        "claude-config"
+      ],
+      "description": "Session Outcome",
+      "size": 3798
+    },
+    ".claude/hooks/src/session-register.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Run if executed directly",
+      "size": 2699
+    },
+    ".claude/hooks/src/session-start-continuity.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "============================================",
+      "size": 23455
+    },
+    ".claude/hooks/src/session-start-dead-code.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Query daemon for dead code analysis (fast - uses in-memory indexes)",
+      "size": 3553
+    },
+    ".claude/hooks/src/session-start-tldr-cache.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "SessionStart Hook: TLDR Cache Warming (Async)",
+      "size": 2349
+    },
+    ".claude/hooks/src/shared/composition-gate.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "code",
+        "hooks"
+      ],
+      "description": "Composition Gate (Gate 3)",
+      "size": 2022
+    },
+    ".claude/hooks/src/shared/db-utils-pg.ts": {
+      "tags": [
+        "async",
+        "hooks",
+        "typescript",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "Add opc to path for imports",
+      "size": 22306
+    },
+    ".claude/hooks/src/shared/db-utils.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "sqlite",
+        "hooks"
+      ],
+      "description": "Re-export SAFE_ID_PATTERN and isValidId from pattern-router for convenience",
+      "size": 12410
+    },
+    ".claude/hooks/src/shared/erotetic-questions.ts": {
+      "tags": [
+        "claude-config",
+        "api",
+        "typescript",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 16973
+    },
+    ".claude/hooks/src/shared/erotetic-termination.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 4912
+    },
+    ".claude/hooks/src/shared/index.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Workflow erotetic gate utilities",
+      "size": 3136
+    },
+    ".claude/hooks/src/shared/learning-extractor.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Learning Extractor - Shared module for auto-learning hooks",
+      "size": 5315
+    },
+    ".claude/hooks/src/shared/memory-client.ts": {
+      "tags": [
+        "hooks",
+        "typescript",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "Memory Client for Skill Lookup",
+      "size": 12000
+    },
+    ".claude/hooks/src/shared/opc-path.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Cross-platform OPC directory resolution for hooks.",
+      "size": 2476
+    },
+    ".claude/hooks/src/shared/pattern-router.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Pattern Router - Shared module for pattern detection in hooks",
+      "size": 2123
+    },
+    ".claude/hooks/src/shared/pattern-selector.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Pattern Selector",
+      "size": 3982
+    },
+    ".claude/hooks/src/shared/project-state.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Project State Management",
+      "size": 3714
+    },
+    ".claude/hooks/src/shared/python-bridge.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Get project root - from .claude/hooks/src/shared/ go up 4 levels",
+      "size": 3604
+    },
+    ".claude/hooks/src/shared/resource-reader.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 4094
+    },
+    ".claude/hooks/src/shared/resource-utils.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "System Resource Query Utility",
+      "size": 1395
+    },
+    ".claude/hooks/src/shared/session-id.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Session ID utilities for cross-process coordination.",
+      "size": 3548
+    },
+    ".claude/hooks/src/shared/skill-router-types.ts": {
+      "tags": [
+        "skills",
+        "hooks",
+        "typescript",
+        "claude-config",
+        "code"
+      ],
+      "description": "=============================================================================",
+      "size": 4271
+    },
+    ".claude/hooks/src/shared/spec-context.ts": {
+      "tags": [
+        "claude-config",
+        "specs",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Spec Context Management",
+      "size": 7851
+    },
+    ".claude/hooks/src/shared/task-detector.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Task Detector - Phase 7 of Self-Improving Skill System",
+      "size": 8463
+    },
+    ".claude/hooks/src/shared/types.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "=============================================================================",
+      "size": 2615
+    },
+    ".claude/hooks/src/shared/workflow-erotetic.ts": {
+      "tags": [
+        "hooks",
+        "api",
+        "typescript",
+        "sqlite",
+        "claude-config"
+      ],
+      "description": "============================================================",
+      "size": 9022
+    },
+    ".claude/hooks/src/signature-helper.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "code",
+        "hooks"
+      ],
+      "description": "Keywords and builtins to skip",
+      "size": 4605
+    },
+    ".claude/hooks/src/skill-activation-prompt.ts": {
+      "tags": [
+        "skills",
+        "hooks",
+        "api",
+        "typescript",
+        "claude-config"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 22314
+    },
+    ".claude/hooks/src/skill-activation-prompt.ts.backup": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 20227
+    },
+    ".claude/hooks/src/skill-activation-prompt.ts.bak": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env node",
+      "size": 19868
+    },
+    ".claude/hooks/src/skill-validation-prompt.ts": {
+      "tags": [
+        "skills",
+        "hooks",
+        "api",
+        "typescript",
+        "docker",
+        "claude-config"
+      ],
+      "description": "Prompt-Based Skill Validation",
+      "size": 8985
+    },
+    ".claude/hooks/src/smart-search-router.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Search context for TLDR layer routing",
+      "size": 21309
+    },
+    ".claude/hooks/src/tldr-context-inject.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "Intent detection patterns",
+      "size": 15794
+    },
+    ".claude/hooks/src/tldr-read-enforcer.ts": {
+      "tags": [
+        "hooks",
+        "typescript",
+        "docker",
+        "claude-config",
+        "code"
+      ],
+      "description": "Search context from smart-search-router",
+      "size": 17059
+    },
+    ".claude/hooks/src/transcript-parser.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "hooks"
+      ],
+      "description": "============================================================================",
+      "size": 11426
+    },
+    ".claude/hooks/src/typescript-preflight.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "async",
+        "hooks"
+      ],
+      "description": "PostToolUse Hook: TypeScript Pre-flight Check",
+      "size": 4954
+    },
+    ".claude/hooks/stop-memory-sync.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1339
+    },
+    ".claude/hooks/tldr-context-inject.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 216
+    },
+    ".claude/hooks/tldr-read-enforcer.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 291
+    },
+    ".claude/hooks/tsconfig.json": {
+      "tags": [
+        "claude-config",
+        "config",
+        "hooks"
+      ],
+      "description": "/",
+      "size": 533
+    },
+    ".claude/hooks/typescript-preflight.sh": {
+      "tags": [
+        "claude-config",
+        "shell",
+        "hooks"
+      ],
+      "description": "!/bin/bash",
+      "size": 552
+    },
+    ".claude/hooks/utf-context-filter.py": {
+      "tags": [
+        "python",
+        "hooks",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 5356
+    },
+    ".claude/hooks/utf-semantic-rag.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 2775
+    },
+    ".claude/hooks/vitest.config.ts": {
+      "tags": [
+        "claude-config",
+        "typescript",
+        "tests",
+        "hooks"
+      ],
+      "description": "/",
+      "size": 222
+    },
+    ".claude/rules/agent-memory-recall.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agent Memory Recall",
+      "size": 671
+    },
+    ".claude/rules/agent-model-selection.md": {
+      "tags": [
+        "agents",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agent Model Selection",
+      "size": 920
+    },
+    ".claude/rules/autonomous-operation.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "docs"
+      ],
+      "description": "Autonomous Operation Mode",
+      "size": 1608
+    },
+    ".claude/rules/before-acting.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Before Acting Protocol",
+      "size": 1051
+    },
+    ".claude/rules/claim-verification.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Claim Verification Rule",
+      "size": 1789
+    },
+    ".claude/rules/cross-terminal-db.md": {
+      "tags": [
+        "claude-config",
+        "docker",
+        "docs"
+      ],
+      "description": "Cross-Terminal Coordination Database",
+      "size": 1351
+    },
+    ".claude/rules/destructive-commands.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Git & Deletion Safety Rules",
+      "size": 1523
+    },
+    ".claude/rules/dynamic-recall.md": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "docs"
+      ],
+      "description": "Dynamic Recall",
+      "size": 4383
+    },
+    ".claude/rules/evolution-plan-adherence.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Evolution Plan Adherence",
+      "size": 1298
+    },
+    ".claude/rules/hook-auto-execute.md": {
+      "tags": [
+        "claude-config",
+        "docs",
+        "hooks"
+      ],
+      "description": "Hook Auto-Execute",
+      "size": 536
+    },
+    ".claude/rules/no-haiku.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "No Haiku Model",
+      "size": 244
+    },
+    ".claude/rules/proactive-delegation.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Proactive Agent Delegation",
+      "size": 2274
+    },
+    ".claude/rules/proactive-memory-disclosure.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Proactive Memory Disclosure",
+      "size": 1335
+    },
+    ".claude/rules/smart-tools-required.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Smart Tools Required",
+      "size": 1164
+    },
+    ".claude/rules/tldr-cli.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "TLDR CLI - Code Analysis Tool",
+      "size": 4597
+    },
+    ".claude/rules/token-efficiency.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Token Efficiency Rules",
+      "size": 1085
+    },
+    ".claude/rules/use-scout-not-explore.md": {
+      "tags": [
+        "claude-config",
+        "docs"
+      ],
+      "description": "Use Scout, Not Explore",
+      "size": 742
+    },
+    ".claude/scripts/add-usage-tracking-hook.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1432
+    },
+    ".claude/scripts/agent-animation.sh": {
+      "tags": [
+        "agents",
+        "shell",
+        "claude-config"
+      ],
+      "description": "!/bin/bash",
+      "size": 1125
+    },
+    ".claude/scripts/aggregate-reasoning.sh": {
+      "tags": [
+        "claude-config",
+        "shell"
+      ],
+      "description": "!/bin/bash",
+      "size": 2005
+    },
+    ".claude/scripts/book-ingest.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "sqlite"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 32304
+    },
+    ".claude/scripts/book-query.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "sqlite"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 9416
+    },
+    ".claude/scripts/cognitive/add-usage-tracking-hook.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "hooks"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 1432
+    },
+    ".claude/scripts/cognitive/context-router-v2.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "api"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 31032
+    },
+    ".claude/scripts/cognitive/history.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 8705
+    },
+    ".claude/scripts/cognitive/pool-auto-update.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 8914
+    },
+    ".claude/scripts/cognitive/pool-extractor.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 7056
+    },
+    ".claude/scripts/cognitive/pool-loader.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 7535
+    },
+    ".claude/scripts/cognitive/pool-query.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 6089
+    },
+    ".claude/scripts/cognitive/usage-track-stop.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 5576
+    },
+    ".claude/scripts/cognitive/usage_tracker.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 21417
+    },
+    ".claude/scripts/context-router-v2.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "api"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 31032
+    },
+    ".claude/scripts/core/__init__.py": {
+      "tags": [
+        "claude-config",
+        "python"
+      ],
+      "description": "  Init  ",
+      "size": 0
+    },
+    ".claude/scripts/core/artifact_index.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "sqlite"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 21537
+    },
+    ".claude/scripts/core/artifact_mark.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "sqlite"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 8896
+    },
+    ".claude/scripts/core/artifact_query.py": {
+      "tags": [
+        "python",
+        "api",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 17824
+    },
+    ".claude/scripts/core/extract_thinking_blocks.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 4732
+    },
+    ".claude/scripts/core/memory_daemon.py": {
+      "tags": [
+        "python",
+        "api",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 15309
+    },
+    ".claude/scripts/core/recall_learnings.py": {
+      "tags": [
+        "python",
+        "async",
+        "api",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 22892
+    },
+    ".claude/scripts/core/store_learning.py": {
+      "tags": [
+        "python",
+        "async",
+        "api",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 11064
+    },
+    ".claude/scripts/docling-ingest.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 3888
+    },
+    ".claude/scripts/generate-reasoning.sh": {
+      "tags": [
+        "claude-config",
+        "shell"
+      ],
+      "description": "!/bin/bash",
+      "size": 2737
+    },
+    ".claude/scripts/get-resources.sh": {
+      "tags": [
+        "claude-config",
+        "shell"
+      ],
+      "description": "!/bin/bash",
+      "size": 1763
+    },
+    ".claude/scripts/history.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 8705
+    },
+    ".claude/scripts/kg-obsidian-sync.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 14421
+    },
+    ".claude/scripts/mcp": {
+      "tags": [
+        "claude-config"
+      ],
+      "description": "Mcp",
+      "size": 21
+    },
+    ".claude/scripts/notify-telegram.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "api"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 2049
+    },
+    ".claude/scripts/phase-complete.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "api"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 3702
+    },
+    ".claude/scripts/phase-progress-status.sh": {
+      "tags": [
+        "claude-config",
+        "shell"
+      ],
+      "description": "!/bin/bash",
+      "size": 5442
+    },
+    ".claude/scripts/pool-auto-update.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 8914
+    },
+    ".claude/scripts/pool-extractor.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 7056
+    },
+    ".claude/scripts/pool-loader.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 7535
+    },
+    ".claude/scripts/pool-query.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 6089
+    },
+    ".claude/scripts/quant-risk-simulator.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 8676
+    },
+    ".claude/scripts/recall_learnings.py": {
+      "tags": [
+        "python",
+        "async",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 6769
+    },
+    ".claude/scripts/search-reasoning.sh": {
+      "tags": [
+        "claude-config",
+        "shell"
+      ],
+      "description": "!/bin/bash",
+      "size": 2071
+    },
+    ".claude/scripts/status.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 15446
+    },
+    ".claude/scripts/status.sh": {
+      "tags": [
+        "claude-config",
+        "shell"
+      ],
+      "description": "!/bin/bash",
+      "size": 6614
+    },
+    ".claude/scripts/telegram-inbox.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "api"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 2948
+    },
+    ".claude/scripts/telegram-poll.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "api"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 3067
+    },
+    ".claude/scripts/tldr_stats.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 13014
+    },
+    ".claude/scripts/token-benchmark.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "sqlite"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 11575
+    },
+    ".claude/scripts/token-tracker.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 17567
+    },
+    ".claude/scripts/usage-track-stop.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 5576
+    },
+    ".claude/scripts/usage_tracker.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 21417
+    },
+    ".claude/scripts/utf-embeddings.py": {
+      "tags": [
+        "claude-config",
+        "python",
+        "code",
+        "sqlite"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 13679
+    },
+    ".claude/scripts/utf-ingest.py": {
+      "tags": [
+        "python",
+        "api",
+        "sqlite",
+        "claude-config",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 44568
+    },
+    ".claude/settings.local.json": {
+      "tags": [
+        "claude-config",
+        "config"
+      ],
+      "description": "Settings.Local",
+      "size": 6020
+    },
+    ".claude/skills/README.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Claude Code Skills Integration",
+      "size": 2558
+    },
+    ".claude/skills/_sandbox/.gitkeep": {
+      "tags": [
+        "claude-config",
+        "skills"
+      ],
+      "description": "Sandbox directory for testing skills",
+      "size": 133
+    },
+    ".claude/skills/agent-context-isolation/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agent Context Isolation",
+      "size": 2729
+    },
+    ".claude/skills/agent-orchestration/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agent Orchestration Rules",
+      "size": 1653
+    },
+    ".claude/skills/agentic-workflow/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agentic Workflow Pattern",
+      "size": 3921
+    },
+    ".claude/skills/agentica-claude-proxy/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agentica-Claude Code Proxy Integration",
+      "size": 4169
+    },
+    ".claude/skills/agentica-infrastructure/API_SPEC.md": {
+      "tags": [
+        "agents",
+        "specs",
+        "skills",
+        "async",
+        "api",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Agentica Infrastructure API Specification",
+      "size": 26597
+    },
+    ".claude/skills/agentica-infrastructure/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "async",
+        "api",
+        "sqlite",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agentica Infrastructure Reference",
+      "size": 3041
+    },
+    ".claude/skills/agentica-prompts/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Agentica Prompt Engineering",
+      "size": 6933
+    },
+    ".claude/skills/agentica-sdk/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "async",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Agentica SDK Reference (v0.3.1)",
+      "size": 11342
+    },
+    ".claude/skills/agentica-server/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agentica Server + Claude Proxy Setup",
+      "size": 4396
+    },
+    ".claude/skills/agentica-spawn/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "async",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Agentica Spawn Skill",
+      "size": 2047
+    },
+    ".claude/skills/archive/async-repl-protocol/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "async",
+        "skills",
+        "docs"
+      ],
+      "description": "Async REPL Protocol",
+      "size": 612
+    },
+    ".claude/skills/archive/leann-search/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "code",
+        "skills",
+        "docs"
+      ],
+      "description": "LEANN Semantic Search",
+      "size": 1834
+    },
+    ".claude/skills/archive/router-first-architecture/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Router-First Architecture",
+      "size": 1607
+    },
+    ".claude/skills/archive/search-hierarchy/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Search Tool Hierarchy",
+      "size": 2317
+    },
+    ".claude/skills/archive/search-tools/SKILL.md": {
+      "tags": [
+        "skills",
+        "api",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Search Tool Hierarchy",
+      "size": 1954
+    },
+    ".claude/skills/ast-grep-find/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "AST-Grep Find",
+      "size": 2705
+    },
+    ".claude/skills/async-repl-protocol/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "async",
+        "skills",
+        "docs"
+      ],
+      "description": "Async REPL Protocol",
+      "size": 634
+    },
+    ".claude/skills/background-agent-pings/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Background Agent Pings",
+      "size": 1325
+    },
+    ".claude/skills/braintrust-analyze/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Braintrust Analysis",
+      "size": 2728
+    },
+    ".claude/skills/braintrust-analyze/SKILL.md.bak": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills"
+      ],
+      "description": "Braintrust Analysis",
+      "size": 2728
+    },
+    ".claude/skills/braintrust-analyze/SKILL.v6.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Option: braintrust-analyze",
+      "size": 1872
+    },
+    ".claude/skills/braintrust-tracing/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Braintrust Tracing for Claude Code",
+      "size": 12878
+    },
+    ".claude/skills/build/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Build - Workflow Orchestrator",
+      "size": 21807
+    },
+    ".claude/skills/cli-reference/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "CLI Reference",
+      "size": 7475
+    },
+    ".claude/skills/coherence/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "skills",
+        "docs"
+      ],
+      "description": "Coherence - Goal Management Skill",
+      "size": 2490
+    },
+    ".claude/skills/commit/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Commit Changes",
+      "size": 1958
+    },
+    ".claude/skills/commit/SKILL.v6.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Option: commit",
+      "size": 2451
+    },
+    ".claude/skills/complete-skill/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "complete-skill",
+      "size": 246
+    },
+    ".claude/skills/completion-check/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "skills",
+        "docs"
+      ],
+      "description": "Completion Check: Verify Infrastructure Is Wired",
+      "size": 2960
+    },
+    ".claude/skills/compound-learnings/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Compound Learnings",
+      "size": 6457
+    },
+    ".claude/skills/confidence-check/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Confidence Check Skill",
+      "size": 3365
+    },
+    ".claude/skills/confidence-check/confidence.ts": {
+      "tags": [
+        "claude-config",
+        "api",
+        "typescript",
+        "skills"
+      ],
+      "description": "Confidence Check - Pre-implementation confidence assessment",
+      "size": 5052
+    },
+    ".claude/skills/continuity_ledger/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "skills",
+        "docs"
+      ],
+      "description": "Continuity Ledger",
+      "size": 4256
+    },
+    ".claude/skills/continuous-learning/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Continuous Learning Skill",
+      "size": 2070
+    },
+    ".claude/skills/continuous-learning/config.json": {
+      "tags": [
+        "claude-config",
+        "config",
+        "api",
+        "skills"
+      ],
+      "description": "Config",
+      "size": 391
+    },
+    ".claude/skills/continuous-learning/evaluate-session.sh": {
+      "tags": [
+        "claude-config",
+        "api",
+        "shell",
+        "skills"
+      ],
+      "description": "!/bin/bash",
+      "size": 2015
+    },
+    ".claude/skills/create_handoff/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "skills",
+        "docs"
+      ],
+      "description": "Create Handoff",
+      "size": 4776
+    },
+    ".claude/skills/create_handoff/SKILL.v6.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Option: create_handoff",
+      "size": 3340
+    },
+    ".claude/skills/dead-code/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Dead Code Detection",
+      "size": 1695
+    },
+    ".claude/skills/debug-hooks/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs",
+        "hooks"
+      ],
+      "description": "Debug Hooks",
+      "size": 3452
+    },
+    ".claude/skills/debug/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "skills",
+        "docs"
+      ],
+      "description": "Debug",
+      "size": 5290
+    },
+    ".claude/skills/deep-reading-analyst.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Deep Reading Analyst",
+      "size": 15255
+    },
+    ".claude/skills/deep-reading-analyst/5w2h_analysis.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "5W2H Analysis Framework",
+      "size": 9040
+    },
+    ".claude/skills/deep-reading-analyst/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Deep Reading Analyst",
+      "size": 15255
+    },
+    ".claude/skills/deep-reading-analyst/comparison_matrix.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Multi-Source Comparison Matrix",
+      "size": 8886
+    },
+    ".claude/skills/deep-reading-analyst/critical_thinking.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Critical Thinking Framework",
+      "size": 3297
+    },
+    ".claude/skills/deep-reading-analyst/first_principles.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "First Principles Thinking",
+      "size": 4460
+    },
+    ".claude/skills/deep-reading-analyst/inversion_thinking.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Inversion Thinking Framework",
+      "size": 8710
+    },
+    ".claude/skills/deep-reading-analyst/mental_models.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Mental Models Framework",
+      "size": 8670
+    },
+    ".claude/skills/deep-reading-analyst/output_templates.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Output Templates",
+      "size": 7644
+    },
+    ".claude/skills/deep-reading-analyst/scqa_framework.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "SCQA Framework (Structure Thinking)",
+      "size": 11733
+    },
+    ".claude/skills/deep-reading-analyst/six_hats.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Six Thinking Hats Framework",
+      "size": 7884
+    },
+    ".claude/skills/deep-reading-analyst/systems_thinking.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Systems Thinking Framework",
+      "size": 5686
+    },
+    ".claude/skills/deep-reading-references/5w2h_analysis.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "5W2H Analysis Framework",
+      "size": 9040
+    },
+    ".claude/skills/deep-reading-references/comparison_matrix.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Multi-Source Comparison Matrix",
+      "size": 8886
+    },
+    ".claude/skills/deep-reading-references/critical_thinking.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Critical Thinking Framework",
+      "size": 3297
+    },
+    ".claude/skills/deep-reading-references/first_principles.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "First Principles Thinking",
+      "size": 4460
+    },
+    ".claude/skills/deep-reading-references/inversion_thinking.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Inversion Thinking Framework",
+      "size": 8710
+    },
+    ".claude/skills/deep-reading-references/mental_models.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Mental Models Framework",
+      "size": 8670
+    },
+    ".claude/skills/deep-reading-references/output_templates.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Output Templates",
+      "size": 7644
+    },
+    ".claude/skills/deep-reading-references/scqa_framework.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "SCQA Framework (Structure Thinking)",
+      "size": 11733
+    },
+    ".claude/skills/deep-reading-references/six_hats.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Six Thinking Hats Framework",
+      "size": 7884
+    },
+    ".claude/skills/deep-reading-references/systems_thinking.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Systems Thinking Framework",
+      "size": 5686
+    },
+    ".claude/skills/describe_pr/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Generate PR Description",
+      "size": 4600
+    },
+    ".claude/skills/discovery-interview/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Discovery Interview",
+      "size": 14744
+    },
+    ".claude/skills/environment-triage/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Environment Triage",
+      "size": 1086
+    },
+    ".claude/skills/explicit-identity/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Explicit Identity Across Boundaries",
+      "size": 1291
+    },
+    ".claude/skills/explore/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Explore - Internal Codebase Exploration",
+      "size": 11582
+    },
+    ".claude/skills/firecrawl-scrape/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Firecrawl Scrape Skill",
+      "size": 1014
+    },
+    ".claude/skills/fix/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Fix",
+      "size": 14740
+    },
+    ".claude/skills/git-commits/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Git Commit Rules",
+      "size": 1025
+    },
+    ".claude/skills/github-search/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "GitHub Search Skill",
+      "size": 1060
+    },
+    ".claude/skills/graceful-degradation/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "async",
+        "skills",
+        "docs"
+      ],
+      "description": "Graceful Degradation with Helpful Messages",
+      "size": 2215
+    },
+    ".claude/skills/handoff.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Handoff Skill",
+      "size": 1105
+    },
+    ".claude/skills/help/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "/help - Workspace Discovery",
+      "size": 10058
+    },
+    ".claude/skills/hook-developer/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs",
+        "hooks"
+      ],
+      "description": "Hook Developer",
+      "size": 14824
+    },
+    ".claude/skills/hooks/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "hooks",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Hook Development Rules",
+      "size": 1376
+    },
+    ".claude/skills/idempotent-redundancy/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Idempotent Redundancy",
+      "size": 828
+    },
+    ".claude/skills/implement_plan/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Implement Plan",
+      "size": 10545
+    },
+    ".claude/skills/implement_plan/SKILL.md.backup": {
+      "tags": [
+        "claude-config",
+        "skills"
+      ],
+      "description": "Implement Plan",
+      "size": 9668
+    },
+    ".claude/skills/implement_plan_micro/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Formal Specification",
+      "size": 5643
+    },
+    ".claude/skills/implement_task/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Implementation Task Agent",
+      "size": 8335
+    },
+    ".claude/skills/index-at-creation/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Index at Creation Time",
+      "size": 802
+    },
+    ".claude/skills/llm-tuning-patterns/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "LLM Tuning Patterns",
+      "size": 1923
+    },
+    ".claude/skills/loogle-search/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Loogle Search - Mathlib Type Signature Search",
+      "size": 1921
+    },
+    ".claude/skills/math-help/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Math Cognitive Stack Guide",
+      "size": 10349
+    },
+    ".claude/skills/math-router/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Math Router",
+      "size": 1986
+    },
+    ".claude/skills/math-unified/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "/math - Unified Math Capabilities",
+      "size": 6251
+    },
+    ".claude/skills/math/LEARNING.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Learning From Past Sessions",
+      "size": 2360
+    },
+    ".claude/skills/math/README.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Math Cognitive Stack",
+      "size": 3360
+    },
+    ".claude/skills/math/TOOLS.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Math Tools Reference",
+      "size": 2092
+    },
+    ".claude/skills/math/WORKFLOW.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Math Skills Development Workflow",
+      "size": 2364
+    },
+    ".claude/skills/math/abstract-algebra/fields/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Fields",
+      "size": 2783
+    },
+    ".claude/skills/math/abstract-algebra/groups/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Groups",
+      "size": 3834
+    },
+    ".claude/skills/math/abstract-algebra/rings/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Rings",
+      "size": 3779
+    },
+    ".claude/skills/math/category-theory/categories-functors/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Categories Functors",
+      "size": 1889
+    },
+    ".claude/skills/math/category-theory/limits-colimits/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Limits Colimits",
+      "size": 1888
+    },
+    ".claude/skills/math/category-theory/natural-transformations/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "code",
+        "skills",
+        "docs"
+      ],
+      "description": "Natural Transformations",
+      "size": 1866
+    },
+    ".claude/skills/math/complex-analysis/analytic-functions/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Analytic Functions",
+      "size": 3658
+    },
+    ".claude/skills/math/complex-analysis/contour-integrals/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Contour Integrals",
+      "size": 3616
+    },
+    ".claude/skills/math/complex-analysis/residues/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Residues",
+      "size": 3908
+    },
+    ".claude/skills/math/complex-analysis/residues/SKILL.v6.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Option: residues",
+      "size": 2280
+    },
+    ".claude/skills/math/functional-analysis/banach-spaces/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Banach Spaces",
+      "size": 3557
+    },
+    ".claude/skills/math/functional-analysis/hilbert-spaces/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Hilbert Spaces",
+      "size": 3998
+    },
+    ".claude/skills/math/functional-analysis/operator-theory/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Operator Theory",
+      "size": 3518
+    },
+    ".claude/skills/math/graph-number-theory/graph-algorithms/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "code",
+        "skills",
+        "docs"
+      ],
+      "description": "Graph Algorithms",
+      "size": 3892
+    },
+    ".claude/skills/math/graph-number-theory/modular-arithmetic/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Modular Arithmetic",
+      "size": 2020
+    },
+    ".claude/skills/math/graph-number-theory/prime-numbers/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Prime Numbers",
+      "size": 1618
+    },
+    ".claude/skills/math/information-theory/channel-capacity/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Channel Capacity",
+      "size": 2316
+    },
+    ".claude/skills/math/information-theory/entropy/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Entropy",
+      "size": 2185
+    },
+    ".claude/skills/math/information-theory/source-coding/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Source Coding",
+      "size": 3135
+    },
+    ".claude/skills/math/linear-algebra/eigenvalues/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Eigenvalues",
+      "size": 1216
+    },
+    ".claude/skills/math/linear-algebra/matrices/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Matrices",
+      "size": 1261
+    },
+    ".claude/skills/math/linear-algebra/vector-spaces/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Vector Spaces",
+      "size": 1312
+    },
+    ".claude/skills/math/math-intuition-builder/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Math Intuition Builder",
+      "size": 3689
+    },
+    ".claude/skills/math/math-model-selector/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Math Model Selector",
+      "size": 3362
+    },
+    ".claude/skills/math/math-progress-monitor/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Math Progress Monitor",
+      "size": 3754
+    },
+    ".claude/skills/math/mathematical-logic/predicate-logic/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Predicate Logic",
+      "size": 1758
+    },
+    ".claude/skills/math/mathematical-logic/proof-theory/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Proof Theory",
+      "size": 1805
+    },
+    ".claude/skills/math/mathematical-logic/propositional-logic/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Propositional Logic",
+      "size": 1639
+    },
+    ".claude/skills/math/measure-theory/integration-theory/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Integration Theory",
+      "size": 3720
+    },
+    ".claude/skills/math/measure-theory/lebesgue-measure/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Lebesgue Measure",
+      "size": 3315
+    },
+    ".claude/skills/math/measure-theory/sigma-algebras/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Sigma Algebras",
+      "size": 3144
+    },
+    ".claude/skills/math/numerical-methods/interpolation/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Interpolation",
+      "size": 4045
+    },
+    ".claude/skills/math/numerical-methods/numerical-integration/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Numerical Integration",
+      "size": 3790
+    },
+    ".claude/skills/math/numerical-methods/root-finding/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Root Finding",
+      "size": 3555
+    },
+    ".claude/skills/math/odes-pdes/boundary-value-problems/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "code",
+        "skills",
+        "docs"
+      ],
+      "description": "Boundary Value Problems",
+      "size": 4300
+    },
+    ".claude/skills/math/odes-pdes/first-order-odes/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "First Order Odes",
+      "size": 3393
+    },
+    ".claude/skills/math/odes-pdes/second-order-odes/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Second Order Odes",
+      "size": 3324
+    },
+    ".claude/skills/math/optimization/constrained-optimization/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Constrained Optimization",
+      "size": 3719
+    },
+    ".claude/skills/math/optimization/convex-optimization/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Convex Optimization",
+      "size": 3650
+    },
+    ".claude/skills/math/optimization/gradient-methods/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Gradient Methods",
+      "size": 4066
+    },
+    ".claude/skills/math/real-analysis/continuity/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Continuity",
+      "size": 1166
+    },
+    ".claude/skills/math/real-analysis/convergence/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Convergence",
+      "size": 1264
+    },
+    ".claude/skills/math/real-analysis/limits/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Limits",
+      "size": 1270
+    },
+    ".claude/skills/math/rudin-real-complex-analysis/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Rudin's Real and Complex Analysis",
+      "size": 2565
+    },
+    ".claude/skills/math/topology/compactness/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Compactness",
+      "size": 2948
+    },
+    ".claude/skills/math/topology/connectedness/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Connectedness",
+      "size": 3665
+    },
+    ".claude/skills/math/topology/open-sets/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Open Sets",
+      "size": 3206
+    },
+    ".claude/skills/mcp-chaining/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "api",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "MCP Chaining Pipeline",
+      "size": 5106
+    },
+    ".claude/skills/mcp-scripts/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "MCP Script Rules",
+      "size": 810
+    },
+    ".claude/skills/migrate/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "/migrate - Migration Workflow",
+      "size": 6010
+    },
+    ".claude/skills/modular-code/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Modular Code Organization",
+      "size": 2930
+    },
+    ".claude/skills/morph-apply/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Morph Fast Apply",
+      "size": 2953
+    },
+    ".claude/skills/morph-search/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Morph Codebase Search",
+      "size": 1633
+    },
+    ".claude/skills/mot/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "MOT - System Health Check",
+      "size": 7063
+    },
+    ".claude/skills/nia-docs/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Nia Documentation Search",
+      "size": 1755
+    },
+    ".claude/skills/no-polling-agents/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "No Polling for Background Agents",
+      "size": 1206
+    },
+    ".claude/skills/no-task-output/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Never Use TaskOutput",
+      "size": 722
+    },
+    ".claude/skills/observe-before-editing/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Observe Before Editing",
+      "size": 1067
+    },
+    ".claude/skills/onboard/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Onboard - Project Discovery & Ledger Creation",
+      "size": 1999
+    },
+    ".claude/skills/opc-architecture/SKILL.md": {
+      "tags": [
+        "skills",
+        "api",
+        "docker",
+        "docs",
+        "claude-config"
+      ],
+      "description": "OPC Architecture Understanding",
+      "size": 2867
+    },
+    ".claude/skills/parallel-agent-contracts/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Parallel Agent Type Contracts",
+      "size": 2051
+    },
+    ".claude/skills/parallel-agents/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Parallel Agent Orchestration",
+      "size": 3266
+    },
+    ".claude/skills/perplexity-search/SKILL.md": {
+      "tags": [
+        "skills",
+        "api",
+        "sqlite",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Perplexity AI Search",
+      "size": 3223
+    },
+    ".claude/skills/pint-compute/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Unit Computation with Pint",
+      "size": 3535
+    },
+    ".claude/skills/plan-agent/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Plan Agent",
+      "size": 9609
+    },
+    ".claude/skills/plan-agent/SKILL.v6.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Option: plan-agent",
+      "size": 3000
+    },
+    ".claude/skills/premortem/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Pre-Mortem",
+      "size": 12281
+    },
+    ".claude/skills/prove/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "/prove - Machine-Verified Proofs (5-Phase Workflow)",
+      "size": 8197
+    },
+    ".claude/skills/qlty-check/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Qlty Code Quality",
+      "size": 2444
+    },
+    ".claude/skills/qlty-during-development/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "QLTY During Development",
+      "size": 815
+    },
+    ".claude/skills/quant-methodology.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Strategy Methodology",
+      "size": 2407
+    },
+    ".claude/skills/recall-reasoning/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Recall Past Work",
+      "size": 3034
+    },
+    ".claude/skills/recall/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Recall - Semantic Memory Retrieval",
+      "size": 1130
+    },
+    ".claude/skills/refactor/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "/refactor - Refactoring Workflow",
+      "size": 4658
+    },
+    ".claude/skills/reference-sdk/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "Reference SDK Check",
+      "size": 1501
+    },
+    ".claude/skills/release/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "/release - Release Workflow",
+      "size": 5831
+    },
+    ".claude/skills/remember/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Remember - Store Learning in Memory",
+      "size": 1669
+    },
+    ".claude/skills/repo-research-analyst/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Repo Research Analyst",
+      "size": 6472
+    },
+    ".claude/skills/repoprompt/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "RepoPrompt Skill",
+      "size": 4369
+    },
+    ".claude/skills/research-agent/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Research Agent",
+      "size": 3599
+    },
+    ".claude/skills/research-external/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "External Research Workflow",
+      "size": 11286
+    },
+    ".claude/skills/research/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Research Codebase",
+      "size": 11054
+    },
+    ".claude/skills/research/SKILL.md.bak": {
+      "tags": [
+        "claude-config",
+        "skills"
+      ],
+      "description": "Research Codebase",
+      "size": 11171
+    },
+    ".claude/skills/resume_handoff/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Resume work from a handoff document",
+      "size": 10276
+    },
+    ".claude/skills/review/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "/review - Code Review Workflow",
+      "size": 5982
+    },
+    ".claude/skills/router-first-architecture/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Router-First Architecture",
+      "size": 1629
+    },
+    ".claude/skills/search-hierarchy/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Search Tool Hierarchy",
+      "size": 2339
+    },
+    ".claude/skills/search-router/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Search Tool Router",
+      "size": 2624
+    },
+    ".claude/skills/search-tools/SKILL.md": {
+      "tags": [
+        "skills",
+        "api",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Search Tool Hierarchy",
+      "size": 1976
+    },
+    ".claude/skills/security/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "/security - Security Audit Workflow",
+      "size": 7015
+    },
+    ".claude/skills/shapely-compute/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Computational Geometry with Shapely",
+      "size": 8114
+    },
+    ".claude/skills/skill-developer/SKILL.md": {
+      "tags": [
+        "skills",
+        "async",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "Skill Developer",
+      "size": 3380
+    },
+    ".claude/skills/skill-development/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Skill Development Rules",
+      "size": 784
+    },
+    ".claude/skills/skill-rules.json": {
+      "tags": [
+        "claude-config",
+        "config",
+        "skills"
+      ],
+      "description": "Skill Rules",
+      "size": 83382
+    },
+    ".claude/skills/skill-rules.json.backup": {
+      "tags": [
+        "claude-config",
+        "skills"
+      ],
+      "description": "Skill Rules.Json",
+      "size": 37388
+    },
+    ".claude/skills/skill-upgrader/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Skill Upgrader",
+      "size": 7511
+    },
+    ".claude/skills/slash-commands/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Slash Commands Reference",
+      "size": 3844
+    },
+    ".claude/skills/sub-agents/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Sub-Agents Reference",
+      "size": 3713
+    },
+    ".claude/skills/system_overview/SKILL.md": {
+      "tags": [
+        "skills",
+        "api",
+        "sqlite",
+        "docs",
+        "claude-config"
+      ],
+      "description": "System Overview",
+      "size": 2631
+    },
+    ".claude/skills/tdd-migrate/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "TDD Migrate",
+      "size": 5887
+    },
+    ".claude/skills/tdd-migration-pipeline/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "code",
+        "skills",
+        "docs"
+      ],
+      "description": "TDD Migration Pipeline",
+      "size": 5791
+    },
+    ".claude/skills/tdd/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "async",
+        "skills",
+        "docs"
+      ],
+      "description": "/tdd - Test-Driven Development Workflow",
+      "size": 9421
+    },
+    ".claude/skills/test/SKILL.md": {
+      "tags": [
+        "skills",
+        "tests",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "/test - Testing Workflow",
+      "size": 5912
+    },
+    ".claude/skills/tldr-code/SKILL.md": {
+      "tags": [
+        "skills",
+        "api",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "TLDR-Code: Complete Reference",
+      "size": 10837
+    },
+    ".claude/skills/tldr-code/rules.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "TLDR-Code Usage Rules",
+      "size": 1098
+    },
+    ".claude/skills/tldr-deep/SKILL.md": {
+      "tags": [
+        "skills",
+        "api",
+        "docs",
+        "claude-config",
+        "code"
+      ],
+      "description": "TLDR Deep Analysis",
+      "size": 2576
+    },
+    ".claude/skills/tldr-overview/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "TLDR Project Overview",
+      "size": 1769
+    },
+    ".claude/skills/tldr-router/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "code",
+        "skills",
+        "docs"
+      ],
+      "description": "TLDR Smart Router",
+      "size": 2394
+    },
+    ".claude/skills/tldr-stats/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "api",
+        "skills",
+        "docs"
+      ],
+      "description": "TLDR Stats Skill",
+      "size": 2998
+    },
+    ".claude/skills/tour/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "sqlite",
+        "skills",
+        "docs"
+      ],
+      "description": "Tour: What Can I Do?",
+      "size": 1692
+    },
+    ".claude/skills/validate-agent/SKILL.md": {
+      "tags": [
+        "agents",
+        "skills",
+        "api",
+        "docs",
+        "claude-config"
+      ],
+      "description": "Validate Agent",
+      "size": 5955
+    },
+    ".claude/skills/wiring/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "code",
+        "skills",
+        "docs"
+      ],
+      "description": "Wiring Verification",
+      "size": 6962
+    },
+    ".claude/skills/workflow-router/SKILL.md": {
+      "tags": [
+        "claude-config",
+        "skills",
+        "docs"
+      ],
+      "description": "Workflow Router",
+      "size": 5964
+    },
+    ".claude/tsc-cache/d03ec597-a868-4551-b326-42bcee094867/affected-repos.txt": {
+      "tags": [
+        "claude-config"
+      ],
+      "description": "Affected Repos",
+      "size": 6
+    },
+    ".claude/tsc-cache/d03ec597-a868-4551-b326-42bcee094867/edited-files.log": {
+      "tags": [
+        "claude-config",
+        "docker"
+      ],
+      "description": "Edited Files",
+      "size": 711
+    },
+    ".claudeignore": {
+      "tags": [
+        "sqlite"
+      ],
+      "description": "Claude Code Ignore - Reduce context loading",
+      "size": 654
+    },
+    ".env.template": {
+      "tags": [
+        "api"
+      ],
+      "description": "Claude Code Slack/n8n Notification Configuration",
+      "size": 1013
+    },
+    ".gitignore": {
+      "tags": [],
+      "description": ".Gitignore",
+      "size": 15
+    },
+    ".gitmodules": {
+      "tags": [],
+      "description": ".Gitmodules",
+      "size": 108
+    },
+    ".mcp.json": {
+      "tags": [
+        "config"
+      ],
+      "description": ".Mcp",
+      "size": 540
+    },
+    "DEV-STORY.md": {
+      "tags": [
+        "sqlite",
+        "docs"
+      ],
+      "description": "The Dev Story: Birth of an Emergent AI",
+      "size": 16557
+    },
+    "EVOLUTION-PLAN.md": {
+      "tags": [
+        "api",
+        "docker",
+        "sqlite",
+        "docs"
+      ],
+      "description": "Claude Evolution Plan",
+      "size": 51353
+    },
+    "MASTER-EVOLUTION-PLAN.md": {
+      "tags": [
+        "api",
+        "docker",
+        "docs"
+      ],
+      "description": "Master Evolution Plan: Ultimate AI Assistant",
+      "size": 5733
+    },
+    "REFERENCE-TAXONOMY.md": {
+      "tags": [
+        "sqlite",
+        "docs"
+      ],
+      "description": "Reference Frameworks Taxonomy",
+      "size": 4074
+    },
+    "SLACK-SETUP.md": {
+      "tags": [
+        "api",
+        "docs"
+      ],
+      "description": "Claude Code Slack Notifications Setup",
+      "size": 4007
+    },
+    "UTF-VALIDATION.md": {
+      "tags": [
+        "code",
+        "docs"
+      ],
+      "description": "UTF Validation: Unified Framework for Personal AI",
+      "size": 10397
+    },
+    "cv": {
+      "tags": [
+        "api"
+      ],
+      "description": "Cv",
+      "size": 5951
+    },
+    "daemon/Dockerfile": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Claude Daemon - 24/7 Async Operation",
+      "size": 1280
+    },
+    "daemon/__pycache__/coherence.cpython-312.pyc": {
+      "tags": [
+        "daemon"
+      ],
+      "description": "Coherence.Cpython 312",
+      "size": 23101
+    },
+    "daemon/__pycache__/decisions.cpython-312.pyc": {
+      "tags": [
+        "daemon"
+      ],
+      "description": "Decisions.Cpython 312",
+      "size": 26873
+    },
+    "daemon/__pycache__/memory.cpython-312.pyc": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Memory.Cpython 312",
+      "size": 39513
+    },
+    "daemon/__pycache__/metacognition.cpython-312.pyc": {
+      "tags": [
+        "daemon"
+      ],
+      "description": "Metacognition.Cpython 312",
+      "size": 23857
+    },
+    "daemon/__pycache__/registry.cpython-312.pyc": {
+      "tags": [
+        "daemon"
+      ],
+      "description": "Registry.Cpython 312",
+      "size": 7666
+    },
+    "daemon/__pycache__/self_improvement.cpython-312.pyc": {
+      "tags": [
+        "daemon"
+      ],
+      "description": "Self Improvement.Cpython 312",
+      "size": 32354
+    },
+    "daemon/api.py": {
+      "tags": [
+        "python",
+        "code",
+        "api",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 13274
+    },
+    "daemon/approvals.db": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Approvals",
+      "size": 20480
+    },
+    "daemon/approvals.py": {
+      "tags": [
+        "python",
+        "daemon",
+        "api",
+        "sqlite",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 17289
+    },
+    "daemon/autonomous_ingest.py": {
+      "tags": [
+        "python",
+        "daemon",
+        "docker",
+        "sqlite",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 49984
+    },
+    "daemon/bisimulation.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 26745
+    },
+    "daemon/book_watcher.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 14869
+    },
+    "daemon/claim_similarity.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 17115
+    },
+    "daemon/coherence.db": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Coherence",
+      "size": 32768
+    },
+    "daemon/coherence.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 16775
+    },
+    "daemon/controller.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 19481
+    },
+    "daemon/core/__init__.py": {
+      "tags": [
+        "python",
+        "daemon"
+      ],
+      "description": "Core subsystem infrastructure",
+      "size": 205
+    },
+    "daemon/core/base.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 9126
+    },
+    "daemon/core/bus.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 10283
+    },
+    "daemon/dashboard.html": {
+      "tags": [
+        "daemon"
+      ],
+      "description": "Dashboard",
+      "size": 16961
+    },
+    "daemon/decisions.db": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Decisions",
+      "size": 28672
+    },
+    "daemon/decisions.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 20833
+    },
+    "daemon/email_sender.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 5339
+    },
+    "daemon/email_trigger.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 5611
+    },
+    "daemon/emergent.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 22778
+    },
+    "daemon/evolution_tracker.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 8121
+    },
+    "daemon/freqtrade_bridge.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 15843
+    },
+    "daemon/gcrl.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 25029
+    },
+    "daemon/github_webhook.py": {
+      "tags": [
+        "python",
+        "code",
+        "hooks",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 6579
+    },
+    "daemon/kg_summary_worker.py": {
+      "tags": [
+        "python",
+        "code",
+        "api",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 7262
+    },
+    "daemon/local_autorouter.py": {
+      "tags": [
+        "python",
+        "api",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 23302
+    },
+    "daemon/mcp_server.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 13096
+    },
+    "daemon/memory.db": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Memory",
+      "size": 53248
+    },
+    "daemon/memory.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 29568
+    },
+    "daemon/memory_router.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 13011
+    },
+    "daemon/metacognition.db": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Metacognition",
+      "size": 40960
+    },
+    "daemon/metacognition.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 17584
+    },
+    "daemon/model_router.py": {
+      "tags": [
+        "python",
+        "daemon",
+        "api",
+        "sqlite",
+        "code"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 23998
+    },
+    "daemon/modules/__init__.py": {
+      "tags": [
+        "python",
+        "daemon"
+      ],
+      "description": "Domain modules for unified personal AI",
+      "size": 41
+    },
+    "daemon/modules/__pycache__/__init__.cpython-312.pyc": {
+      "tags": [
+        "daemon"
+      ],
+      "description": "  Init  .Cpython 312",
+      "size": 180
+    },
+    "daemon/modules/__pycache__/base.cpython-312.pyc": {
+      "tags": [
+        "code",
+        "daemon"
+      ],
+      "description": "Base.Cpython 312",
+      "size": 6533
+    },
+    "daemon/modules/base.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "Base module template implementing CoherenceInterface.",
+      "size": 3555
+    },
+    "daemon/openmemory.db": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "\u000f'\f'\f\u00f4\u000bO\u000b\u00fc",
+      "size": 208896
+    },
+    "daemon/outcome_tracker.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 15458
+    },
+    "daemon/registry.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 5093
+    },
+    "daemon/runner.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 6985
+    },
+    "daemon/scheduler.db": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Scheduler",
+      "size": 12288
+    },
+    "daemon/scheduler.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 10713
+    },
+    "daemon/seed_strategies.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 2690
+    },
+    "daemon/self_continue.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 14010
+    },
+    "daemon/self_improvement.db": {
+      "tags": [
+        "sqlite",
+        "daemon"
+      ],
+      "description": "Self Improvement",
+      "size": 45056
+    },
+    "daemon/self_improvement.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 27464
+    },
+    "daemon/strategy_evolution.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 42814
+    },
+    "daemon/strategy_ops.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 30972
+    },
+    "daemon/submit.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 4475
+    },
+    "daemon/synthesis_worker.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 19134
+    },
+    "daemon/task_generator.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 18675
+    },
+    "daemon/telegram_notify.py": {
+      "tags": [
+        "python",
+        "code",
+        "api",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 4688
+    },
+    "daemon/utf_extractor.py": {
+      "tags": [
+        "python",
+        "code",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 31539
+    },
+    "daemon/vector_store.py": {
+      "tags": [
+        "python",
+        "code",
+        "sqlite",
+        "daemon"
+      ],
+      "description": "!/usr/bin/env python3",
+      "size": 15095
+    },
+    "docker-compose.yaml": {
+      "tags": [
+        "config",
+        "api",
+        "docker"
+      ],
+      "description": "Usage:",
+      "size": 4392
+    },
+    "modules/freqtrade": {
+      "tags": [],
+      "description": "Freqtrade",
+      "size": 12288
+    },
+    "modules/git ingest": {
+      "tags": [
+        "api"
+      ],
+      "description": "Git Ingest",
+      "size": 2161
+    },
+    "specs/ADAM-BENSAID-PROFILE.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docs"
+      ],
+      "description": "Adam Bensaid - Principal Profile",
+      "size": 8250
+    },
+    "specs/ALGIERS-BAY-COMPANY-VISION.md": {
+      "tags": [
+        "specs",
+        "docs"
+      ],
+      "description": "Algiers Bay Company - Company Vision",
+      "size": 5411
+    },
+    "specs/ATLAS-ANALYTICS-VISION.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docs"
+      ],
+      "description": "Atlas Analytics - Company Vision",
+      "size": 3781
+    },
+    "specs/ATLAS-CONTENT-COMPANY-VISION.md": {
+      "tags": [
+        "specs",
+        "docs"
+      ],
+      "description": "Atlas Content Company - Company Vision",
+      "size": 5846
+    },
+    "specs/ATLAS-CRM-SPEC.md": {
+      "tags": [
+        "specs",
+        "api",
+        "code",
+        "docs"
+      ],
+      "description": "Atlas CRM System Specification",
+      "size": 14619
+    },
+    "specs/ATLAS-INSTRUMENTS-VISION.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docs"
+      ],
+      "description": "Atlas Instruments - Company Vision",
+      "size": 5326
+    },
+    "specs/ATLAS-MEDIA-PRODUCTION-VISION.md": {
+      "tags": [
+        "specs",
+        "docs"
+      ],
+      "description": "Atlas Media Production - Company Vision",
+      "size": 5409
+    },
+    "specs/ATLAS-PUBLISHING-VISION.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docs"
+      ],
+      "description": "Atlas Publishing - Company Vision",
+      "size": 6341
+    },
+    "specs/BISIMULATION-GCRL-INTEGRATION.md": {
+      "tags": [
+        "specs",
+        "code",
+        "docs"
+      ],
+      "description": "Bisimulation & Goal-Conditioned RL Integration Spec",
+      "size": 13556
+    },
+    "specs/CAREER-MANAGER-SPEC.md": {
+      "tags": [
+        "specs",
+        "code",
+        "docs"
+      ],
+      "description": "Career Manager Function - Specification",
+      "size": 8450
+    },
+    "specs/CRM-ANALYSIS-DECISION.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docs"
+      ],
+      "description": "CRM Analysis & Decision",
+      "size": 10171
+    },
+    "specs/EFFICIENCY-STACK.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docker",
+        "docs"
+      ],
+      "description": "Efficiency Stack - Priority Deployments",
+      "size": 6367
+    },
+    "specs/GIT-INGEST-ANALYSIS.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docker",
+        "docs"
+      ],
+      "description": "Git Ingest Analysis",
+      "size": 15956
+    },
+    "specs/INBOX-ZERO-INTEGRATION.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docs"
+      ],
+      "description": "Inbox Zero Integration",
+      "size": 9634
+    },
+    "specs/LOCAL-DEPLOYMENT-GUIDE.md": {
+      "tags": [
+        "specs",
+        "api",
+        "docker",
+        "docs",
+        "code"
+      ],
+      "description": "Local Deployment Guide - Claude Cognitive System",
+      "size": 8776
+    },
+    "specs/README.md": {
+      "tags": [
+        "specs",
+        "docs"
+      ],
+      "description": "Specs Directory",
+      "size": 2254
+    },
+    "specs/REVENUE-STRATEGIES.md": {
+      "tags": [
+        "specs",
+        "docs"
+      ],
+      "description": "Revenue Strategies - Adam Bensaid",
+      "size": 6323
+    },
+    "specs/TELEGRAM-REPOS-TRACKER.md": {
+      "tags": [
+        "specs",
+        "async",
+        "api",
+        "docker",
+        "docs"
+      ],
+      "description": "Telegram Repos Tracker",
+      "size": 7107
+    },
+    "specs/UTF-RESEARCH-OS-SPEC.md": {
+      "tags": [
+        "specs",
+        "docs"
+      ],
+      "description": "UTF Research Program OS Specification v1.0",
+      "size": 61474
+    },
+    "start-daemon.ps1": {
+      "tags": [
+        "api",
+        "docker",
+        "powershell"
+      ],
+      "description": "Start Claude Daemon Stack (Windows)",
+      "size": 1073
+    },
+    "start-daemon.sh": {
+      "tags": [
+        "api",
+        "shell",
+        "docker"
+      ],
+      "description": "!/bin/bash",
+      "size": 570
+    },
+    "start-hybrid.ps1": {
+      "tags": [
+        "docker",
+        "powershell"
+      ],
+      "description": "Hybrid Architecture Startup Script",
+      "size": 3276
+    },
+    "task.md": {
+      "tags": [
+        "sqlite",
+        "docs"
+      ],
+      "description": "Current Task Plan",
+      "size": 17809
+    },
+    "thoughts/FORMAL-REASONING-TOOLS.md": {
+      "tags": [
+        "api",
+        "docs"
+      ],
+      "description": "Formal Reasoning Tools - Future Development",
+      "size": 2261
+    },
+    "thoughts/LOCALAI-INTEGRATION-PLAN.md": {
+      "tags": [
+        "api",
+        "docs"
+      ],
+      "description": "LocalAI Stack Integration Plan",
+      "size": 13182
+    },
+    "thoughts/REPOSITORY-INDEX.md": {
+      "tags": [
+        "api",
+        "docs"
+      ],
+      "description": "Repository Index",
+      "size": 7338
+    },
+    "thoughts/REPOSITORY-RESEARCH-2026-01-23.md": {
+      "tags": [
+        "api",
+        "docs"
+      ],
+      "description": "Repository Research Analysis",
+      "size": 7815
+    },
+    "thoughts/TOOL-TAXONOMY.yaml": {
+      "tags": [
+        "config",
+        "api",
+        "sqlite"
+      ],
+      "description": "Tool & Framework Taxonomy",
+      "size": 12081
+    },
+    "thoughts/handoffs/2026-01-22_212626_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-22_phase5-validation.yaml": {
+      "tags": [
+        "config",
+        "docker"
+      ],
+      "description": "2026 01 22 Phase5 Validation",
+      "size": 2402
+    },
+    "thoughts/handoffs/2026-01-22_phase6-9-progress.yaml": {
+      "tags": [
+        "config",
+        "api",
+        "docker",
+        "sqlite"
+      ],
+      "description": "2026 01 22 Phase6 9 Progress",
+      "size": 5414
+    },
+    "thoughts/handoffs/2026-01-22_phase7-docker.yaml": {
+      "tags": [
+        "config",
+        "docker",
+        "sqlite"
+      ],
+      "description": "2026 01 22 Phase7 Docker",
+      "size": 1931
+    },
+    "thoughts/handoffs/2026-01-23_091026_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_112059_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_114039_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_115938_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_122011_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_122937_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_161452_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_164043_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_170611_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 909
+    },
+    "thoughts/handoffs/2026-01-23_202131_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 910
+    },
+    "thoughts/handoffs/2026-01-23_231932_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 910
+    },
+    "thoughts/handoffs/2026-01-23_232728_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 910
+    },
+    "thoughts/handoffs/2026-01-23_debug-check-complete.yaml": {
+      "tags": [
+        "config",
+        "api",
+        "docker",
+        "code"
+      ],
+      "description": "Handoff: Debug Check Complete",
+      "size": 1844
+    },
+    "thoughts/handoffs/2026-01-23_mcp-stability.yaml": {
+      "tags": [
+        "config",
+        "docker"
+      ],
+      "description": "2026 01 23 Mcp Stability",
+      "size": 1127
+    },
+    "thoughts/handoffs/2026-01-23_phase10-resources.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "2026 01 23 Phase10 Resources",
+      "size": 4431
+    },
+    "thoughts/handoffs/2026-01-23_phase11-utf-architecture.yaml": {
+      "tags": [
+        "config",
+        "api",
+        "docker",
+        "sqlite"
+      ],
+      "description": "Handoff: UTF Knowledge Architecture Implementation",
+      "size": 3973
+    },
+    "thoughts/handoffs/2026-01-23_phase12-complete.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "2026 01 23 Phase12 Complete",
+      "size": 2672
+    },
+    "thoughts/handoffs/2026-01-23_telegram-integration-complete.yaml": {
+      "tags": [
+        "config",
+        "docker"
+      ],
+      "description": "Handoff: Telegram Integration Complete",
+      "size": 2566
+    },
+    "thoughts/handoffs/2026-01-23_token-optimization-research.yaml": {
+      "tags": [
+        "config",
+        "api",
+        "docker",
+        "sqlite"
+      ],
+      "description": "CRITICAL HANDOFF - Token Optimization Research",
+      "size": 4509
+    },
+    "thoughts/handoffs/2026-01-23_utf-embeddings-remote.yaml": {
+      "tags": [
+        "config",
+        "api",
+        "docker",
+        "sqlite"
+      ],
+      "description": "Handoff: UTF Embeddings + Remote Access Setup",
+      "size": 4095
+    },
+    "thoughts/handoffs/2026-01-24_021636_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 910
+    },
+    "thoughts/handoffs/2026-01-24_024506_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 911
+    },
+    "thoughts/handoffs/2026-01-24_024830_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 911
+    },
+    "thoughts/handoffs/2026-01-24_152620_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 911
+    },
+    "thoughts/handoffs/2026-01-24_181359_pre-compact.yaml": {
+      "tags": [
+        "config"
+      ],
+      "description": "Pre-Compact Handoff",
+      "size": 911
+    },
+    "thoughts/handoffs/2026-01-24_autonomous-ingest-handoff.yaml": {
+      "tags": [
+        "config",
+        "docker"
+      ],
+      "description": "Handoff: Autonomous Ingest + UTF Integration",
+      "size": 2907
+    },
+    "thoughts/handoffs/2026-01-24_phase12-dashboard.yaml": {
+      "tags": [
+        "config",
+        "api",
+        "sqlite"
+      ],
+      "description": "2026 01 24 Phase12 Dashboard",
+      "size": 2519
+    },
+    "thoughts/handoffs/2026-01-24_research-synthesis-complete.yaml": {
+      "tags": [
+        "config",
+        "docker"
+      ],
+      "description": "2026 01 24 Research Synthesis Complete",
+      "size": 3466
+    },
+    "thoughts/handoffs/2026-01-24_session-continuation.yaml": {
+      "tags": [
+        "config",
+        "docker"
+      ],
+      "description": "Handoff: Session Continuation - All 4 Tasks",
+      "size": 2192
+    },
+    "thoughts/ledgers/CONTINUITY_main.md": {
+      "tags": [
+        "docs"
+      ],
+      "description": "Continuity Ledger: Main Project",
+      "size": 1338
+    }
+  },
+  "capabilities": {
+    "Dockerfile": {
+      "file": "daemon/Dockerfile",
+      "type": "daemon",
+      "description": "Claude Daemon - 24/7 Async Operation"
+    },
+    "coherence.cpython-312": {
+      "file": "daemon/__pycache__/coherence.cpython-312.pyc",
+      "type": "daemon",
+      "description": "Coherence.Cpython 312"
+    },
+    "decisions.cpython-312": {
+      "file": "daemon/__pycache__/decisions.cpython-312.pyc",
+      "type": "daemon",
+      "description": "Decisions.Cpython 312"
+    },
+    "memory.cpython-312": {
+      "file": "daemon/__pycache__/memory.cpython-312.pyc",
+      "type": "daemon",
+      "description": "Memory.Cpython 312"
+    },
+    "metacognition.cpython-312": {
+      "file": "daemon/__pycache__/metacognition.cpython-312.pyc",
+      "type": "daemon",
+      "description": "Metacognition.Cpython 312"
+    },
+    "registry.cpython-312": {
+      "file": "daemon/__pycache__/registry.cpython-312.pyc",
+      "type": "daemon",
+      "description": "Registry.Cpython 312"
+    },
+    "self_improvement.cpython-312": {
+      "file": "daemon/__pycache__/self_improvement.cpython-312.pyc",
+      "type": "daemon",
+      "description": "Self Improvement.Cpython 312"
+    },
+    "api": {
+      "file": "daemon/api.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "approvals": {
+      "file": "daemon/approvals.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "autonomous_ingest": {
+      "file": "daemon/autonomous_ingest.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "bisimulation": {
+      "file": "daemon/bisimulation.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "book_watcher": {
+      "file": "daemon/book_watcher.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "claim_similarity": {
+      "file": "daemon/claim_similarity.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "coherence": {
+      "file": "daemon/coherence.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "controller": {
+      "file": "daemon/controller.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "__init__": {
+      "file": "daemon/modules/__init__.py",
+      "type": "daemon",
+      "description": "Domain modules for unified personal AI"
+    },
+    "base": {
+      "file": "daemon/modules/base.py",
+      "type": "daemon",
+      "description": "Base module template implementing CoherenceInterface."
+    },
+    "bus": {
+      "file": "daemon/core/bus.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "dashboard": {
+      "file": "daemon/dashboard.html",
+      "type": "daemon",
+      "description": "Dashboard"
+    },
+    "decisions": {
+      "file": "daemon/decisions.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "email_sender": {
+      "file": "daemon/email_sender.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "email_trigger": {
+      "file": "daemon/email_trigger.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "emergent": {
+      "file": "daemon/emergent.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "evolution_tracker": {
+      "file": "daemon/evolution_tracker.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "freqtrade_bridge": {
+      "file": "daemon/freqtrade_bridge.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "gcrl": {
+      "file": "daemon/gcrl.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "github_webhook": {
+      "file": "daemon/github_webhook.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "kg_summary_worker": {
+      "file": "daemon/kg_summary_worker.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "local_autorouter": {
+      "file": "daemon/local_autorouter.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "mcp_server": {
+      "file": "daemon/mcp_server.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "memory": {
+      "file": "daemon/memory.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "memory_router": {
+      "file": "daemon/memory_router.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "metacognition": {
+      "file": "daemon/metacognition.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "model_router": {
+      "file": "daemon/model_router.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "__init__.cpython-312": {
+      "file": "daemon/modules/__pycache__/__init__.cpython-312.pyc",
+      "type": "daemon",
+      "description": "  Init  .Cpython 312"
+    },
+    "base.cpython-312": {
+      "file": "daemon/modules/__pycache__/base.cpython-312.pyc",
+      "type": "daemon",
+      "description": "Base.Cpython 312"
+    },
+    "openmemory": {
+      "file": "daemon/openmemory.db",
+      "type": "daemon",
+      "description": "\u000f'\f'\f\u00f4\u000bO\u000b\u00fc"
+    },
+    "outcome_tracker": {
+      "file": "daemon/outcome_tracker.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "registry": {
+      "file": "daemon/registry.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "runner": {
+      "file": "daemon/runner.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "scheduler": {
+      "file": "daemon/scheduler.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "seed_strategies": {
+      "file": "daemon/seed_strategies.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "self_continue": {
+      "file": "daemon/self_continue.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "self_improvement": {
+      "file": "daemon/self_improvement.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "strategy_evolution": {
+      "file": "daemon/strategy_evolution.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "strategy_ops": {
+      "file": "daemon/strategy_ops.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "submit": {
+      "file": "daemon/submit.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "synthesis_worker": {
+      "file": "daemon/synthesis_worker.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "task_generator": {
+      "file": "daemon/task_generator.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "telegram_notify": {
+      "file": "daemon/telegram_notify.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "utf_extractor": {
+      "file": "daemon/utf_extractor.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    },
+    "vector_store": {
+      "file": "daemon/vector_store.py",
+      "type": "daemon",
+      "description": "!/usr/bin/env python3"
+    }
+  },
+  "domains": [
+    "tests",
+    "python",
+    "typescript",
+    "docs",
+    "config",
+    "async",
+    "hooks",
+    "api",
+    "skills",
+    "docker",
+    "sqlite",
+    "claude-config",
+    "code",
+    "powershell",
+    "javascript",
+    "agents",
+    "specs",
+    "daemon",
+    "shell"
+  ],
+  "built_at": "2026-01-25T16:07:48.010631"
+}

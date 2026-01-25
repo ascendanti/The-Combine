@@ -27,7 +27,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from queue import TaskQueue, TaskPriority
+from task_queue import TaskQueue, TaskPriority
 from coherence import GoalCoherenceLayer, GoalTimeframe
 from registry import create_default_registry
 from decisions import DecisionEngine, Criterion

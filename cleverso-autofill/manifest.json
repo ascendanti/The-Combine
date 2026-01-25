@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Cleverso AutoFill",
+  "version": "1.0",
+  "description": "Auto-fill Cleverso translations from Google Sheets",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://docs.google.com/*",
+    "https://*.googleusercontent.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://workspace.cleverso.com/*", "https://*.cleverso.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

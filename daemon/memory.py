@@ -14,6 +14,22 @@ from typing import Optional, List, Dict, Any
 from dataclasses import dataclass, asdict
 from abc import ABC, abstractmethod
 
+# Claim similarity integration (lazy import)
+_claim_index = None
+
+def get_claim_index():
+    """Lazy-load claim similarity index."""
+    global _claim_index
+    if _claim_index is None:
+        try:
+            from claim_similarity import ClaimSimilarityIndex
+            _claim_index = ClaimSimilarityIndex()
+            _claim_index.load()
+        except Exception as e:
+            print(f"[WARN] Claim index not available: {e}")
+            _claim_index = False  # Marker that we tried
+    return _claim_index if _claim_index else None
+
 
 # =============================================================================
 # Data Models
@@ -525,6 +541,136 @@ class Memory:
             return self._backend.list_all_decisions(limit)
         return []
 
+    # =========================================================================
+    # Claim Similarity Integration (Phase 12.4)
+    # =========================================================================
+
+    def recall_similar_claims(self, query: str, k: int = 10,
+                              threshold: float = 0.3) -> List[Dict[str, Any]]:
+        """
+        Recall claims similar to query text using UTF closeness.
+
+        Args:
+            query: Text to search for similar claims
+            k: Maximum number of results
+            threshold: Minimum similarity score (0-1)
+
+        Returns:
+            List of dicts with claim info and similarity scores
+        """
+        index = get_claim_index()
+        if not index:
+            return []
+
+        results = index.find_similar(query, top_k=k, threshold=threshold)
+        return [
+            {
+                "claim_id": r.matched_claim_id,
+                "statement": r.matched_statement,
+                "source": r.matched_source,
+                "score": r.similarity_score,
+                "match_type": r.match_type,
+                "tags": r.common_tags
+            }
+            for r in results
+        ]
+
+    def get_cross_paper_insights(self, topic: str = None,
+                                  min_papers: int = 2) -> List[Dict[str, Any]]:
+        """
+        Get insights that appear across multiple papers.
+
+        Args:
+            topic: Optional topic filter (searches common taxonomy)
+            min_papers: Minimum papers for cross-paper link
+
+        Returns:
+            List of cross-paper claim clusters
+        """
+        index = get_claim_index()
+        if not index:
+            return []
+
+        links = index.get_cross_paper_links()
+
+        # Filter by topic if provided
+        if topic:
+            topic_lower = topic.lower()
+            links = [
+                link for link in links
+                if any(topic_lower in tag.lower() for tag in link.get("common_taxonomy", []))
+                or topic_lower in link.get("common_concept", "").lower()
+            ]
+
+        # Filter by minimum papers
+        links = [link for link in links if link.get("num_papers", 0) >= min_papers]
+
+        return links
+
+    def get_related_claims(self, claim_id: str, k: int = 5,
+                           threshold: float = 0.4) -> List[Dict[str, Any]]:
+        """
+        Get claims related to a specific claim by ID using UTF closeness.
+
+        Args:
+            claim_id: Source claim ID
+            k: Maximum results
+            threshold: Minimum UTF closeness score
+
+        Returns:
+            List of related claims with closeness scores
+        """
+        index = get_claim_index()
+        if not index:
+            return []
+
+        results = index.find_similar_by_id(claim_id, top_k=k, threshold=threshold)
+        return [
+            {
+                "claim_id": r.matched_claim_id,
+                "statement": r.matched_statement,
+                "source": r.matched_source,
+                "utf_closeness": r.similarity_score,
+                "common_tags": r.common_tags
+            }
+            for r in results
+        ]
+
+    def get_claim_clusters(self, limit: int = 20) -> List[Dict[str, Any]]:
+        """
+        Get clusters of semantically related claims.
+
+        Returns:
+            List of claim clusters with centroids and member info
+        """
+        index = get_claim_index()
+        if not index:
+            return []
+
+        return [
+            {
+                "cluster_id": c.cluster_id,
+                "centroid": c.centroid_slug,
+                "num_claims": len(c.claims),
+                "num_sources": len(c.sources),
+                "common_taxonomy": c.common_taxonomy,
+                "cohesion": c.cohesion_score
+            }
+            for c in index.clusters[:limit]
+        ]
+
+    def refresh_claim_index(self):
+        """Rebuild claim similarity index from database."""
+        global _claim_index
+        try:
+            from claim_similarity import ClaimSimilarityIndex
+            _claim_index = ClaimSimilarityIndex()
+            _claim_index.rebuild_from_db()
+            return {"status": "ok", "claims": len(_claim_index.claims),
+                    "clusters": len(_claim_index.clusters)}
+        except Exception as e:
+            return {"status": "error", "error": str(e)}
+
 
 # =============================================================================
 # CLI Interface
@@ -563,6 +709,21 @@ if __name__ == "__main__":
     list_parser = subparsers.add_parser("list", help="List all entries")
     list_parser.add_argument("type", choices=["learnings", "decisions"], help="What to list")
     list_parser.add_argument("--limit", type=int, default=20, help="Max entries")
+
+    # Claim similarity commands (Phase 12.4)
+    claim_parser = subparsers.add_parser("claims", help="Search similar claims")
+    claim_parser.add_argument("query", help="Search query for claims")
+    claim_parser.add_argument("-k", type=int, default=10, help="Number of results")
+    claim_parser.add_argument("--threshold", type=float, default=0.3, help="Min similarity")
+
+    cross_paper_parser = subparsers.add_parser("cross-paper", help="Cross-paper insights")
+    cross_paper_parser.add_argument("--topic", help="Filter by topic")
+    cross_paper_parser.add_argument("--min-papers", type=int, default=2, help="Min papers")
+
+    clusters_parser = subparsers.add_parser("clusters", help="Show claim clusters")
+    clusters_parser.add_argument("--limit", type=int, default=20, help="Max clusters")
+
+    refresh_parser = subparsers.add_parser("refresh-claims", help="Rebuild claim index")
 
     args = parser.parse_args()
     memory = Memory()
@@ -615,6 +776,47 @@ if __name__ == "__main__":
             decisions = memory.list_decisions(args.limit)
             for d in decisions:
                 print(f"[{d.topic[:15]:15}] {d.id[:8]} | {d.decision[:50]}...")
+
+    elif args.command == "claims":
+        results = memory.recall_similar_claims(args.query, args.k, args.threshold)
+        if not results:
+            print("No similar claims found (index may need rebuilding)")
+        else:
+            print(f"\n{len(results)} similar claims:\n")
+            for r in results:
+                print(f"  [{r['score']:.2f}] {r['statement'][:70]}...")
+                print(f"        Source: {r['source']}, Tags: {r['tags']}\n")
+
+    elif args.command == "cross-paper":
+        links = memory.get_cross_paper_insights(
+            topic=getattr(args, 'topic', None),
+            min_papers=getattr(args, 'min_papers', 2)
+        )
+        if not links:
+            print("No cross-paper insights found")
+        else:
+            print(f"\n{len(links)} cross-paper insights:\n")
+            for link in links[:15]:
+                print(f"  [{link['num_papers']} papers] {link['common_concept']}")
+                print(f"    {link['num_claims']} claims, Topics: {link['common_taxonomy'][:3]}\n")
+
+    elif args.command == "clusters":
+        clusters = memory.get_claim_clusters(getattr(args, 'limit', 20))
+        if not clusters:
+            print("No clusters found (index may need rebuilding)")
+        else:
+            print(f"\n{len(clusters)} claim clusters:\n")
+            for c in clusters:
+                print(f"  {c['cluster_id']}: {c['centroid']}")
+                print(f"    Claims: {c['num_claims']}, Sources: {c['num_sources']}")
+                print(f"    Topics: {c['common_taxonomy'][:3]}\n")
+
+    elif args.command == "refresh-claims":
+        result = memory.refresh_claim_index()
+        if result["status"] == "ok":
+            print(f"[OK] Rebuilt: {result['claims']} claims, {result['clusters']} clusters")
+        else:
+            print(f"[ERR] {result['error']}")
 
     else:
         parser.print_help()

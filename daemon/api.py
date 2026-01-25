@@ -30,7 +30,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from queue import TaskQueue, TaskPriority
+from task_queue import TaskQueue, TaskPriority
 from coherence import GoalCoherenceLayer, GoalTimeframe
 from registry import create_default_registry
 from decisions import DecisionEngine, Criterion
@@ -143,6 +143,60 @@ class APIHandler(BaseHTTPRequestHandler):
                 self._send_json({
                     "query": q,
                     "results": results
+                })
+
+            # Phase 12.4: State Abstractions (Bisimulation)
+            elif path == '/abstractions':
+                try:
+                    from bisimulation import BisimulationEngine
+                    engine = BisimulationEngine()
+                    abstractions = engine.get_state_abstractions(limit=20)
+                    self._send_json({
+                        "abstractions": abstractions,
+                        "total": len(abstractions)
+                    })
+                except Exception as e:
+                    self._send_json({"abstractions": [], "error": str(e)})
+
+            # Phase 12.4: Policy Transfers
+            elif path == '/transfers':
+                try:
+                    from bisimulation import BisimulationEngine
+                    engine = BisimulationEngine()
+                    transfers = engine.get_recent_transfers(limit=10)
+                    self._send_json({
+                        "transfers": transfers,
+                        "total": len(transfers)
+                    })
+                except Exception as e:
+                    self._send_json({"transfers": [], "error": str(e)})
+
+            # Phase 12.4: Claim Clusters
+            elif path == '/claims/clusters':
+                clusters = self.memory.get_claim_clusters(limit=15)
+                self._send_json({
+                    "clusters": clusters,
+                    "total": len(clusters)
+                })
+
+            # Phase 12.4: Cross-paper Insights
+            elif path == '/claims/cross-paper':
+                topic = query.get('topic', [None])[0]
+                insights = self.memory.get_cross_paper_insights(topic=topic, min_papers=2)
+                self._send_json({
+                    "insights": insights[:15],
+                    "total": len(insights)
+                })
+
+            # Phase 12.4: Similar Claims
+            elif path == '/claims/search':
+                q = query.get('q', [''])[0]
+                k = int(query.get('k', [10])[0])
+                claims = self.memory.recall_similar_claims(q, k=k)
+                self._send_json({
+                    "query": q,
+                    "claims": claims,
+                    "total": len(claims)
                 })
 
             else:

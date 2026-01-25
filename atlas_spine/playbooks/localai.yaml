@@ -1,0 +1,31 @@
+name: LocalAI Issues
+description: LocalAI model loading and API problems
+
+patterns:
+  - "connection refused 8080"
+  - "model not found"
+  - "localai"
+  - "chat/completions"
+  - "context length"
+  - "out of memory"
+
+diagnosis: |
+  LocalAI issues:
+  1. Container not running
+  2. Model not downloaded
+  3. Context too long
+  4. GPU memory exhausted
+  5. Wrong endpoint
+
+fix: |
+  1. Start: docker-compose up -d localai
+  2. Check health: curl http://localhost:8080/readyz
+  3. List models: curl http://localhost:8080/v1/models
+  4. Test: curl -X POST http://localhost:8080/v1/chat/completions -d '{"model":"mistral","messages":[{"role":"user","content":"hi"}]}'
+  5. Reduce context if OOM
+
+commands:
+  - 'curl http://localhost:8080/readyz'
+  - 'curl http://localhost:8080/v1/models'
+  - 'docker logs localai --tail 50'
+  - 'docker-compose restart localai'

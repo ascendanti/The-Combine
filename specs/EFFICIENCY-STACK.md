@@ -16,9 +16,10 @@ Only tools that directly improve:
 
 ## Tier 1: Deploy Immediately
 
-### 1. MinerU ⭐⭐⭐⭐⭐
+### 1. MinerU ⭐⭐⭐⭐⭐ ✅ INTEGRATED
 **URL:** https://github.com/opendatalab/MinerU
 **Impact:** MEMORY + TOKENS
+**Status:** Integrated into autonomous_ingest.py (2026-01-25)
 
 | Improvement | Mechanism |
 |-------------|-----------|
@@ -28,17 +29,18 @@ Only tools that directly improve:
 
 **Token Savings:** 30-50% (cleaner extraction = less garbage)
 
-**Deploy:**
-```bash
-pip install mineru
-# Replace autonomous_ingest.py PDF handling
-```
+**Integration Details:**
+- Priority: MinerU > MarkItDown > PyMuPDF
+- Auto-detection: UNIPipe for text, OCRPipe for scanned
+- Output: Markdown with preserved structure
+- Tracking: Extraction method logged per document
 
 ---
 
-### 2. markitdown ⭐⭐⭐⭐⭐
+### 2. markitdown ⭐⭐⭐⭐⭐ ✅ INTEGRATED
 **URL:** https://github.com/microsoft/markitdown
 **Impact:** TOKENS + SPEED
+**Status:** Already integrated in autonomous_ingest.py (Phase 13)
 
 | Improvement | Mechanism |
 |-------------|-----------|
@@ -48,11 +50,10 @@ pip install mineru
 
 **Token Savings:** 20-30% (consistent format = predictable chunking)
 
-**Deploy:**
-```bash
-pip install markitdown
-# Pre-process all documents before RAG
-```
+**Integration Details:**
+- Fallback for PDFs when MinerU unavailable
+- Primary for DOCX, PPTX, HTML, EPUB
+- Converts all formats to clean markdown
 
 ---
 

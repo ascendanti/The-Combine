@@ -19,7 +19,7 @@ from typing import Optional
 # Add parent to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
-from queue import TaskQueue, Task, TaskStatus
+from task_queue import TaskQueue, Task, TaskStatus
 
 # Configuration
 POLL_INTERVAL = 10  # seconds between queue checks

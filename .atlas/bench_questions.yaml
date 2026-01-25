@@ -1,0 +1,90 @@
+name: Atlas Benchmark Questions
+description: Self-test questions to validate routing accuracy
+updated: 2026-01-25
+
+questions:
+  # LOOKUP tests
+  - question: "find the ingest code"
+    expected_operator: LOOKUP
+    expected_result_contains: "ingest"
+
+  - question: "where is the feedback loop implemented"
+    expected_operator: LOOKUP
+    expected_result_contains: "feedback"
+
+  - question: "which files handle telegram"
+    expected_operator: LOOKUP
+    expected_result_contains: "telegram"
+
+  - question: "show code for model routing"
+    expected_operator: LOOKUP
+    expected_result_contains: "model_router"
+
+  # OPEN tests
+  - question: "open daemon/api.py"
+    expected_operator: OPEN
+    expected_result_contains: "content"
+
+  - question: "read the docker-compose.yaml"
+    expected_operator: OPEN
+    expected_result_contains: "services"
+
+  # DIAGNOSE tests
+  - question: "I got error: source is not recognized on Windows"
+    expected_operator: DIAGNOSE
+    expected_result_contains: "patterns"
+
+  - question: "error connection refused 8080"
+    expected_operator: DIAGNOSE
+    expected_result_contains: "docker"
+
+  - question: "pip is not recognized"
+    expected_operator: DIAGNOSE
+    expected_result_contains: "python"
+
+  - question: "activate.ps1 cannot be loaded"
+    expected_operator: DIAGNOSE
+    expected_result_contains: "execution"
+
+  # TEST tests
+  - question: "run docker ps"
+    expected_operator: TEST
+    expected_result_contains: "stdout"
+
+  - question: "test LocalAI endpoint"
+    expected_operator: TEST
+    expected_result_contains: "exit_code"
+
+  # Complex routing
+  - question: "list all capabilities"
+    expected_operator: LOOKUP
+    expected_result_contains: "daemon"
+
+  - question: "what modules handle memory"
+    expected_operator: LOOKUP
+    expected_result_contains: "memory"
+
+  - question: "check if LocalAI is running"
+    expected_operator: TEST
+    expected_result_contains: "exit_code"
+
+  # Edge cases
+  - question: "explain the architecture"
+    expected_operator: THINK
+    expected_result_contains: "response"
+
+  - question: "what should I do next"
+    expected_operator: THINK
+    expected_result_contains: "answer"
+
+  - question: "find hooks"
+    expected_operator: LOOKUP
+    expected_result_contains: "hook"
+
+  - question: "search for evolution"
+    expected_operator: LOOKUP
+    expected_result_contains: "evolution"
+
+  - question: "where are the skills"
+    expected_operator: LOOKUP
+    expected_result_contains: "skill"

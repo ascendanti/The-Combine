@@ -1,0 +1,14 @@
+{
+  "keywords": {
+    "EVOLUTION-PLAN.md": ["evolution", "phase", "progress", "roadmap", "milestone"],
+    "task.md": ["task", "todo", "objective", "goal", "current"],
+    "daemon/memory.py": ["memory", "recall", "learning", "store", "retrieve"],
+    "daemon/self_improvement.py": ["improve", "insight", "pattern", "analysis"],
+    "thoughts/handoffs": ["handoff", "continue", "resume", "session", "context"]
+  },
+  "co_activation": {
+    "EVOLUTION-PLAN.md": ["task.md"],
+    "daemon/memory.py": ["daemon/self_improvement.py"]
+  },
+  "pinned": ["task.md", ".claude/CLAUDE.md", ".claude/REPOSITORY-INDEX.md"]
+}

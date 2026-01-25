@@ -1,0 +1,33 @@
+name: Docker Issues
+description: Docker container and network problems
+
+patterns:
+  - "connection refused"
+  - "port is already allocated"
+  - "no such container"
+  - "cannot connect to docker"
+  - "image not found"
+  - "network not found"
+  - "host.docker.internal"
+
+diagnosis: |
+  Docker issues often stem from:
+  1. Docker Desktop not running
+  2. Port already in use
+  3. Container not started
+  4. Network isolation (use host.docker.internal)
+  5. Wrong image tag
+
+fix: |
+  1. Start Docker Desktop
+  2. Check running: docker ps
+  3. Check port: netstat -an | findstr :8080
+  4. From container to host: use host.docker.internal
+  5. Rebuild: docker-compose build --no-cache
+
+commands:
+  - 'docker ps'
+  - 'docker-compose ps'
+  - 'docker logs <container>'
+  - 'netstat -an | findstr :8080'
+  - 'docker network ls'

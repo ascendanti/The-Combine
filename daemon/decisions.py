@@ -321,6 +321,144 @@ class DecisionEngine:
         conn.commit()
         conn.close()
 
+    # --- GCRL Integration (Phase 12) ---
+
+    def get_policy_guided_decision(self, title: str, context: str,
+                                   goal_id: str = None) -> Dict[str, Any]:
+        """Get decision recommendation guided by learned GCRL policies."""
+        try:
+            from gcrl import GoalConditionedLearner, Goal
+        except ImportError:
+            return {"policy_available": False, "reason": "GCRL module not available"}
+
+        learner = GoalConditionedLearner()
+
+        # Create goal from context
+        goal = Goal(
+            goal_id=goal_id or f"decision_{title[:20]}",
+            description=context,
+            success_criteria=[f"Complete: {title}"],
+            goal_type="task"
+        )
+
+        # Get policy recommendation
+        current_state = {"decision": title, "context": context}
+        policy = learner.policy_for_goal(current_state, goal)
+
+        if not policy:
+            return {
+                "policy_available": False,
+                "reason": "No learned policy for this goal type",
+                "suggestion": "Make decision and record outcome to build policy"
+            }
+
+        return {
+            "policy_available": True,
+            "suggested_actions": policy.action_sequence,
+            "historical_success_rate": policy.success_rate,
+            "causal_factors": policy.causal_factors,
+            "confidence": policy.success_rate * policy.sample_count / (policy.sample_count + 5)
+        }
+
+    def record_outcome_with_trajectory(self, decision_id: str, actual_result: str,
+                                       satisfaction: float, actions_taken: List[str],
+                                       states: List[Dict] = None, lessons: str = "") -> None:
+        """Record outcome and create GCRL trajectory for learning."""
+        # Standard outcome recording
+        self.record_outcome(decision_id, actual_result, satisfaction, lessons)
+
+        # Create GCRL trajectory
+        try:
+            from gcrl import GoalConditionedLearner, Trajectory
+        except ImportError:
+            return
+
+        learner = GoalConditionedLearner()
+
+        # Get decision details
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        row = conn.execute("SELECT * FROM decisions WHERE id = ?", (decision_id,)).fetchone()
+        conn.close()
+
+        if not row:
+            return
+
+        # Create trajectory
+        trajectory = Trajectory(
+            trajectory_id=f"traj_{decision_id[:8]}_{datetime.now().strftime('%Y%m%d%H%M%S')}",
+            states=states or [{"decision": row["title"], "step": i} for i in range(len(actions_taken))],
+            actions=actions_taken,
+            rewards=[satisfaction / 10.0] * len(actions_taken),  # Normalize to 0-1
+            intended_goal=f"decision_{row['title'][:20]}",
+            success=satisfaction >= 7.0,
+            causal_factors=[]
+        )
+
+        # Extract causal factors
+        trajectory.causal_factors = learner._extract_causal_factors(trajectory, trajectory.intended_goal)
+
+        # Store trajectory
+        learner.store_trajectory(trajectory)
+
+        # If failed, attempt hindsight relabeling
+        if not trajectory.success:
+            relabeled = learner.hindsight_relabel(trajectory)
+            if relabeled:
+                learner.store_trajectory(relabeled)
+
+    def find_similar_decisions(self, title: str, context: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        """Find similar past decisions using bisimulation state comparison."""
+        try:
+            from bisimulation import BisimulationEngine, BisimulationState
+        except ImportError:
+            return []
+
+        engine = BisimulationEngine()
+
+        # Create state for current decision
+        current_state = BisimulationState(
+            state_id=f"decision_query",
+            features={"title_len": len(title), "context_len": len(context)},
+            goal_context=title,
+            action_history=[],
+            reward_history=[]
+        )
+
+        # Get past decisions
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute("""
+            SELECT d.*, o.satisfaction FROM decisions d
+            LEFT JOIN outcomes o ON d.id = o.decision_id
+            ORDER BY d.created_at DESC LIMIT 100
+        """).fetchall()
+        conn.close()
+
+        similar = []
+        for row in rows:
+            past_state = BisimulationState(
+                state_id=f"decision_{row['id'][:8]}",
+                features={"title_len": len(row["title"]), "context_len": len(row["context"] or "")},
+                goal_context=row["title"],
+                action_history=[],
+                reward_history=[row["satisfaction"] / 10.0] if row["satisfaction"] else []
+            )
+
+            metric = engine.compute_distance(current_state, past_state, title)
+
+            if metric.distance < 0.5:  # Similarity threshold
+                similar.append({
+                    "decision_id": row["id"],
+                    "title": row["title"],
+                    "recommendation": row["recommendation"],
+                    "expected_value": row["expected_value"],
+                    "outcome_satisfaction": row["satisfaction"],
+                    "similarity": 1.0 - metric.distance
+                })
+
+        return sorted(similar, key=lambda x: x["similarity"], reverse=True)[:top_k]
+
 
 # --- CLI ---
 

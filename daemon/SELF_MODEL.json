@@ -1,0 +1,71 @@
+{
+  "_comment": "Self-Model: What the system knows about itself. Used to recognize upgrade potential in every input.",
+  "_updated": "2026-01-25",
+
+  "capabilities": {
+    "document_processing": {
+      "current_method": "MinerU + MarkItDown + PyMuPDF",
+      "version": "Phase 14",
+      "keywords": ["PDF", "extraction", "OCR", "parsing", "markdown", "table", "figure"],
+      "limitations": ["No handwriting OCR", "Large PDFs slow"],
+      "upgrade_triggers": ["better extraction", "faster PDF", "handwriting", "layout preservation"]
+    },
+    "knowledge_extraction": {
+      "current_method": "UTF Schema + HiRAG + LeanRAG",
+      "version": "Phase 13",
+      "keywords": ["RAG", "retrieval", "chunking", "embedding", "semantic", "hierarchical"],
+      "limitations": ["Single-vector retrieval", "No multi-hop reasoning"],
+      "upgrade_triggers": ["multi-vector", "graph RAG", "reasoning chains", "better recall"]
+    },
+    "caching": {
+      "current_method": "Dragonfly + LLM response cache",
+      "version": "Phase 13.3",
+      "keywords": ["cache", "memoization", "deduplication", "TTL"],
+      "limitations": ["No semantic cache", "No cross-session"],
+      "upgrade_triggers": ["semantic caching", "compressed cache", "distributed cache"]
+    },
+    "llm_routing": {
+      "current_method": "Complexity-based routing (LocalAI < Codex < Claude)",
+      "version": "Phase 13",
+      "keywords": ["routing", "model selection", "cost", "latency"],
+      "limitations": ["Static thresholds", "No learning from outcomes"],
+      "upgrade_triggers": ["adaptive routing", "learned routing", "cost optimization"]
+    },
+    "memory": {
+      "current_method": "OpenMemory + PostgreSQL + SQLite",
+      "version": "Phase 12",
+      "keywords": ["memory", "recall", "embedding", "vector", "semantic search"],
+      "limitations": ["Multiple stores", "No unified search"],
+      "upgrade_triggers": ["unified memory", "faster search", "better embeddings"]
+    },
+    "strategy_evolution": {
+      "current_method": "Genetic evolution + outcome tracking",
+      "version": "Phase 13",
+      "keywords": ["strategy", "evolution", "genetic", "fitness", "mutation"],
+      "limitations": ["Not connected to decisions", "Manual triggers"],
+      "upgrade_triggers": ["automatic evolution", "online learning", "bandit algorithms"]
+    },
+    "policy_transfer": {
+      "current_method": "Bisimulation + GCRL",
+      "version": "Phase 11",
+      "keywords": ["transfer learning", "policy", "RL", "MDP", "bisimulation"],
+      "limitations": ["Not wired to decisions", "No continuous learning"],
+      "upgrade_triggers": ["meta-learning", "few-shot transfer", "contextual bandits"]
+    }
+  },
+
+  "architecture": {
+    "services": ["LocalAI", "Dragonfly", "autonomous-ingest", "synthesis-worker", "kg-summary-worker", "feedback-loop"],
+    "databases": 23,
+    "target_databases": 4,
+    "hooks": 15,
+    "skills": 116,
+    "agents": 48
+  },
+
+  "upgrade_policy": {
+    "auto_apply": ["documentation", "config tweaks", "parameter tuning"],
+    "require_review": ["new dependencies", "architecture changes", "model changes"],
+    "never_auto": ["data deletion", "external API changes", "security-related"]
+  }
+}

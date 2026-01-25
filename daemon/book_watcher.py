@@ -23,11 +23,17 @@ Config:
 
 import os
 import sys
+import io
 import json
 import time
 import hashlib
 import sqlite3
 import threading
+
+# Fix Windows encoding for Unicode filenames
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 import argparse
 from pathlib import Path
 from datetime import datetime

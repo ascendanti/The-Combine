@@ -46,6 +46,15 @@ export interface StopInput {
   stop_hook_active?: boolean;
 }
 
+export interface SessionStartInput {
+  session_id: string;
+  transcript_path: string;
+  cwd: string;
+  permission_mode: string;
+  hook_event_name: 'SessionStart';
+  source: 'startup' | 'resume' | 'clear' | 'compact';
+}
+
 // =============================================================================
 // Hook Output Types (Claude Code v1.0.21+ format)
 // =============================================================================

@@ -1,0 +1,78 @@
+{
+  "claims": {
+    "clm_ac4209f455": {
+      "claim_id": "clm_ac4209f455",
+      "slug_code": "",
+      "statement": "Models can store additional features in superposition by tolerating some interference.",
+      "source_id": "src_b27b1464c6",
+      "source_title": "Transformer Circuits: Toy Models of Superposition",
+      "taxonomy_tags": [],
+      "claim_form": "EmpiricalRegularity",
+      "embedding": null
+    },
+    "clm_d4179e9d92": {
+      "claim_id": "clm_d4179e9d92",
+      "slug_code": "",
+      "statement": "Models can perform computation while in superposition, specifically putting simple circuits computing the absolute value function in superposition.",
+      "source_id": "src_b27b1464c6",
+      "source_title": "Transformer Circuits: Toy Models of Superposition",
+      "taxonomy_tags": [],
+      "claim_form": "EmpiricalRegularity",
+      "embedding": null
+    },
+    "clm_897f0ecd56": {
+      "claim_id": "clm_897f0ecd56",
+      "slug_code": "",
+      "statement": "The neural networks we observe in practice might be noisily simulating larger, highly sparse networks.",
+      "source_id": "src_b27b1464c6",
+      "source_title": "Transformer Circuits: Toy Models of Superposition",
+      "taxonomy_tags": [],
+      "claim_form": "Conjecture",
+      "embedding": null
+    },
+    "clm_1dcbef6be3": {
+      "claim_id": "clm_1dcbef6be3",
+      "slug_code": "",
+      "statement": "Superposition occurs in artificial neural networks given a relatively natural setup.",
+      "source_id": "src_b27b1464c6",
+      "source_title": "Transformer Circuits: Toy Models of Superposition",
+      "taxonomy_tags": [],
+      "claim_form": "EmpiricalRegularity",
+      "embedding": null
+    },
+    "clm_aeed4b3d06": {
+      "claim_id": "clm_aeed4b3d06",
+      "slug_code": "",
+      "statement": "Superposition is a real, observed phenomenon.",
+      "source_id": "src_b27b1464c6",
+      "source_title": "Transformer Circuits: Toy Models of Superposition",
+      "taxonomy_tags": [],
+      "claim_form": "EmpiricalRegularity",
+      "embedding": null
+    },
+    "clm_e69c9e0913": {
+      "claim_id": "clm_e69c9e0913",
+      "slug_code": "",
+      "statement": "At least some kinds of computation can be performed in superposition.",
+      "source_id": "src_b27b1464c6",
+      "source_title": "Transformer Circuits: Toy Models of Superposition",
+      "taxonomy_tags": [],
+      "claim_form": "EmpiricalRegularity",
+      "embedding": null
+    },
+    "clm_2361632641": {
+      "claim_id": "clm_2361632641",
+      "slug_code": "",
+      "statement": "Whether features are stored in superposition is governed by a phase change.",
+      "source_id": "src_b27b1464c6",
+      "source_title": "Transformer Circuits: Toy Models of Superposition",
+      "taxonomy_tags": [],
+      "claim_form": "CausalMechanism",
+      "embedding": null
+    }
+  },
+  "slug_index": {},
+  "taxonomy_index": {},
+  "clusters": [],
+  "updated_at": "2026-01-24T02:20:00.064858"
+}

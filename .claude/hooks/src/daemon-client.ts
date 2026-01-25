@@ -143,6 +143,8 @@ export interface DaemonResponse {
   results?: any[];
   result?: any;
   callers?: any[];
+  imports?: Array<{ module: string; names?: string[]; alias?: string }>;
+  importers?: Array<{ file: string; line?: number }>;
   error?: string;
   indexing?: boolean;
   message?: string;

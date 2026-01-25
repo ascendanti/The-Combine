@@ -28,7 +28,9 @@ RUN pip install --no-cache-dir \
     "markitdown[pdf]" \
     pymupdf \
     watchdog \
-    redis
+    redis \
+    fire \
+    PyDrive2
 
 # Create data directories
 RUN mkdir -p /data /logs

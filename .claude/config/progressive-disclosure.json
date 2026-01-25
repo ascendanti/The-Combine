@@ -1,0 +1,46 @@
+{
+  "description": "Progressive disclosure config - load context just-in-time",
+  "context_tiers": {
+    "HOT": {
+      "description": "Always loaded - critical for every task",
+      "max_tokens": 2000,
+      "files": [
+        "CLAUDE.md",
+        "task.md"
+      ]
+    },
+    "WARM": {
+      "description": "Loaded on-demand when relevant",
+      "max_tokens": 5000,
+      "files": [
+        "EVOLUTION-PLAN.md",
+        "thoughts/handoffs/*.yaml"
+      ]
+    },
+    "COLD": {
+      "description": "Reference only - load specific sections",
+      "files": [
+        ".claude/skills/**/*.md",
+        ".claude/agents/**/*.md",
+        "daemon/**/*.py"
+      ]
+    }
+  },
+  "output_offloading": {
+    "enabled": true,
+    "plugin": "fewword",
+    "thresholds": {
+      "inline_max": 512,
+      "pointer_max": 4096,
+      "file_above": 4096
+    }
+  },
+  "compression": {
+    "enabled": true,
+    "strategies": [
+      "file_references",
+      "hierarchical_summaries",
+      "concept_extraction"
+    ]
+  }
+}

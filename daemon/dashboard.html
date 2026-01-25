@@ -103,6 +103,36 @@
                 <h2>Domain Context</h2>
                 <div id="contextList"></div>
             </div>
+
+            <!-- Phase 12: State Abstractions -->
+            <div class="card">
+                <h2>State Abstractions</h2>
+                <div id="abstractionsStats">
+                    <div class="stat"><span class="stat-label">Classes</span><span class="stat-value" id="absClasses">-</span></div>
+                    <div class="stat"><span class="stat-label">Avg Cohesion</span><span class="stat-value" id="absCohesion">-</span></div>
+                </div>
+                <div class="list" id="abstractionsList" style="margin-top: 15px;"></div>
+            </div>
+
+            <!-- Phase 12: Policy Transfers -->
+            <div class="card">
+                <h2>Policy Transfers</h2>
+                <div id="transfersStats">
+                    <div class="stat"><span class="stat-label">Valid</span><span class="stat-value" id="transfersValid">-</span></div>
+                    <div class="stat"><span class="stat-label">Success Rate</span><span class="stat-value" id="transfersSuccess">-</span></div>
+                </div>
+                <div class="list" id="transfersList" style="margin-top: 15px;"></div>
+            </div>
+
+            <!-- Phase 12: Claim Clusters -->
+            <div class="card">
+                <h2>Claim Clusters</h2>
+                <div id="clustersStats">
+                    <div class="stat"><span class="stat-label">Clusters</span><span class="stat-value" id="clusterCount">-</span></div>
+                    <div class="stat"><span class="stat-label">Cross-Paper</span><span class="stat-value" id="crossPaperCount">-</span></div>
+                </div>
+                <div class="list" id="clustersList" style="margin-top: 15px;"></div>
+            </div>
         </div>
     </div>
 
@@ -246,6 +276,70 @@
             }
         }
 
+        // Phase 12: State Abstractions
+        async function loadAbstractions() {
+            const result = await fetchAPI('/abstractions');
+            if (result.error) return;
+
+            document.getElementById('absClasses').textContent = result.total || 0;
+
+            const abstractions = result.abstractions || [];
+            const avgCohesion = abstractions.length > 0
+                ? (abstractions.reduce((s, a) => s + (a.cohesion || 0), 0) / abstractions.length * 100).toFixed(0) + '%'
+                : 'N/A';
+            document.getElementById('absCohesion').textContent = avgCohesion;
+
+            const list = document.getElementById('abstractionsList');
+            list.innerHTML = abstractions.slice(0, 5).map(a => `
+                <div class="list-item">
+                    <span>${a.goal || 'Unknown'} (${a.members} states)</span>
+                    <span class="badge">${(a.cohesion * 100).toFixed(0)}%</span>
+                </div>
+            `).join('') || '<div class="list-item">No abstractions yet</div>';
+        }
+
+        // Phase 12: Policy Transfers
+        async function loadTransfers() {
+            const result = await fetchAPI('/transfers');
+            if (result.error) return;
+
+            const transfers = result.transfers || [];
+            const validCount = transfers.filter(t => t.valid).length;
+            const successCount = transfers.filter(t => t.success).length;
+
+            document.getElementById('transfersValid').textContent = `${validCount}/${transfers.length}`;
+            document.getElementById('transfersSuccess').textContent =
+                validCount > 0 ? ((successCount / validCount) * 100).toFixed(0) + '%' : 'N/A';
+
+            const list = document.getElementById('transfersList');
+            list.innerHTML = transfers.slice(0, 5).map(t => `
+                <div class="list-item">
+                    <span>${t.source} → ${t.target}</span>
+                    <span class="badge ${t.success ? 'low' : t.valid ? 'normal' : 'high'}">${t.valid ? (t.success ? '✓' : '~') : '✗'}</span>
+                </div>
+            `).join('') || '<div class="list-item">No transfers yet</div>';
+        }
+
+        // Phase 12: Claim Clusters
+        async function loadClusters() {
+            const clustersResult = await fetchAPI('/claims/clusters');
+            const crossResult = await fetchAPI('/claims/cross-paper');
+
+            const clusters = clustersResult.clusters || [];
+            const crossPaper = crossResult.insights || [];
+
+            document.getElementById('clusterCount').textContent = clusters.length;
+            document.getElementById('crossPaperCount').textContent = crossPaper.length;
+
+            const list = document.getElementById('clustersList');
+            list.innerHTML = clusters.slice(0, 5).map(c => `
+                <div class="list-item">
+                    <span>${c.centroid || 'Unnamed'}</span>
+                    <span class="badge">${c.num_claims} claims</span>
+                </div>
+            `).join('') || '<div class="list-item">No clusters yet</div>';
+        }
+
         function refreshAll() {
             checkHealth();
             loadTasks();
@@ -254,6 +348,9 @@
             loadGaps();
             loadCalibration();
             loadContext();
+            loadAbstractions();
+            loadTransfers();
+            loadClusters();
         }
 
         // Initial load

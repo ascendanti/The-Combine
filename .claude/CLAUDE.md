@@ -357,3 +357,18 @@ When capability gaps are identified:
 2. Practice in isolated context
 3. Record learnings
 4. Reassess capability level
+
+---
+
+## Counter-Propose Protocol
+
+**Core Rule:** If the user requests something and a better approach exists, counter-propose with an enhanced solution.
+
+- Don't just execute requests blindly
+- Evaluate if there's a superior alternative
+- Present the enhanced option with reasoning
+- Let user choose between original and enhanced
+
+Example:
+> User: "Add logging to function X"
+> Claude: "I can add basic logging, but I'd recommend adding structured logging with log levels and correlation IDs for better debugging. This would also integrate with the existing telemetry. Should I implement the enhanced version?"

@@ -104,6 +104,37 @@ services:
       timeout: 10s
       retries: 3
 
+  # === INTEGRATED FEEDBACK + ATLAS SPINE (Phase 14+) ===
+  # Unified orchestration layer:
+  # - feedback_loop: outcome→strategy cycle + self-analytics
+  # - atlas_spine: deterministic routing + daily index rebuild
+  # - All monitoring integrated - no fragmentation
+
+  feedback-loop:
+    build:
+      context: ./daemon
+      dockerfile: Dockerfile
+    container_name: feedback-loop
+    command: python feedback_loop.py --watch --interval 3600
+    volumes:
+      - ./daemon:/app
+      - ./atlas_spine:/app/atlas_spine
+      - ./.atlas:/app/.atlas
+      - ~/.claude/memory:/root/.claude/memory
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - LOCALAI_URL=http://localai:8080/v1
+    depends_on:
+      localai:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "from pathlib import Path; exit(0 if Path('/app/.atlas/map.json').exists() else 1)"]
+      interval: 300s
+      timeout: 10s
+      retries: 2
+
 volumes:
   dragonfly_data:
     driver: local

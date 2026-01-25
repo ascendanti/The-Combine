@@ -187,7 +187,7 @@ describe('signature-helper daemon migration', () => {
     });
 
     it('should return null when function not found', () => {
-      const daemonResponse = { status: 'ok', results: [] };
+      const daemonResponse = { status: 'ok', results: [] as Array<{ file: string }> };
 
       const findFunctionFile = (response: typeof daemonResponse): string | null => {
         if (response.status !== 'ok' || !response.results || response.results.length === 0) {
@@ -237,11 +237,11 @@ describe('signature-helper daemon migration', () => {
     });
 
     it('should handle missing result gracefully', () => {
-      const daemonResponse = { status: 'ok', result: { functions: [] } };
+      const daemonResponse = { status: 'ok', result: { functions: [] as Array<{ name: string; signature?: string }> } };
 
       const findSignature = (funcName: string, response: typeof daemonResponse): string | null => {
         const funcs = response?.result?.functions || [];
-        const func = funcs.find((f: any) => f.name === funcName);
+        const func = funcs.find((f) => f.name === funcName);
         return func?.signature || null;
       };
 

@@ -298,6 +298,143 @@ class GoalCoherenceLayer:
 
         return True  # Unknown constraint types pass by default
 
+    # --- Bisimulation Integration (Phase 12) ---
+
+    def find_similar_goals(self, goal_id: str, threshold: float = 0.3) -> List[Dict[str, Any]]:
+        """Find goals similar to given goal using bisimulation state abstraction."""
+        try:
+            from bisimulation import BisimulationEngine, BisimulationState
+        except ImportError:
+            return []
+
+        engine = BisimulationEngine()
+        conn = self._get_conn()
+
+        # Get target goal
+        row = conn.execute("SELECT * FROM goals WHERE id = ?", (goal_id,)).fetchone()
+        if not row:
+            conn.close()
+            return []
+
+        target = self._row_to_goal(row)
+
+        # Create bisimulation state from goal
+        target_state = BisimulationState(
+            state_id=f"goal_{target.id[:8]}",
+            features={
+                "timeframe": target.timeframe.value,
+                "domains": len(target.domains),
+                "constraints": len(target.constraints),
+                "status": target.status.value
+            },
+            goal_context=target.title,
+            action_history=[],
+            reward_history=[]
+        )
+
+        # Compare with all other goals
+        similar = []
+        rows = conn.execute("SELECT * FROM goals WHERE id != ?", (goal_id,)).fetchall()
+        conn.close()
+
+        for r in rows:
+            other = self._row_to_goal(r)
+            other_state = BisimulationState(
+                state_id=f"goal_{other.id[:8]}",
+                features={
+                    "timeframe": other.timeframe.value,
+                    "domains": len(other.domains),
+                    "constraints": len(other.constraints),
+                    "status": other.status.value
+                },
+                goal_context=other.title,
+                action_history=[],
+                reward_history=[]
+            )
+
+            metric = engine.compute_distance(target_state, other_state, target.title)
+            if metric.distance < threshold:
+                similar.append({
+                    "goal_id": other.id,
+                    "title": other.title,
+                    "distance": metric.distance,
+                    "bisimilar": metric.distance < 0.3
+                })
+
+        return sorted(similar, key=lambda x: x["distance"])
+
+    def suggest_policy_transfer(self, from_goal_id: str, to_goal_id: str) -> Dict[str, Any]:
+        """Check if learned policy can transfer between goals."""
+        try:
+            from bisimulation import BisimulationEngine
+            from gcrl import GoalConditionedLearner
+        except ImportError:
+            return {"valid": False, "reason": "Modules not available"}
+
+        bisim = BisimulationEngine()
+        gcrl = GoalConditionedLearner()
+
+        # Get goals
+        conn = self._get_conn()
+        from_row = conn.execute("SELECT * FROM goals WHERE id = ?", (from_goal_id,)).fetchone()
+        to_row = conn.execute("SELECT * FROM goals WHERE id = ?", (to_goal_id,)).fetchone()
+        conn.close()
+
+        if not from_row or not to_row:
+            return {"valid": False, "reason": "Goal not found"}
+
+        from_goal = self._row_to_goal(from_row)
+        to_goal = self._row_to_goal(to_row)
+
+        # Check bisimulation transfer validity
+        transfer = bisim.transfer_policy(
+            f"goal_{from_goal.id[:8]}", from_goal.title,
+            f"goal_{to_goal.id[:8]}", to_goal.title
+        )
+
+        # Get policy if available
+        policy = gcrl.policy_for_goal({}, type('Goal', (), {
+            'goal_id': to_goal.id,
+            'description': to_goal.description,
+            'success_criteria': [],
+            'goal_type': to_goal.timeframe.value
+        })())
+
+        return {
+            "valid": transfer.transfer_valid,
+            "confidence": transfer.confidence,
+            "reasoning": transfer.reasoning,
+            "suggested_actions": policy.action_sequence if policy else [],
+            "from_goal": from_goal.title,
+            "to_goal": to_goal.title
+        }
+
+    def get_goal_state_for_bisim(self, goal_id: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
+        """Convert goal + context to bisimulation state representation."""
+        conn = self._get_conn()
+        row = conn.execute("SELECT * FROM goals WHERE id = ?", (goal_id,)).fetchone()
+        conn.close()
+
+        if not row:
+            return {}
+
+        goal = self._row_to_goal(row)
+
+        state = {
+            "goal_id": goal.id,
+            "goal_title": goal.title,
+            "timeframe": goal.timeframe.value,
+            "status": goal.status.value,
+            "domain_count": len(goal.domains),
+            "constraint_count": len(goal.constraints),
+            "has_parent": goal.parent_id is not None
+        }
+
+        if context:
+            state.update(context)
+
+        return state
+
 
 # --- CLI ---
 

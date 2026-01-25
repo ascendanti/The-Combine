@@ -1,0 +1,29 @@
+name: Windows Path Issues
+description: Common Windows path and command issues
+
+patterns:
+  - "is not recognized"
+  - "cannot find the path"
+  - "source is not recognized"
+  - "the system cannot find"
+  - "access is denied"
+  - "no such file or directory"
+
+diagnosis: |
+  Windows path issues typically occur due to:
+  1. Missing quotes around paths with spaces
+  2. Wrong slash direction (use \ or /)
+  3. Missing environment variable
+  4. Execution policy blocking scripts
+
+fix: |
+  1. Wrap paths in quotes: "C:\Users\Name\folder"
+  2. Use forward slashes in git bash: /c/Users/Name
+  3. Check PATH: echo %PATH%
+  4. For .ps1 scripts: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+commands:
+  - 'echo %PATH%'
+  - 'where python'
+  - 'Get-ExecutionPolicy'
+  - 'dir /b'

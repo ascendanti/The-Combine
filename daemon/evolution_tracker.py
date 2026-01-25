@@ -201,6 +201,40 @@ def show_status():
     print("-" * 60)
 
 
+def run_watch(interval: int = 3600):
+    """Run in watch mode - sync periodically and notify changes."""
+    import time
+    try:
+        from telegram_notify import notify
+        TELEGRAM_ENABLED = True
+    except ImportError:
+        TELEGRAM_ENABLED = False
+        def notify(*args, **kwargs): pass
+
+    print(f"[WATCH] Evolution Tracker watching (interval: {interval}s)")
+    notify(f"Evolution Tracker started (sync every {interval//60}m)")
+
+    last_count = 0
+    while True:
+        try:
+            count = sync_documents()
+            if count != last_count:
+                notify(f"Evolution sync: {count} active strategies")
+                last_count = count
+
+            # Generate and log progress
+            report = generate_progress_report()
+            if "error" not in report.lower():
+                print(f"[PROGRESS] {datetime.now().isoformat()}")
+                print(report[:500])  # First 500 chars
+
+        except Exception as e:
+            print(f"[ERROR] {e}")
+
+        print(f"[WATCH] Sleeping {interval}s...")
+        time.sleep(interval)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Evolution Tracker")
     subparsers = parser.add_subparsers(dest="command")
@@ -208,6 +242,9 @@ def main():
     subparsers.add_parser("sync", help="Sync all linked documents")
     subparsers.add_parser("status", help="Show linked status")
     subparsers.add_parser("progress", help="Generate progress report")
+
+    watch_parser = subparsers.add_parser("watch", help="Watch mode - periodic sync")
+    watch_parser.add_argument("--interval", type=int, default=3600, help="Sync interval in seconds")
 
     args = parser.parse_args()
 
@@ -217,6 +254,8 @@ def main():
         show_status()
     elif args.command == "progress":
         print(generate_progress_report())
+    elif args.command == "watch":
+        run_watch(args.interval)
     else:
         parser.print_help()
 

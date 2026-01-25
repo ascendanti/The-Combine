@@ -148,6 +148,62 @@
 
 ---
 
+## Atlas Spine (atlas_spine/) - NEW 2026-01-25
+
+Deterministic orchestration layer - routes 80%+ requests without LLM.
+
+| Module | Purpose | Usage |
+|--------|---------|-------|
+| `cli.py` | Main entry point | `python atlas_spine/cli.py route "query"` |
+| `map.py` | Structured repo index | `atlas map build`, `atlas map query "x"` |
+| `router.py` | Rule-based routing | Routes to LOOKUP/OPEN/DIAGNOSE/TEST/THINK |
+| `operators.py` | Deterministic functions | Execute actions without LLM |
+| `events.py` | Audit logging | `atlas audit last`, `.atlas/events.jsonl` |
+
+### Operators
+
+| Operator | Purpose | When Used |
+|----------|---------|-----------|
+| LOOKUP | Find files/symbols | "find X", "where is X" |
+| OPEN | Read file content | "open file.py", "show X" |
+| DIAGNOSE | Check playbooks | Error messages |
+| TEST | Run commands | "run X", "test X" |
+| THINK | LocalAI reasoning | Complex/unclear requests |
+| PATCH | Apply code changes | Requires confirmation |
+
+### Playbooks (atlas_spine/playbooks/)
+
+| Playbook | Patterns |
+|----------|----------|
+| `windows_paths.yaml` | "not recognized", path errors |
+| `python_venv.yaml` | activate, pip, ModuleNotFoundError |
+| `docker.yaml` | connection refused, port allocated |
+| `localai.yaml` | 8080, model not found |
+
+### Atlas Files (.atlas/)
+
+| File | Purpose |
+|------|---------|
+| `map.json` | Indexed repo structure |
+| `events.jsonl` | Audit log (append-only) |
+| `bench_questions.yaml` | Self-test questions |
+| `repair_queue.jsonl` | Issues needing fixes |
+
+---
+
+## LocalOps Router (daemon/localops_router/) - NEW 2026-01-25
+
+MCP server for repo navigation using ripgrep + ctags.
+
+| Module | Purpose | Usage |
+|--------|---------|-------|
+| `server.py` | MCP server | `python -m daemon.localops_router.server --serve` |
+| `indexer.py` | File/symbol indexing | Uses ripgrep + universal-ctags |
+| `explorer.py` | Code navigation | Find symbols, outlines, references |
+| `historian.py` | Git history | Commits, blame, contributors |
+
+---
+
 ## Databases
 
 | Database | Location | Purpose |
@@ -159,6 +215,7 @@
 | `coherence.db` | daemon/ | Goals and alignment |
 | `synthesis.db` | daemon/ | Patterns and meta-learnings |
 | `tasks.db` | daemon/ | Background task queue |
+| `analytics.db` | daemon/ | Self-analytics & component health |
 
 ---
 
@@ -171,6 +228,22 @@
 | `.claude/cache/agents/oracle/` | Research agent outputs |
 | `GateofTruth/` | PDF drop folder for ingestion |
 | `~/.claude/memory/knowledge-graph.jsonl` | Main knowledge graph |
+| `.atlas/` | Atlas spine data (map, events, bench) |
+
+---
+
+## Planned: Google Drive Integration
+
+**Spec:** `specs/GDRIVE-ARCHITECTURE.md`
+
+| Layer | Purpose | Status |
+|-------|---------|--------|
+| Access | OAuth2 + API client | Planned |
+| Index | `gdrive_index.db` + Dragonfly cache | Planned |
+| Intelligence | Auto-categorization, rules engine | Planned |
+| MCP Server | `gdrive.list`, `gdrive.search`, `gdrive.organize` | Planned |
+| Sync | Bidirectional with GateofTruth | Planned |
+| Superstructure | Unified file search (local + Drive + Obsidian) | Planned |
 
 ---
 
@@ -178,10 +251,17 @@
 
 ```
 Need to find code?
+├─ Quick deterministic search → atlas route "find X"
 ├─ Know exact pattern → Grep
 ├─ Know file pattern → Glob
 ├─ Need to understand structure → tldr structure
 └─ Complex exploration → scout agent
+
+Got an error?
+├─ Windows/path issue → atlas route "error: message"
+├─ Docker issue → atlas route "error: connection refused"
+├─ Python/venv issue → atlas route "error: pip not found"
+└─ Unknown error → atlas route "diagnose: error text"
 
 Need external info?
 ├─ Web search → oracle agent
@@ -197,6 +277,12 @@ Need to communicate?
 ├─ Telegram update → telegram_notify.py
 ├─ Session handoff → create_handoff skill
 └─ Store learning → memory.py add
+
+System maintenance?
+├─ Rebuild indexes → atlas map build
+├─ Check audit log → atlas audit last
+├─ Run daily loop → atlas daily
+└─ Self-diagnostics → feedback_loop.py
 
 Running containers?
 ├─ Check status → docker ps
@@ -245,6 +331,20 @@ The `model_router.py` automatically selects based on task complexity.
 | `INBOX-ZERO-INTEGRATION.md` | Email automation | AI email management |
 | `CAREER-MANAGER-SPEC.md` | Career orchestration | Future implementation |
 | `LOCAL-DEPLOYMENT-GUIDE.md` | Self-hosted setup | $2K PC + voice/hologram |
+| `TELEGRAM-REPOS-TRACKER.md` | Track repo evaluations | Git repos from Telegram |
+
+### Architecture & Efficiency (NEW - 2026-01-25)
+
+| Document | Purpose | Usage |
+|----------|---------|-------|
+| `EFFICIENCY-STACK.md` | Token/memory optimization | MinerU, ragflow, khoj priorities |
+| `SYSTEM-AUDIT.md` | What's built vs running | 43 modules audit |
+| `INTEGRATION-ARCHITECTURE.md` | Folder/process workflow | How components connect |
+| `LEAN-ARCHITECTURE.md` | Efficient module design | Unified worker proposal |
+| `RESOURCE-TRIGGER-MAP.md` | Auto-triggering map | Event-driven activation |
+| `GIT-INGEST-ANALYSIS.md` | 52 repo analysis | Categorized by purpose |
+| `MISSING-LAYERS-ANALYSIS.md` | Gap analysis | Layers 6-10 needed |
+| `BISIMULATION-GCRL-INTEGRATION.md` | Policy transfer spec | Wire bisim to decisions |
 
 ---
 
@@ -296,6 +396,9 @@ python daemon/self_continue.py checkpoint --phase "X" --task "Y"
 |------|---------|--------|
 | `twentyhq/twenty` | CRM (39K stars) | Selected for deployment |
 | `elie222/inbox-zero` | Email AI (9.9K stars) | Spec created |
+| `meirwah/awesome-workflow-engines` | Workflow engines list (7.6K) | Reference |
+
+*Full analysis: `specs/GIT-INGEST-ANALYSIS.md` (52 repos categorized)*
 
 ---
 
