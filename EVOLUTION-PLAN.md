@@ -1111,8 +1111,10 @@ messages = [
 | 2 | Prompt caching (Anthropic) | 60-90% | [ ] Needs API key |
 | 3 | Model routing enhancement | 30-85% | ✅ CascadeRouter + cost tracking |
 | 4 | Thinking budget tiers | 20-40% | ✅ THINKING_BUDGETS in model_router.py |
-| 5 | L-RAG lazy loading | 26% retrieval | [ ] |
+| 5 | L-RAG lazy loading | 26% retrieval | ✅ daemon/lazy_rag.py |
 | 6 | Hierarchical summarization | 95% history | ✅ In delta_handoff.py |
+| 7 | Pack sync system | Deterministic sync | ✅ daemon/gdrive/manifest.py, pack_sync.py |
+| 8 | Change feed watcher | Reactive sync | ✅ daemon/gdrive/change_watcher.py |
 
 **Expected improvement:** 60-80% reduction in Claude token costs
 
