@@ -7,7 +7,35 @@ Evolve Claude instance to become all-powerful in service to business, publicatio
 
 ---
 
-## Completed This Session (2026-01-25 Night)
+## Completed This Session (2026-01-25 Evening)
+
+### Google Drive Integration (Phase 13.6)
+- [x] OAuth connected (Adam Bensaid, 2TB storage, 1.6TB free)
+- [x] `daemon/gdrive/` module (client.py, sync.py)
+- [x] Drive structure: /Atlas/Inbox/PDFs, /Models, /Cache/Embeddings, /Backup
+- [x] 33 handoffs + 3 embedding DBs backed up to Drive
+- [x] Auto-sync scheduled every 6 hours
+- [x] `rclone` installed and configured for delta-efficient sync
+- [x] `daemon/rclone_sync.py` - CLI for sync operations
+
+### Phase 14: Compute Efficiency
+- [x] Delta-based handoffs (`daemon/delta_handoff.py`) - 50-70% savings
+- [x] Thinking budget tiers (0-32K tokens by task complexity)
+- [x] Cascade routing (try cheap first, escalate on failure)
+- [x] Model router enhanced with cost tracking
+
+### Bug Fixes
+- [x] Fixed UTFClaim missing `stability_class` attribute
+- [x] Fixed UTFConcept `source_id` vs `source_ids` mismatch
+- [x] Ingest pipeline now processing (3 sources, 17 claims, 10 concepts in UTF DB)
+
+### Git Commits
+- [x] Phase 13.6 + Phase 14 committed and pushed
+- [x] rclone_sync.py committed and pushed
+
+---
+
+## Completed Earlier (2026-01-25 Night)
 
 ### Major Commit (80 files, 23,280 lines)
 - [x] All planning docs committed to git
@@ -164,24 +192,127 @@ Evolve Claude instance to become all-powerful in service to business, publicatio
 
 ---
 
+## Completed This Session (2026-01-25 Afternoon)
+
+### Atlas Spine - Deterministic Orchestration (NEW)
+- [x] **atlas_spine/** - Complete deterministic routing layer
+  - `cli.py` - Unified CLI: `atlas route "query"`, `atlas map build`, `atlas audit last`
+  - `map.py` - Structured repo index (836 files, 52 capabilities, 19 domains)
+  - `router.py` - Rule-based routing (80%+ requests without LLM)
+  - `operators.py` - LOOKUP, OPEN, DIAGNOSE, TEST, THINK, PATCH
+  - `events.py` - Append-only audit log (`.atlas/events.jsonl`)
+- [x] **Playbooks** - No-think diagnosis guides
+  - `windows_paths.yaml` - "not recognized", path errors
+  - `python_venv.yaml` - activate, pip, ModuleNotFoundError
+  - `docker.yaml` - connection refused, port issues
+  - `localai.yaml` - model loading, API issues
+- [x] **Bench Questions** - Self-test validation (`.atlas/bench_questions.yaml`)
+- [x] **Daily Loop** - `atlas daily` rebuilds map, checks repairs, runs bench
+
+### LocalOps Router - MCP Server (NEW)
+- [x] **daemon/localops_router/** - Repo navigation via ripgrep + ctags
+  - `server.py` - MCP server with 10 tools
+  - `indexer.py` - File/symbol indexing with caching
+  - `explorer.py` - Symbol finding, outlines, references
+  - `historian.py` - Git history, blame, contributors
+
+### Self-Analytics Integration (NEW)
+- [x] **feedback_loop.py** - Enhanced with self-analytics
+  - Component health tracking (`analytics.db`)
+  - Weak point detection (< 70% health threshold)
+  - Breakthrough detection (> 95% health, replicable patterns)
+  - Optimization insights extraction
+  - Atlas daily loop integrated
+  - Repair queue (`repair_queue.jsonl`)
+
+### Documentation Updates
+- [x] **RESOURCE-MAP.md** - Added Atlas Spine + LocalOps sections
+- [x] **atlas.bat** - Windows batch file for easy CLI access
+
+---
+
+## Completed Earlier (2026-01-25 Night)
+
+### Efficiency Pipeline Enhancements
+- [x] **MinerU Integration** - Superior PDF extraction with table/figure handling
+  - Priority: MinerU > MarkItDown > PyMuPDF
+  - Auto-detection: UNIPipe for text, OCRPipe for scanned docs
+  - Output: Structured markdown preserving semantics
+- [x] **Extraction Method Tracking** - Log which method extracted each doc
+- [x] **Cache Efficiency Stats** - Track hit/miss/write rates for Dragonfly
+- [x] **File Prioritization** - Process larger files first, skip tiny (<10KB)
+- [x] **Status Display Enhanced** - Show extraction stack and cache stats
+- [x] **New Repo Analyzed** - meirwah/awesome-workflow-engines (7.6K stars)
+
+### Architecture & Integration Specs Created
+- [x] **INTEGRATION-ARCHITECTURE.md** - How folders/processes connect
+- [x] **SYSTEM-AUDIT.md** - 43 modules built, 4 running (gap analysis)
+- [x] **LEAN-ARCHITECTURE.md** - Unified worker proposal (5→1 services)
+- [x] **RESOURCE-TRIGGER-MAP.md** - Event-driven auto-triggering
+
+### Feedback Loop Fixes
+- [x] **docker-compose.yaml** - Added strategy-evolution, evolution-tracker services
+- [x] **evolution_tracker.py** - Added watch mode for continuous sync
+- [x] **EFFICIENCY-STACK.md** - Marked MinerU/MarkItDown as integrated
+
+### Protocol Established
+- [x] **auto-link-specs.md** - Rule: Always link new specs to RESOURCE-MAP.md
+- [x] **RESOURCE-MAP.md** - Updated with all new specs and repos
+
+---
+
 ## Priority Actions (Next 48 Hours)
 
 ### Quick Wins
-1. [ ] **Enforce token-optimizer-MCP** (1 day, 70% savings)
+1. [x] **Atlas Spine** - Deterministic routing (80%+ without LLM) ✓
+2. [x] **Self-Analytics** - Component health + breakthrough detection ✓
+3. [ ] **Enforce token-optimizer-MCP** (1 day, 70% savings)
    - Hook redirect from Read/Grep/Glob to smart_* variants
 
-2. [ ] **Wire bisimulation to decisions.py** (2 days, 100x learning)
+4. [ ] **Wire bisimulation to decisions.py** (2 days, 100x learning)
    - Check similar states before deriving new solutions
    - Transfer learned policies
 
-3. [ ] **Consolidate memory search** (1 day, 10x speed)
-   - Single search() interface across all memory systems
-
 ### Integration Sprint (Next 2 Weeks)
-4. [ ] Consolidate 19 DBs → 1 PostgreSQL (3 days)
-5. [ ] Unify memory systems (3 days)
-6. [ ] Implement MAPE daemon continuous mode (3 days)
-7. [ ] Lazy load agents/skills (2 days)
+5. [ ] Consolidate 19 DBs → 4 SQLite (3 days) - see `db_consolidate.py`
+6. [ ] Unify memory systems (3 days)
+7. [ ] Implement MAPE daemon continuous mode (3 days)
+8. [ ] Lazy load agents/skills (2 days)
+
+---
+
+## Upcoming Milestone: Google Drive Integration
+
+### Objective
+Access and organize Google Drive files automatically.
+
+### Capabilities Needed
+1. **Read/List** - Browse folder structure
+2. **Organize** - Move/rename files based on rules
+3. **Categorize** - Auto-tag by content type
+4. **Sync** - Two-way sync with local folders
+5. **Search** - Find files by content/metadata
+
+### Implementation Options
+| Option | Pros | Cons |
+|--------|------|------|
+| **Google Drive API** | Full control, official | OAuth setup required |
+| **rclone** | CLI-friendly, mature | External dependency |
+| **MCP Server** | Native integration | Custom build needed |
+| **n8n Workflow** | Visual, existing infra | Indirect access |
+
+### Recommended: MCP Server + Google Drive API
+- Create `daemon/gdrive_mcp/` module
+- OAuth2 via service account or desktop app flow
+- MCP tools: `gdrive.list`, `gdrive.read`, `gdrive.move`, `gdrive.organize`
+- Rules-based organization (like email Inbox Zero)
+
+### Pre-requisites
+1. Google Cloud project with Drive API enabled
+2. OAuth credentials (service account or OAuth2 desktop)
+3. Folder structure analysis
+
+### Planning Status: PENDING (after self-optimization complete)
 
 ---
 

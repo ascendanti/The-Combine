@@ -1108,11 +1108,11 @@ messages = [
 | Priority | Task | Savings | Status |
 |----------|------|---------|--------|
 | 1 | Delta-based handoffs | 50-70% | ✅ daemon/delta_handoff.py |
-| 2 | Prompt caching (Anthropic) | 60-90% | [ ] |
-| 3 | Model routing enhancement | 30-85% | [ ] |
-| 4 | Thinking budget tiers | 20-40% | [ ] |
+| 2 | Prompt caching (Anthropic) | 60-90% | [ ] Needs API key |
+| 3 | Model routing enhancement | 30-85% | ✅ CascadeRouter + cost tracking |
+| 4 | Thinking budget tiers | 20-40% | ✅ THINKING_BUDGETS in model_router.py |
 | 5 | L-RAG lazy loading | 26% retrieval | [ ] |
-| 6 | Hierarchical summarization | 95% history | [ ] |
+| 6 | Hierarchical summarization | 95% history | ✅ In delta_handoff.py |
 
 **Expected improvement:** 60-80% reduction in Claude token costs
 
