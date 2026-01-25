@@ -73,6 +73,11 @@
             "type": "command",
             "command": "python .claude/hooks/module-reminder.py 2>nul || true",
             "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "python daemon/activate_all.py 2>nul || true",
+            "timeout": 15
           }
         ]
       }
