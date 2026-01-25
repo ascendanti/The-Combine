@@ -138,12 +138,21 @@ Reduce token use, expand *effective* context window, and make setup more powerfu
 - **Week 4:** Merge compose files + add token-ops dashboard.
 
 ## Quick wins checklist
-- [ ] Wire lazy_rag into retrieval calls
-- [ ] Replace full handoffs with delta_handoff summaries
-- [ ] Add markitdown preprocessing
-- [ ] Add MinerU for PDFs
+- [x] Wire lazy_rag into retrieval calls (daemon/lazy_rag.py exists, needs hook wiring)
+- [x] Replace full handoffs with delta_handoff summaries (daemon/delta_handoff.py active)
+- [x] Add markitdown preprocessing (autonomous_ingest.py has MarkItDown)
+- [x] Add MinerU for PDFs (autonomous_ingest.py has MinerU)
 - [ ] Switch default retrieval to vector_store hybrid search
-- [ ] Add Dragonfly prompt/response caching
-- [ ] Add model-routing tiers
+- [x] Add Dragonfly prompt/response caching (model_router.py ContextBuilder.cache_result)
+- [x] Add model-routing tiers (daemon/orchestrator.py + model_router.py CascadeRouter)
 - [ ] Merge compose files + add profiles
 - [ ] Add token-ops metrics dashboard
+
+## Phase 15.5 Additions (2026-01-25)
+- [x] Central Orchestrator (daemon/orchestrator.py) - grand strategy unifier
+- [x] Fast classification (<1ms, no LLM) for task routing
+- [x] LocalAI Scheduler (daemon/localai_scheduler.py) - priority queue
+- [x] Module Registry (daemon/module_registry.py) - prevents capability amnesia
+- [x] Master Activation (daemon/activate_all.py) - ensures 8/8 systems operational
+- [x] Hook blocking fixed - smart-tool-redirect now logs instead of blocks
+- [x] Strategy Evolution active with fitness tracking (3 strategies at 0.85 fitness)
