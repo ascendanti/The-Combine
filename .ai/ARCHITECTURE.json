@@ -1,0 +1,113 @@
+{
+  "system": "Atlas-Spine",
+  "version": "Phase 14.6",
+  "description": "Autonomous Claude orchestration with token optimization and multi-model routing",
+
+  "topology": {
+    "entry_points": [
+      {"type": "cli", "command": "claude", "handler": "Claude Code"},
+      {"type": "api", "port": 8765, "handler": "daemon/api.py"},
+      {"type": "telegram", "handler": "telegram_claude_bridge.py"},
+      {"type": "email", "handler": "daemon/email_trigger.py"},
+      {"type": "github", "handler": "daemon/github_webhook.py"}
+    ],
+
+    "core_services": {
+      "model_router": {
+        "file": "daemon/model_router.py",
+        "purpose": "Three-tier model selection (LocalAI → Codex → Claude)",
+        "tiers": [
+          {"tier": 1, "provider": "LocalAI", "model": "qwen2.5:7b", "port": 8080},
+          {"tier": 2, "provider": "Codex", "model": "codex-mini-latest", "cost": "low"},
+          {"tier": 3, "provider": "Claude", "model": "claude-sonnet-4-20250514", "cost": "high"}
+        ]
+      },
+      "task_queue": {
+        "file": "daemon/task_queue.py",
+        "purpose": "Async task processing with priority queue"
+      },
+      "memory": {
+        "file": "daemon/memory.py",
+        "purpose": "Persistent memory with vector search",
+        "backend": "openmemory.db"
+      },
+      "runner": {
+        "file": "daemon/runner.py",
+        "purpose": "Background daemon for autonomous execution"
+      }
+    },
+
+    "token_optimization": {
+      "mcp_server": {
+        "file": "daemon/mcp_server.py",
+        "purpose": "Token-optimizer MCP tools (smart_read, smart_grep, smart_glob)",
+        "savings": "70-80%"
+      },
+      "hooks": {
+        "dir": ".claude/hooks/",
+        "key_hooks": [
+          "smart-tool-redirect.py (blocks native tools → smart variants)",
+          "tldr-context-inject.ts (code analysis injection)",
+          "kg-context-gate.py (retrieval gating)"
+        ]
+      },
+      "lazy_rag": {
+        "file": "daemon/lazy_rag.py",
+        "purpose": "Skip retrieval when context suffices",
+        "savings": "26% retrieval reduction"
+      },
+      "delta_handoff": {
+        "file": "daemon/delta_handoff.py",
+        "purpose": "Incremental state transfer vs full handoffs",
+        "savings": "50-70% handoff reduction"
+      }
+    },
+
+    "caching": {
+      "dragonfly": {"port": 6379, "purpose": "High-performance cache layer"},
+      "sqlite_dbs": [
+        "daemon/tasks.db",
+        "daemon/router.db",
+        "daemon/books.db",
+        "daemon/openmemory.db"
+      ]
+    }
+  },
+
+  "data_flows": {
+    "user_request": [
+      "Entry point (CLI/Telegram/Email)",
+      "→ model_router.py (tier selection)",
+      "→ LocalAI/Codex/Claude (inference)",
+      "→ Response + memory.py (store learning)"
+    ],
+    "autonomous_task": [
+      "task_queue.py (dequeue)",
+      "→ runner.py (execute)",
+      "→ model_router.py (select model)",
+      "→ Result + handoff if needed"
+    ],
+    "token_optimized_read": [
+      "Native Read blocked by hook",
+      "→ smart_read MCP tool",
+      "→ Cache check (Dragonfly)",
+      "→ Diff return (only changes)"
+    ]
+  },
+
+  "integrations": {
+    "google_drive": {
+      "auth": "daemon/gdrive/auth.py",
+      "sync": "daemon/gdrive/sync.py",
+      "pack_system": ["manifest.py", "pack_sync.py", "change_watcher.py"]
+    },
+    "telegram": {
+      "bridge": "telegram_claude_bridge.py",
+      "notify": "daemon/telegram_notify.py"
+    },
+    "github": {
+      "webhook": "daemon/github_webhook.py",
+      "pr_review": "via Claude Code"
+    }
+  }
+}
