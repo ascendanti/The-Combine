@@ -471,6 +471,7 @@ class ContinuousExecutor:
             cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
+            stdin=subprocess.PIPE,
             text=True,
             cwd=temp_dir,
             encoding="utf-8",
@@ -481,7 +482,7 @@ class ContinuousExecutor:
         )
         self._register_child_process(proc)
         try:
-            stdout, stderr = proc.communicate(timeout=MAX_TASK_DURATION)
+            stdout, stderr = proc.communicate(input="", timeout=MAX_TASK_DURATION)
         except subprocess.TimeoutExpired:
             self._terminate_process(proc, reason="timeout")
             raise
