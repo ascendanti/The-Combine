@@ -41,9 +41,10 @@ import sqlite3
 import subprocess
 import threading
 import hashlib
+import re
 from pathlib import Path
 from datetime import datetime, timedelta
-from typing import Optional, Dict, List, Tuple
+from typing import Optional, Dict, List, Tuple, Any
 from dataclasses import dataclass
 import logging
 
@@ -177,6 +178,12 @@ MAX_RETRIES = 2  # Retry failed tasks
 # All tools enabled for full autonomous execution
 ALLOWED_TOOLS = "default"  # "default" enables all built-in tools
 
+# Sequential tool mode (avoids parallel tool_use conflicts by handling tools ourselves)
+SEQUENTIAL_TOOL_MODE = True
+MAX_TOOL_STEPS = 6
+TOOL_TIMEOUT = 120  # seconds per tool invocation
+MAX_TOOL_OUTPUT_CHARS = 4000
+
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
@@ -241,6 +248,98 @@ class ContinuousExecutor:
         self.running = False
         self.current_task: Optional[ContinuousTask] = None
         self.last_activity = datetime.now()
+        self._tool_registry = {
+            "bash": self._tool_bash,
+            "read_file": self._tool_read_file,
+            "write_file": self._tool_write_file,
+            "append_file": self._tool_append_file,
+            "list_dir": self._tool_list_dir,
+        }
+
+    def _tool_bash(self, payload: Dict[str, Any]) -> str:
+        """Execute a shell command."""
+        command = payload.get("command")
+        if not command:
+            return "Error: missing command"
+        try:
+            result = subprocess.run(
+                command,
+                shell=True,
+                capture_output=True,
+                text=True,
+                timeout=TOOL_TIMEOUT,
+                cwd=str(PROJECT_DIR),
+                env={**os.environ, "CLAUDE_PROJECT_DIR": str(PROJECT_DIR)},
+            )
+        except subprocess.TimeoutExpired:
+            return f"Error: command timed out after {TOOL_TIMEOUT}s"
+
+        output = result.stdout or ""
+        if result.stderr:
+            output = f"{output}\n[stderr]\n{result.stderr}"
+        output = output.strip() or "(no output)"
+        if len(output) > MAX_TOOL_OUTPUT_CHARS:
+            output = output[:MAX_TOOL_OUTPUT_CHARS] + "\n...[truncated]"
+        return f"exit_code={result.returncode}\n{output}"
+
+    def _tool_read_file(self, payload: Dict[str, Any]) -> str:
+        """Read a file from disk."""
+        path = payload.get("path")
+        if not path:
+            return "Error: missing path"
+        target = (PROJECT_DIR / path).resolve() if not os.path.isabs(path) else Path(path).resolve()
+        if not target.exists():
+            return f"Error: file not found: {target}"
+        try:
+            content = target.read_text(encoding="utf-8", errors="replace")
+        except Exception as exc:
+            return f"Error reading file: {exc}"
+        if len(content) > MAX_TOOL_OUTPUT_CHARS:
+            content = content[:MAX_TOOL_OUTPUT_CHARS] + "\n...[truncated]"
+        return content
+
+    def _tool_write_file(self, payload: Dict[str, Any]) -> str:
+        """Write content to a file."""
+        path = payload.get("path")
+        content = payload.get("content", "")
+        if not path:
+            return "Error: missing path"
+        target = (PROJECT_DIR / path).resolve() if not os.path.isabs(path) else Path(path).resolve()
+        try:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(content, encoding="utf-8")
+        except Exception as exc:
+            return f"Error writing file: {exc}"
+        return f"Wrote {len(content)} chars to {target}"
+
+    def _tool_append_file(self, payload: Dict[str, Any]) -> str:
+        """Append content to a file."""
+        path = payload.get("path")
+        content = payload.get("content", "")
+        if not path:
+            return "Error: missing path"
+        target = (PROJECT_DIR / path).resolve() if not os.path.isabs(path) else Path(path).resolve()
+        try:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with target.open("a", encoding="utf-8") as handle:
+                handle.write(content)
+        except Exception as exc:
+            return f"Error appending file: {exc}"
+        return f"Appended {len(content)} chars to {target}"
+
+    def _tool_list_dir(self, payload: Dict[str, Any]) -> str:
+        """List a directory."""
+        path = payload.get("path", ".")
+        target = (PROJECT_DIR / path).resolve() if not os.path.isabs(path) else Path(path).resolve()
+        if not target.exists():
+            return f"Error: path not found: {target}"
+        if not target.is_dir():
+            return f"Error: not a directory: {target}"
+        entries = sorted(p.name for p in target.iterdir())
+        listing = "\n".join(entries) if entries else "(empty)"
+        if len(listing) > MAX_TOOL_OUTPUT_CHARS:
+            listing = listing[:MAX_TOOL_OUTPUT_CHARS] + "\n...[truncated]"
+        return listing
 
     def start(self):
         """Start the daemon loop."""
@@ -324,6 +423,118 @@ class ContinuousExecutor:
             )
         return None
 
+    def _run_claude_prompt(self, prompt: str, session_id: str, system_prompt: str) -> subprocess.CompletedProcess:
+        """Invoke Claude CLI with a single prompt."""
+        import tempfile
+        temp_dir = tempfile.gettempdir()
+
+        cmd = [
+            CLAUDE_CMD,
+            "--print",
+            "--permission-mode", "bypassPermissions",
+            "--no-session-persistence",
+            "--session-id", session_id,
+            "--system-prompt", system_prompt,
+            "--mcp-config", "{}",
+            "--strict-mcp-config",
+            "--",
+            prompt,
+        ]
+
+        run_env = {
+            **os.environ,
+            "CLAUDE_PROJECT_DIR": str(PROJECT_DIR),
+            "CLAUDE_DISABLE_PARALLEL_TOOL_USE": "1",
+        }
+
+        return subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=MAX_TASK_DURATION,
+            cwd=temp_dir,
+            encoding="utf-8",
+            errors="replace",
+            env=run_env,
+        )
+
+    def _extract_json_payload(self, text: str) -> Optional[Dict[str, Any]]:
+        """Extract JSON object from model output."""
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            pass
+
+        match = re.search(r"\{.*\}", text, re.DOTALL)
+        if not match:
+            return None
+        try:
+            return json.loads(match.group(0))
+        except json.JSONDecodeError:
+            return None
+
+    def _execute_task_sequential(self, task: ContinuousTask) -> Tuple[bool, str, bool]:
+        """Execute a task with sequential tool handling (no parallel tool_use)."""
+        import uuid
+        session_id = str(uuid.uuid4())
+        system_prompt = (
+            "You are a helpful assistant running in sequential tool mode. "
+            "Do NOT call built-in tools. Respond ONLY with a JSON object. "
+            "Use {\"type\":\"tool_call\",\"tool\":\"<name>\",\"input\":{...}} to request a tool. "
+            "Use {\"type\":\"final\",\"content\":\"...\"} to finish."
+        )
+
+        tool_history: List[str] = []
+        tool_used = False
+
+        for step in range(1, MAX_TOOL_STEPS + 1):
+            history_block = ""
+            if tool_history:
+                history_block = "\n\nPrevious tool results:\n" + "\n\n".join(tool_history)
+
+            prompt = (
+                f"Task:\n{task.prompt}\n"
+                f"{history_block}\n\n"
+                "Remember: respond ONLY with JSON."
+            )
+
+            result = self._run_claude_prompt(prompt, session_id, system_prompt)
+
+            if result.returncode != 0:
+                error_msg = result.stderr.strip() or result.stdout.strip() or f"exit_code: {result.returncode}"
+                return False, error_msg, tool_used
+
+            response_text = (result.stdout or "").strip()
+            payload = self._extract_json_payload(response_text)
+            if not payload:
+                # No JSON response: treat as final content fallback
+                return True, response_text, tool_used
+
+            if payload.get("type") == "final":
+                return True, str(payload.get("content", "")).strip(), tool_used
+
+            if payload.get("type") != "tool_call":
+                return True, response_text, tool_used
+
+            tool_name = payload.get("tool")
+            tool_input = payload.get("input") or {}
+            tool_func = self._tool_registry.get(tool_name)
+            if not tool_func:
+                tool_history.append(f"[tool:{tool_name}] Error: unknown tool")
+                continue
+
+            tool_used = True
+            try:
+                tool_result = tool_func(tool_input)
+            except Exception as exc:
+                tool_result = f"Error running tool {tool_name}: {exc}"
+
+            tool_history.append(
+                f"[tool:{tool_name} step:{step}]\nInput: {json.dumps(tool_input)}\nResult:\n{tool_result}"
+            )
+
+        return False, "Exceeded maximum sequential tool steps", tool_used
+
     def _execute_task(self, task: ContinuousTask):
         """Execute a task using Claude CLI with caching."""
         logger.info(f"Executing task {task.id[:8]} from {task.source}")
@@ -339,65 +550,59 @@ class ContinuousExecutor:
             return
 
         try:
+            if SEQUENTIAL_TOOL_MODE:
+                success, output, tool_used = self._execute_task_sequential(task)
+                if success:
+                    if output and not tool_used:
+                        cache_response(task.prompt, output)
+                    self._complete_task(task.id, output)
+                    self._log_event(
+                        "task_complete",
+                        task.id,
+                        {"output_len": len(output), "cached": not tool_used, "sequential": True},
+                    )
+                    self._check_continuation(output, task)
+                    return
+
+                error_msg = output or "Unknown failure in sequential tool mode"
+                logger.error(f"Task failed: {error_msg[:500]}")
+
+                retryable = any(
+                    x in error_msg.lower()
+                    for x in ["timeout", "connection", "rate limit", "503", "502", "overloaded"]
+                )
+                retry_count = self._get_retry_count(task.id)
+
+                if retryable and retry_count < MAX_RETRIES:
+                    logger.info(f"Retryable error, attempt {retry_count + 1}/{MAX_RETRIES}")
+                    self._increment_retry(task.id)
+                    self._update_task_status(task.id, 'pending')
+                    time.sleep(5)
+                else:
+                    self._fail_task(task.id, error_msg)
+                    self._log_event("task_failed", task.id, {"error": error_msg[:500], "sequential": True})
+                return
+
             import uuid
             session_id = str(uuid.uuid4())
-
-            # Build Claude CLI command with full tool access
-            # Run from temp directory to avoid project hooks/session conflicts
-            import tempfile
-            temp_dir = tempfile.gettempdir()
-
-            # Minimal CLI invocation to avoid tool_use ID conflicts
-            # Use explicit system prompt and disable MCP to minimize context
-            cmd = [
-                CLAUDE_CMD,
-                "--print",
-                "--permission-mode", "bypassPermissions",
-                "--no-session-persistence",
-                "--session-id", session_id,
-                "--tools", ALLOWED_TOOLS,
-                "--system-prompt", "You are a helpful assistant. Use only ONE tool per response. Work step by step.",
-                "--mcp-config", "{}",
-                "--strict-mcp-config",
-                "--",
+            result = self._run_claude_prompt(
                 task.prompt,
-            ]
-
-            logger.info(f"Executing with minimal context")
-
-            logger.info(f"Cache MISS - calling Claude (session {session_id[:8]})")
-            logger.debug(f"Command: {cmd[:8]}...")
-
-            # Execute from temp dir to avoid project hooks causing tool_use ID conflicts
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                timeout=MAX_TASK_DURATION,
-                cwd=temp_dir,  # Run outside project to avoid hooks
-                encoding='utf-8',
-                errors='replace'
+                session_id,
+                "You are a helpful assistant. Use only ONE tool per response. Work step by step.",
             )
 
-            # Comprehensive logging
             logger.info(f"Return code: {result.returncode}")
             if result.stdout:
                 logger.info(f"stdout ({len(result.stdout)} chars): {result.stdout[:200]}...")
             if result.stderr:
                 logger.warning(f"stderr ({len(result.stderr)} chars): {result.stderr[:500]}")
 
-            # Process result
             if result.returncode == 0 and result.stdout:
-                # Cache successful response
                 cache_response(task.prompt, result.stdout)
-
                 self._complete_task(task.id, result.stdout)
                 self._log_event("task_complete", task.id, {"output_len": len(result.stdout), "cached": False})
-
-                # Check for continuation signals in output
                 self._check_continuation(result.stdout, task)
             else:
-                # Build comprehensive error message
                 error_parts = []
                 if result.stderr and result.stderr.strip():
                     error_parts.append(f"stderr: {result.stderr.strip()}")
@@ -408,15 +613,14 @@ class ContinuousExecutor:
                 error_msg = " | ".join(error_parts) if error_parts else f"Unknown failure (code {result.returncode})"
                 logger.error(f"Task failed: {error_msg[:500]}")
 
-                # Check if retryable error
                 retryable = any(x in error_msg.lower() for x in ["timeout", "connection", "rate limit", "503", "502", "overloaded"])
                 retry_count = self._get_retry_count(task.id)
 
                 if retryable and retry_count < MAX_RETRIES:
                     logger.info(f"Retryable error, attempt {retry_count + 1}/{MAX_RETRIES}")
                     self._increment_retry(task.id)
-                    self._update_task_status(task.id, 'pending')  # Re-queue
-                    time.sleep(5)  # Brief delay before retry
+                    self._update_task_status(task.id, 'pending')
+                    time.sleep(5)
                 else:
                     self._fail_task(task.id, error_msg)
                     self._log_event("task_failed", task.id, {"error": error_msg[:500], "code": result.returncode})
