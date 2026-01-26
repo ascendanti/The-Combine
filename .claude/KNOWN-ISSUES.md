@@ -29,7 +29,12 @@ Expected 96 from C header, got 88 from PyObject
 
 **Cause:** FewWord hook intercepts bash output and runs sed transformations that fail on certain output patterns.
 
-**Fix:** Use `python -X utf8` for Python scripts, or redirect stderr.
+**Workaround (DISCOVERED 2026-01-26):** Use Python subprocess to bypass hook entirely:
+```python
+python -c "import subprocess; r = subprocess.run(['git', 'status', '--porcelain'], capture_output=True, text=True, cwd=r'PATH'); print(r.stdout)"
+```
+
+**When to use:** Any bash command whose output is being garbled by FewWord sed processing - especially git commands with special characters in output.
 
 ---
 
@@ -42,6 +47,74 @@ Expected 96 from C header, got 88 from PyObject
 **Cause:** Python can't find daemon modules when running from project root.
 
 **Fix Applied:** Added `sys.path.insert(0, str(DAEMON_DIR))` at top of files that need cross-module imports.
+
+---
+
+## Windows Daemon Issues
+
+### continuous_executor exits immediately (2026-01-26)
+
+**Symptom:** Daemon starts but immediately exits. Status shows "running: false" even after start.
+
+**Cause:** Windows kills child processes when parent shell closes. Background shell commands (`&`, `start /B`) don't create truly independent processes.
+
+**Fix Applied:**
+```python
+# In main() for 'start' action:
+if os.name == "nt" and not os.environ.get("CONTINUOUS_EXECUTOR_CHILD"):
+    env = os.environ.copy()
+    env["CONTINUOUS_EXECUTOR_CHILD"] = "1"
+    proc = subprocess.Popen(
+        [sys.executable, str(Path(__file__).resolve()), "start"],
+        cwd=str(DAEMON_DIR),
+        env=env,
+        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        close_fds=True,
+    )
+```
+
+**Key elements:**
+- `DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP` flags for true independence
+- Environment marker prevents infinite spawn loop
+- DEVNULL for stdio to prevent handle inheritance issues
+
+---
+
+### os.kill(pid, 0) fails on Windows (2026-01-26)
+
+**Symptom:** Status check returns "running: false" even when process IS running.
+
+**Cause:** `os.kill(pid, 0)` returns `[WinError 87] The parameter is incorrect` on Windows. Signal 0 isn't valid on Windows.
+
+**Fix Applied:**
+```python
+def _is_process_running(pid: int) -> bool:
+    if os.name == "nt":
+        result = subprocess.run(
+            ["tasklist", "/fi", f"PID eq {pid}", "/nh"],
+            capture_output=True, text=True, timeout=5
+        )
+        return str(pid) in result.stdout
+    else:
+        try:
+            os.kill(pid, 0)
+            return True
+        except OSError:
+            return False
+```
+
+---
+
+### B:/ drive error popup (2026-01-26)
+
+**Symptom:** Windows shows "B: the system cannot find the drive specified" dialog.
+
+**Cause:** Using `start /B` bash command syntax. The `/B` flag can be misinterpreted by Windows.
+
+**Fix:** Avoid `start /B` syntax. Use Python subprocess with proper flags instead.
 
 ---
 
