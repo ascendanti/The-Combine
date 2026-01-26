@@ -821,6 +821,22 @@ def main():
     args = parser.parse_args()
 
     if args.action == 'start':
+        if os.name == "nt" and not os.environ.get("CONTINUOUS_EXECUTOR_CHILD"):
+            env = os.environ.copy()
+            env["CONTINUOUS_EXECUTOR_CHILD"] = "1"
+            creationflags = 0
+            if os.name == "nt":
+                creationflags = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS
+            subprocess.Popen(
+                [sys.executable, str(Path(__file__).resolve()), "start"],
+                cwd=str(DAEMON_DIR),
+                env=env,
+                creationflags=creationflags,
+                close_fds=True,
+            )
+            print("Daemon start requested (detached).")
+            return
+
         executor = ContinuousExecutor()
         executor.start()
 
