@@ -42,6 +42,7 @@ import subprocess
 import threading
 import hashlib
 import re
+import shutil
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Optional, Dict, List, Tuple, Any
@@ -586,8 +587,26 @@ class ContinuousExecutor:
         import tempfile
         temp_dir = tempfile.gettempdir()
 
+        claude_cmd = CLAUDE_CMD
+        run_env = {
+            **os.environ,
+            "CLAUDE_PROJECT_DIR": str(PROJECT_DIR),
+            "CLAUDE_DISABLE_PARALLEL_TOOL_USE": "1",
+        }
+
+        # Resolve full path to Claude CLI to ensure DLLs can be found on Windows
+        resolved_cmd = shutil.which(claude_cmd, path=run_env.get("PATH"))
+        if not resolved_cmd and os.name == "nt" and not claude_cmd.lower().endswith(".exe"):
+            resolved_cmd = shutil.which(f"{claude_cmd}.exe", path=run_env.get("PATH"))
+        if resolved_cmd:
+            claude_cmd = resolved_cmd
+            claude_dir = str(Path(resolved_cmd).parent)
+            run_env["PATH"] = os.pathsep.join([claude_dir, run_env.get("PATH", "")])
+        else:
+            logger.warning("Claude CLI not found on PATH; using raw command: %s", claude_cmd)
+
         cmd = [
-            CLAUDE_CMD,
+            claude_cmd,
             "--print",
             "--permission-mode", "bypassPermissions",
             "--no-session-persistence",
@@ -598,11 +617,6 @@ class ContinuousExecutor:
             "--",
             prompt,
         ]
-
-        run_env = {
-            **os.environ,
-            "CLAUDE_PROJECT_DIR": str(PROJECT_DIR),
-        }
 
         return subprocess.run(
             cmd,
