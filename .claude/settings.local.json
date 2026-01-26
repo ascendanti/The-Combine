@@ -76,6 +76,11 @@
           },
           {
             "type": "command",
+            "command": "python .claude/scripts/essential-docs-briefing.py 2>nul || echo.",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": "python daemon/activate_all.py 2>nul || echo.",
             "timeout": 15
           }
