@@ -854,16 +854,22 @@ class ContinuousExecutor:
         """Run background maintenance tasks when idle."""
         logger.debug("Running background tasks...")
 
-        # Generate tasks from detectors if queue is empty
+        # Auto-approve and queue generated tasks when execution queue is empty
         try:
-            from task_generator import generate_tasks, get_pending_tasks
+            from task_generator import generate_tasks, get_pending_tasks, approve_task
             from task_queue import TaskQueue
             tq = TaskQueue()
             if tq.count_pending() == 0:
-                # Check for pending generated tasks first
-                pending = get_pending_tasks()
-                if not pending:
-                    # Run detectors to find opportunities
+                # Check for pending generated tasks - auto-approve them
+                pending_generated = get_pending_tasks()
+                if pending_generated:
+                    # Auto-approve up to 3 tasks per cycle
+                    for task in pending_generated[:3]:
+                        approve_task(task["task_id"])
+                        logger.info(f"Auto-approved task: {task['title'][:50]}")
+                    self.last_activity = datetime.now()
+                else:
+                    # No pending generated tasks - run detectors
                     task_ids = generate_tasks()
                     if task_ids:
                         logger.info(f"Generated {len(task_ids)} tasks from detectors")
@@ -881,6 +887,17 @@ class ContinuousExecutor:
                 self.last_activity = datetime.now()
         except Exception as e:
             logger.debug(f"Spine check failed: {e}")
+
+        # Run unified_spine cycle for full workflow
+        try:
+            from unified_spine import UnifiedSpine
+            spine = UnifiedSpine()
+            results = spine.run_cycle()
+            if results.get("tasks_executed", 0) > 0:
+                logger.info(f"Spine cycle: {results['tasks_executed']} tasks executed")
+                self.last_activity = datetime.now()
+        except Exception as e:
+            logger.debug(f"Unified spine cycle failed: {e}")
 
         # Run optimization if due
         try:
