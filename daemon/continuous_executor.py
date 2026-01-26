@@ -614,8 +614,6 @@ class ContinuousExecutor:
             "--no-session-persistence",
             "--session-id", session_id,
             "--system-prompt", system_prompt,
-            "--mcp-config", "{}",
-            "--strict-mcp-config",
             "--",
             prompt,
         ]
@@ -990,6 +988,7 @@ class ContinuousExecutor:
         conn.close()
 
     def _complete_task(self, task_id: str, result: str):
+        # Update continuous_tasks table
         conn = sqlite3.connect(DB_PATH)
         conn.execute("""
             UPDATE continuous_tasks SET status = 'complete', completed_at = ?, result = ?
@@ -998,7 +997,15 @@ class ContinuousExecutor:
         conn.commit()
         conn.close()
 
+        # Also update shared task queue (tasks.db) if task came from there
+        try:
+            shared_queue = TaskQueue()
+            shared_queue.mark_completed(task_id, result[:10000])
+        except Exception:
+            pass  # Task may not exist in shared queue
+
     def _fail_task(self, task_id: str, error: str):
+        # Update continuous_tasks table
         conn = sqlite3.connect(DB_PATH)
         conn.execute("""
             UPDATE continuous_tasks SET status = 'failed', completed_at = ?, error = ?
@@ -1006,6 +1013,13 @@ class ContinuousExecutor:
         """, (datetime.now().isoformat(), error[:2000], task_id))
         conn.commit()
         conn.close()
+
+        # Also update shared task queue (tasks.db) if task came from there
+        try:
+            shared_queue = TaskQueue()
+            shared_queue.mark_failed(task_id, error[:2000])
+        except Exception:
+            pass  # Task may not exist in shared queue
 
     def _log_event(self, event: str, task_id: Optional[str], details: Dict):
         conn = sqlite3.connect(DB_PATH)
