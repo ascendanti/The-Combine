@@ -168,6 +168,44 @@ DB_PATH = DAEMON_DIR / "continuous_executor.db"
 PID_FILE = DAEMON_DIR / "continuous_executor.pid"
 LOG_FILE = DAEMON_DIR / "continuous_executor.log"
 
+
+def _is_process_running(pid: int) -> bool:
+    """Check if a PID is running across platforms."""
+    if pid <= 0:
+        return False
+    if os.name != "nt":
+        try:
+            os.kill(pid, 0)
+            return True
+        except OSError:
+            return False
+
+    try:
+        import ctypes
+        from ctypes import wintypes
+    except Exception:
+        return False
+
+    PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+    STILL_ACTIVE = 259
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+    kernel32.OpenProcess.restype = wintypes.HANDLE
+    kernel32.GetExitCodeProcess.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
+    kernel32.GetExitCodeProcess.restype = wintypes.BOOL
+    kernel32.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel32.CloseHandle.restype = wintypes.BOOL
+
+    handle = kernel32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, pid)
+    if not handle:
+        return False
+    exit_code = wintypes.DWORD()
+    success = kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code))
+    kernel32.CloseHandle(handle)
+    if not success:
+        return False
+    return exit_code.value == STILL_ACTIVE
+
 # Configuration
 POLL_INTERVAL = 30  # seconds between checks
 MAX_TASK_DURATION = 600  # 10 minutes max per task
@@ -346,12 +384,9 @@ class ContinuousExecutor:
         # Check if already running
         if PID_FILE.exists():
             pid = int(PID_FILE.read_text().strip())
-            try:
-                os.kill(pid, 0)  # Check if process exists
+            if _is_process_running(pid):
                 logger.error(f"Daemon already running (PID {pid})")
                 return
-            except OSError:
-                pass  # Process not running, stale PID file
 
         # Write PID
         PID_FILE.write_text(str(os.getpid()))
@@ -770,12 +805,9 @@ class ContinuousExecutor:
         # Check if running
         if PID_FILE.exists():
             pid = int(PID_FILE.read_text().strip())
-            try:
-                os.kill(pid, 0)
+            if _is_process_running(pid):
                 status["running"] = True
                 status["pid"] = pid
-            except OSError:
-                pass
 
         # Task counts
         conn = sqlite3.connect(DB_PATH)
