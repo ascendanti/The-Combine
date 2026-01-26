@@ -2,15 +2,17 @@
 """
 Essential Docs Briefing
 
-Outputs a concise session briefing to stdout for SessionStart context injection.
-Reads task.md, EVOLUTION-PLAN.md, and latest handoff (if present) and trims
-content to a configurable length.
+Outputs a concise session briefing for SessionStart context injection.
+Reads task.md, EVOLUTION-PLAN.md (current status only), and latest handoff.
+Outputs JSON for hook compatibility.
 """
 
+import json
 from pathlib import Path
 from typing import List
 
-MAX_LINES = 80
+MAX_LINES_TASK = 60
+MAX_LINES_HANDOFF = 30
 
 
 def read_lines(path: Path, max_lines: int) -> List[str]:
@@ -18,6 +20,29 @@ def read_lines(path: Path, max_lines: int) -> List[str]:
         return []
     with path.open("r", encoding="utf-8", errors="ignore") as handle:
         lines = [line.rstrip() for line in handle][:max_lines]
+    return lines
+
+
+def extract_current_status(path: Path) -> List[str]:
+    """Extract only the Current Status section from EVOLUTION-PLAN.md"""
+    if not path.exists():
+        return []
+    lines = []
+    in_status = False
+    with path.open("r", encoding="utf-8", errors="ignore") as handle:
+        for line in handle:
+            stripped = line.rstrip()
+            if "## Current Status" in stripped:
+                in_status = True
+                lines.append(stripped)
+                continue
+            if in_status:
+                if stripped.startswith("## ") and "Current Status" not in stripped:
+                    break
+                lines.append(stripped)
+                if len(lines) > 30:
+                    lines.append("... (truncated)")
+                    break
     return lines
 
 
@@ -38,23 +63,34 @@ def main() -> int:
 
     sections: List[str] = []
 
-    sections.append("# Session Briefing (Auto-loaded)")
-
+    # Task.md - current objectives (condensed)
     if task_file.exists():
-        sections.append("\n## task.md (current objectives)")
-        sections.extend(read_lines(task_file, MAX_LINES))
+        sections.append("=== CURRENT TASK ===")
+        sections.extend(read_lines(task_file, MAX_LINES_TASK))
 
+    # Evolution Plan - current status only (not full file)
     if evolution_file.exists():
-        sections.append("\n## EVOLUTION-PLAN.md (current phase)")
-        sections.extend(read_lines(evolution_file, MAX_LINES))
+        status_lines = extract_current_status(evolution_file)
+        if status_lines:
+            sections.append("\n=== EVOLUTION STATUS ===")
+            sections.extend(status_lines)
 
+    # Latest handoff
     if handoff_file and handoff_file.exists():
-        sections.append(f"\n## Latest Handoff ({handoff_file.name})")
-        sections.extend(read_lines(handoff_file, MAX_LINES))
+        sections.append(f"\n=== LATEST HANDOFF ({handoff_file.name}) ===")
+        sections.extend(read_lines(handoff_file, MAX_LINES_HANDOFF))
 
-    output = "\n".join(sections).strip()
-    if output:
-        print(output)
+    # Output JSON for hook compatibility
+    output = {
+        "continue": True,
+        "stopReason": None
+    }
+
+    briefing = "\n".join(sections).strip()
+    if briefing:
+        output["message"] = briefing
+
+    print(json.dumps(output))
     return 0
 
 

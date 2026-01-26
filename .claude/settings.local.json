@@ -1,5 +1,6 @@
 ﻿{
   "env": {
+    "FEWWORD_DISABLE": "1",
     "CLAUDE_PROJECT_DIR": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Claude n8n",
     "ATLAS_ROOT": "C:\\Users\\New Employee\\Downloads\\Atlas-OS-main",
     "UTF_RESEARCH": "C:\\Users\\New Employee\\Desktop\\UTF",
@@ -56,6 +57,11 @@
           },
           {
             "type": "command",
+            "command": "python .claude/hooks/session-briefing.py 2>nul || echo.",
+            "timeout": 10
+          },
+          {
+            "type": "command",
             "command": "python .claude/hooks/session-start-clean.py 2>nul || echo Session ready",
             "timeout": 5
           },
@@ -90,6 +96,11 @@
     "UserPromptSubmit": [
       {
         "hooks": [
+          {
+            "type": "command",
+            "command": "python daemon/deterministic_router.py route 2>nul || echo.",
+            "timeout": 3
+          },
           {
             "type": "command",
             "command": "python .claude/scripts/context-router-v2.py 2>nul || echo.",

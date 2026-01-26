@@ -1,1924 +1,2426 @@
 {
-  "generated_at": "2026-01-26T14:25:20.440706+00:00",
+  "generated": "2026-01-26T09:30:54.002117",
+  "total": 205,
   "counts": {
-    "agents": 35,
-    "skills": 112,
-    "hooks": 148,
-    "rules": 18
+    "agents": 33,
+    "skills": 118,
+    "rules": 20,
+    "hooks": 34
   },
-  "entries": [
+  "capabilities": [
     {
-      "type": "agent",
       "name": "aegis",
-      "path": ".claude/agents/aegis.json",
-      "description": "Security vulnerability analysis and testing",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\aegis.md",
+      "description": "",
+      "domain": "security",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "medium"
     },
     {
-      "type": "agent",
       "name": "agentica-agent",
-      "path": ".claude/agents/agentica-agent.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\agentica-agent.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "arbiter",
-      "path": ".claude/agents/arbiter.json",
-      "description": "Unit and integration test execution and validation",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\arbiter.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "architect",
-      "path": ".claude/agents/architect.json",
-      "description": "Feature planning, design documentation, AND integration planning",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\architect.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [
+        "framework",
+        "extended"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "atlas",
-      "path": ".claude/agents/atlas.json",
-      "description": "End-to-end and acceptance test execution",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\atlas.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "braintrust-analyst",
-      "path": ".claude/agents/braintrust-analyst.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\braintrust-analyst.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "chronicler",
-      "path": ".claude/agents/chronicler.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\chronicler.md",
+      "description": "",
+      "domain": "documentation",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "context-query-agent",
-      "path": ".claude/agents/context-query-agent.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\context-query-agent.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "critic",
-      "path": ".claude/agents/critic.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\critic.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "debug-agent",
-      "path": ".claude/agents/debug-agent.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\debug-agent.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "medium"
     },
     {
-      "type": "agent",
       "name": "herald",
-      "path": ".claude/agents/herald.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\herald.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "judge",
-      "path": ".claude/agents/judge.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\judge.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "kraken",
-      "path": ".claude/agents/kraken.json",
-      "description": "Implementation and refactoring agent using TDD workflow",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\kraken.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "medium"
     },
     {
-      "type": "agent",
       "name": "learnings-researcher",
-      "path": ".claude/agents/learnings-researcher.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\learnings-researcher.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [
+        "step",
+        "efficient",
+        "task",
+        "description",
+        "from",
+        "identify",
+        "feature",
+        "keywords",
+        "module",
+        "extract"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "liaison",
-      "path": ".claude/agents/liaison.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\liaison.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "maestro",
-      "path": ".claude/agents/maestro.json",
-      "description": "Multi-agent coordination for complex patterns",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\maestro.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "memory-extractor",
-      "path": ".claude/agents/memory-extractor.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\memory-extractor.md",
+      "description": "",
+      "domain": "memory",
+      "triggers": [],
+      "model_tier": "localai",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "onboard",
-      "path": ".claude/agents/onboard.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\onboard.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "patterns",
+        "updated",
+        "detected",
+        "constraints",
+        "test",
+        "name",
+        "command",
+        "timestamp",
+        "contributing",
+        "step"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "oracle",
-      "path": ".claude/agents/oracle.json",
-      "description": "External research - web, docs, APIs with optional LLM",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\oracle.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "pathfinder",
-      "path": ".claude/agents/pathfinder.json",
-      "description": "External repository research and analysis",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\pathfinder.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "phoenix",
-      "path": ".claude/agents/phoenix.json",
-      "description": "Refactoring planning AND migration planning",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\phoenix.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "framework",
+        "extended"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "plan-agent",
-      "path": ".claude/agents/plan-agent.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\plan-agent.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "plan-reviewer",
-      "path": ".claude/agents/plan-reviewer.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\plan-reviewer.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "profiler",
-      "path": ".claude/agents/profiler.json",
-      "description": "Performance profiling, race conditions, memory issues",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\profiler.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "research-codebase",
-      "path": ".claude/agents/research-codebase.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\research-codebase.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "review-agent",
-      "path": ".claude/agents/review-agent.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\review-agent.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [
+        "step",
+        "implement",
+        "plan",
+        "agent",
+        "implementation",
+        "flow",
+        "before",
+        "complete",
+        "after",
+        "handoff"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "scout",
-      "path": ".claude/agents/scout.json",
-      "description": "Codebase exploration and pattern finding",
-      "model": "sonnet"
+      "type": "agent",
+      "path": ".claude\\agents\\scout.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "scribe",
-      "path": ".claude/agents/scribe.json",
-      "description": "Documentation, handoffs, session summaries, and ledger management",
-      "model": "sonnet"
+      "type": "agent",
+      "path": ".claude\\agents\\scribe.md",
+      "description": "",
+      "domain": "documentation",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
-      "name": "sentinel",
-      "path": ".claude/agents/sentinel.json",
-      "description": "Reviews build plans (new features, integrations) from Architect",
-      "model": "sonnet"
-    },
-    {
-      "type": "agent",
       "name": "session-analyst",
-      "path": ".claude/agents/session-analyst.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\session-analyst.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "sleuth",
-      "path": ".claude/agents/sleuth.json",
-      "description": "General bug investigation and root cause analysis",
-      "model": "opus"
+      "type": "agent",
+      "path": ".claude\\agents\\sleuth.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "spark",
-      "path": ".claude/agents/spark.json",
-      "description": "Lightweight fixes and quick tweaks",
-      "model": "sonnet"
+      "type": "agent",
+      "path": ".claude\\agents\\spark.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "surveyor",
-      "path": ".claude/agents/surveyor.md",
-      "description": "---",
-      "model": ""
+      "type": "agent",
+      "path": ".claude\\agents\\surveyor.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "agent",
       "name": "validate-agent",
-      "path": ".claude/agents/validate-agent.md",
-      "description": "---",
-      "model": ""
-    },
-    {
       "type": "agent",
-      "name": "warden",
-      "path": ".claude/agents/warden.json",
-      "description": "Reviews change plans (refactors, migrations) from Phoenix",
-      "model": "sonnet"
+      "path": ".claude\\agents\\validate-agent.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agent-context-isolation",
-      "path": ".claude/skills/agent-context-isolation/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agent-context-isolation\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agent-orchestration",
-      "path": ".claude/skills/agent-orchestration/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agent-orchestration\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agentic-workflow",
-      "path": ".claude/skills/agentic-workflow/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agentic-workflow\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agentica-claude-proxy",
-      "path": ".claude/skills/agentica-claude-proxy/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agentica-claude-proxy\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "developing",
+        "claude",
+        "skill",
+        "proxy",
+        "debugging",
+        "agentica",
+        "integration",
+        "when"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agentica-infrastructure",
-      "path": ".claude/skills/agentica-infrastructure/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agentica-infrastructure\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agentica-prompts",
-      "path": ".claude/skills/agentica-prompts/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agentica-prompts\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "findings",
+        "should",
+        "persist",
+        "that"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agentica-sdk",
-      "path": ".claude/skills/agentica-sdk/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agentica-sdk\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "simplest",
+        "code",
+        "orchestration",
+        "multi",
+        "import",
+        "existing",
+        "behavior",
+        "agentic",
+        "agentica",
+        "adding"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agentica-server",
-      "path": ".claude/skills/agentica-server/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agentica-server\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "code",
+        "claude_proxy",
+        "between",
+        "claude",
+        "access",
+        "proxy",
+        "environment",
+        "client",
+        "connection",
+        "http"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "agentica-spawn",
-      "path": ".claude/skills/agentica-spawn/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\agentica-spawn\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "skill",
+        "pattern",
+        "agentica",
+        "after",
+        "selects",
+        "user"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "ast-grep-find",
-      "path": ".claude/skills/ast-grep-find/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\ast-grep-find\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "async-repl-protocol",
-      "path": ".claude/skills/async-repl-protocol/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\async-repl-protocol\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "background-agent-pings",
-      "path": ".claude/skills/background-agent-pings/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\background-agent-pings\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "braintrust-analyze",
-      "path": ".claude/skills/braintrust-analyze/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\braintrust-analyze\\SKILL.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "braintrust-tracing",
-      "path": ".claude/skills/braintrust-tracing/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\braintrust-tracing\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "build",
-      "path": ".claude/skills/build/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\build\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "interrupted",
+        "message",
+        "resume",
+        "points",
+        "orchestration",
+        "greenfield",
+        "each",
+        "last",
+        "brownfield",
+        "discovery"
+      ],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "cli-reference",
-      "path": ".claude/skills/cli-reference/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\cli-reference\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "coherence",
-      "path": ".claude/skills/coherence/SKILL.md",
-      "description": "Manage goals, constraints, and cross-domain coherence for unified personal AI."
+      "type": "skill",
+      "path": ".claude\\skills\\coherence\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "commit",
-      "path": ".claude/skills/commit/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\commit\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "complete-skill",
-      "path": ".claude/skills/complete-skill/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\complete-skill\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "completion-check",
-      "path": ".claude/skills/completion-check/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\completion-check\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "compound-learnings",
-      "path": ".claude/skills/compound-learnings/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\compound-learnings\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "should",
+        "asked",
+        "what",
+        "compound",
+        "setup",
+        "claude",
+        "sessions",
+        "skill",
+        "learnings",
+        "patterns"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "confidence-check",
-      "path": ".claude/skills/confidence-check/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\confidence-check\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "confidence",
+        "exist",
+        "implementations",
+        "documentation",
+        "compliance",
+        "ensure",
+        "identified",
+        "duplicate",
+        "before",
+        "criteria"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "continuity_ledger",
-      "path": ".claude/skills/continuity_ledger/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\continuity_ledger\\SKILL.md",
+      "description": "",
+      "domain": "memory",
+      "triggers": [
+        "folder",
+        "handoff",
+        "name"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "continuous-learning",
-      "path": ".claude/skills/continuous-learning/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\continuous-learning\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "create_handoff",
-      "path": ".claude/skills/create_handoff/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\create_handoff\\SKILL.md",
+      "description": "",
+      "domain": "memory",
+      "triggers": [
+        "folder",
+        "handoff",
+        "name"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "dead-code",
-      "path": ".claude/skills/dead-code/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\dead-code\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "code",
+        "dead",
+        "unreachable",
+        "cleanup",
+        "refactor",
+        "unused"
+      ],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "debug",
-      "path": ".claude/skills/debug/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\debug\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "debug-hooks",
-      "path": ".claude/skills/debug-hooks/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\debug-hooks\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "hooks",
+        "output",
+        "wrong",
+        "firing",
+        "aren",
+        "behaving",
+        "producing",
+        "unexpectedly"
+      ],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "deep-reading-analyst",
-      "path": ".claude/skills/deep-reading-analyst/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\deep-reading-analyst\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "here",
+        "learning",
+        "hats",
+        "actionable",
+        "perspectives",
+        "inversion",
+        "does",
+        "study",
+        "unpack",
+        "scqa_framework"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
+      "name": "deep-reading-analyst",
       "type": "skill",
+      "path": ".claude\\skills\\deep-reading-analyst.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "here",
+        "learning",
+        "hats",
+        "actionable",
+        "perspectives",
+        "inversion",
+        "does",
+        "study",
+        "unpack",
+        "scqa_framework"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "deep-reading-references",
+      "type": "skill",
+      "path": ".claude\\skills\\deep-reading-references\\5w2h_analysis.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "describe_pr",
-      "path": ".claude/skills/describe_pr/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\describe_pr\\SKILL.md",
+      "description": "",
+      "domain": "documentation",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "discovery-interview",
-      "path": ".claude/skills/discovery-interview/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\discovery-interview\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "environment-triage",
-      "path": ".claude/skills/environment-triage/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\environment-triage\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "explicit-identity",
-      "path": ".claude/skills/explicit-identity/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\explicit-identity\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "explore",
-      "path": ".claude/skills/explore/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\explore\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [
+        "codebase",
+        "understand",
+        "graph",
+        "explore",
+        "call",
+        "analyze",
+        "layers",
+        "brownfield",
+        "architecture"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "firecrawl-scrape",
-      "path": ".claude/skills/firecrawl-scrape/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\firecrawl-scrape\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "fix",
-      "path": ".claude/skills/fix/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\fix\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "git-commits",
-      "path": ".claude/skills/git-commits/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\git-commits\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "github-search",
-      "path": ".claude/skills/github-search/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\github-search\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "graceful-degradation",
-      "path": ".claude/skills/graceful-degradation/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\graceful-degradation\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
+      "name": "handoff",
       "type": "skill",
+      "path": ".claude\\skills\\handoff.md",
+      "description": "",
+      "domain": "memory",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "help",
-      "path": ".claude/skills/help/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\help\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "what",
+        "help",
+        "keyword2",
+        "show",
+        "keyword1",
+        "capabilities"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "hook-developer",
-      "path": ".claude/skills/hook-developer/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\hook-developer\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "hooks",
+        "with",
+        "write",
+        "only",
+        "output",
+        "input",
+        "cleanup",
+        "correct",
+        "schemas"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "hooks",
-      "path": ".claude/skills/hooks/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\hooks\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "idempotent-redundancy",
-      "path": ".claude/skills/idempotent-redundancy/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\idempotent-redundancy\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "implement_plan",
-      "path": ".claude/skills/implement_plan/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\implement_plan\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "please",
+        "orchestration",
+        "complete",
+        "inform",
+        "implementations",
+        "automated",
+        "that",
+        "multi",
+        "completing",
+        "manual"
+      ],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "implement_plan_micro",
-      "path": ".claude/skills/implement_plan_micro/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\implement_plan_micro\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "implement_task",
-      "path": ".claude/skills/implement_task/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\implement_task\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "handoffs",
+        "reading",
+        "previous",
+        "approach"
+      ],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "index-at-creation",
-      "path": ".claude/skills/index-at-creation/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\index-at-creation\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "llm-tuning-patterns",
-      "path": ".claude/skills/llm-tuning-patterns/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\llm-tuning-patterns\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "loogle-search",
-      "path": ".claude/skills/loogle-search/SKILL.md",
-      "description": "Search Mathlib for lemmas by type signature pattern."
+      "type": "skill",
+      "path": ".claude\\skills\\loogle-search\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
+      "name": "math",
       "type": "skill",
+      "path": ".claude\\skills\\math\\LEARNING.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "math-help",
-      "path": ".claude/skills/math-help/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\math-help\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "what",
+        "help",
+        "which",
+        "tutorial",
+        "example",
+        "solve",
+        "sympy_compute",
+        "math",
+        "tools",
+        "tool"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "math-router",
-      "path": ".claude/skills/math-router/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\math-router\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "compute",
+        "calculate",
+        "plot",
+        "integrate",
+        "router",
+        "requests",
+        "convert",
+        "first",
+        "solve",
+        "math"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "math-unified",
-      "path": ".claude/skills/math-unified/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\math-unified\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "simplify",
+        "matrix",
+        "integrate",
+        "derivative",
+        "limit",
+        "unit",
+        "unsure",
+        "factor",
+        "convert",
+        "series"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "mcp-chaining",
-      "path": ".claude/skills/mcp-chaining/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\mcp-chaining\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "mcp-scripts",
-      "path": ".claude/skills/mcp-scripts/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\mcp-scripts\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "migrate",
-      "path": ".claude/skills/migrate/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\migrate\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "modular-code",
-      "path": ".claude/skills/modular-code/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\modular-code\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "morph-apply",
-      "path": ".claude/skills/morph-apply/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\morph-apply\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "morph-search",
-      "path": ".claude/skills/morph-search/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\morph-search\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "mot",
-      "path": ".claude/skills/mot/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\mot\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "nia-docs",
-      "path": ".claude/skills/nia-docs/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\nia-docs\\SKILL.md",
+      "description": "",
+      "domain": "documentation",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "no-polling-agents",
-      "path": ".claude/skills/no-polling-agents/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\no-polling-agents\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "no-task-output",
-      "path": ".claude/skills/no-task-output/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\no-task-output\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "observe-before-editing",
-      "path": ".claude/skills/observe-before-editing/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\observe-before-editing\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "onboard",
-      "path": ".claude/skills/onboard/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\onboard\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "opc-architecture",
-      "path": ".claude/skills/opc-architecture/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\opc-architecture\\SKILL.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "parallel-agent-contracts",
-      "path": ".claude/skills/parallel-agent-contracts/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\parallel-agent-contracts\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "parallel-agents",
-      "path": ".claude/skills/parallel-agents/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\parallel-agents\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "perplexity-search",
-      "path": ".claude/skills/perplexity-search/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\perplexity-search\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "pint-compute",
-      "path": ".claude/skills/pint-compute/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\pint-compute\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "plan-agent",
-      "path": ".claude/skills/plan-agent/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\plan-agent\\SKILL.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [
+        "current",
+        "state",
+        "brief",
+        "patterns",
+        "rationale",
+        "name",
+        "plan",
+        "choices",
+        "exists",
+        "feature"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "premortem",
-      "path": ".claude/skills/premortem/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\premortem\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "prove",
-      "path": ".claude/skills/prove/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\prove\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "true",
+        "show",
+        "that",
+        "verify",
+        "formalize",
+        "prove"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "qlty-check",
-      "path": ".claude/skills/qlty-check/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\qlty-check\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "qlty-during-development",
-      "path": ".claude/skills/qlty-during-development/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\qlty-during-development\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
+      "name": "quant-methodology",
       "type": "skill",
+      "path": ".claude\\skills\\quant-methodology.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "README",
+      "type": "skill",
+      "path": ".claude\\skills\\README.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "recall",
-      "path": ".claude/skills/recall/SKILL.md",
-      "description": "Query the memory system for relevant learnings from past sessions."
+      "type": "skill",
+      "path": ".claude\\skills\\recall\\SKILL.md",
+      "description": "",
+      "domain": "memory",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "recall-reasoning",
-      "path": ".claude/skills/recall-reasoning/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\recall-reasoning\\SKILL.md",
+      "description": "",
+      "domain": "memory",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "refactor",
-      "path": ".claude/skills/refactor/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\refactor\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "reference-sdk",
-      "path": ".claude/skills/reference-sdk/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\reference-sdk\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "project",
+        "websearch",
+        "patterns",
+        "specific",
+        "lookups",
+        "grep",
+        "documentation",
+        "simple",
+        "instead",
+        "questions"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "release",
-      "path": ".claude/skills/release/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\release\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "remember",
-      "path": ".claude/skills/remember/SKILL.md",
-      "description": "Store a learning, pattern, or decision in the memory system for future recall."
+      "type": "skill",
+      "path": ".claude\\skills\\remember\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "code",
+        "design",
+        "didn",
+        "work",
+        "discovered",
+        "patterns",
+        "that",
+        "working_solution",
+        "architectural_decision",
+        "pythonpath"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "repo-research-analyst",
-      "path": ".claude/skills/repo-research-analyst/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\repo-research-analyst\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [
+        "patterns",
+        "documentation",
+        "when",
+        "searching",
+        "recent"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "repoprompt",
-      "path": ".claude/skills/repoprompt/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\repoprompt\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "research",
-      "path": ".claude/skills/research/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\research\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "research-agent",
-      "path": ".claude/skills/research-agent/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\research-agent\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "research-external",
-      "path": ".claude/skills/research-external/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\research-external\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "resume_handoff",
-      "path": ".claude/skills/resume_handoff/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\resume_handoff\\SKILL.md",
+      "description": "",
+      "domain": "memory",
+      "triggers": [
+        "optimization",
+        "explanations",
+        "arbiter",
+        "scribe",
+        "workflows",
+        "history",
+        "finding",
+        "repository",
+        "plan",
+        "migrations"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "review",
-      "path": ".claude/skills/review/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\review\\SKILL.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "router-first-architecture",
-      "path": ".claude/skills/router-first-architecture/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\router-first-architecture\\SKILL.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "search-hierarchy",
-      "path": ".claude/skills/search-hierarchy/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\search-hierarchy\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "search-router",
-      "path": ".claude/skills/search-router/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\search-router\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "search-tools",
-      "path": ".claude/skills/search-tools/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\search-tools\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [
+        "where",
+        "indexes",
+        "that",
+        "structural",
+        "type",
+        "fast",
+        "implemented",
+        "names",
+        "usestate",
+        "directly"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "security",
-      "path": ".claude/skills/security/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\security\\SKILL.md",
+      "description": "",
+      "domain": "security",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "shapely-compute",
-      "path": ".claude/skills/shapely-compute/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\shapely-compute\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "geometry",
+        "intersection",
+        "between",
+        "hull",
+        "contains",
+        "polygon",
+        "buffer",
+        "distance",
+        "points",
+        "area"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "skill-developer",
-      "path": ".claude/skills/skill-developer/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\skill-developer\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "skill-development",
-      "path": ".claude/skills/skill-development/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\skill-development\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "skill-upgrader",
-      "path": ".claude/skills/skill-upgrader/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\skill-upgrader\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "slash-commands",
-      "path": ".claude/skills/slash-commands/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\slash-commands\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "sub-agents",
-      "path": ".claude/skills/sub-agents/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\sub-agents\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "optional",
+        "inherits",
+        "20251101",
+        "claude",
+        "here",
+        "prompt",
+        "omitted",
+        "edit",
+        "haiku",
+        "bash"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "system_overview",
-      "path": ".claude/skills/system_overview/SKILL.md",
-      "description": "Show users how Continuous Claude works - the opinionated setup with hooks, memory, and coordination."
+      "type": "skill",
+      "path": ".claude\\skills\\system_overview\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tdd",
-      "path": ".claude/skills/tdd/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\tdd\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "driven",
+        "green",
+        "first",
+        "refactor",
+        "test"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tdd-migrate",
-      "path": ".claude/skills/tdd-migrate/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\tdd-migrate\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tdd-migration-pipeline",
-      "path": ".claude/skills/tdd-migration-pipeline/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\tdd-migration-pipeline\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "test",
-      "path": ".claude/skills/test/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\test\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tldr-code",
-      "path": ".claude/skills/tldr-code/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\tldr-code\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "code",
+        "what",
+        "search",
+        "understand",
+        "debug",
+        "dead",
+        "graph",
+        "calls",
+        "data",
+        "call"
+      ],
+      "model_tier": "codex",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tldr-deep",
-      "path": ".claude/skills/tldr-deep/SKILL.md",
-      "description": "Full 5-layer analysis of a specific function. Use when debugging or deeply understanding code."
+      "type": "skill",
+      "path": ".claude\\skills\\tldr-deep\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "understanding",
+        "deeply",
+        "code",
+        "debugging"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tldr-overview",
-      "path": ".claude/skills/tldr-overview/SKILL.md",
-      "description": "Get a token-efficient overview of any project using the TLDR stack."
+      "type": "skill",
+      "path": ".claude\\skills\\tldr-overview\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tldr-router",
-      "path": ".claude/skills/tldr-router/SKILL.md",
-      "description": "Maps questions to the optimal tldr command. Use this to pick the right layer."
+      "type": "skill",
+      "path": ".claude\\skills\\tldr-router\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "layer",
+        "pick",
+        "right"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tldr-stats",
-      "path": ".claude/skills/tldr-stats/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\tldr-stats\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "tour",
-      "path": ".claude/skills/tour/SKILL.md",
-      "description": "Friendly onboarding when users ask about capabilities."
+      "type": "skill",
+      "path": ".claude\\skills\\tour\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "validate-agent",
-      "path": ".claude/skills/validate-agent/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\validate-agent\\SKILL.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "skill",
       "name": "wiring",
-      "path": ".claude/skills/wiring/SKILL.md",
-      "description": "---"
-    },
-    {
       "type": "skill",
+      "path": ".claude\\skills\\wiring\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "workflow-router",
-      "path": ".claude/skills/workflow-router/SKILL.md",
-      "description": "---"
+      "type": "skill",
+      "path": ".claude\\skills\\workflow-router\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "asks",
+        "wanting",
+        "first",
+        "wants",
+        "approach",
+        "selection",
+        "hasn",
+        "primary",
+        "plan",
+        "explore"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
-      "type": "hook",
-      "name": "auto-cache-pre",
-      "path": ".claude/hooks/auto-cache-pre.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "pre-compact-continuity",
-      "path": ".claude/hooks/pre-compact-continuity.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "premortem-suggest",
-      "path": ".claude/hooks/premortem-suggest.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "compiler-in-the-loop-stop",
-      "path": ".claude/hooks/compiler-in-the-loop-stop.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "build",
-      "path": ".claude/hooks/build.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "n8n-notify",
-      "path": ".claude/hooks/n8n-notify.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "handoff-index",
-      "path": ".claude/hooks/handoff-index.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "context-router",
-      "path": ".claude/hooks/context-router.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "impact-refactor",
-      "path": ".claude/hooks/impact-refactor.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "stop-memory-sync",
-      "path": ".claude/hooks/stop-memory-sync.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "auto-doc-sync",
-      "path": ".claude/hooks/auto-doc-sync.py",
-      "description": "#!/usr/bin/env -S uv run --script"
-    },
-    {
-      "type": "hook",
-      "name": "memory-awareness",
-      "path": ".claude/hooks/memory-awareness.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "session-start-tldr-cache",
-      "path": ".claude/hooks/session-start-tldr-cache.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "tldr-context-inject",
-      "path": ".claude/hooks/tldr-context-inject.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "run-python",
-      "path": ".claude/hooks/run-python.mjs",
-      "description": "#!/usr/bin/env node"
-    },
-    {
-      "type": "hook",
-      "name": "session-symbol-index",
-      "path": ".claude/hooks/session-symbol-index.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "module-reminder",
-      "path": ".claude/hooks/module-reminder.py",
-      "description": "#!/usr/bin/env -S uv run --script"
-    },
-    {
-      "type": "hook",
-      "name": "continuous-executor",
-      "path": ".claude/hooks/continuous-executor.py",
-      "description": "#!/usr/bin/env -S uv run --script"
-    },
-    {
-      "type": "hook",
-      "name": "smart-search-router",
-      "path": ".claude/hooks/smart-search-router.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "post-edit-notify",
-      "path": ".claude/hooks/post-edit-notify.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "compiler-in-the-loop",
-      "path": ".claude/hooks/compiler-in-the-loop.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "git-post-commit",
-      "path": ".claude/hooks/git-post-commit.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "pre_compact_continuity",
-      "path": ".claude/hooks/pre_compact_continuity.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "session-end-cleanup",
-      "path": ".claude/hooks/session-end-cleanup.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "typescript-preflight",
-      "path": ".claude/hooks/typescript-preflight.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "post_tool_use_tracker",
-      "path": ".claude/hooks/post_tool_use_tracker.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "utf-semantic-rag",
-      "path": ".claude/hooks/utf-semantic-rag.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "vitest.config",
-      "path": ".claude/hooks/vitest.config.ts",
-      "description": "import { defineConfig } from 'vitest/config';"
-    },
-    {
-      "type": "hook",
-      "name": "import-validator",
-      "path": ".claude/hooks/import-validator.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "kg-context-store",
-      "path": ".claude/hooks/kg-context-store.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "utf-context-filter",
-      "path": ".claude/hooks/utf-context-filter.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "session_start_continuity",
-      "path": ".claude/hooks/session_start_continuity.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "persist-project-dir",
-      "path": ".claude/hooks/persist-project-dir.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "session-start-clean",
-      "path": ".claude/hooks/session-start-clean.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "session-register",
-      "path": ".claude/hooks/session-register.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "pre-tool-use-broadcast",
-      "path": ".claude/hooks/pre-tool-use-broadcast.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "hook_launcher",
-      "path": ".claude/hooks/hook_launcher.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "memory-recall-start",
-      "path": ".claude/hooks/memory-recall-start.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "tldr-read-enforcer",
-      "path": ".claude/hooks/tldr-read-enforcer.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "session-start-dead-code",
-      "path": ".claude/hooks/session-start-dead-code.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "arch-context-inject",
-      "path": ".claude/hooks/arch-context-inject.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "file-claims",
-      "path": ".claude/hooks/file-claims.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "braintrust_hooks",
-      "path": ".claude/hooks/braintrust_hooks.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "post-tool-use-tracker",
-      "path": ".claude/hooks/post-tool-use-tracker.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "session-outcome",
-      "path": ".claude/hooks/session-outcome.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "post-edit-diagnostics",
-      "path": ".claude/hooks/post-edit-diagnostics.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "auto-cache-post",
-      "path": ".claude/hooks/auto-cache-post.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "orchestrator-route",
-      "path": ".claude/hooks/orchestrator-route.py",
-      "description": "#!/usr/bin/env -S uv run --script"
-    },
-    {
-      "type": "hook",
-      "name": "kg-context-gate",
-      "path": ".claude/hooks/kg-context-gate.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "pre-compact-handoff",
-      "path": ".claude/hooks/pre-compact-handoff.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "auto-handoff-stop",
-      "path": ".claude/hooks/auto-handoff-stop.py",
-      "description": "#!/usr/bin/env -S uv run"
-    },
-    {
-      "type": "hook",
-      "name": "post-compact-continue",
-      "path": ".claude/hooks/post-compact-continue.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "path-rules",
-      "path": ".claude/hooks/path-rules.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "session-symbol-index",
-      "path": ".claude/hooks/session-symbol-index.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "skill-activation-prompt",
-      "path": ".claude/hooks/skill-activation-prompt.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "smart-tool-redirect",
-      "path": ".claude/hooks/smart-tool-redirect.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "unified-post-tool-tracker",
-      "path": ".claude/hooks/unified-post-tool-tracker.py",
-      "description": "#!/usr/bin/env -S uv run --script"
-    },
-    {
-      "type": "hook",
-      "name": "memory-store-stop",
-      "path": ".claude/hooks/memory-store-stop.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "signature-helper",
-      "path": ".claude/hooks/signature-helper.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "continuous-learning-stop",
-      "path": ".claude/hooks/continuous-learning-stop.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "cleanup-mcp",
-      "path": ".claude/hooks/cleanup-mcp.py",
-      "description": "#!/usr/bin/env python3"
-    },
-    {
-      "type": "hook",
-      "name": "session-start-continuity",
-      "path": ".claude/hooks/session-start-continuity.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "edit-context-inject",
-      "path": ".claude/hooks/edit-context-inject.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "import-error-detector",
-      "path": ".claude/hooks/import-error-detector.sh",
-      "description": "#!/bin/bash"
-    },
-    {
-      "type": "hook",
-      "name": "session-activate-systems",
-      "path": ".claude/hooks/session-activate-systems.py",
-      "description": "#!/usr/bin/env -S uv run --script"
-    },
-    {
-      "type": "hook",
-      "name": "file-claims",
-      "path": ".claude/hooks/src/file-claims.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "import-validator",
-      "path": ".claude/hooks/src/import-validator.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-router",
-      "path": ".claude/hooks/src/skill-router.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "pre-tool-use-broadcast",
-      "path": ".claude/hooks/src/pre-tool-use-broadcast.ts",
-      "description": "#!/usr/bin/env node"
-    },
-    {
-      "type": "hook",
-      "name": "compiler-in-the-loop",
-      "path": ".claude/hooks/src/compiler-in-the-loop.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "pre-compact-continuity",
-      "path": ".claude/hooks/src/pre-compact-continuity.ts",
-      "description": "import * as fs from 'fs';"
-    },
-    {
-      "type": "hook",
-      "name": "import-error-detector",
-      "path": ".claude/hooks/src/import-error-detector.ts",
-      "description": "#!/usr/bin/env node"
-    },
-    {
-      "type": "hook",
-      "name": "edit-context-inject",
-      "path": ".claude/hooks/src/edit-context-inject.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "smart-search-router",
-      "path": ".claude/hooks/src/smart-search-router.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "tldr-context-inject",
-      "path": ".claude/hooks/src/tldr-context-inject.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "signature-helper",
-      "path": ".claude/hooks/src/signature-helper.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "arch-context-inject",
-      "path": ".claude/hooks/src/arch-context-inject.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-validation-prompt",
-      "path": ".claude/hooks/src/skill-validation-prompt.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "session-start-tldr-cache",
-      "path": ".claude/hooks/src/session-start-tldr-cache.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "memory-awareness",
-      "path": ".claude/hooks/src/memory-awareness.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "session-register",
-      "path": ".claude/hooks/src/session-register.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "session-end-cleanup",
-      "path": ".claude/hooks/src/session-end-cleanup.ts",
-      "description": "import * as fs from 'fs';"
-    },
-    {
-      "type": "hook",
-      "name": "session-start-continuity",
-      "path": ".claude/hooks/src/session-start-continuity.ts",
-      "description": "import * as fs from 'fs';"
-    },
-    {
-      "type": "hook",
-      "name": "impact-refactor",
-      "path": ".claude/hooks/src/impact-refactor.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "path-rules",
-      "path": ".claude/hooks/src/path-rules.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "session-outcome",
-      "path": ".claude/hooks/src/session-outcome.ts",
-      "description": "import * as fs from 'fs';"
-    },
-    {
-      "type": "hook",
-      "name": "post-edit-diagnostics",
-      "path": ".claude/hooks/src/post-edit-diagnostics.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "transcript-parser",
-      "path": ".claude/hooks/src/transcript-parser.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "daemon-client",
-      "path": ".claude/hooks/src/daemon-client.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "compiler-in-the-loop-stop",
-      "path": ".claude/hooks/src/compiler-in-the-loop-stop.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-activation-prompt",
-      "path": ".claude/hooks/src/skill-activation-prompt.ts",
-      "description": "#!/usr/bin/env node"
-    },
-    {
-      "type": "hook",
-      "name": "tldr-read-enforcer",
-      "path": ".claude/hooks/src/tldr-read-enforcer.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "session-start-dead-code",
-      "path": ".claude/hooks/src/session-start-dead-code.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "handoff-index",
-      "path": ".claude/hooks/src/handoff-index.ts",
-      "description": "import * as fs from 'fs';"
-    },
-    {
-      "type": "hook",
-      "name": "post-edit-notify",
-      "path": ".claude/hooks/src/post-edit-notify.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "typescript-preflight",
-      "path": ".claude/hooks/src/typescript-preflight.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "daemon-client.test",
-      "path": ".claude/hooks/src/__tests__/daemon-client.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "mainHandoffFirst.test",
-      "path": ".claude/hooks/src/__tests__/mainHandoffFirst.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-router-integration.test",
-      "path": ".claude/hooks/src/__tests__/skill-router-integration.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "findSessionHandoff.test",
-      "path": ".claude/hooks/src/__tests__/findSessionHandoff.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "user-confirm-learning.test",
-      "path": ".claude/hooks/src/__tests__/user-confirm-learning.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "session-id-persistence.test",
-      "path": ".claude/hooks/src/__tests__/session-id-persistence.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "hooks-daemon-migration.test",
-      "path": ".claude/hooks/src/__tests__/hooks-daemon-migration.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "pattern-orchestrator.test",
-      "path": ".claude/hooks/src/__tests__/pattern-orchestrator.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-prerequisites.test",
-      "path": ".claude/hooks/src/__tests__/skill-prerequisites.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "tldr-hooks.test",
-      "path": ".claude/hooks/src/__tests__/tldr-hooks.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "composition-gate.test",
-      "path": ".claude/hooks/src/__tests__/composition-gate.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "extractLedgerSection.test",
-      "path": ".claude/hooks/src/__tests__/extractLedgerSection.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "session-affinity.test",
-      "path": ".claude/hooks/src/__tests__/session-affinity.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-validation-prompt.test",
-      "path": ".claude/hooks/src/__tests__/skill-validation-prompt.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "workflow-erotetic.test",
-      "path": ".claude/hooks/src/__tests__/workflow-erotetic.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-toposort.test",
-      "path": ".claude/hooks/src/__tests__/skill-toposort.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-coactivation.test",
-      "path": ".claude/hooks/src/__tests__/skill-coactivation.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-loading.test",
-      "path": ".claude/hooks/src/__tests__/skill-loading.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-backward-compat.test",
-      "path": ".claude/hooks/src/__tests__/skill-backward-compat.test.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "pattern-router",
-      "path": ".claude/hooks/src/shared/pattern-router.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "pattern-selector",
-      "path": ".claude/hooks/src/shared/pattern-selector.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "resource-reader",
-      "path": ".claude/hooks/src/shared/resource-reader.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "memory-client",
-      "path": ".claude/hooks/src/shared/memory-client.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "workflow-erotetic",
-      "path": ".claude/hooks/src/shared/workflow-erotetic.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "db-utils-pg",
-      "path": ".claude/hooks/src/shared/db-utils-pg.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "opc-path",
-      "path": ".claude/hooks/src/shared/opc-path.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "python-bridge",
-      "path": ".claude/hooks/src/shared/python-bridge.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "erotetic-questions",
-      "path": ".claude/hooks/src/shared/erotetic-questions.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "task-detector",
-      "path": ".claude/hooks/src/shared/task-detector.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "composition-gate",
-      "path": ".claude/hooks/src/shared/composition-gate.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "db-utils",
-      "path": ".claude/hooks/src/shared/db-utils.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "types",
-      "path": ".claude/hooks/src/shared/types.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "erotetic-termination",
-      "path": ".claude/hooks/src/shared/erotetic-termination.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "spec-context",
-      "path": ".claude/hooks/src/shared/spec-context.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "session-id",
-      "path": ".claude/hooks/src/shared/session-id.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "resource-utils",
-      "path": ".claude/hooks/src/shared/resource-utils.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "project-state",
-      "path": ".claude/hooks/src/shared/project-state.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "learning-extractor",
-      "path": ".claude/hooks/src/shared/learning-extractor.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "skill-router-types",
-      "path": ".claude/hooks/src/shared/skill-router-types.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "index",
-      "path": ".claude/hooks/src/shared/index.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "blackboard",
-      "path": ".claude/hooks/src/patterns/blackboard.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "map-reduce",
-      "path": ".claude/hooks/src/patterns/map-reduce.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "hierarchical-test-harness",
-      "path": ".claude/hooks/src/patterns/hierarchical-test-harness.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "swarm",
-      "path": ".claude/hooks/src/patterns/swarm.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "hierarchical",
-      "path": ".claude/hooks/src/patterns/hierarchical.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "pipeline",
-      "path": ".claude/hooks/src/patterns/pipeline.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "event-driven",
-      "path": ".claude/hooks/src/patterns/event-driven.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "jury",
-      "path": ".claude/hooks/src/patterns/jury.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "generator-critic",
-      "path": ".claude/hooks/src/patterns/generator-critic.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "circuit-breaker",
-      "path": ".claude/hooks/src/patterns/circuit-breaker.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "chain-of-responsibility",
-      "path": ".claude/hooks/src/patterns/chain-of-responsibility.ts",
-      "description": "*"
-    },
-    {
-      "type": "hook",
-      "name": "adversarial",
-      "path": ".claude/hooks/src/patterns/adversarial.ts",
-      "description": "*"
-    },
-    {
-      "type": "rule",
       "name": "agent-memory-recall",
-      "path": ".claude/rules/agent-memory-recall.md",
-      "description": "Before starting implementation tasks, agents should check for relevant learnings."
+      "type": "rule",
+      "path": ".claude\\rules\\agent-memory-recall.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "agent-model-selection",
-      "path": ".claude/rules/agent-model-selection.md",
-      "description": "**Default:** Omit `model` parameter - agents inherit parent model (usually Opus)."
+      "type": "rule",
+      "path": ".claude\\rules\\agent-model-selection.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "auto-link-specs",
-      "path": ".claude/rules/auto-link-specs.md",
-      "description": "**MANDATORY: After creating any new spec, document, or significant file:**"
+      "type": "rule",
+      "path": ".claude\\rules\\auto-link-specs.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "autonomous-operation",
-      "path": ".claude/rules/autonomous-operation.md",
-      "description": "**FULL AUTONOMY GRANTED** - User has authorized all operations."
+      "type": "rule",
+      "path": ".claude\\rules\\autonomous-operation.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "before-acting",
-      "path": ".claude/rules/before-acting.md",
-      "description": "**STOP before any action. Check these first:**"
+      "type": "rule",
+      "path": ".claude\\rules\\before-acting.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "claim-verification",
-      "path": ".claude/rules/claim-verification.md",
-      "description": "**LESSON LEARNED:** An 80% false claim rate occurred when grep results were trusted without reading files."
+      "type": "rule",
+      "path": ".claude\\rules\\claim-verification.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "cross-terminal-db",
-      "path": ".claude/rules/cross-terminal-db.md",
-      "description": "Connection Details"
+      "type": "rule",
+      "path": ".claude\\rules\\cross-terminal-db.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "destructive-commands",
-      "path": ".claude/rules/destructive-commands.md",
-      "description": "**NEVER run destructive commands without explicit user confirmation.**"
+      "type": "rule",
+      "path": ".claude\\rules\\destructive-commands.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "dynamic-recall",
-      "path": ".claude/rules/dynamic-recall.md",
-      "description": "You have access to a semantic memory system that stores learnings, decisions, and patterns from past sessions."
+      "type": "rule",
+      "path": ".claude\\rules\\dynamic-recall.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "evolution-plan-adherence",
-      "path": ".claude/rules/evolution-plan-adherence.md",
-      "description": "**MANDATORY: Follow the phased evolution plan in EVOLUTION-PLAN.md**"
+      "type": "rule",
+      "path": ".claude\\rules\\evolution-plan-adherence.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "hook-auto-execute",
-      "path": ".claude/rules/hook-auto-execute.md",
-      "description": "When a PreToolUse hook blocks with `permissionDecision: deny` and the reason contains a bash command, **immediately execute that command via Bash** without asking."
+      "type": "rule",
+      "path": ".claude\\rules\\hook-auto-execute.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "no-haiku",
-      "path": ".claude/rules/no-haiku.md",
-      "description": "Never use `model: haiku` when spawning agents via the Task tool."
+      "type": "rule",
+      "path": ".claude\\rules\\no-haiku.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "proactive-delegation",
-      "path": ".claude/rules/proactive-delegation.md",
-      "description": "Keep main context clean by delegating to agents. Don't wait to be asked."
+      "type": "rule",
+      "path": ".claude\\rules\\proactive-delegation.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "proactive-memory-disclosure",
-      "path": ".claude/rules/proactive-memory-disclosure.md",
-      "description": "When the memory-awareness hook finds relevant learnings (indicated by `MEMORY MATCH` in system context), follow this protocol:"
+      "type": "rule",
+      "path": ".claude\\rules\\proactive-memory-disclosure.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
+      "name": "root-cause-focus",
       "type": "rule",
+      "path": ".claude\\rules\\root-cause-focus.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
       "name": "smart-tools-required",
-      "path": ".claude/rules/smart-tools-required.md",
-      "description": "**MANDATORY**: Always use token-optimized MCP tools instead of native tools."
+      "type": "rule",
+      "path": ".claude\\rules\\smart-tools-required.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "tldr-cli",
-      "path": ".claude/rules/tldr-cli.md",
-      "description": "You have `tldr` available on PATH for token-efficient code analysis."
+      "type": "rule",
+      "path": ".claude\\rules\\tldr-cli.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
-      "type": "rule",
       "name": "token-efficiency",
-      "path": ".claude/rules/token-efficiency.md",
-      "description": "Parallel Agents by Default"
+      "type": "rule",
+      "path": ".claude\\rules\\token-efficiency.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     },
     {
+      "name": "unified-spine-mandatory",
       "type": "rule",
+      "path": ".claude\\rules\\unified-spine-mandatory.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
       "name": "use-scout-not-explore",
-      "path": ".claude/rules/use-scout-not-explore.md",
-      "description": "For codebase exploration tasks, use `scout` (Sonnet) instead of `Explore` (Haiku)."
+      "type": "rule",
+      "path": ".claude\\rules\\use-scout-not-explore.md",
+      "description": "",
+      "domain": "behavior",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "auto-cache-post",
+      "type": "hook",
+      "path": ".claude\\hooks\\auto-cache-post.py",
+      "description": "Auto-Cache PostToolUse Hook\n\nAutomatically caches outputs from Read, Grep, Glob operations\nfor token efficiency. Works with token-optimizer MCP.\n\nCaches:\n- File reads (by path + mtime)\n- Grep results ",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "auto-cache-pre",
+      "type": "hook",
+      "path": ".claude\\hooks\\auto-cache-pre.py",
+      "description": "Auto-Cache PreToolUse Hook\n\nChecks cache before executing Read, Grep, Glob operations.\nReturns cached result if valid, saving tokens.\n\nCache invalidation:\n- Read: Checks file mtime (reloads if file ch",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "auto-doc-sync",
+      "type": "hook",
+      "path": ".claude\\hooks\\auto-doc-sync.py",
+      "description": "Stop Hook: Auto-sync documentation after each response.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "auto-handoff-stop",
+      "type": "hook",
+      "path": ".claude\\hooks\\auto-handoff-stop.py",
+      "description": "Stop hook: Block when context is too high and suggest handoff.\n\nCalculates context percentage directly from stdin JSON for accuracy.\nThis ensures 1:1 match with status line even after auto-compaction.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "braintrust_hooks",
+      "type": "hook",
+      "path": ".claude\\hooks\\braintrust_hooks.py",
+      "description": "Ensure state directories exist.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "cleanup-mcp",
+      "type": "hook",
+      "path": ".claude\\hooks\\cleanup-mcp.py",
+      "description": "SessionStart hook: Cleans up orphaned MCP node processes.\nPrevents process accumulation across sessions.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "context-router",
+      "type": "hook",
+      "path": ".claude\\hooks\\context-router.py",
+      "description": "Context Router - HOT/WARM/COLD context management\n\nImplements progressive disclosure:\n- HOT: Always injected (task.md, CLAUDE.md)\n- WARM: Injected when keywords detected\n- COLD: Referenced only, load ",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "continuous-executor",
+      "type": "hook",
+      "path": ".claude\\hooks\\continuous-executor.py",
+      "description": "Stop Hook: Continuous Execution Architecture\n\nThis hook runs after every assistant response. It checks if there's pending work\nand injects a continuation prompt if needed.\n\nArchitecture fix: Claude st",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "continuous-learning-stop",
+      "type": "hook",
+      "path": ".claude\\hooks\\continuous-learning-stop.py",
+      "description": "Continuous Learning Stop Hook\nExtracts patterns from session and stores in memory system.\n\nRuns at session end to capture:\n- Error resolutions\n- User corrections\n- Workarounds discovered\n- Debugging t",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "git-post-commit",
+      "type": "hook",
+      "path": ".claude\\hooks\\git-post-commit.py",
+      "description": "Git Post-Commit Hook - Historian Checkpoint\nAutomatically creates a checkpoint after each commit.\n\nInstall: cp .claude/hooks/git-post-commit.py .git/hooks/post-commit && chmod +x .git/hooks/post-commi",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "hook_launcher",
+      "type": "hook",
+      "path": ".claude\\hooks\\hook_launcher.py",
+      "description": "from __future__ import annotations\n\nimport json\nimport os\nimport shutil\nimport subprocess\nimport sys\nfrom pathlib import Path\nfrom typing import Any\n\n\ndef expand_path(path: str) -> str:",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "kg-context-gate",
+      "type": "hook",
+      "path": ".claude\\hooks\\kg-context-gate.py",
+      "description": "KG Context Gate - PreToolUse Hook (Revised)\n\nBased on claude-context-extender pattern:\n- Don't BLOCK reads - inject cached summary as ADDITIONAL context\n- Use LLM-generated summaries stored in KG\n- Fa",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "kg-context-store",
+      "type": "hook",
+      "path": ".claude\\hooks\\kg-context-store.py",
+      "description": "import json\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\n\n# File extensions worth caching\nCODE_EXTENSIONS = {'.py', '.ts', '.tsx', '.js', '.jsx', '.go', '.rs', '.java'}\nDOC_EXTENS",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "memory-recall-start",
+      "type": "hook",
+      "path": ".claude\\hooks\\memory-recall-start.py",
+      "description": "Session start hook: Recall relevant memories.\n\nRuns on session start to load context from previous sessions.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "memory-store-stop",
+      "type": "hook",
+      "path": ".claude\\hooks\\memory-store-stop.py",
+      "description": "Session stop hook: Store session learnings.\n\nRuns on session end to persist important learnings.\nReads from environment or stdin for session summary.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "module-reminder",
+      "type": "hook",
+      "path": ".claude\\hooks\\module-reminder.py",
+      "description": "SessionStart Hook: Surface forgotten modules.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "n8n-notify",
+      "type": "hook",
+      "path": ".claude\\hooks\\n8n-notify.py",
+      "description": "n8n webhook notification hook for Claude Code.\nSends updates to an n8n workflow which can then forward to Slack, Discord, email, etc.\n\nThis is more flexible than direct Slack - you can customize the w",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "orchestrator-route",
+      "type": "hook",
+      "path": ".claude\\hooks\\orchestrator-route.py",
+      "description": "PreToolUse Hook: Route tasks through central orchestrator for optimization.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "post-compact-continue",
+      "type": "hook",
+      "path": ".claude\\hooks\\post-compact-continue.py",
+      "description": "Post-Compact Continue Hook\n\nTriggers after conversation compaction to inject continuation context.\nThis ensures Claude automatically resumes work without asking what to do.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "post-tool-use-tracker",
+      "type": "hook",
+      "path": ".claude\\hooks\\post-tool-use-tracker.py",
+      "description": "Post-tool-use hook that:\n1. Tracks edited files and their repos (Edit/Write tools)\n2. Captures build/test attempts for reasoning-aware VCS (Bash tool)\n\nReasoning data stored in: .git/claude/branches/<",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "post_tool_use_tracker",
+      "type": "hook",
+      "path": ".claude\\hooks\\post_tool_use_tracker.py",
+      "description": "Post-tool-use tracker - Cross-platform Python port.\n\nTracks:\n1. Build/test attempts for reasoning-aware commits (Bash tool)\n2. Edited files and their repos (Edit/Write tools)\n\nReasoning data stored in",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "pre-compact-handoff",
+      "type": "hook",
+      "path": ".claude\\hooks\\pre-compact-handoff.py",
+      "description": "PreCompact hook - auto-saves state before context compaction.\n\nWhen context is about to be compacted, saves current state to handoff.\nSends Telegram notification so user knows context is low.\nBased on",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "premortem-suggest",
+      "type": "hook",
+      "path": ".claude\\hooks\\premortem-suggest.py",
+      "description": "Extract plan file paths from prompt.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "pre_compact_continuity",
+      "type": "hook",
+      "path": ".claude\\hooks\\pre_compact_continuity.py",
+      "description": "PreCompact Continuity Hook (Python port).\n\nParses transcript and generates auto-handoff before context compaction.\n2s faster than TypeScript version.\n\nInput: JSON with trigger ('manual'|'auto'), sessi",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "session-activate-systems",
+      "type": "hook",
+      "path": ".claude\\hooks\\session-activate-systems.py",
+      "description": "Session Start: Activate all cognitive systems and check for unused capabilities.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "session-briefing",
+      "type": "hook",
+      "path": ".claude\\hooks\\session-briefing.py",
+      "description": "Session Briefing Hook\n\nLoads essential documents into context on session start.\nOutputs condensed briefing to be injected into Claude's context.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "session-start-clean",
+      "type": "hook",
+      "path": ".claude\\hooks\\session-start-clean.py",
+      "description": "Clean session start hook - consolidates startup tasks.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "session-symbol-index",
+      "type": "hook",
+      "path": ".claude\\hooks\\session-symbol-index.py",
+      "description": "Session start hook: Warm tldr cache and build semantic index\nCross-platform Python port of session-symbol-index.sh\n\nUses daemon for cache warming (P0-P4)\nTriggers semantic indexing (P5) if call graph ",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "session_start_continuity",
+      "type": "hook",
+      "path": ".claude\\hooks\\session_start_continuity.py",
+      "description": "Session Start Continuity Hook (Python port).\n\nLoads YAML handoff context at session start. Injects full handoff (~400 tokens).\n\nInput: JSON with session_id, source ('startup'|'resume'|'clear'|'compact",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "smart-tool-redirect",
+      "type": "hook",
+      "path": ".claude\\hooks\\smart-tool-redirect.py",
+      "description": "PreToolUse hook: ENFORCES smart tool usage for token optimization.\nBlocks native Read/Grep/Glob and redirects to MCP smart_* tools.\n\nSaves 70-80% tokens by using cached, compressed alternatives.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "stop-memory-sync",
+      "type": "hook",
+      "path": ".claude\\hooks\\stop-memory-sync.py",
+      "description": "Stop hook - triggers memory sync when dirty files exist.\n\nAt end of turn, checks for modified files and outputs sync reminder.\nBased on claude-code-auto-memory pattern.",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "unified-post-tool-tracker",
+      "type": "hook",
+      "path": ".claude\\hooks\\unified-post-tool-tracker.py",
+      "description": "Unified Post Tool Use Tracker - Consolidates all post-tool tracking.\n\nReplaces:\n- auto-cache-post.py (caching)\n- kg-context-store.py (knowledge graph)\n- post-tool-use-tracker.py (general tracking)\n\nSi",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "utf-context-filter",
+      "type": "hook",
+      "path": ".claude\\hooks\\utf-context-filter.py",
+      "description": "UTF Context Filter Hook - Taxonomy-Based Context Retrieval\n\nPreToolUse hook that augments Read operations with relevant UTF knowledge\nfiltered by taxonomy (domain, level, claim_form, confidence).\n\nBas",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
+    },
+    {
+      "name": "utf-semantic-rag",
+      "type": "hook",
+      "path": ".claude\\hooks\\utf-semantic-rag.py",
+      "description": "UTF Semantic RAG Hook - Token-Efficient Context Retrieval\n\nPreToolUse hook for Read operations that:\n1. Checks if file is in a known domain\n2. Searches UTF vectors for relevant pre-processed knowledge",
+      "domain": "lifecycle",
+      "triggers": [],
+      "model_tier": "n/a",
+      "risk_level": "low"
     }
   ]
 }

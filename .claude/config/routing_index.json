@@ -1,0 +1,2431 @@
+{
+  "by_domain": {
+    "security": [
+      "aegis",
+      "security"
+    ],
+    "general": [
+      "agentica-agent",
+      "arbiter",
+      "atlas",
+      "braintrust-analyst",
+      "context-query-agent",
+      "herald",
+      "liaison",
+      "maestro",
+      "onboard",
+      "pathfinder",
+      "phoenix",
+      "profiler",
+      "scout",
+      "session-analyst",
+      "sleuth",
+      "spark",
+      "surveyor",
+      "agent-context-isolation",
+      "agent-orchestration",
+      "agentic-workflow",
+      "agentica-claude-proxy",
+      "agentica-infrastructure",
+      "agentica-prompts",
+      "agentica-sdk",
+      "agentica-server",
+      "agentica-spawn",
+      "ast-grep-find",
+      "async-repl-protocol",
+      "background-agent-pings",
+      "braintrust-tracing",
+      "cli-reference",
+      "coherence",
+      "commit",
+      "complete-skill",
+      "completion-check",
+      "compound-learnings",
+      "confidence-check",
+      "continuous-learning",
+      "deep-reading-analyst",
+      "deep-reading-analyst",
+      "deep-reading-references",
+      "discovery-interview",
+      "environment-triage",
+      "explicit-identity",
+      "firecrawl-scrape",
+      "git-commits",
+      "graceful-degradation",
+      "help",
+      "hook-developer",
+      "hooks",
+      "idempotent-redundancy",
+      "index-at-creation",
+      "llm-tuning-patterns",
+      "math",
+      "math-help",
+      "math-router",
+      "math-unified",
+      "mcp-chaining",
+      "mcp-scripts",
+      "migrate",
+      "morph-apply",
+      "mot",
+      "no-polling-agents",
+      "no-task-output",
+      "observe-before-editing",
+      "onboard",
+      "parallel-agent-contracts",
+      "parallel-agents",
+      "pint-compute",
+      "premortem",
+      "prove",
+      "qlty-check",
+      "qlty-during-development",
+      "quant-methodology",
+      "README",
+      "refactor",
+      "reference-sdk",
+      "release",
+      "remember",
+      "repoprompt",
+      "shapely-compute",
+      "skill-developer",
+      "skill-development",
+      "skill-upgrader",
+      "slash-commands",
+      "sub-agents",
+      "system_overview",
+      "tdd",
+      "tdd-migrate",
+      "tdd-migration-pipeline",
+      "tldr-deep",
+      "tldr-overview",
+      "tldr-router",
+      "tldr-stats",
+      "tour",
+      "wiring",
+      "workflow-router"
+    ],
+    "planning": [
+      "architect",
+      "plan-agent",
+      "plan-reviewer",
+      "opc-architecture",
+      "plan-agent",
+      "router-first-architecture"
+    ],
+    "documentation": [
+      "chronicler",
+      "scribe",
+      "describe_pr",
+      "nia-docs"
+    ],
+    "analysis": [
+      "critic",
+      "judge",
+      "review-agent",
+      "validate-agent",
+      "braintrust-analyze",
+      "review",
+      "validate-agent"
+    ],
+    "code": [
+      "debug-agent",
+      "kraken",
+      "build",
+      "dead-code",
+      "debug",
+      "debug-hooks",
+      "fix",
+      "implement_plan",
+      "implement_plan_micro",
+      "implement_task",
+      "modular-code",
+      "test",
+      "tldr-code"
+    ],
+    "research": [
+      "learnings-researcher",
+      "oracle",
+      "research-codebase",
+      "explore",
+      "github-search",
+      "loogle-search",
+      "morph-search",
+      "perplexity-search",
+      "repo-research-analyst",
+      "research",
+      "research-agent",
+      "research-external",
+      "search-hierarchy",
+      "search-router",
+      "search-tools"
+    ],
+    "memory": [
+      "memory-extractor",
+      "continuity_ledger",
+      "create_handoff",
+      "handoff",
+      "recall",
+      "recall-reasoning",
+      "resume_handoff"
+    ],
+    "behavior": [
+      "agent-memory-recall",
+      "agent-model-selection",
+      "auto-link-specs",
+      "autonomous-operation",
+      "before-acting",
+      "claim-verification",
+      "cross-terminal-db",
+      "destructive-commands",
+      "dynamic-recall",
+      "evolution-plan-adherence",
+      "hook-auto-execute",
+      "no-haiku",
+      "proactive-delegation",
+      "proactive-memory-disclosure",
+      "root-cause-focus",
+      "smart-tools-required",
+      "tldr-cli",
+      "token-efficiency",
+      "unified-spine-mandatory",
+      "use-scout-not-explore"
+    ],
+    "lifecycle": [
+      "auto-cache-post",
+      "auto-cache-pre",
+      "auto-doc-sync",
+      "auto-handoff-stop",
+      "braintrust_hooks",
+      "cleanup-mcp",
+      "context-router",
+      "continuous-executor",
+      "continuous-learning-stop",
+      "git-post-commit",
+      "hook_launcher",
+      "kg-context-gate",
+      "kg-context-store",
+      "memory-recall-start",
+      "memory-store-stop",
+      "module-reminder",
+      "n8n-notify",
+      "orchestrator-route",
+      "post-compact-continue",
+      "post-tool-use-tracker",
+      "post_tool_use_tracker",
+      "pre-compact-handoff",
+      "premortem-suggest",
+      "pre_compact_continuity",
+      "session-activate-systems",
+      "session-briefing",
+      "session-start-clean",
+      "session-symbol-index",
+      "session_start_continuity",
+      "smart-tool-redirect",
+      "stop-memory-sync",
+      "unified-post-tool-tracker",
+      "utf-context-filter",
+      "utf-semantic-rag"
+    ]
+  },
+  "by_type": {
+    "agent": [
+      "aegis",
+      "agentica-agent",
+      "arbiter",
+      "architect",
+      "atlas",
+      "braintrust-analyst",
+      "chronicler",
+      "context-query-agent",
+      "critic",
+      "debug-agent",
+      "herald",
+      "judge",
+      "kraken",
+      "learnings-researcher",
+      "liaison",
+      "maestro",
+      "memory-extractor",
+      "onboard",
+      "oracle",
+      "pathfinder",
+      "phoenix",
+      "plan-agent",
+      "plan-reviewer",
+      "profiler",
+      "research-codebase",
+      "review-agent",
+      "scout",
+      "scribe",
+      "session-analyst",
+      "sleuth",
+      "spark",
+      "surveyor",
+      "validate-agent"
+    ],
+    "skill": [
+      "agent-context-isolation",
+      "agent-orchestration",
+      "agentic-workflow",
+      "agentica-claude-proxy",
+      "agentica-infrastructure",
+      "agentica-prompts",
+      "agentica-sdk",
+      "agentica-server",
+      "agentica-spawn",
+      "ast-grep-find",
+      "async-repl-protocol",
+      "background-agent-pings",
+      "braintrust-analyze",
+      "braintrust-tracing",
+      "build",
+      "cli-reference",
+      "coherence",
+      "commit",
+      "complete-skill",
+      "completion-check",
+      "compound-learnings",
+      "confidence-check",
+      "continuity_ledger",
+      "continuous-learning",
+      "create_handoff",
+      "dead-code",
+      "debug",
+      "debug-hooks",
+      "deep-reading-analyst",
+      "deep-reading-analyst",
+      "deep-reading-references",
+      "describe_pr",
+      "discovery-interview",
+      "environment-triage",
+      "explicit-identity",
+      "explore",
+      "firecrawl-scrape",
+      "fix",
+      "git-commits",
+      "github-search",
+      "graceful-degradation",
+      "handoff",
+      "help",
+      "hook-developer",
+      "hooks",
+      "idempotent-redundancy",
+      "implement_plan",
+      "implement_plan_micro",
+      "implement_task",
+      "index-at-creation",
+      "llm-tuning-patterns",
+      "loogle-search",
+      "math",
+      "math-help",
+      "math-router",
+      "math-unified",
+      "mcp-chaining",
+      "mcp-scripts",
+      "migrate",
+      "modular-code",
+      "morph-apply",
+      "morph-search",
+      "mot",
+      "nia-docs",
+      "no-polling-agents",
+      "no-task-output",
+      "observe-before-editing",
+      "onboard",
+      "opc-architecture",
+      "parallel-agent-contracts",
+      "parallel-agents",
+      "perplexity-search",
+      "pint-compute",
+      "plan-agent",
+      "premortem",
+      "prove",
+      "qlty-check",
+      "qlty-during-development",
+      "quant-methodology",
+      "README",
+      "recall",
+      "recall-reasoning",
+      "refactor",
+      "reference-sdk",
+      "release",
+      "remember",
+      "repo-research-analyst",
+      "repoprompt",
+      "research",
+      "research-agent",
+      "research-external",
+      "resume_handoff",
+      "review",
+      "router-first-architecture",
+      "search-hierarchy",
+      "search-router",
+      "search-tools",
+      "security",
+      "shapely-compute",
+      "skill-developer",
+      "skill-development",
+      "skill-upgrader",
+      "slash-commands",
+      "sub-agents",
+      "system_overview",
+      "tdd",
+      "tdd-migrate",
+      "tdd-migration-pipeline",
+      "test",
+      "tldr-code",
+      "tldr-deep",
+      "tldr-overview",
+      "tldr-router",
+      "tldr-stats",
+      "tour",
+      "validate-agent",
+      "wiring",
+      "workflow-router"
+    ],
+    "rule": [
+      "agent-memory-recall",
+      "agent-model-selection",
+      "auto-link-specs",
+      "autonomous-operation",
+      "before-acting",
+      "claim-verification",
+      "cross-terminal-db",
+      "destructive-commands",
+      "dynamic-recall",
+      "evolution-plan-adherence",
+      "hook-auto-execute",
+      "no-haiku",
+      "proactive-delegation",
+      "proactive-memory-disclosure",
+      "root-cause-focus",
+      "smart-tools-required",
+      "tldr-cli",
+      "token-efficiency",
+      "unified-spine-mandatory",
+      "use-scout-not-explore"
+    ],
+    "hook": [
+      "auto-cache-post",
+      "auto-cache-pre",
+      "auto-doc-sync",
+      "auto-handoff-stop",
+      "braintrust_hooks",
+      "cleanup-mcp",
+      "context-router",
+      "continuous-executor",
+      "continuous-learning-stop",
+      "git-post-commit",
+      "hook_launcher",
+      "kg-context-gate",
+      "kg-context-store",
+      "memory-recall-start",
+      "memory-store-stop",
+      "module-reminder",
+      "n8n-notify",
+      "orchestrator-route",
+      "post-compact-continue",
+      "post-tool-use-tracker",
+      "post_tool_use_tracker",
+      "pre-compact-handoff",
+      "premortem-suggest",
+      "pre_compact_continuity",
+      "session-activate-systems",
+      "session-briefing",
+      "session-start-clean",
+      "session-symbol-index",
+      "session_start_continuity",
+      "smart-tool-redirect",
+      "stop-memory-sync",
+      "unified-post-tool-tracker",
+      "utf-context-filter",
+      "utf-semantic-rag"
+    ]
+  },
+  "by_keyword": {
+    "framework": [
+      {
+        "name": "architect",
+        "type": "agent"
+      },
+      {
+        "name": "phoenix",
+        "type": "agent"
+      }
+    ],
+    "extended": [
+      {
+        "name": "architect",
+        "type": "agent"
+      },
+      {
+        "name": "phoenix",
+        "type": "agent"
+      }
+    ],
+    "step": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      },
+      {
+        "name": "onboard",
+        "type": "agent"
+      },
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "efficient": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "task": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "description": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "from": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "identify": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "feature": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      },
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      }
+    ],
+    "keywords": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "module": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "extract": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "patterns": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      },
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      },
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      },
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      },
+      {
+        "name": "remember",
+        "type": "skill"
+      },
+      {
+        "name": "repo-research-analyst",
+        "type": "skill"
+      }
+    ],
+    "updated": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      }
+    ],
+    "detected": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      }
+    ],
+    "constraints": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      }
+    ],
+    "test": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      },
+      {
+        "name": "tdd",
+        "type": "skill"
+      }
+    ],
+    "name": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      },
+      {
+        "name": "continuity_ledger",
+        "type": "skill"
+      },
+      {
+        "name": "create_handoff",
+        "type": "skill"
+      },
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      }
+    ],
+    "command": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      }
+    ],
+    "timestamp": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      }
+    ],
+    "contributing": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      }
+    ],
+    "implement": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "plan": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      },
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      },
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      },
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "agent": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "implementation": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "flow": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "before": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      },
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "complete": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      },
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "after": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      },
+      {
+        "name": "agentica-spawn",
+        "type": "skill"
+      }
+    ],
+    "handoff": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      },
+      {
+        "name": "continuity_ledger",
+        "type": "skill"
+      },
+      {
+        "name": "create_handoff",
+        "type": "skill"
+      }
+    ],
+    "developing": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      }
+    ],
+    "claude": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      },
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      },
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "skill": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-spawn",
+        "type": "skill"
+      },
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      }
+    ],
+    "proxy": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "debugging": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-deep",
+        "type": "skill"
+      }
+    ],
+    "agentica": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-spawn",
+        "type": "skill"
+      }
+    ],
+    "integration": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      }
+    ],
+    "when": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "repo-research-analyst",
+        "type": "skill"
+      }
+    ],
+    "findings": [
+      {
+        "name": "agentica-prompts",
+        "type": "skill"
+      }
+    ],
+    "should": [
+      {
+        "name": "agentica-prompts",
+        "type": "skill"
+      },
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      }
+    ],
+    "persist": [
+      {
+        "name": "agentica-prompts",
+        "type": "skill"
+      }
+    ],
+    "that": [
+      {
+        "name": "agentica-prompts",
+        "type": "skill"
+      },
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      },
+      {
+        "name": "prove",
+        "type": "skill"
+      },
+      {
+        "name": "remember",
+        "type": "skill"
+      },
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "simplest": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      }
+    ],
+    "code": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      },
+      {
+        "name": "dead-code",
+        "type": "skill"
+      },
+      {
+        "name": "remember",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-deep",
+        "type": "skill"
+      }
+    ],
+    "orchestration": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      },
+      {
+        "name": "build",
+        "type": "skill"
+      },
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "multi": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      },
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "import": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      }
+    ],
+    "existing": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      }
+    ],
+    "behavior": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      }
+    ],
+    "agentic": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      }
+    ],
+    "adding": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      }
+    ],
+    "claude_proxy": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "between": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      },
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "access": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "environment": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "client": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "connection": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "http": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "pattern": [
+      {
+        "name": "agentica-spawn",
+        "type": "skill"
+      }
+    ],
+    "selects": [
+      {
+        "name": "agentica-spawn",
+        "type": "skill"
+      }
+    ],
+    "user": [
+      {
+        "name": "agentica-spawn",
+        "type": "skill"
+      }
+    ],
+    "interrupted": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "message": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "resume": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "points": [
+      {
+        "name": "build",
+        "type": "skill"
+      },
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "greenfield": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "each": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "last": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "brownfield": [
+      {
+        "name": "build",
+        "type": "skill"
+      },
+      {
+        "name": "explore",
+        "type": "skill"
+      }
+    ],
+    "discovery": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "asked": [
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      }
+    ],
+    "what": [
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      },
+      {
+        "name": "help",
+        "type": "skill"
+      },
+      {
+        "name": "math-help",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "compound": [
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      }
+    ],
+    "setup": [
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      }
+    ],
+    "sessions": [
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      }
+    ],
+    "learnings": [
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      }
+    ],
+    "confidence": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "exist": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "implementations": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      },
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "documentation": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      },
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      },
+      {
+        "name": "repo-research-analyst",
+        "type": "skill"
+      }
+    ],
+    "compliance": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "ensure": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "identified": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "duplicate": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "criteria": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "folder": [
+      {
+        "name": "continuity_ledger",
+        "type": "skill"
+      },
+      {
+        "name": "create_handoff",
+        "type": "skill"
+      }
+    ],
+    "dead": [
+      {
+        "name": "dead-code",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "unreachable": [
+      {
+        "name": "dead-code",
+        "type": "skill"
+      }
+    ],
+    "cleanup": [
+      {
+        "name": "dead-code",
+        "type": "skill"
+      },
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "refactor": [
+      {
+        "name": "dead-code",
+        "type": "skill"
+      },
+      {
+        "name": "tdd",
+        "type": "skill"
+      }
+    ],
+    "unused": [
+      {
+        "name": "dead-code",
+        "type": "skill"
+      }
+    ],
+    "hooks": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      },
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "output": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      },
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "wrong": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      }
+    ],
+    "firing": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      }
+    ],
+    "aren": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      }
+    ],
+    "behaving": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      }
+    ],
+    "producing": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      }
+    ],
+    "unexpectedly": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      }
+    ],
+    "here": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "learning": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "hats": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "actionable": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "perspectives": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "inversion": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "does": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "study": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "unpack": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "scqa_framework": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "codebase": [
+      {
+        "name": "explore",
+        "type": "skill"
+      }
+    ],
+    "understand": [
+      {
+        "name": "explore",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "graph": [
+      {
+        "name": "explore",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "explore": [
+      {
+        "name": "explore",
+        "type": "skill"
+      },
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "call": [
+      {
+        "name": "explore",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "analyze": [
+      {
+        "name": "explore",
+        "type": "skill"
+      }
+    ],
+    "layers": [
+      {
+        "name": "explore",
+        "type": "skill"
+      }
+    ],
+    "architecture": [
+      {
+        "name": "explore",
+        "type": "skill"
+      }
+    ],
+    "help": [
+      {
+        "name": "help",
+        "type": "skill"
+      },
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "keyword2": [
+      {
+        "name": "help",
+        "type": "skill"
+      }
+    ],
+    "show": [
+      {
+        "name": "help",
+        "type": "skill"
+      },
+      {
+        "name": "prove",
+        "type": "skill"
+      }
+    ],
+    "keyword1": [
+      {
+        "name": "help",
+        "type": "skill"
+      }
+    ],
+    "capabilities": [
+      {
+        "name": "help",
+        "type": "skill"
+      }
+    ],
+    "with": [
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "write": [
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "only": [
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "input": [
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "correct": [
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "schemas": [
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "please": [
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "inform": [
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "automated": [
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "completing": [
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "manual": [
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "handoffs": [
+      {
+        "name": "implement_task",
+        "type": "skill"
+      }
+    ],
+    "reading": [
+      {
+        "name": "implement_task",
+        "type": "skill"
+      }
+    ],
+    "previous": [
+      {
+        "name": "implement_task",
+        "type": "skill"
+      }
+    ],
+    "approach": [
+      {
+        "name": "implement_task",
+        "type": "skill"
+      },
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "which": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "tutorial": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "example": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "solve": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      },
+      {
+        "name": "math-router",
+        "type": "skill"
+      }
+    ],
+    "sympy_compute": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "math": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      },
+      {
+        "name": "math-router",
+        "type": "skill"
+      }
+    ],
+    "tools": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "tool": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "compute": [
+      {
+        "name": "math-router",
+        "type": "skill"
+      }
+    ],
+    "calculate": [
+      {
+        "name": "math-router",
+        "type": "skill"
+      }
+    ],
+    "plot": [
+      {
+        "name": "math-router",
+        "type": "skill"
+      }
+    ],
+    "integrate": [
+      {
+        "name": "math-router",
+        "type": "skill"
+      },
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "router": [
+      {
+        "name": "math-router",
+        "type": "skill"
+      }
+    ],
+    "requests": [
+      {
+        "name": "math-router",
+        "type": "skill"
+      }
+    ],
+    "convert": [
+      {
+        "name": "math-router",
+        "type": "skill"
+      },
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "first": [
+      {
+        "name": "math-router",
+        "type": "skill"
+      },
+      {
+        "name": "tdd",
+        "type": "skill"
+      },
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "simplify": [
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "matrix": [
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "derivative": [
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "limit": [
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "unit": [
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "unsure": [
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "factor": [
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "series": [
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "current": [
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      }
+    ],
+    "state": [
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      }
+    ],
+    "brief": [
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      }
+    ],
+    "rationale": [
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      }
+    ],
+    "choices": [
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      }
+    ],
+    "exists": [
+      {
+        "name": "plan-agent",
+        "type": "skill"
+      }
+    ],
+    "true": [
+      {
+        "name": "prove",
+        "type": "skill"
+      }
+    ],
+    "verify": [
+      {
+        "name": "prove",
+        "type": "skill"
+      }
+    ],
+    "formalize": [
+      {
+        "name": "prove",
+        "type": "skill"
+      }
+    ],
+    "prove": [
+      {
+        "name": "prove",
+        "type": "skill"
+      }
+    ],
+    "project": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "websearch": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "specific": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "lookups": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "grep": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "simple": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "instead": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "questions": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "design": [
+      {
+        "name": "remember",
+        "type": "skill"
+      }
+    ],
+    "didn": [
+      {
+        "name": "remember",
+        "type": "skill"
+      }
+    ],
+    "work": [
+      {
+        "name": "remember",
+        "type": "skill"
+      }
+    ],
+    "discovered": [
+      {
+        "name": "remember",
+        "type": "skill"
+      }
+    ],
+    "working_solution": [
+      {
+        "name": "remember",
+        "type": "skill"
+      }
+    ],
+    "architectural_decision": [
+      {
+        "name": "remember",
+        "type": "skill"
+      }
+    ],
+    "pythonpath": [
+      {
+        "name": "remember",
+        "type": "skill"
+      }
+    ],
+    "searching": [
+      {
+        "name": "repo-research-analyst",
+        "type": "skill"
+      }
+    ],
+    "recent": [
+      {
+        "name": "repo-research-analyst",
+        "type": "skill"
+      }
+    ],
+    "optimization": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "explanations": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "arbiter": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "scribe": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "workflows": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "history": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "finding": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "repository": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "migrations": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "where": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "structural": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "type": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "fast": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "implemented": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "names": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "usestate": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "directly": [
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "geometry": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "intersection": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "hull": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "contains": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "polygon": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "buffer": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "distance": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "area": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "optional": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "inherits": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "20251101": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "prompt": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "omitted": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "edit": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "haiku": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "bash": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "driven": [
+      {
+        "name": "tdd",
+        "type": "skill"
+      }
+    ],
+    "green": [
+      {
+        "name": "tdd",
+        "type": "skill"
+      }
+    ],
+    "search": [
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "debug": [
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "calls": [
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "data": [
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "understanding": [
+      {
+        "name": "tldr-deep",
+        "type": "skill"
+      }
+    ],
+    "deeply": [
+      {
+        "name": "tldr-deep",
+        "type": "skill"
+      }
+    ],
+    "layer": [
+      {
+        "name": "tldr-router",
+        "type": "skill"
+      }
+    ],
+    "pick": [
+      {
+        "name": "tldr-router",
+        "type": "skill"
+      }
+    ],
+    "right": [
+      {
+        "name": "tldr-router",
+        "type": "skill"
+      }
+    ],
+    "asks": [
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "wanting": [
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "wants": [
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "selection": [
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "hasn": [
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "primary": [
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ]
+  },
+  "by_model_tier": {
+    "claude": [
+      "aegis",
+      "agentica-agent",
+      "arbiter",
+      "architect",
+      "atlas",
+      "braintrust-analyst",
+      "chronicler",
+      "context-query-agent",
+      "critic",
+      "herald",
+      "judge",
+      "learnings-researcher",
+      "liaison",
+      "maestro",
+      "onboard",
+      "oracle",
+      "pathfinder",
+      "phoenix",
+      "plan-agent",
+      "plan-reviewer",
+      "profiler",
+      "research-codebase",
+      "review-agent",
+      "scout",
+      "scribe",
+      "session-analyst",
+      "sleuth",
+      "spark",
+      "surveyor",
+      "validate-agent",
+      "agent-context-isolation",
+      "agent-orchestration",
+      "agentic-workflow",
+      "agentica-claude-proxy",
+      "agentica-infrastructure",
+      "agentica-prompts",
+      "agentica-sdk",
+      "agentica-server",
+      "agentica-spawn",
+      "ast-grep-find",
+      "async-repl-protocol",
+      "background-agent-pings",
+      "braintrust-analyze",
+      "braintrust-tracing",
+      "cli-reference",
+      "coherence",
+      "commit",
+      "complete-skill",
+      "completion-check",
+      "compound-learnings",
+      "confidence-check",
+      "continuity_ledger",
+      "continuous-learning",
+      "create_handoff",
+      "deep-reading-analyst",
+      "deep-reading-analyst",
+      "deep-reading-references",
+      "describe_pr",
+      "discovery-interview",
+      "environment-triage",
+      "explicit-identity",
+      "explore",
+      "firecrawl-scrape",
+      "git-commits",
+      "github-search",
+      "graceful-degradation",
+      "handoff",
+      "help",
+      "hook-developer",
+      "hooks",
+      "idempotent-redundancy",
+      "index-at-creation",
+      "llm-tuning-patterns",
+      "loogle-search",
+      "math",
+      "math-help",
+      "math-router",
+      "math-unified",
+      "mcp-chaining",
+      "mcp-scripts",
+      "migrate",
+      "morph-apply",
+      "morph-search",
+      "mot",
+      "nia-docs",
+      "no-polling-agents",
+      "no-task-output",
+      "observe-before-editing",
+      "onboard",
+      "opc-architecture",
+      "parallel-agent-contracts",
+      "parallel-agents",
+      "perplexity-search",
+      "pint-compute",
+      "plan-agent",
+      "premortem",
+      "prove",
+      "qlty-check",
+      "qlty-during-development",
+      "quant-methodology",
+      "README",
+      "recall",
+      "recall-reasoning",
+      "refactor",
+      "reference-sdk",
+      "release",
+      "remember",
+      "repo-research-analyst",
+      "repoprompt",
+      "research",
+      "research-agent",
+      "research-external",
+      "resume_handoff",
+      "review",
+      "router-first-architecture",
+      "search-hierarchy",
+      "search-router",
+      "search-tools",
+      "security",
+      "shapely-compute",
+      "skill-developer",
+      "skill-development",
+      "skill-upgrader",
+      "slash-commands",
+      "sub-agents",
+      "system_overview",
+      "tdd",
+      "tdd-migrate",
+      "tdd-migration-pipeline",
+      "tldr-deep",
+      "tldr-overview",
+      "tldr-router",
+      "tldr-stats",
+      "tour",
+      "validate-agent",
+      "wiring",
+      "workflow-router"
+    ],
+    "codex": [
+      "debug-agent",
+      "kraken",
+      "build",
+      "dead-code",
+      "debug",
+      "debug-hooks",
+      "fix",
+      "implement_plan",
+      "implement_plan_micro",
+      "implement_task",
+      "modular-code",
+      "test",
+      "tldr-code"
+    ],
+    "localai": [
+      "memory-extractor"
+    ],
+    "n/a": [
+      "agent-memory-recall",
+      "agent-model-selection",
+      "auto-link-specs",
+      "autonomous-operation",
+      "before-acting",
+      "claim-verification",
+      "cross-terminal-db",
+      "destructive-commands",
+      "dynamic-recall",
+      "evolution-plan-adherence",
+      "hook-auto-execute",
+      "no-haiku",
+      "proactive-delegation",
+      "proactive-memory-disclosure",
+      "root-cause-focus",
+      "smart-tools-required",
+      "tldr-cli",
+      "token-efficiency",
+      "unified-spine-mandatory",
+      "use-scout-not-explore",
+      "auto-cache-post",
+      "auto-cache-pre",
+      "auto-doc-sync",
+      "auto-handoff-stop",
+      "braintrust_hooks",
+      "cleanup-mcp",
+      "context-router",
+      "continuous-executor",
+      "continuous-learning-stop",
+      "git-post-commit",
+      "hook_launcher",
+      "kg-context-gate",
+      "kg-context-store",
+      "memory-recall-start",
+      "memory-store-stop",
+      "module-reminder",
+      "n8n-notify",
+      "orchestrator-route",
+      "post-compact-continue",
+      "post-tool-use-tracker",
+      "post_tool_use_tracker",
+      "pre-compact-handoff",
+      "premortem-suggest",
+      "pre_compact_continuity",
+      "session-activate-systems",
+      "session-briefing",
+      "session-start-clean",
+      "session-symbol-index",
+      "session_start_continuity",
+      "smart-tool-redirect",
+      "stop-memory-sync",
+      "unified-post-tool-tracker",
+      "utf-context-filter",
+      "utf-semantic-rag"
+    ]
+  }
+}
