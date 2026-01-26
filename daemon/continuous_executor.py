@@ -182,7 +182,7 @@ LOG_FILE = DAEMON_DIR / "continuous_executor.log"
 # Configuration
 POLL_INTERVAL = 30  # seconds between checks
 MAX_TASK_DURATION = 600  # 10 minutes max per task
-IDLE_THRESHOLD = 300  # 5 minutes idle before background tasks
+IDLE_THRESHOLD = 60  # 1 minute idle before background tasks
 CLAUDE_CMD = "claude"  # CLI command
 MAX_RETRIES = 2  # Retry failed tasks
 
@@ -929,7 +929,8 @@ class ContinuousExecutor:
             from task_generator import generate_tasks, get_pending_tasks, approve_task
             from task_queue import TaskQueue
             tq = TaskQueue()
-            if tq.count_pending() == 0:
+            pending_count = len(tq.get_pending_tasks(limit=1))
+            if pending_count == 0:
                 # Check for pending generated tasks - auto-approve them
                 pending_generated = get_pending_tasks()
                 if pending_generated:
