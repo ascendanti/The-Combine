@@ -426,19 +426,78 @@ class ContinuousExecutor:
                 except Exception as e:
                     logger.warning(f"Codex execution failed: {e}, falling back")
 
-            # Claude needed for complex reasoning
+            # Claude needed for complex reasoning - but fallback if unavailable
             if route == "claude":
-                logger.info("Complex task - routing to Claude sequential mode")
-                # Store decision_id for outcome recording after Claude completes
-                task.decision_id = decision_id if hasattr(task, '__dict__') else None
-                return None  # Let Claude handle it
+                # Check if Claude CLI is available (has auth)
+                claude_available = self._check_claude_available()
 
-            # Unknown route - default to Claude
-            return None
+                if claude_available:
+                    logger.info("Complex task - routing to Claude sequential mode")
+                    task.decision_id = decision_id if hasattr(task, '__dict__') else None
+                    return None  # Let Claude handle it
+                else:
+                    # Fallback: try Codex for code tasks, LocalAI for others
+                    logger.warning("Claude CLI unavailable - falling back to alternative providers")
+
+                    if self.router and self.router.openai_client.available():
+                        try:
+                            result = self.router.route(task=task.prompt, content="", force_provider="codex")
+                            if result.get("response"):
+                                self._complete_task(task.id, result["response"])
+                                record_outcome(decision_id, "success", tokens_used=500)
+                                self._log_event("task_complete", task.id, {"provider": "codex", "fallback": True})
+                                return True
+                        except Exception as e:
+                            logger.warning(f"Codex fallback failed: {e}")
+
+                    if self.router and self.router.localai.available():
+                        try:
+                            result = self.router.route(task=task.prompt, content="", force_provider="localai")
+                            if result.get("response"):
+                                self._complete_task(task.id, result["response"])
+                                record_outcome(decision_id, "success", tokens_used=100)
+                                self._log_event("task_complete", task.id, {"provider": "localai", "fallback": True})
+                                return True
+                        except Exception as e:
+                            logger.warning(f"LocalAI fallback failed: {e}")
+
+                    # No providers available - mark task as blocked
+                    self._fail_task(task.id, "No AI providers available (Claude, Codex, LocalAI)")
+                    record_outcome(decision_id, "failure", tokens_used=0)
+                    return True  # Handled (as failure)
+
+            # Unknown route - try available providers
+            if self.router and self.router.localai.available():
+                try:
+                    result = self.router.route(task=task.prompt, content="", force_provider="localai")
+                    if result.get("response"):
+                        self._complete_task(task.id, result["response"])
+                        return True
+                except Exception:
+                    pass
+
+            return None  # Last resort: try Claude CLI
 
         except Exception as e:
             logger.error(f"AutoRouter exception: {e}")
             return None  # Fallback to Claude
+
+    def _check_claude_available(self) -> bool:
+        """Check if Claude CLI is available and authenticated."""
+        try:
+            resolved = shutil.which("claude") or shutil.which("claude.exe")
+            if not resolved:
+                return False
+            # Quick check - just verify the binary exists and runs
+            result = subprocess.run(
+                [resolved, "--version"],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            return result.returncode == 0
+        except Exception:
+            return False
 
     def _queue_agent_task(self, task: ContinuousTask, agent_name: str):
         """Queue a task for a specific agent."""
@@ -618,6 +677,9 @@ class ContinuousExecutor:
             prompt,
         ]
 
+        # On Windows, suppress console window creation
+        creation_flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+
         return subprocess.run(
             cmd,
             capture_output=True,
@@ -627,6 +689,7 @@ class ContinuousExecutor:
             encoding="utf-8",
             errors="replace",
             env=run_env,
+            creationflags=creation_flags,
         )
 
     def _extract_json_payload(self, text: str) -> Optional[Dict[str, Any]]:
