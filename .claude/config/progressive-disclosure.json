@@ -29,6 +29,7 @@
   "output_offloading": {
     "enabled": true,
     "plugin": "fewword",
+    "processor": ".claude/scripts/fewword-output.py",
     "thresholds": {
       "inline_max": 512,
       "pointer_max": 4096,
