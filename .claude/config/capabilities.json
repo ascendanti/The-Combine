@@ -1,13 +1,43 @@
 {
-  "generated": "2026-01-26T09:30:54.002117",
-  "total": 205,
+  "generated": "2026-01-26T09:53:15.131304",
+  "total": 350,
   "counts": {
-    "agents": 33,
-    "skills": 118,
+    "agents": 149,
+    "skills": 147,
     "rules": 20,
     "hooks": 34
   },
   "capabilities": [
+    {
+      "name": "academic-research-synthesizer",
+      "type": "agent",
+      "path": ".claude\\agents\\academic-research-synthesizer.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "academic-researcher",
+      "type": "agent",
+      "path": ".claude\\agents\\academic-researcher.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "accessibility-specialist",
+      "type": "agent",
+      "path": ".claude\\agents\\accessibility-specialist.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
     {
       "name": "aegis",
       "type": "agent",
@@ -17,6 +47,16 @@
       "triggers": [],
       "model_tier": "claude",
       "risk_level": "medium"
+    },
+    {
+      "name": "agent-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\agent-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
     },
     {
       "name": "agentica-agent",
@@ -29,11 +69,61 @@
       "risk_level": "low"
     },
     {
+      "name": "ai-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\ai-engineer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "api-documenter",
+      "type": "agent",
+      "path": ".claude\\agents\\api-documenter.md",
+      "description": "",
+      "domain": "documentation",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "api-security-audit",
+      "type": "agent",
+      "path": ".claude\\agents\\api-security-audit.md",
+      "description": "",
+      "domain": "security",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "medium"
+    },
+    {
       "name": "arbiter",
       "type": "agent",
       "path": ".claude\\agents\\arbiter.md",
       "description": "",
       "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "arbitrage-bot",
+      "type": "agent",
+      "path": ".claude\\agents\\arbitrage-bot.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "architect-review",
+      "type": "agent",
+      "path": ".claude\\agents\\architect-review.md",
+      "description": "",
+      "domain": "planning",
       "triggers": [],
       "model_tier": "claude",
       "risk_level": "low"
@@ -62,9 +152,59 @@
       "risk_level": "low"
     },
     {
+      "name": "audio-quality-controller",
+      "type": "agent",
+      "path": ".claude\\agents\\audio-quality-controller.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "backend-architect",
+      "type": "agent",
+      "path": ".claude\\agents\\backend-architect.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "blockchain-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\blockchain-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "braintrust-analyst",
       "type": "agent",
       "path": ".claude\\agents\\braintrust-analyst.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "business-analyst",
+      "type": "agent",
+      "path": ".claude\\agents\\business-analyst.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "c-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\c-developer.md",
       "description": "",
       "domain": "general",
       "triggers": [],
@@ -82,9 +222,89 @@
       "risk_level": "low"
     },
     {
+      "name": "cloud-architect",
+      "type": "agent",
+      "path": ".claude\\agents\\cloud-architect.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "code-reviewer",
+      "type": "agent",
+      "path": ".claude\\agents\\code-reviewer.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "medium"
+    },
+    {
+      "name": "command-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\command-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "comprehensive-researcher",
+      "type": "agent",
+      "path": ".claude\\agents\\comprehensive-researcher.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "connection-agent",
+      "type": "agent",
+      "path": ".claude\\agents\\connection-agent.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "content-marketer",
+      "type": "agent",
+      "path": ".claude\\agents\\content-marketer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "context-manager",
+      "type": "agent",
+      "path": ".claude\\agents\\context-manager.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "context-query-agent",
       "type": "agent",
       "path": ".claude\\agents\\context-query-agent.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "cpp-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\cpp-engineer.md",
       "description": "",
       "domain": "general",
       "triggers": [],
@@ -102,6 +322,106 @@
       "risk_level": "low"
     },
     {
+      "name": "crypto-analyst",
+      "type": "agent",
+      "path": ".claude\\agents\\crypto-analyst.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "crypto-risk-manager",
+      "type": "agent",
+      "path": ".claude\\agents\\crypto-risk-manager.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "crypto-trader",
+      "type": "agent",
+      "path": ".claude\\agents\\crypto-trader.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "customer-support",
+      "type": "agent",
+      "path": ".claude\\agents\\customer-support.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "data-analyst",
+      "type": "agent",
+      "path": ".claude\\agents\\data-analyst.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "data-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\data-engineer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "data-scientist",
+      "type": "agent",
+      "path": ".claude\\agents\\data-scientist.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "database-admin",
+      "type": "agent",
+      "path": ".claude\\agents\\database-admin.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "database-optimization",
+      "type": "agent",
+      "path": ".claude\\agents\\database-optimization.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "database-optimizer",
+      "type": "agent",
+      "path": ".claude\\agents\\database-optimizer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "debug-agent",
       "type": "agent",
       "path": ".claude\\agents\\debug-agent.md",
@@ -112,9 +432,209 @@
       "risk_level": "medium"
     },
     {
+      "name": "debugger",
+      "type": "agent",
+      "path": ".claude\\agents\\debugger.md",
+      "description": "1. Capture complete error message, stack trace, and environment details 2. Run `git diff` to check recent changes that might have introduced the issue 3. Identify minimal reproduction steps",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "medium"
+    },
+    {
+      "name": "defi-strategist",
+      "type": "agent",
+      "path": ".claude\\agents\\defi-strategist.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "deployment-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\deployment-engineer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "devops-troubleshooter",
+      "type": "agent",
+      "path": ".claude\\agents\\devops-troubleshooter.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "directus-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\directus-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "docusaurus-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\docusaurus-expert.md",
+      "description": "",
+      "domain": "documentation",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "drupal-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\drupal-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "dx-optimizer",
+      "type": "agent",
+      "path": ".claude\\agents\\dx-optimizer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "episode-orchestrator",
+      "type": "agent",
+      "path": ".claude\\agents\\episode-orchestrator.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "error-detective",
+      "type": "agent",
+      "path": ".claude\\agents\\error-detective.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "frontend-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\frontend-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "game-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\game-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "golang-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\golang-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "graphql-architect",
+      "type": "agent",
+      "path": ".claude\\agents\\graphql-architect.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "hackathon-ai-strategist",
+      "type": "agent",
+      "path": ".claude\\agents\\hackathon-ai-strategist.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "herald",
       "type": "agent",
       "path": ".claude\\agents\\herald.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "hyperledger-fabric-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\hyperledger-fabric-developer.md",
+      "description": "",
+      "domain": "memory",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "incident-responder",
+      "type": "agent",
+      "path": ".claude\\agents\\incident-responder.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "ios-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\ios-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "java-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\java-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "javascript-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\javascript-developer.md",
       "description": "",
       "domain": "general",
       "triggers": [],
@@ -142,23 +662,53 @@
       "risk_level": "medium"
     },
     {
+      "name": "laravel-vue-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\laravel-vue-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "learnings-researcher",
       "type": "agent",
       "path": ".claude\\agents\\learnings-researcher.md",
       "description": "",
       "domain": "research",
       "triggers": [
-        "step",
-        "efficient",
-        "task",
-        "description",
-        "from",
-        "identify",
-        "feature",
         "keywords",
         "module",
-        "extract"
+        "names",
+        "from",
+        "task",
+        "strategy",
+        "efficient",
+        "extract",
+        "step",
+        "description"
       ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "legacy-modernizer",
+      "type": "agent",
+      "path": ".claude\\agents\\legacy-modernizer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "legal-advisor",
+      "type": "agent",
+      "path": ".claude\\agents\\legal-advisor.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -166,6 +716,16 @@
       "name": "liaison",
       "type": "agent",
       "path": ".claude\\agents\\liaison.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "llms-maintainer",
+      "type": "agent",
+      "path": ".claude\\agents\\llms-maintainer.md",
       "description": "",
       "domain": "general",
       "triggers": [],
@@ -183,6 +743,100 @@
       "risk_level": "low"
     },
     {
+      "name": "markdown-syntax-formatter",
+      "type": "agent",
+      "path": ".claude\\agents\\markdown-syntax-formatter.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "market-research-analyst",
+      "type": "agent",
+      "path": ".claude\\agents\\market-research-analyst.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "mcp-deployment-orchestrator",
+      "type": "agent",
+      "path": ".claude\\agents\\mcp-deployment-orchestrator.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "mcp-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\mcp-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "mcp-registry-navigator",
+      "type": "agent",
+      "path": ".claude\\agents\\mcp-registry-navigator.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "generating",
+        "capabilities",
+        "servers",
+        "searching",
+        "assessing",
+        "trustworthiness",
+        "registries",
+        "with",
+        "configurations",
+        "specific"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "mcp-security-auditor",
+      "type": "agent",
+      "path": ".claude\\agents\\mcp-security-auditor.md",
+      "description": "",
+      "domain": "security",
+      "triggers": [
+        "implementing",
+        "oauth"
+      ],
+      "model_tier": "claude",
+      "risk_level": "medium"
+    },
+    {
+      "name": "mcp-server-architect",
+      "type": "agent",
+      "path": ".claude\\agents\\mcp-server-architect.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "mcp-testing-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\mcp-testing-engineer.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "medium"
+    },
+    {
       "name": "memory-extractor",
       "type": "agent",
       "path": ".claude\\agents\\memory-extractor.md",
@@ -193,22 +847,123 @@
       "risk_level": "low"
     },
     {
+      "name": "metadata-agent",
+      "type": "agent",
+      "path": ".claude\\agents\\metadata-agent.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "ml-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\ml-engineer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "mlops-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\mlops-engineer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "mobile-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\mobile-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "moc-agent",
+      "type": "agent",
+      "path": ".claude\\agents\\moc-agent.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "network-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\network-engineer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "nextjs-app-router-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\nextjs-app-router-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "ocr-grammar-fixer",
+      "type": "agent",
+      "path": ".claude\\agents\\ocr-grammar-fixer.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "typical",
+        "correcting",
+        "artifacts",
+        "processed",
+        "copy",
+        "business",
+        "scanned",
+        "with",
+        "recognition",
+        "text"
+      ],
+      "model_tier": "codex",
+      "risk_level": "medium"
+    },
+    {
+      "name": "ocr-quality-assurance",
+      "type": "agent",
+      "path": ".claude\\agents\\ocr-quality-assurance.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "onboard",
       "type": "agent",
       "path": ".claude\\agents\\onboard.md",
       "description": "",
       "domain": "general",
       "triggers": [
-        "patterns",
-        "updated",
-        "detected",
-        "constraints",
-        "test",
-        "name",
-        "command",
-        "timestamp",
+        "template",
+        "user",
+        "build",
+        "framework",
+        "markdown",
+        "session",
+        "from",
         "contributing",
-        "step"
+        "tech",
+        "stated"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -234,6 +989,26 @@
       "risk_level": "low"
     },
     {
+      "name": "payment-integration",
+      "type": "agent",
+      "path": ".claude\\agents\\payment-integration.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "performance-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\performance-engineer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "phoenix",
       "type": "agent",
       "path": ".claude\\agents\\phoenix.md",
@@ -243,6 +1018,16 @@
         "framework",
         "extended"
       ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "php-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\php-developer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -267,11 +1052,216 @@
       "risk_level": "low"
     },
     {
+      "name": "podcast-content-analyzer",
+      "type": "agent",
+      "path": ".claude\\agents\\podcast-content-analyzer.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "podcast-metadata-specialist",
+      "type": "agent",
+      "path": ".claude\\agents\\podcast-metadata-specialist.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "descriptions",
+        "titles",
+        "platforms",
+        "optimized",
+        "creating",
+        "media",
+        "posts",
+        "formatted",
+        "podcast",
+        "timestamps"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "podcast-transcriber",
+      "type": "agent",
+      "path": ".claude\\agents\\podcast-transcriber.md",
+      "description": "",
+      "domain": "documentation",
+      "triggers": [
+        "structured",
+        "converting",
+        "files",
+        "identifying",
+        "generating",
+        "media",
+        "transcription",
+        "timestamped",
+        "speakers",
+        "segments"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "podcast-trend-scout",
+      "type": "agent",
+      "path": ".claude\\agents\\podcast-trend-scout.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "developments",
+        "trends",
+        "tech",
+        "areas",
+        "researching",
+        "finding",
+        "breaking",
+        "timely",
+        "podcasts",
+        "focus"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "profiler",
       "type": "agent",
       "path": ".claude\\agents\\profiler.md",
       "description": "",
       "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "project-supervisor-orchestrator",
+      "type": "agent",
+      "path": ".claude\\agents\\project-supervisor-orchestrator.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "orchestrating",
+        "processes",
+        "detecting",
+        "pipelines",
+        "incomplete",
+        "sophisticated",
+        "multi",
+        "managing",
+        "information",
+        "agent"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "prompt-engineer",
+      "type": "agent",
+      "path": ".claude\\agents\\prompt-engineer.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "prompts",
+        "improving",
+        "building",
+        "performance",
+        "crafting",
+        "features",
+        "system",
+        "agent"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "python-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\python-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "quant-analyst",
+      "type": "agent",
+      "path": ".claude\\agents\\quant-analyst.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "query-clarifier",
+      "type": "agent",
+      "path": ".claude\\agents\\query-clarifier.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "rails-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\rails-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "react-performance-optimization",
+      "type": "agent",
+      "path": ".claude\\agents\\react-performance-optimization.md",
+      "description": "Use this agent when dealing with React performance issues including slow loading applications, janky user interactions, large bundle sizes, memory leaks, poor Core Web Vitals scores, or performance re",
+      "domain": "research",
+      "triggers": [
+        "scores",
+        "applications",
+        "poor",
+        "user",
+        "with",
+        "sizes",
+        "agent",
+        "including",
+        "vitals",
+        "performance"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "report-generator",
+      "type": "agent",
+      "path": ".claude\\agents\\report-generator.md",
+      "description": "Use this agent when you need to transform synthesized research findings into a comprehensive, well-structured final report. This should be used after research has been completed and findings have been",
+      "domain": "research",
+      "triggers": [
+        "structured",
+        "findings",
+        "need",
+        "final",
+        "into",
+        "transform",
+        "well",
+        "research",
+        "report",
+        "synthesized"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "research-brief-generator",
+      "type": "agent",
+      "path": ".claude\\agents\\research-brief-generator.md",
+      "description": "",
+      "domain": "research",
       "triggers": [],
       "model_tier": "claude",
       "risk_level": "low"
@@ -287,23 +1277,123 @@
       "risk_level": "low"
     },
     {
+      "name": "research-coordinator",
+      "type": "agent",
+      "path": ".claude\\agents\\research-coordinator.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "research-orchestrator",
+      "type": "agent",
+      "path": ".claude\\agents\\research-orchestrator.md",
+      "description": "Use this agent when you need to coordinate a comprehensive research project that requires multiple specialized agents working in sequence. This agent manages the entire research workflow from initial ",
+      "domain": "research",
+      "triggers": [
+        "requires",
+        "need",
+        "project",
+        "working",
+        "agents",
+        "coordinate",
+        "that",
+        "research",
+        "multiple",
+        "specialized"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "research-synthesizer",
+      "type": "agent",
+      "path": ".claude\\agents\\research-synthesizer.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [
+        "structured",
+        "identifying",
+        "creating",
+        "perspectives",
+        "from",
+        "insights",
+        "research",
+        "patterns",
+        "merging",
+        "diverse"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "review-agent",
       "type": "agent",
       "path": ".claude\\agents\\review-agent.md",
-      "description": "",
+      "description": "Use this agent to cross-check enhancement work and ensure consistency across the vault. This agent should be used after other enhancement agents have completed their work to validate outputs and maint",
       "domain": "analysis",
       "triggers": [
-        "step",
-        "implement",
-        "plan",
-        "agent",
-        "implementation",
-        "flow",
-        "before",
-        "complete",
-        "after",
-        "handoff"
+        "cross",
+        "check",
+        "work",
+        "across",
+        "enhancement",
+        "consistency",
+        "ensure",
+        "vault",
+        "agent"
       ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "risk-manager",
+      "type": "agent",
+      "path": ".claude\\agents\\risk-manager.md",
+      "description": "Use this agent proactively for risk assessment, trade tracking, or portfolio protection. Apply when you need to monitor portfolio risk, calculate R-multiples, assess position limits, create hedging st",
+      "domain": "general",
+      "triggers": [
+        "risk",
+        "proactively",
+        "agent",
+        "trade",
+        "tracking",
+        "protection",
+        "portfolio",
+        "assessment"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "ruby-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\ruby-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "rust-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\rust-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "sales-automator",
+      "type": "agent",
+      "path": ".claude\\agents\\sales-automator.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -328,6 +1418,57 @@
       "risk_level": "low"
     },
     {
+      "name": "search-specialist",
+      "type": "agent",
+      "path": ".claude\\agents\\search-specialist.md",
+      "description": "Use this agent when you need expert web research using advanced search techniques and synthesis. Apply for competitive analysis, fact-checking, historical research, trend analysis, or when you need to",
+      "domain": "research",
+      "triggers": [
+        "need",
+        "techniques",
+        "expert",
+        "advanced",
+        "using",
+        "research",
+        "synthesis",
+        "when",
+        "search",
+        "agent"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "security-auditor",
+      "type": "agent",
+      "path": ".claude\\agents\\security-auditor.md",
+      "description": "",
+      "domain": "security",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "medium"
+    },
+    {
+      "name": "seo-podcast-optimizer",
+      "type": "agent",
+      "path": ".claude\\agents\\seo-podcast-optimizer.md",
+      "description": "Use this agent when you need to optimize podcast episode content for search engines. This includes creating SEO-friendly titles, meta descriptions, and identifying relevant long-tail keywords for tech",
+      "domain": "research",
+      "triggers": [
+        "need",
+        "episode",
+        "engines",
+        "search",
+        "podcast",
+        "content",
+        "when",
+        "optimize",
+        "agent"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "session-analyst",
       "type": "agent",
       "path": ".claude\\agents\\session-analyst.md",
@@ -348,9 +1489,49 @@
       "risk_level": "low"
     },
     {
+      "name": "social-media-clip-creator",
+      "type": "agent",
+      "path": ".claude\\agents\\social-media-clip-creator.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "social-media-copywriter",
+      "type": "agent",
+      "path": ".claude\\agents\\social-media-copywriter.md",
+      "description": "Use this agent when you need to create social media content for podcast episodes. This includes generating Twitter/X threads, LinkedIn posts, and Instagram captions from episode information. The agent",
+      "domain": "documentation",
+      "triggers": [
+        "episodes",
+        "need",
+        "social",
+        "media",
+        "when",
+        "podcast",
+        "content",
+        "create",
+        "agent"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "spark",
       "type": "agent",
       "path": ".claude\\agents\\spark.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "sql-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\sql-expert.md",
       "description": "",
       "domain": "general",
       "triggers": [],
@@ -368,11 +1549,151 @@
       "risk_level": "low"
     },
     {
+      "name": "tag-agent",
+      "type": "agent",
+      "path": ".claude\\agents\\tag-agent.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "task-decomposition-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\task-decomposition-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "technical-researcher",
+      "type": "agent",
+      "path": ".claude\\agents\\technical-researcher.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "terraform-specialist",
+      "type": "agent",
+      "path": ".claude\\agents\\terraform-specialist.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "test-automator",
+      "type": "agent",
+      "path": ".claude\\agents\\test-automator.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [],
+      "model_tier": "codex",
+      "risk_level": "medium"
+    },
+    {
+      "name": "text-comparison-validator",
+      "type": "agent",
+      "path": ".claude\\agents\\text-comparison-validator.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "timestamp-precision-specialist",
+      "type": "agent",
+      "path": ".claude\\agents\\timestamp-precision-specialist.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "twitter-ai-influencer-manager",
+      "type": "agent",
+      "path": ".claude\\agents\\twitter-ai-influencer-manager.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "typescript-expert",
+      "type": "agent",
+      "path": ".claude\\agents\\typescript-expert.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "ui-ux-designer",
+      "type": "agent",
+      "path": ".claude\\agents\\ui-ux-designer.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "url-context-validator",
+      "type": "agent",
+      "path": ".claude\\agents\\url-context-validator.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "url-link-extractor",
+      "type": "agent",
+      "path": ".claude\\agents\\url-link-extractor.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "localai",
+      "risk_level": "low"
+    },
+    {
       "name": "validate-agent",
       "type": "agent",
       "path": ".claude\\agents\\validate-agent.md",
       "description": "",
       "domain": "analysis",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "visual-analysis-ocr",
+      "type": "agent",
+      "path": ".claude\\agents\\visual-analysis-ocr.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "wordpress-developer",
+      "type": "agent",
+      "path": ".claude\\agents\\wordpress-developer.md",
+      "description": "",
+      "domain": "general",
       "triggers": [],
       "model_tier": "claude",
       "risk_level": "low"
@@ -414,14 +1735,14 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "developing",
-        "claude",
-        "skill",
-        "proxy",
-        "debugging",
         "agentica",
+        "developing",
+        "debugging",
+        "proxy",
         "integration",
-        "when"
+        "when",
+        "claude",
+        "skill"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -458,16 +1779,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "simplest",
-        "code",
-        "orchestration",
-        "multi",
-        "import",
-        "existing",
-        "behavior",
-        "agentic",
+        "implementing",
         "agentica",
-        "adding"
+        "multi",
+        "with",
+        "start",
+        "agent",
+        "quick",
+        "agentic",
+        "function",
+        "capabilities"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -479,16 +1800,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "code",
-        "claude_proxy",
-        "between",
-        "claude",
-        "access",
+        "agentica",
         "proxy",
-        "environment",
+        "8080",
+        "with",
+        "access",
         "client",
-        "connection",
-        "http"
+        "agent",
+        "fresh",
+        "localhost",
+        "chat"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -500,14 +1821,35 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "skill",
-        "pattern",
         "agentica",
+        "pattern",
+        "skill",
+        "user",
         "after",
-        "selects",
-        "user"
+        "selects"
       ],
       "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "artifacts-builder",
+      "type": "skill",
+      "path": ".claude\\skills\\artifacts-builder\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "components",
+        "requiring",
+        "html",
+        "single",
+        "artifacts",
+        "routing",
+        "state",
+        "shadcn",
+        "simple",
+        "management"
+      ],
+      "model_tier": "codex",
       "risk_level": "low"
     },
     {
@@ -561,24 +1903,78 @@
       "risk_level": "low"
     },
     {
+      "name": "brand-guidelines",
+      "type": "skill",
+      "path": ".claude\\skills\\brand-guidelines\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "skill"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "build",
       "type": "skill",
       "path": ".claude\\skills\\build\\SKILL.md",
       "description": "",
       "domain": "code",
       "triggers": [
-        "interrupted",
-        "message",
-        "resume",
-        "points",
-        "orchestration",
-        "greenfield",
-        "each",
-        "last",
-        "brownfield",
-        "discovery"
+        "human",
+        "verification",
+        "decision",
+        "advanced",
+        "verify",
+        "acknowledge",
+        "commit",
+        "with",
+        "build",
+        "approve"
       ],
       "model_tier": "codex",
+      "risk_level": "low"
+    },
+    {
+      "name": "canvas-design",
+      "type": "skill",
+      "path": ".claude\\skills\\canvas-design\\SKILL.md",
+      "description": "",
+      "domain": "planning",
+      "triggers": [
+        "static",
+        "asks",
+        "poster",
+        "when",
+        "user",
+        "other",
+        "piece",
+        "create",
+        "design",
+        "skill"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "changelog-generator",
+      "type": "skill",
+      "path": ".claude\\skills\\changelog-generator\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "entries",
+        "weekly",
+        "changelog",
+        "product",
+        "notes",
+        "summaries",
+        "store",
+        "page",
+        "generating",
+        "public"
+      ],
+      "model_tier": "claude",
       "risk_level": "low"
     },
     {
@@ -612,6 +2008,27 @@
       "risk_level": "low"
     },
     {
+      "name": "competitive-ads-extractor",
+      "type": "skill",
+      "path": ".claude\\skills\\competitive-ads-extractor\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "campaigns",
+        "identifying",
+        "successful",
+        "proven",
+        "understanding",
+        "strategies",
+        "original",
+        "copy",
+        "with",
+        "designs"
+      ],
+      "model_tier": "localai",
+      "risk_level": "low"
+    },
+    {
       "name": "complete-skill",
       "type": "skill",
       "path": ".claude\\skills\\complete-skill\\SKILL.md",
@@ -638,14 +2055,14 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "should",
-        "asked",
-        "what",
         "compound",
-        "setup",
-        "claude",
-        "sessions",
-        "skill",
+        "asked",
+        "should",
+        "rules",
+        "json",
+        "skills",
+        "from",
+        "what",
         "learnings",
         "patterns"
       ],
@@ -659,16 +2076,37 @@
       "description": "",
       "domain": "general",
       "triggers": [
+        "implementing",
+        "cause",
+        "official",
+        "reviewed",
+        "found",
         "confidence",
-        "exist",
-        "implementations",
-        "documentation",
+        "working",
+        "verified",
         "compliance",
-        "ensure",
-        "identified",
-        "duplicate",
-        "before",
-        "criteria"
+        "assessment"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "content-research-writer",
+      "type": "skill",
+      "path": ".claude\\skills\\content-research-writer\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [
+        "articles",
+        "references",
+        "while",
+        "leadership",
+        "getting",
+        "section",
+        "with",
+        "citations",
+        "producing",
+        "pieces"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -680,9 +2118,9 @@
       "description": "",
       "domain": "memory",
       "triggers": [
+        "name",
         "folder",
-        "handoff",
-        "name"
+        "handoff"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -704,9 +2142,9 @@
       "description": "",
       "domain": "memory",
       "triggers": [
+        "name",
         "folder",
-        "handoff",
-        "name"
+        "handoff"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -719,11 +2157,11 @@
       "domain": "code",
       "triggers": [
         "code",
-        "dead",
         "unreachable",
-        "cleanup",
+        "unused",
+        "dead",
         "refactor",
-        "unused"
+        "cleanup"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -745,14 +2183,14 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "hooks",
-        "output",
-        "wrong",
-        "firing",
-        "aren",
         "behaving",
-        "producing",
-        "unexpectedly"
+        "wrong",
+        "hooks",
+        "aren",
+        "firing",
+        "output",
+        "unexpectedly",
+        "producing"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -764,16 +2202,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "here",
-        "learning",
-        "hats",
-        "actionable",
-        "perspectives",
-        "inversion",
-        "does",
-        "study",
-        "unpack",
-        "scqa_framework"
+        "application",
+        "they",
+        "models",
+        "first",
+        "frameworks",
+        "model",
+        "summaries",
+        "mentions",
+        "apply",
+        "play"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -785,16 +2223,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "here",
-        "learning",
-        "hats",
-        "actionable",
-        "perspectives",
-        "inversion",
-        "does",
-        "study",
-        "unpack",
-        "scqa_framework"
+        "application",
+        "they",
+        "models",
+        "first",
+        "frameworks",
+        "model",
+        "summaries",
+        "mentions",
+        "apply",
+        "play"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -820,12 +2258,68 @@
       "risk_level": "low"
     },
     {
+      "name": "developer-growth-analysis",
+      "type": "skill",
+      "path": ".claude\\skills\\developer-growth-analysis\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "articles",
+        "focused",
+        "they",
+        "week",
+        "skills",
+        "address",
+        "recurring",
+        "improvement",
+        "their",
+        "with"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "discovery-interview",
       "type": "skill",
       "path": ".claude\\skills\\discovery-interview\\SKILL.md",
       "description": "",
       "domain": "general",
       "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "docx",
+      "type": "skill",
+      "path": ".claude\\skills\\docx\\SKILL.md",
+      "description": "",
+      "domain": "documentation",
+      "triggers": [
+        "tracked",
+        "your",
+        "changes"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "domain-name-brainstormer",
+      "type": "skill",
+      "path": ".claude\\skills\\domain-name-brainstormer\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "service",
+        "first",
+        "product",
+        "available",
+        "personal",
+        "registering",
+        "site",
+        "portfolio",
+        "finding",
+        "company"
+      ],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -856,15 +2350,36 @@
       "description": "",
       "domain": "research",
       "triggers": [
-        "codebase",
-        "understand",
-        "graph",
         "explore",
-        "call",
-        "analyze",
         "layers",
-        "brownfield",
-        "architecture"
+        "understand",
+        "analyze",
+        "codebase",
+        "graph",
+        "call",
+        "architecture",
+        "brownfield"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "file-organizer",
+      "type": "skill",
+      "path": ".claude\\skills\\file-organizer\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "space",
+        "they",
+        "need",
+        "folder",
+        "everywhere",
+        "have",
+        "archiving",
+        "because",
+        "projects",
+        "files"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -936,12 +2451,12 @@
       "description": "",
       "domain": "general",
       "triggers": [
+        "capabilities",
+        "show",
+        "keyword2",
         "what",
         "help",
-        "keyword2",
-        "show",
-        "keyword1",
-        "capabilities"
+        "keyword1"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -953,15 +2468,15 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "hooks",
-        "with",
+        "schemas",
         "write",
-        "only",
-        "output",
         "input",
+        "hooks",
+        "only",
         "cleanup",
-        "correct",
-        "schemas"
+        "output",
+        "with",
+        "correct"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -987,22 +2502,43 @@
       "risk_level": "low"
     },
     {
+      "name": "image-enhancer",
+      "type": "skill",
+      "path": ".claude\\skills\\image-enhancer\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "media",
+        "sharing",
+        "social",
+        "blog",
+        "screenshot",
+        "upscaling",
+        "cleaning",
+        "sharpening",
+        "quality",
+        "posts"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "implement_plan",
       "type": "skill",
       "path": ".claude\\skills\\implement_plan\\SKILL.md",
       "description": "",
       "domain": "code",
       "triggers": [
+        "testing",
+        "focused",
+        "preservation",
+        "below",
+        "human",
+        "verification",
+        "ready",
         "please",
-        "orchestration",
-        "complete",
-        "inform",
-        "implementations",
-        "automated",
-        "that",
-        "multi",
-        "completing",
-        "manual"
+        "know",
+        "proceed"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -1024,10 +2560,10 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "handoffs",
         "reading",
-        "previous",
-        "approach"
+        "approach",
+        "handoffs",
+        "previous"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -1039,6 +2575,85 @@
       "description": "",
       "domain": "general",
       "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "internal-comms",
+      "type": "skill",
+      "path": ".claude\\skills\\internal-comms\\SKILL.md",
+      "description": "To write internal communications, use this skill for:",
+      "domain": "documentation",
+      "triggers": [
+        "faqs",
+        "leadership",
+        "problems",
+        "responses",
+        "incident",
+        "progress",
+        "sort",
+        "updates",
+        "communication",
+        "newsletters"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "invoice-organizer",
+      "type": "skill",
+      "path": ".claude\\skills\\invoice-organizer\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "messy",
+        "need",
+        "vendors",
+        "folder",
+        "archiving",
+        "business",
+        "accountants",
+        "year",
+        "reconciling",
+        "organizing"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "json-canvas",
+      "type": "skill",
+      "path": ".claude\\skills\\json-canvas\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "working",
+        "editing",
+        "creating",
+        "with",
+        "skill"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "lead-research-assistant",
+      "type": "skill",
+      "path": ".claude\\skills\\lead-research-assistant\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [
+        "identifying",
+        "service",
+        "product",
+        "potential",
+        "accounts",
+        "business",
+        "sales",
+        "clients",
+        "that",
+        "reach"
+      ],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -1079,16 +2694,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "what",
-        "help",
-        "which",
-        "tutorial",
-        "example",
         "solve",
-        "sympy_compute",
+        "which",
+        "equations",
+        "what",
+        "guide",
         "math",
         "tools",
-        "tool"
+        "sympy_compute",
+        "help",
+        "tutorial"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1100,16 +2715,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
+        "solve",
         "compute",
         "calculate",
-        "plot",
-        "integrate",
-        "router",
         "requests",
-        "convert",
         "first",
-        "solve",
-        "math"
+        "router",
+        "derivative",
+        "plot",
+        "math",
+        "prove"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1121,18 +2736,39 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "simplify",
-        "matrix",
-        "integrate",
+        "equation",
+        "solve",
         "derivative",
-        "limit",
+        "differential",
+        "explain",
         "unit",
-        "unsure",
-        "factor",
-        "convert",
-        "series"
+        "limit",
+        "matrix",
+        "simplify",
+        "unsure"
       ],
       "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "mcp-builder",
+      "type": "skill",
+      "path": ".claude\\skills\\mcp-builder\\SKILL.md",
+      "description": "",
+      "domain": "code",
+      "triggers": [
+        "servers",
+        "typescript",
+        "whether",
+        "building",
+        "python",
+        "node",
+        "external",
+        "fastmcp",
+        "services",
+        "apis"
+      ],
+      "model_tier": "codex",
       "risk_level": "low"
     },
     {
@@ -1152,6 +2788,27 @@
       "description": "",
       "domain": "general",
       "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "meeting-insights-analyzer",
+      "type": "skill",
+      "path": ".claude\\skills\\meeting-insights-analyzer\\SKILL.md",
+      "description": "",
+      "domain": "analysis",
+      "triggers": [
+        "identifying",
+        "difficult",
+        "understanding",
+        "time",
+        "getting",
+        "leadership",
+        "skills",
+        "tracking",
+        "avoid",
+        "improvement"
+      ],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -1246,6 +2903,41 @@
       "risk_level": "low"
     },
     {
+      "name": "obsidian-bases",
+      "type": "skill",
+      "path": ".claude\\skills\\obsidian-bases\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "database",
+        "filtering",
+        "notes",
+        "with",
+        "card",
+        "organizing",
+        "working",
+        "fields",
+        "table",
+        "calculated"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "obsidian-markdown",
+      "type": "skill",
+      "path": ".claude\\skills\\obsidian-markdown\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "skill",
+        "working",
+        "with"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "onboard",
       "type": "skill",
       "path": ".claude\\skills\\onboard\\SKILL.md",
@@ -1286,6 +2978,16 @@
       "risk_level": "low"
     },
     {
+      "name": "pdf",
+      "type": "skill",
+      "path": ".claude\\skills\\pdf\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "perplexity-search",
       "type": "skill",
       "path": ".claude\\skills\\perplexity-search\\SKILL.md",
@@ -1312,16 +3014,37 @@
       "description": "",
       "domain": "planning",
       "triggers": [
-        "current",
-        "state",
-        "brief",
-        "patterns",
-        "rationale",
-        "name",
-        "plan",
+        "decision",
         "choices",
-        "exists",
-        "feature"
+        "current",
+        "feature",
+        "brief",
+        "files",
+        "markdown",
+        "category",
+        "rationale",
+        "what"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "pptx",
+      "type": "skill",
+      "path": ".claude\\skills\\pptx\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "people",
+        "topic",
+        "emphasis",
+        "image",
+        "section",
+        "verify",
+        "placeholder",
+        "have",
+        "layouts",
+        "with"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1345,10 +3068,10 @@
       "triggers": [
         "true",
         "show",
-        "that",
         "verify",
-        "formalize",
-        "prove"
+        "that",
+        "prove",
+        "formalize"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1380,6 +3103,27 @@
       "description": "",
       "domain": "general",
       "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "raffle-winner-picker",
+      "type": "skill",
+      "path": ".claude\\skills\\raffle-winner-picker\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "distribution",
+        "fair",
+        "raffle",
+        "events",
+        "media",
+        "participants",
+        "tests",
+        "contest",
+        "social",
+        "giveaways"
+      ],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -1430,16 +3174,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "project",
         "websearch",
-        "patterns",
-        "specific",
+        "documentation",
+        "project",
+        "glob",
         "lookups",
         "grep",
-        "documentation",
-        "simple",
-        "instead",
-        "questions"
+        "patterns",
+        "questions",
+        "docs",
+        "instead"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1461,16 +3205,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "code",
-        "design",
-        "didn",
-        "work",
-        "discovered",
-        "patterns",
-        "that",
-        "working_solution",
+        "choices",
+        "error",
+        "system",
+        "resolutions",
+        "solutions",
+        "worked",
         "architectural_decision",
-        "pythonpath"
+        "that",
+        "default",
+        "specific"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1482,11 +3226,11 @@
       "description": "",
       "domain": "research",
       "triggers": [
-        "patterns",
         "documentation",
-        "when",
         "searching",
-        "recent"
+        "recent",
+        "patterns",
+        "when"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1538,16 +3282,16 @@
       "description": "",
       "domain": "memory",
       "triggers": [
-        "optimization",
-        "explanations",
-        "arbiter",
-        "scribe",
-        "workflows",
-        "history",
-        "finding",
+        "atlas",
+        "summaries",
+        "refactoring",
+        "system",
+        "scanning",
+        "kraken",
         "repository",
-        "plan",
-        "migrations"
+        "migrations",
+        "sleuth",
+        "scout"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1599,16 +3343,16 @@
       "description": "",
       "domain": "research",
       "triggers": [
-        "where",
-        "indexes",
-        "that",
-        "structural",
-        "type",
-        "fast",
-        "implemented",
-        "names",
-        "usestate",
-        "directly"
+        "decision",
+        "refactoring",
+        "compact",
+        "rate",
+        "files",
+        "function",
+        "comparison",
+        "communication",
+        "__init__",
+        "literal"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1630,16 +3374,29 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "geometry",
-        "intersection",
-        "between",
-        "hull",
         "contains",
-        "polygon",
-        "buffer",
-        "distance",
+        "hull",
+        "centroid",
         "points",
-        "area"
+        "convex",
+        "area",
+        "intersection",
+        "buffer",
+        "geometry",
+        "polygon"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "skill-creator",
+      "type": "skill",
+      "path": ".claude\\skills\\skill-creator\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "when",
+        "skill"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1665,12 +3422,54 @@
       "risk_level": "low"
     },
     {
+      "name": "skill-share",
+      "type": "skill",
+      "path": ".claude\\skills\\skill-share\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "distribution",
+        "collaborative",
+        "need",
+        "ready",
+        "notification",
+        "skills",
+        "metadata",
+        "says",
+        "sharing",
+        "with"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "skill-upgrader",
       "type": "skill",
       "path": ".claude\\skills\\skill-upgrader\\SKILL.md",
       "description": "",
       "domain": "general",
       "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "slack-gif-creator",
+      "type": "skill",
+      "path": ".claude\\skills\\slack-gif-creator\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "they",
+        "toolkit",
+        "only",
+        "aren",
+        "already",
+        "present",
+        "bash",
+        "pillow",
+        "imageio",
+        "numpy"
+      ],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -1691,16 +3490,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "optional",
-        "inherits",
-        "20251101",
-        "claude",
-        "here",
-        "prompt",
-        "omitted",
+        "inherit",
+        "model",
         "edit",
-        "haiku",
-        "bash"
+        "20251101",
+        "system",
+        "agent",
+        "inherits",
+        "content",
+        "optional",
+        "read"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1723,10 +3522,10 @@
       "domain": "general",
       "triggers": [
         "driven",
-        "green",
         "first",
+        "test",
         "refactor",
-        "test"
+        "green"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1762,22 +3561,34 @@
       "risk_level": "low"
     },
     {
+      "name": "theme-factory",
+      "type": "skill",
+      "path": ".claude\\skills\\theme-factory\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "skill"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "tldr-code",
       "type": "skill",
       "path": ".claude\\skills\\tldr-code\\SKILL.md",
       "description": "",
       "domain": "code",
       "triggers": [
-        "code",
-        "what",
-        "search",
-        "understand",
-        "debug",
-        "dead",
-        "graph",
         "calls",
-        "data",
-        "call"
+        "explore",
+        "code",
+        "understand",
+        "analyze",
+        "dead",
+        "refactor",
+        "graph",
+        "what",
+        "data"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -1789,10 +3600,10 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "understanding",
-        "deeply",
+        "debugging",
         "code",
-        "debugging"
+        "deeply",
+        "understanding"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1814,9 +3625,9 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "layer",
         "pick",
-        "right"
+        "right",
+        "layer"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1852,6 +3663,36 @@
       "risk_level": "low"
     },
     {
+      "name": "video-downloader",
+      "type": "skill",
+      "path": ".claude\\skills\\video-downloader\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [
+        "videos",
+        "asks",
+        "save",
+        "youtube",
+        "user",
+        "when",
+        "download",
+        "skill",
+        "grab"
+      ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "webapp-testing",
+      "type": "skill",
+      "path": ".claude\\skills\\webapp-testing\\SKILL.md",
+      "description": "",
+      "domain": "research",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "wiring",
       "type": "skill",
       "path": ".claude\\skills\\wiring\\SKILL.md",
@@ -1868,17 +3709,27 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "asks",
-        "wanting",
+        "need",
         "first",
-        "wants",
-        "approach",
         "selection",
-        "hasn",
-        "primary",
-        "plan",
+        "build",
+        "user",
+        "mentions",
+        "complex",
+        "start",
+        "orchestrate",
         "explore"
       ],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
+      "name": "xlsx",
+      "type": "skill",
+      "path": ".claude\\skills\\xlsx\\SKILL.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
       "model_tier": "claude",
       "risk_level": "low"
     },
@@ -2086,7 +3937,7 @@
       "name": "auto-cache-post",
       "type": "hook",
       "path": ".claude\\hooks\\auto-cache-post.py",
-      "description": "Auto-Cache PostToolUse Hook\n\nAutomatically caches outputs from Read, Grep, Glob operations\nfor token efficiency. Works with token-optimizer MCP.\n\nCaches:\n- File reads (by path + mtime)\n- Grep results ",
+      "description": "Auto-Cache PostToolUse Hook\n\nAutomatically caches outputs from Read, Grep, Glob operations\nto Dragonfly for token efficiency.\n\nCaches:\n- File reads (by path + mtime)\n- Grep results (by pattern + path)",
       "domain": "lifecycle",
       "triggers": [],
       "model_tier": "n/a",
@@ -2096,7 +3947,7 @@
       "name": "auto-cache-pre",
       "type": "hook",
       "path": ".claude\\hooks\\auto-cache-pre.py",
-      "description": "Auto-Cache PreToolUse Hook\n\nChecks cache before executing Read, Grep, Glob operations.\nReturns cached result if valid, saving tokens.\n\nCache invalidation:\n- Read: Checks file mtime (reloads if file ch",
+      "description": "Auto-Cache PreToolUse Hook\n\nChecks Dragonfly cache before executing Read, Grep, Glob operations.\nReturns cached result if valid, saving tokens.\n\nCache invalidation:\n- Read: Checks file mtime (reloads ",
       "domain": "lifecycle",
       "triggers": [],
       "model_tier": "n/a",
@@ -2336,7 +4187,7 @@
       "name": "session-briefing",
       "type": "hook",
       "path": ".claude\\hooks\\session-briefing.py",
-      "description": "Session Briefing Hook\n\nLoads essential documents into context on session start.\nOutputs condensed briefing to be injected into Claude's context.",
+      "description": "Session Briefing Hook - Token-Efficient Version\n\nOutputs MINIMAL briefing on session start.\nFollows context engineering principles:\n- Just-in-time context loading (pointers over content)\n- Minimal foo",
       "domain": "lifecycle",
       "triggers": [],
       "model_tier": "n/a",

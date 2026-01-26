@@ -1,57 +1,173 @@
 # Capability Registry
 
-*Generated: 2026-01-26 09:30*
+*Generated: 2026-01-26 09:53*
 
 ## Summary
 
 | Type | Count |
 |------|-------|
-| agent | 33 |
+| agent | 149 |
 | hook | 34 |
 | rule | 20 |
-| skill | 118 |
+| skill | 147 |
 
 ---
 
-## Agents (33)
+## Agents (149)
 
 | Name | Domain | Model | Description |
 |------|--------|-------|-------------|
+| `academic-research-synthesizer` | research | claude |  |
+| `academic-researcher` | research | claude |  |
+| `accessibility-specialist` | general | claude |  |
 | `aegis` | security | claude |  |
+| `agent-expert` | general | claude |  |
 | `agentica-agent` | general | claude |  |
+| `ai-engineer` | general | claude |  |
+| `api-documenter` | documentation | claude |  |
+| `api-security-audit` | security | claude |  |
 | `arbiter` | general | claude |  |
+| `arbitrage-bot` | general | claude |  |
 | `architect` | planning | claude |  |
+| `architect-review` | planning | claude |  |
 | `atlas` | general | claude |  |
+| `audio-quality-controller` | general | claude |  |
+| `backend-architect` | planning | claude |  |
+| `blockchain-developer` | general | claude |  |
 | `braintrust-analyst` | general | claude |  |
+| `business-analyst` | general | claude |  |
+| `c-developer` | general | claude |  |
 | `chronicler` | documentation | claude |  |
+| `cloud-architect` | planning | claude |  |
+| `code-reviewer` | code | codex |  |
+| `command-expert` | general | claude |  |
+| `comprehensive-researcher` | research | claude |  |
+| `connection-agent` | general | claude |  |
+| `content-marketer` | general | claude |  |
+| `context-manager` | general | claude |  |
 | `context-query-agent` | general | claude |  |
+| `cpp-engineer` | general | claude |  |
 | `critic` | analysis | claude |  |
+| `crypto-analyst` | general | claude |  |
+| `crypto-risk-manager` | general | claude |  |
+| `crypto-trader` | general | claude |  |
+| `customer-support` | general | claude |  |
+| `data-analyst` | general | claude |  |
+| `data-engineer` | general | claude |  |
+| `data-scientist` | general | claude |  |
+| `database-admin` | general | claude |  |
+| `database-optimization` | general | claude |  |
+| `database-optimizer` | general | claude |  |
 | `debug-agent` | code | codex |  |
+| `debugger` | code | codex | 1. Capture complete error message, stack trace, and environm... |
+| `defi-strategist` | general | claude |  |
+| `deployment-engineer` | general | claude |  |
+| `devops-troubleshooter` | general | claude |  |
+| `directus-developer` | general | claude |  |
+| `docusaurus-expert` | documentation | claude |  |
+| `drupal-developer` | general | claude |  |
+| `dx-optimizer` | general | claude |  |
+| `episode-orchestrator` | general | claude |  |
+| `error-detective` | general | claude |  |
+| `frontend-developer` | general | claude |  |
+| `game-developer` | general | claude |  |
+| `golang-expert` | general | claude |  |
+| `graphql-architect` | planning | claude |  |
+| `hackathon-ai-strategist` | general | claude |  |
 | `herald` | general | claude |  |
+| `hyperledger-fabric-developer` | memory | claude |  |
+| `incident-responder` | general | claude |  |
+| `ios-developer` | general | claude |  |
+| `java-developer` | general | claude |  |
+| `javascript-developer` | general | claude |  |
 | `judge` | analysis | claude |  |
 | `kraken` | code | codex |  |
+| `laravel-vue-developer` | general | claude |  |
 | `learnings-researcher` | research | claude |  |
+| `legacy-modernizer` | general | claude |  |
+| `legal-advisor` | general | claude |  |
 | `liaison` | general | claude |  |
+| `llms-maintainer` | general | claude |  |
 | `maestro` | general | claude |  |
+| `markdown-syntax-formatter` | general | claude |  |
+| `market-research-analyst` | research | claude |  |
+| `mcp-deployment-orchestrator` | general | claude |  |
+| `mcp-expert` | general | claude |  |
+| `mcp-registry-navigator` | general | claude |  |
+| `mcp-security-auditor` | security | claude |  |
+| `mcp-server-architect` | planning | claude |  |
+| `mcp-testing-engineer` | code | codex |  |
 | `memory-extractor` | memory | localai |  |
+| `metadata-agent` | general | claude |  |
+| `ml-engineer` | general | claude |  |
+| `mlops-engineer` | general | claude |  |
+| `mobile-developer` | general | claude |  |
+| `moc-agent` | general | claude |  |
+| `network-engineer` | general | claude |  |
+| `nextjs-app-router-developer` | general | claude |  |
+| `ocr-grammar-fixer` | code | codex |  |
+| `ocr-quality-assurance` | general | claude |  |
 | `onboard` | general | claude |  |
 | `oracle` | research | claude |  |
 | `pathfinder` | general | claude |  |
+| `payment-integration` | general | claude |  |
+| `performance-engineer` | general | claude |  |
 | `phoenix` | general | claude |  |
+| `php-developer` | general | claude |  |
 | `plan-agent` | planning | claude |  |
 | `plan-reviewer` | planning | claude |  |
+| `podcast-content-analyzer` | analysis | claude |  |
+| `podcast-metadata-specialist` | general | claude |  |
+| `podcast-transcriber` | documentation | claude |  |
+| `podcast-trend-scout` | general | claude |  |
 | `profiler` | general | claude |  |
+| `project-supervisor-orchestrator` | general | claude |  |
+| `prompt-engineer` | general | claude |  |
+| `python-expert` | general | claude |  |
+| `quant-analyst` | general | claude |  |
+| `query-clarifier` | general | claude |  |
+| `rails-expert` | general | claude |  |
+| `react-performance-optimization` | research | claude | Use this agent when dealing with React performance issues in... |
+| `report-generator` | research | claude | Use this agent when you need to transform synthesized resear... |
+| `research-brief-generator` | research | claude |  |
 | `research-codebase` | research | claude |  |
-| `review-agent` | analysis | claude |  |
+| `research-coordinator` | research | claude |  |
+| `research-orchestrator` | research | claude | Use this agent when you need to coordinate a comprehensive r... |
+| `research-synthesizer` | research | claude |  |
+| `review-agent` | analysis | claude | Use this agent to cross-check enhancement work and ensure co... |
+| `risk-manager` | general | claude | Use this agent proactively for risk assessment, trade tracki... |
+| `ruby-expert` | general | claude |  |
+| `rust-expert` | general | claude |  |
+| `sales-automator` | general | claude |  |
 | `scout` | general | claude |  |
 | `scribe` | documentation | claude |  |
+| `search-specialist` | research | claude | Use this agent when you need expert web research using advan... |
+| `security-auditor` | security | claude |  |
+| `seo-podcast-optimizer` | research | claude | Use this agent when you need to optimize podcast episode con... |
 | `session-analyst` | general | claude |  |
 | `sleuth` | general | claude |  |
+| `social-media-clip-creator` | general | claude |  |
+| `social-media-copywriter` | documentation | claude | Use this agent when you need to create social media content ... |
 | `spark` | general | claude |  |
+| `sql-expert` | general | claude |  |
 | `surveyor` | general | claude |  |
+| `tag-agent` | general | claude |  |
+| `task-decomposition-expert` | general | claude |  |
+| `technical-researcher` | research | claude |  |
+| `terraform-specialist` | general | claude |  |
+| `test-automator` | code | codex |  |
+| `text-comparison-validator` | general | claude |  |
+| `timestamp-precision-specialist` | general | claude |  |
+| `twitter-ai-influencer-manager` | general | claude |  |
+| `typescript-expert` | general | claude |  |
+| `ui-ux-designer` | planning | claude |  |
+| `url-context-validator` | general | claude |  |
+| `url-link-extractor` | general | localai |  |
 | `validate-agent` | analysis | claude |  |
+| `visual-analysis-ocr` | general | claude |  |
+| `wordpress-developer` | general | claude |  |
 
-## Skills (118)
+## Skills (147)
 
 | Name | Domain | Model | Description |
 |------|--------|-------|-------------|
@@ -65,19 +181,25 @@
 | `agentica-sdk` | general | claude |  |
 | `agentica-server` | general | claude |  |
 | `agentica-spawn` | general | claude |  |
+| `artifacts-builder` | code | codex |  |
 | `ast-grep-find` | general | claude |  |
 | `async-repl-protocol` | general | claude |  |
 | `background-agent-pings` | general | claude |  |
 | `braintrust-analyze` | analysis | claude |  |
 | `braintrust-tracing` | general | claude |  |
+| `brand-guidelines` | general | claude |  |
 | `build` | code | codex |  |
+| `canvas-design` | planning | claude |  |
+| `changelog-generator` | general | claude |  |
 | `cli-reference` | general | claude |  |
 | `coherence` | general | claude |  |
 | `commit` | general | claude |  |
+| `competitive-ads-extractor` | general | localai |  |
 | `complete-skill` | general | claude |  |
 | `completion-check` | general | claude |  |
 | `compound-learnings` | general | claude |  |
 | `confidence-check` | general | claude |  |
+| `content-research-writer` | research | claude |  |
 | `continuity_ledger` | memory | claude |  |
 | `continuous-learning` | general | claude |  |
 | `create_handoff` | memory | claude |  |
@@ -88,10 +210,14 @@
 | `deep-reading-analyst` | general | claude |  |
 | `deep-reading-references` | general | claude |  |
 | `describe_pr` | documentation | claude |  |
+| `developer-growth-analysis` | general | claude |  |
 | `discovery-interview` | general | claude |  |
+| `docx` | documentation | claude |  |
+| `domain-name-brainstormer` | general | claude |  |
 | `environment-triage` | general | claude |  |
 | `explicit-identity` | general | claude |  |
 | `explore` | research | claude |  |
+| `file-organizer` | general | claude |  |
 | `firecrawl-scrape` | general | claude |  |
 | `fix` | code | codex |  |
 | `git-commits` | general | claude |  |
@@ -102,18 +228,25 @@
 | `hook-developer` | general | claude |  |
 | `hooks` | general | claude |  |
 | `idempotent-redundancy` | general | claude |  |
+| `image-enhancer` | general | claude |  |
 | `implement_plan` | code | codex |  |
 | `implement_plan_micro` | code | codex |  |
 | `implement_task` | code | codex |  |
 | `index-at-creation` | general | claude |  |
+| `internal-comms` | documentation | claude | To write internal communications, use this skill for: |
+| `invoice-organizer` | general | claude |  |
+| `json-canvas` | general | claude |  |
+| `lead-research-assistant` | research | claude |  |
 | `llm-tuning-patterns` | general | claude |  |
 | `loogle-search` | research | claude |  |
 | `math` | general | claude |  |
 | `math-help` | general | claude |  |
 | `math-router` | general | claude |  |
 | `math-unified` | general | claude |  |
+| `mcp-builder` | code | codex |  |
 | `mcp-chaining` | general | claude |  |
 | `mcp-scripts` | general | claude |  |
+| `meeting-insights-analyzer` | analysis | claude |  |
 | `migrate` | general | claude |  |
 | `modular-code` | code | codex |  |
 | `morph-apply` | general | claude |  |
@@ -123,18 +256,23 @@
 | `no-polling-agents` | general | claude |  |
 | `no-task-output` | general | claude |  |
 | `observe-before-editing` | general | claude |  |
+| `obsidian-bases` | general | claude |  |
+| `obsidian-markdown` | general | claude |  |
 | `onboard` | general | claude |  |
 | `opc-architecture` | planning | claude |  |
 | `parallel-agent-contracts` | general | claude |  |
 | `parallel-agents` | general | claude |  |
+| `pdf` | general | claude |  |
 | `perplexity-search` | research | claude |  |
 | `pint-compute` | general | claude |  |
 | `plan-agent` | planning | claude |  |
+| `pptx` | general | claude |  |
 | `premortem` | general | claude |  |
 | `prove` | general | claude |  |
 | `qlty-check` | general | claude |  |
 | `qlty-during-development` | general | claude |  |
 | `quant-methodology` | general | claude |  |
+| `raffle-winner-picker` | general | claude |  |
 | `recall` | memory | claude |  |
 | `recall-reasoning` | memory | claude |  |
 | `refactor` | general | claude |  |
@@ -154,9 +292,12 @@
 | `search-tools` | research | claude |  |
 | `security` | security | claude |  |
 | `shapely-compute` | general | claude |  |
+| `skill-creator` | general | claude |  |
 | `skill-developer` | general | claude |  |
 | `skill-development` | general | claude |  |
+| `skill-share` | general | claude |  |
 | `skill-upgrader` | general | claude |  |
+| `slack-gif-creator` | general | claude |  |
 | `slash-commands` | general | claude |  |
 | `sub-agents` | general | claude |  |
 | `system_overview` | general | claude |  |
@@ -164,6 +305,7 @@
 | `tdd-migrate` | general | claude |  |
 | `tdd-migration-pipeline` | general | claude |  |
 | `test` | code | codex |  |
+| `theme-factory` | general | claude |  |
 | `tldr-code` | code | codex |  |
 | `tldr-deep` | general | claude |  |
 | `tldr-overview` | general | claude |  |
@@ -171,8 +313,11 @@
 | `tldr-stats` | general | claude |  |
 | `tour` | general | claude |  |
 | `validate-agent` | analysis | claude |  |
+| `video-downloader` | general | claude |  |
+| `webapp-testing` | research | claude |  |
 | `wiring` | general | claude |  |
 | `workflow-router` | general | claude |  |
+| `xlsx` | general | claude |  |
 
 ## Rules (20)
 
@@ -208,7 +353,7 @@
 Automatically caches outputs from Read, Grep, Glob ... |
 | `auto-cache-pre` | Auto-Cache PreToolUse Hook
 
-Checks cache before executing Read, Grep, Glob opera... |
+Checks Dragonfly cache before executing Read, Grep, ... |
 | `auto-doc-sync` | Stop Hook: Auto-sync documentation after each response. |
 | `auto-handoff-stop` | Stop hook: Block when context is too high and suggest handoff.
 
@@ -268,10 +413,9 @@ When context is a... |
 Parses transcript and generates auto-... |
 | `premortem-suggest` | Extract plan file paths from prompt. |
 | `session-activate-systems` | Session Start: Activate all cognitive systems and check for unused capabilities. |
-| `session-briefing` | Session Briefing Hook
+| `session-briefing` | Session Briefing Hook - Token-Efficient Version
 
-Loads essential documents into context on session start.
-... |
+Outputs MINIMAL briefing on ses... |
 | `session-start-clean` | Clean session start hook - consolidates startup tasks. |
 | `session-symbol-index` | Session start hook: Warm tldr cache and build semantic index
 Cross-platform Pyth... |
