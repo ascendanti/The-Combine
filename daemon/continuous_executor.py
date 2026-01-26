@@ -400,23 +400,10 @@ class ContinuousExecutor:
                 record_outcome(decision_id, "success", tokens_used=0)
                 return True
 
-            # LocalAI can handle simple tasks (FREE)
-            if route == "localai" and self.router and self.router.localai.available():
-                try:
-                    result = self.router.route(task=task.prompt, content="", force_provider="localai")
-                    if result.get("response"):
-                        response = result["response"]
-                        cache_response(task.prompt, response)
-                        self._complete_task(task.id, response)
-                        record_outcome(decision_id, "success", tokens_used=100)
-                        self._log_event("task_complete", task.id, {"provider": "localai", "free": True})
-                        return True
-                except Exception as e:
-                    logger.warning(f"LocalAI execution failed: {e}, falling back")
-
-            # Codex can handle code tasks (cheap)
+            # OpenAI/Codex can handle code tasks
             if route == "codex" and self.router and self.router.openai_client.available():
                 try:
+                    logger.info("Routing to OpenAI Codex")
                     result = self.router.route(task=task.prompt, content="", force_provider="codex")
                     if result.get("response"):
                         response = result["response"]
@@ -426,59 +413,12 @@ class ContinuousExecutor:
                         self._log_event("task_complete", task.id, {"provider": "codex"})
                         return True
                 except Exception as e:
-                    logger.warning(f"Codex execution failed: {e}, falling back")
+                    logger.warning(f"OpenAI execution failed: {e}, falling back to Claude")
 
-            # Claude needed for complex reasoning - but fallback if unavailable
-            if route == "claude":
-                # Check if Claude CLI is available (has auth)
-                claude_available = self._check_claude_available()
-
-                if claude_available:
-                    logger.info("Complex task - routing to Claude sequential mode")
-                    task.decision_id = decision_id if hasattr(task, '__dict__') else None
-                    return None  # Let Claude handle it
-                else:
-                    # Fallback: try Codex for code tasks, LocalAI for others
-                    logger.warning("Claude CLI unavailable - falling back to alternative providers")
-
-                    if self.router and self.router.openai_client.available():
-                        try:
-                            result = self.router.route(task=task.prompt, content="", force_provider="codex")
-                            if result.get("response"):
-                                self._complete_task(task.id, result["response"])
-                                record_outcome(decision_id, "success", tokens_used=500)
-                                self._log_event("task_complete", task.id, {"provider": "codex", "fallback": True})
-                                return True
-                        except Exception as e:
-                            logger.warning(f"Codex fallback failed: {e}")
-
-                    if self.router and self.router.localai.available():
-                        try:
-                            result = self.router.route(task=task.prompt, content="", force_provider="localai")
-                            if result.get("response"):
-                                self._complete_task(task.id, result["response"])
-                                record_outcome(decision_id, "success", tokens_used=100)
-                                self._log_event("task_complete", task.id, {"provider": "localai", "fallback": True})
-                                return True
-                        except Exception as e:
-                            logger.warning(f"LocalAI fallback failed: {e}")
-
-                    # No providers available - mark task as blocked
-                    self._fail_task(task.id, "No AI providers available (Claude, Codex, LocalAI)")
-                    record_outcome(decision_id, "failure", tokens_used=0)
-                    return True  # Handled (as failure)
-
-            # Unknown route - try available providers
-            if self.router and self.router.localai.available():
-                try:
-                    result = self.router.route(task=task.prompt, content="", force_provider="localai")
-                    if result.get("response"):
-                        self._complete_task(task.id, result["response"])
-                        return True
-                except Exception:
-                    pass
-
-            return None  # Last resort: try Claude CLI
+            # Default: Claude CLI for all other tasks
+            logger.info("Routing to Claude CLI")
+            task.decision_id = decision_id if hasattr(task, '__dict__') else None
+            return None  # Let Claude handle it
 
         except Exception as e:
             logger.error(f"AutoRouter exception: {e}")
