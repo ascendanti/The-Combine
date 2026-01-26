@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-Deterministic Router
+Deterministic Router - UNIFIED VERSION
 
 Routes requests without LLM when possible:
 1. Ultrawork mode detection → 2. Slash commands → 3. atlas_spine (rule-based)
-4. capability registry lookup → 5. Task complexity analysis → 6. Claude
+4. capability registry lookup → 5. Orchestrator fast_classify → 6. Claude
+
+WIRING: This router now integrates with orchestrator.fast_classify() for
+enriched classification when local patterns don't match with high confidence.
 
 This is the core of the Tripartite Integration - routing 80%+ without LLM.
 
@@ -12,6 +15,7 @@ Integrations:
 - oh-my-opencode: ultrawork/ulw keyword detection
 - create-claude: /commit, /review, /test, etc. commands
 - claude-code-buddy: task complexity scoring and workflow guidance
+- orchestrator.py: fast_classify() for intent detection (NEWLY WIRED)
 """
 
 import os
@@ -25,6 +29,16 @@ from dataclasses import dataclass, field
 PROJECT_ROOT = Path(__file__).parent.parent
 CLAUDE_DIR = PROJECT_ROOT / ".claude"
 CONFIG_DIR = CLAUDE_DIR / "config"
+DAEMON_DIR = Path(__file__).parent
+
+# Wire in orchestrator for enhanced classification
+sys.path.insert(0, str(DAEMON_DIR))
+try:
+    from orchestrator import fast_classify as orchestrator_classify
+    ORCHESTRATOR_AVAILABLE = True
+except ImportError:
+    ORCHESTRATOR_AVAILABLE = False
+    orchestrator_classify = None
 
 
 @dataclass
@@ -185,7 +199,15 @@ class DeterministicRouter:
             result.mode = "ultrawork" if ultrawork_mode else "normal"
             return result
 
-        # Stage 5: Escalate to LLM classification
+        # Stage 5: Orchestrator fast_classify (NEWLY WIRED)
+        # Uses orchestrator's intent detection as secondary source
+        result = self._try_orchestrator_classify(query_lower)
+        if result and result.confidence >= 0.6:
+            result.complexity = complexity
+            result.mode = "ultrawork" if ultrawork_mode else "normal"
+            return result
+
+        # Stage 6: Escalate to LLM classification
         return RouteResult(
             target='escalate',
             target_type='escalate',
@@ -311,6 +333,41 @@ class DeterministicRouter:
                 )
 
         return None
+
+    def _try_orchestrator_classify(self, query: str) -> Optional[RouteResult]:
+        """
+        WIRED: Use orchestrator.fast_classify() for enhanced routing.
+        This integrates the orchestrator's intent detection as a secondary source.
+        """
+        if not ORCHESTRATOR_AVAILABLE or orchestrator_classify is None:
+            return None
+
+        try:
+            # Call orchestrator's fast classification
+            classification = orchestrator_classify(query)
+
+            # Only use if confidence is reasonable
+            if classification.get("confidence", 0) < 0.5:
+                return None
+
+            # Map orchestrator's route to model tier
+            route_to_tier = {
+                "localai": "localai",
+                "codex": "codex",
+                "claude": "claude",
+            }
+
+            return RouteResult(
+                target=classification.get("agent", "spark"),
+                target_type="agent",
+                confidence=classification.get("confidence", 0.6),
+                reason=f"Orchestrator: {classification.get('intent', 'unknown')} intent",
+                model_tier=route_to_tier.get(classification.get("route", "claude"), "claude"),
+                complexity=classification.get("complexity", 3)
+            )
+        except Exception as e:
+            # Don't fail routing if orchestrator has issues
+            return None
 
     def _get_model_tier(self, capability_name: str) -> str:
         """Get appropriate model tier for a capability."""

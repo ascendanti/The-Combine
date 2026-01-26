@@ -1,6 +1,6 @@
 {
   "_comment": "Self-Model: What the system knows about itself. Used to recognize upgrade potential in every input.",
-  "_updated": "2026-01-25",
+  "_updated": "2026-01-26",
 
   "capabilities": {
     "document_processing": {
@@ -18,11 +18,11 @@
       "upgrade_triggers": ["multi-vector", "graph RAG", "reasoning chains", "better recall"]
     },
     "caching": {
-      "current_method": "Dragonfly + LLM response cache",
-      "version": "Phase 13.3",
-      "keywords": ["cache", "memoization", "deduplication", "TTL"],
-      "limitations": ["No semantic cache", "No cross-session"],
-      "upgrade_triggers": ["semantic caching", "compressed cache", "distributed cache"]
+      "current_method": "Dragonfly L1 + Semantic Cache (Jaccard) + Context Router",
+      "version": "Phase 14",
+      "keywords": ["cache", "memoization", "deduplication", "TTL", "semantic", "HOT/WARM/COLD"],
+      "limitations": ["No cross-session", "No embedding-based similarity"],
+      "upgrade_triggers": ["embedding cache", "compressed cache", "distributed cache"]
     },
     "llm_routing": {
       "current_method": "Complexity-based routing (LocalAI < Codex < Claude)",
@@ -32,17 +32,24 @@
       "upgrade_triggers": ["adaptive routing", "learned routing", "cost optimization"]
     },
     "memory": {
-      "current_method": "OpenMemory + PostgreSQL + SQLite",
-      "version": "Phase 12",
-      "keywords": ["memory", "recall", "embedding", "vector", "semantic search"],
-      "limitations": ["Multiple stores", "No unified search"],
-      "upgrade_triggers": ["unified memory", "faster search", "better embeddings"]
+      "current_method": "memory_router (SQLite + KnowledgeGraph + Dragonfly L1)",
+      "version": "Phase 14",
+      "keywords": ["memory", "recall", "unified", "L1 cache", "semantic search"],
+      "limitations": ["No embedding-based similarity", "Jaccard only"],
+      "upgrade_triggers": ["MARM integration", "embedding search", "better recall"]
+    },
+    "context_management": {
+      "current_method": "context_router HOT/WARM/COLD tiering",
+      "version": "Phase 14",
+      "keywords": ["context", "tiering", "token savings", "decay", "relevance"],
+      "limitations": ["Single-file scoring", "No cross-file relationships"],
+      "upgrade_triggers": ["file clustering", "dependency-aware tiering", "predictive loading"]
     },
     "strategy_evolution": {
-      "current_method": "Genetic evolution + outcome tracking",
-      "version": "Phase 13",
+      "current_method": "Genetic evolution + outcome tracking (via unified_spine)",
+      "version": "Phase 14",
       "keywords": ["strategy", "evolution", "genetic", "fitness", "mutation"],
-      "limitations": ["Not connected to decisions", "Manual triggers"],
+      "limitations": ["Manual triggers for mutation"],
       "upgrade_triggers": ["automatic evolution", "online learning", "bandit algorithms"]
     },
     "policy_transfer": {
@@ -56,8 +63,9 @@
 
   "architecture": {
     "services": ["LocalAI", "Dragonfly", "autonomous-ingest", "synthesis-worker", "kg-summary-worker", "feedback-loop"],
-    "databases": 23,
-    "target_databases": 4,
+    "wired_systems": ["orchestrator", "memory_router", "unified_spine", "context_router", "emergent", "feedback_loop", "feedback_bridge", "strategy_evolution", "outcome_tracker", "execution_spine"],
+    "multi_agent": "Swarms (sequential/concurrent workflows)",
+    "databases": 9,
     "hooks": 15,
     "skills": 116,
     "agents": 48

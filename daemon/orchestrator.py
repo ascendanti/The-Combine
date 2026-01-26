@@ -29,6 +29,17 @@ sys.path.insert(0, str(DAEMON_DIR))
 
 from model_router import ModelRouter, classify_task, TaskType, Provider, CascadeRouter
 
+# WIRED: Swarms for multi-agent orchestration
+try:
+    from swarms import Agent
+    from swarms.structs import SequentialWorkflow, ConcurrentWorkflow
+    SWARMS_AVAILABLE = True
+except ImportError:
+    SWARMS_AVAILABLE = False
+    Agent = None
+    SequentialWorkflow = None
+    ConcurrentWorkflow = None
+
 DB_PATH = DAEMON_DIR / "orchestrator.db"
 
 # ============================================================================
@@ -203,6 +214,10 @@ class Orchestrator:
         # Initialize subsystems
         self.router = ModelRouter()
         self.cascade = CascadeRouter(self.router) if self.config.cascade_enabled else None
+
+        # WIRED: Swarms for multi-agent tasks
+        self.swarms_enabled = SWARMS_AVAILABLE
+        self._agent_cache = {}  # Cache created agents
 
         # State
         self.tokens_used_today = 0
@@ -451,8 +466,97 @@ class Orchestrator:
             },
             "by_provider": by_provider,
             "tokens_used_today": self.tokens_used_today,
-            "token_budget_remaining": self.config.token_budget_daily - self.tokens_used_today
+            "token_budget_remaining": self.config.token_budget_daily - self.tokens_used_today,
+            "swarms_enabled": self.swarms_enabled
         }
+
+    # =========================================================================
+    # WIRED: Swarms Multi-Agent Orchestration
+    # =========================================================================
+
+    def run_swarm_workflow(self, tasks: List[str], workflow_type: str = "sequential",
+                           agent_configs: List[Dict] = None) -> Dict[str, Any]:
+        """
+        Run a multi-agent workflow using Swarms.
+
+        Args:
+            tasks: List of task prompts
+            workflow_type: "sequential" or "concurrent"
+            agent_configs: Optional agent configurations
+
+        Returns:
+            Dict with workflow results and metadata
+        """
+        if not self.swarms_enabled:
+            return {"error": "Swarms not available", "results": []}
+
+        try:
+            # Create agents for each task
+            agents = []
+            for i, task in enumerate(tasks):
+                agent_name = f"agent_{i}"
+                if agent_name not in self._agent_cache:
+                    # Create minimal agent (Swarms will use its default model)
+                    agent = Agent(
+                        agent_name=agent_name,
+                        system_prompt=f"You are agent {i}. Complete tasks efficiently.",
+                        max_loops=1
+                    )
+                    self._agent_cache[agent_name] = agent
+                agents.append(self._agent_cache[agent_name])
+
+            # Create workflow based on type
+            if workflow_type == "concurrent":
+                workflow = ConcurrentWorkflow(
+                    agents=agents,
+                    max_workers=min(len(agents), self.config.max_concurrent_tasks)
+                )
+            else:
+                workflow = SequentialWorkflow(agents=agents)
+
+            # Run workflow
+            results = workflow.run(tasks[0] if len(tasks) == 1 else str(tasks))
+
+            return {
+                "workflow_type": workflow_type,
+                "tasks_count": len(tasks),
+                "agents_used": len(agents),
+                "results": results,
+                "success": True
+            }
+
+        except Exception as e:
+            return {
+                "error": str(e),
+                "workflow_type": workflow_type,
+                "success": False
+            }
+
+    def should_use_swarm(self, classification: Dict) -> bool:
+        """
+        Determine if task should use Swarms multi-agent workflow.
+
+        Uses swarm for:
+        - High complexity tasks (>= 7)
+        - Tasks requiring multiple capabilities
+        - Explicit multi-step tasks
+        """
+        if not self.swarms_enabled:
+            return False
+
+        complexity = classification.get("complexity", 1)
+        intent = classification.get("intent", "")
+
+        # High complexity tasks benefit from multi-agent
+        if complexity >= 7:
+            return True
+
+        # Multi-step intents
+        multi_step_intents = ["plan", "architect", "refactor", "analyze"]
+        if intent in multi_step_intents:
+            return True
+
+        return False
 
 # ============================================================================
 # CLI

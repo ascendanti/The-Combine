@@ -5,6 +5,11 @@ Auto-Cache PreToolUse Hook
 Checks Dragonfly cache before executing Read, Grep, Glob operations.
 Returns cached result if valid, saving tokens.
 
+WIRED (2026-01-26): Now integrates Context Router for HOT/WARM/COLD tiering.
+- HOT files: Full content (frequently accessed)
+- WARM files: Headers/signatures only (64-95% token savings)
+- COLD files: Reference only (evicted)
+
 Cache invalidation:
 - Read: Checks file mtime (reloads if file changed)
 - Grep/Glob: TTL-based (1 hour default)
@@ -16,7 +21,7 @@ import hashlib
 from pathlib import Path
 from datetime import datetime
 
-# Add daemon to path for cache_client
+# Add daemon to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "daemon"))
 
 try:
@@ -24,6 +29,14 @@ try:
     CACHE_AVAILABLE = True
 except ImportError:
     CACHE_AVAILABLE = False
+
+# WIRED: Context Router for tiered context management
+try:
+    from context_router import ContextRouter
+    CONTEXT_ROUTER_AVAILABLE = True
+except ImportError:
+    CONTEXT_ROUTER_AVAILABLE = False
+    ContextRouter = None
 
 # Tools to check cache for
 CACHEABLE_TOOLS = {"Read", "Grep", "Glob"}
@@ -52,6 +65,33 @@ def main():
     if tool_name not in CACHEABLE_TOOLS:
         print(json.dumps({"continue": True}))
         return
+
+    # WIRED: Use Context Router for Read operations
+    if tool_name == "Read" and CONTEXT_ROUTER_AVAILABLE and "file_path" in tool_input:
+        file_path = tool_input["file_path"]
+        try:
+            router = ContextRouter()
+            tier, content = router.get_context(file_path)
+            router.record_access(file_path, "PreToolUse Read")
+
+            if tier == "warm":
+                # Return WARM content instead of full
+                print(json.dumps({
+                    "continue": True,
+                    "message": f"[CONTEXT ROUTER] {tier.upper()} tier - headers only ({len(content)} chars)\n{content[:2000]}"
+                }))
+                return
+            elif tier == "cold":
+                # File is COLD - just reference
+                print(json.dumps({
+                    "continue": True,
+                    "message": f"[CONTEXT ROUTER] COLD tier - {file_path} (evicted, access to promote)"
+                }))
+                return
+            # HOT tier - continue to full read
+
+        except Exception as e:
+            pass  # Fall through to normal processing
 
     if not CACHE_AVAILABLE:
         print(json.dumps({"continue": True}))

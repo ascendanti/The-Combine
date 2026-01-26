@@ -4,10 +4,16 @@ Unified Memory Router - Single interface to all memory systems.
 
 Routes queries to appropriate backends and aggregates results.
 Prevents memory system clashes through unified interface.
+
+WIRING (2026-01-26):
+- L1 Cache: Dragonfly (Redis-compatible) for fast lookups
+- L2: SQLite daemon memory for learnings/decisions
+- L3: Knowledge Graph for entity relations
 """
 
 import json
 import sys
+import hashlib
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from dataclasses import dataclass
@@ -19,7 +25,20 @@ sys.path.insert(0, str(Path(__file__).parent))
 # Local imports
 from memory import Memory, Learning, Decision
 
+# WIRED: Dragonfly L1 cache
+try:
+    import redis
+    REDIS_AVAILABLE = True
+except ImportError:
+    REDIS_AVAILABLE = False
+
 KNOWLEDGE_GRAPH_PATH = Path.home() / ".claude" / "memory" / "knowledge-graph.jsonl"
+CACHE_TTL = 300  # 5 minutes for search results
+
+# Two-stage semantic matching thresholds (inspired by prompt-cache)
+SIMILARITY_HIGH = 0.85   # Immediately return cached (high confidence match)
+SIMILARITY_LOW = 0.5     # Bypass cache entirely (too different)
+# Gray zone (0.5-0.85) could trigger LLM verification, but we skip for performance
 
 
 @dataclass
@@ -43,20 +62,149 @@ class MemoryRouter:
     """
     Unified interface to all memory systems.
 
-    Backends:
-    - daemon/memory.py (SQLite/OpenMemory) - Learnings & decisions
-    - knowledge-graph.jsonl - Entity relations
-    - token-optimizer cache - File content cache
+    WIRED Backends (2026-01-26):
+    - L1: Dragonfly/Redis cache - Fast lookup (< 100ms)
+    - L2: daemon/memory.py (SQLite) - Learnings & decisions
+    - L3: knowledge-graph.jsonl - Entity relations
     """
 
     def __init__(self):
         self._daemon_memory = Memory(backend="auto")
         self._kg_path = KNOWLEDGE_GRAPH_PATH
+        # WIRED: L1 Dragonfly cache
+        self._cache = self._init_cache()
+
+    def _init_cache(self) -> Optional[Any]:
+        """Initialize Dragonfly/Redis cache connection."""
+        if not REDIS_AVAILABLE:
+            return None
+        try:
+            r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+            r.ping()
+            return r
+        except Exception:
+            return None
+
+    def _cache_key(self, query: str, k: int) -> str:
+        """Generate cache key for a search query."""
+        query_hash = hashlib.sha256(f"{query}:{k}".encode()).hexdigest()[:16]
+        return f"claude:memory_router:{query_hash}"
+
+    def _normalize_query(self, query: str) -> set:
+        """Normalize query to word set for semantic matching."""
+        # Simple tokenization and normalization
+        words = set(query.lower().split())
+        # Remove common stop words
+        stop_words = {'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been',
+                      'to', 'of', 'and', 'or', 'in', 'on', 'at', 'for', 'with'}
+        return words - stop_words
+
+    def _semantic_similarity(self, query1: str, query2: str) -> float:
+        """Calculate Jaccard similarity between queries (lightweight semantic matching)."""
+        words1 = self._normalize_query(query1)
+        words2 = self._normalize_query(query2)
+        if not words1 or not words2:
+            return 0.0
+        intersection = len(words1 & words2)
+        union = len(words1 | words2)
+        return intersection / union if union > 0 else 0.0
+
+    def _cache_get(self, key: str) -> Optional[List[Dict]]:
+        """Get from L1 cache."""
+        if not self._cache:
+            return None
+        try:
+            data = self._cache.get(key)
+            if data:
+                return json.loads(data)
+        except Exception:
+            pass
+        return None
+
+    def _cache_get_semantic(self, query: str, k: int) -> Optional[List[Dict]]:
+        """
+        Two-stage semantic cache lookup (inspired by prompt-cache architecture).
+
+        Stage 1: High similarity (>0.85) → Return immediately
+        Stage 2: Low similarity (<0.5) → Skip entirely
+        Gray zone: Accept for now (could add LLM verification later)
+        """
+        if not self._cache:
+            return None
+
+        try:
+            # Get all cached query keys
+            keys = self._cache.keys("claude:memory_router:*")
+            if not keys:
+                return None
+
+            best_match = None
+            best_similarity = 0
+
+            # Check each cached query for semantic similarity
+            for cached_key in keys[:50]:  # Limit to 50 for performance
+                if ":meta" in str(cached_key):
+                    continue  # Skip metadata keys
+
+                # Get the original query from metadata
+                meta_key = f"{cached_key}:meta"
+                meta = self._cache.get(meta_key)
+                if not meta:
+                    continue
+
+                meta_data = json.loads(meta)
+                cached_query = meta_data.get("query", "")
+                cached_k = meta_data.get("k", 0)
+
+                if cached_k < k:
+                    continue  # Need at least as many results
+
+                # Two-stage similarity check
+                similarity = self._semantic_similarity(query, cached_query)
+
+                if similarity < SIMILARITY_LOW:
+                    continue  # Too different, skip
+
+                if similarity > best_similarity:
+                    best_similarity = similarity
+                    best_match = cached_key
+
+                # High confidence match - return immediately
+                if similarity >= SIMILARITY_HIGH:
+                    data = self._cache.get(cached_key)
+                    if data:
+                        return json.loads(data)
+
+            # Return best gray-zone match if found
+            if best_match and best_similarity >= SIMILARITY_LOW:
+                data = self._cache.get(best_match)
+                if data:
+                    return json.loads(data)
+
+        except Exception:
+            pass
+        return None
+
+    def _cache_set(self, key: str, results: List[Dict], query: str = "", k: int = 0, ttl: int = CACHE_TTL):
+        """Set in L1 cache with metadata for semantic matching."""
+        if not self._cache:
+            return
+        try:
+            self._cache.setex(key, ttl, json.dumps(results))
+            # Store metadata for semantic matching
+            if query:
+                meta_key = f"{key}:meta"
+                self._cache.setex(meta_key, ttl, json.dumps({"query": query, "k": k}))
+        except Exception:
+            pass
 
     @property
     def active_backends(self) -> List[str]:
         """List active memory backends."""
-        backends = [f"daemon:{self._daemon_memory.backend_name}"]
+        backends = []
+        if self._cache:
+            backends.append("dragonfly:l1_cache")
+        backends.append(f"daemon:{self._daemon_memory.backend_name}")
         if self._kg_path.exists():
             backends.append("knowledge_graph")
         return backends
@@ -125,6 +273,8 @@ class MemoryRouter:
         """
         Search across all memory systems.
 
+        WIRED: Now uses L1 Dragonfly cache for fast repeated queries.
+
         Args:
             query: Search query
             k: Max results per source
@@ -136,6 +286,18 @@ class MemoryRouter:
         """
         if sources is None:
             sources = ["daemon", "knowledge_graph"]
+
+        # WIRED: Check L1 cache first (exact match)
+        cache_key = self._cache_key(query, k)
+        cached = self._cache_get(cache_key)
+        if cached:
+            # Reconstruct UnifiedResult from cached dicts
+            return [UnifiedResult(**r) for r in cached]
+
+        # WIRED: Try semantic cache (fuzzy match)
+        semantic_cached = self._cache_get_semantic(query, k)
+        if semantic_cached:
+            return [UnifiedResult(**r) for r in semantic_cached]
 
         results = []
 
@@ -177,7 +339,12 @@ class MemoryRouter:
 
         # Sort by relevance
         results.sort(key=lambda r: r.relevance, reverse=True)
-        return results[:k * 2]  # Return up to 2x k across all sources
+        final_results = results[:k * 2]  # Return up to 2x k across all sources
+
+        # WIRED: Cache results in L1 for next time (with semantic metadata)
+        self._cache_set(cache_key, [r.to_dict() for r in final_results], query=query, k=k)
+
+        return final_results
 
     # =========================================================================
     # Knowledge Graph Operations
