@@ -48,8 +48,18 @@ from typing import Optional, Dict, List, Tuple, Any
 from dataclasses import dataclass
 import logging
 
+# MANDATORY: LocalAI autorouter for intelligent routing (the orchestrator)
+# No fallback - if this fails, fix it don't ignore it
+from local_autorouter import route_request, record_outcome, get_best_agent
+
+# MANDATORY: Model router for provider abstraction
+from model_router import ModelRouter
+
 DAEMON_DIR = Path(__file__).parent
 PROJECT_DIR = DAEMON_DIR.parent
+
+# MANDATORY: Shared task queue for unified task management
+from task_queue import TaskQueue, TaskStatus, TaskPriority
 CACHE_DB = DAEMON_DIR / "prompt_cache.db"
 DRAGONFLY_URL = os.environ.get("DRAGONFLY_URL", "redis://localhost:6379")
 CACHE_TTL = 86400 * 7  # 7 days
@@ -255,6 +265,8 @@ class ContinuousExecutor:
             "append_file": self._tool_append_file,
             "list_dir": self._tool_list_dir,
         }
+        # Initialize model router for intelligent provider selection
+        self.router = ModelRouter()  # MANDATORY - no fallback
 
     def _tool_bash(self, payload: Dict[str, Any]) -> str:
         """Execute a shell command."""
@@ -341,32 +353,154 @@ class ContinuousExecutor:
             listing = listing[:MAX_TOOL_OUTPUT_CHARS] + "\n...[truncated]"
         return listing
 
+    def _execute_via_router(self, task: ContinuousTask) -> Optional[bool]:
+        """Execute task via LocalAI autorouter (the orchestrator).
+
+        LocalAI classifies and routes mechanically:
+        - Simple → LocalAI handles (FREE)
+        - Code → Codex handles (cheap)
+        - Complex → Claude sequential mode
+        - agent:* → Spawn agent
+        - skill:* → Run skill
+
+        Returns:
+            True if completed successfully
+            False if failed
+            None if should fallback to Claude sequential mode
+        """
+        # Autorouter is MANDATORY - no fallback check needed
+
+        try:
+            # Get routing decision from LocalAI autorouter (mechanical classification)
+            routing = route_request(task.prompt, use_localai=False)  # Fast keyword-based
+
+            route = routing.get("route", "claude")
+            decision_id = routing.get("decision_id")
+
+            logger.info(f"AutoRouter decision: {route} (confidence: {routing.get('confidence', 0):.0%})")
+
+            # Handle agent routes - spawn the agent
+            if route.startswith("agent:"):
+                agent_name = route.replace("agent:", "")
+                logger.info(f"Routing to agent: {agent_name}")
+                # Queue as agent task (let the spine handle it)
+                self._queue_agent_task(task, agent_name)
+                record_outcome(decision_id, "success", tokens_used=0)
+                self._complete_task(task.id, f"Delegated to {agent_name} agent")
+                return True
+
+            # Handle skill routes - run the skill
+            if route.startswith("skill:"):
+                skill_name = route.replace("skill:", "")
+                logger.info(f"Routing to skill: {skill_name}")
+                self._complete_task(task.id, f"Run /{skill_name} skill")
+                record_outcome(decision_id, "success", tokens_used=0)
+                return True
+
+            # LocalAI can handle simple tasks (FREE)
+            if route == "localai" and self.router and self.router.localai.available():
+                try:
+                    result = self.router.route(task=task.prompt, content="", force_provider="localai")
+                    if result.get("response"):
+                        response = result["response"]
+                        cache_response(task.prompt, response)
+                        self._complete_task(task.id, response)
+                        record_outcome(decision_id, "success", tokens_used=100)
+                        self._log_event("task_complete", task.id, {"provider": "localai", "free": True})
+                        return True
+                except Exception as e:
+                    logger.warning(f"LocalAI execution failed: {e}, falling back")
+
+            # Codex can handle code tasks (cheap)
+            if route == "codex" and self.router and self.router.openai_client.available():
+                try:
+                    result = self.router.route(task=task.prompt, content="", force_provider="codex")
+                    if result.get("response"):
+                        response = result["response"]
+                        cache_response(task.prompt, response)
+                        self._complete_task(task.id, response)
+                        record_outcome(decision_id, "success", tokens_used=500)
+                        self._log_event("task_complete", task.id, {"provider": "codex"})
+                        return True
+                except Exception as e:
+                    logger.warning(f"Codex execution failed: {e}, falling back")
+
+            # Claude needed for complex reasoning
+            if route == "claude":
+                logger.info("Complex task - routing to Claude sequential mode")
+                # Store decision_id for outcome recording after Claude completes
+                task.decision_id = decision_id if hasattr(task, '__dict__') else None
+                return None  # Let Claude handle it
+
+            # Unknown route - default to Claude
+            return None
+
+        except Exception as e:
+            logger.error(f"AutoRouter exception: {e}")
+            return None  # Fallback to Claude
+
+    def _queue_agent_task(self, task: ContinuousTask, agent_name: str):
+        """Queue a task for a specific agent."""
+        import hashlib
+        agent_task_id = f"agent_{agent_name}_{datetime.now().strftime('%Y%m%d%H%M%S')}_{hashlib.md5(task.prompt.encode()).hexdigest()[:8]}"
+
+        conn = sqlite3.connect(DB_PATH)
+        conn.execute("""
+            INSERT INTO continuous_tasks (id, prompt, source, priority, status, created_at)
+            VALUES (?, ?, ?, ?, 'pending', ?)
+        """, (agent_task_id, f"[AGENT:{agent_name}] {task.prompt}", 'agent', task.priority, datetime.now().isoformat()))
+        conn.commit()
+        conn.close()
+
+        logger.info(f"Queued agent task: {agent_task_id}")
+
+    def _debug_log(self, msg):
+        """Write debug message to file (for detached process debugging)."""
+        if os.environ.get("CONTINUOUS_EXECUTOR_CHILD"):
+            debug_log = DAEMON_DIR / "daemon_debug.log"
+            try:
+                with open(debug_log, "a") as f:
+                    f.write(f"[{datetime.now()}] {msg}\n")
+            except:
+                pass
+
     def start(self):
         """Start the daemon loop."""
+        self._debug_log(f"start() called, PID={os.getpid()}")
+
         # Check if already running
         if PID_FILE.exists():
             pid = int(PID_FILE.read_text().strip())
             try:
                 os.kill(pid, 0)  # Check if process exists
                 logger.error(f"Daemon already running (PID {pid})")
+                self._debug_log(f"Already running as PID {pid}, exiting")
                 return
             except OSError:
+                self._debug_log(f"Stale PID file for {pid}, continuing")
                 pass  # Process not running, stale PID file
 
         # Write PID
         PID_FILE.write_text(str(os.getpid()))
+        self._debug_log(f"Wrote PID file: {os.getpid()}")
 
         # Register signal handlers
         signal.signal(signal.SIGINT, self._shutdown)
         signal.signal(signal.SIGTERM, self._shutdown)
+        self._debug_log("Signal handlers registered")
 
         logger.info("Continuous Executor started")
         self._log_event("daemon_start", None, {"pid": os.getpid()})
         self.running = True
+        self._debug_log("About to enter main loop")
 
         try:
             self._main_loop()
+        except Exception as e:
+            self._debug_log(f"Exception in main_loop: {e}")
+            raise
         finally:
+            self._debug_log("Exiting start(), running cleanup")
             self._cleanup()
 
     def _shutdown(self, signum, frame):
@@ -383,10 +517,15 @@ class ContinuousExecutor:
 
     def _main_loop(self):
         """Main execution loop."""
+        self._debug_log(f"Entered _main_loop, self.running={self.running}")
+        iteration = 0
         while self.running:
+            iteration += 1
+            self._debug_log(f"Loop iteration {iteration}, running={self.running}")
             try:
                 # Check for pending tasks
                 task = self._get_next_task()
+                self._debug_log(f"Got task: {task}")
 
                 if task:
                     self._execute_task(task)
@@ -397,14 +536,33 @@ class ContinuousExecutor:
                     if idle_time > IDLE_THRESHOLD:
                         self._run_background_tasks()
 
+                self._debug_log(f"About to sleep {POLL_INTERVAL}s")
                 time.sleep(POLL_INTERVAL)
 
             except Exception as e:
+                self._debug_log(f"Exception in loop: {e}")
                 logger.error(f"Error in main loop: {e}")
                 time.sleep(POLL_INTERVAL)
+        self._debug_log(f"Exited main loop, self.running={self.running}")
 
     def _get_next_task(self) -> Optional[ContinuousTask]:
-        """Get next pending task from queue."""
+        """Get next pending task from UNIFIED queue (checks both DBs)."""
+        # 1. First check shared task queue (tasks.db) - where strategies push
+        shared_queue = TaskQueue()
+        shared_task = shared_queue.get_next_pending()
+        if shared_task:
+            # Mark as in progress in shared queue
+            shared_queue.mark_in_progress(shared_task.id)
+            return ContinuousTask(
+                id=shared_task.id,
+                prompt=shared_task.prompt,
+                source='shared_queue',
+                priority=shared_task.priority.value,
+                created_at=shared_task.created_at,
+                status='pending'
+            )
+
+        # 2. Fallback to local continuous_tasks table
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.execute("""
             SELECT id, prompt, source, priority, created_at
@@ -444,7 +602,6 @@ class ContinuousExecutor:
         run_env = {
             **os.environ,
             "CLAUDE_PROJECT_DIR": str(PROJECT_DIR),
-            "CLAUDE_DISABLE_PARALLEL_TOOL_USE": "1",
         }
 
         return subprocess.run(
@@ -536,7 +693,7 @@ class ContinuousExecutor:
         return False, "Exceeded maximum sequential tool steps", tool_used
 
     def _execute_task(self, task: ContinuousTask):
-        """Execute a task using Claude CLI with caching."""
+        """Execute a task using intelligent routing (LocalAI first, Claude for complex)."""
         logger.info(f"Executing task {task.id[:8]} from {task.source}")
         self._update_task_status(task.id, 'running')
         self._log_event("task_start", task.id, {"source": task.source})
@@ -549,6 +706,13 @@ class ContinuousExecutor:
             self._log_event("task_complete", task.id, {"cached": True, "output_len": len(cached)})
             return
 
+        # Use LocalAI autorouter for mechanical routing (FREE classification)
+        # LocalAI decides: simple→LocalAI, code→Codex, complex→Claude, agent:*→spawn
+        result = self._execute_via_router(task)
+        if result is not None:
+            return  # Handled by LocalAI/Codex/agent - no Claude tokens used
+
+        # Fallback to sequential tool mode for Claude-only execution
         try:
             if SEQUENTIAL_TOOL_MODE:
                 success, output, tool_used = self._execute_task_sequential(task)
@@ -763,6 +927,28 @@ class ContinuousExecutor:
         return task_id
 
     @staticmethod
+    def _is_process_running(pid: int) -> bool:
+        """Check if process is running (Windows-compatible)."""
+        if os.name == "nt":
+            # Windows: os.kill(pid, 0) doesn't work reliably
+            # Use tasklist instead
+            try:
+                result = subprocess.run(
+                    ["tasklist", "/fi", f"PID eq {pid}", "/nh"],
+                    capture_output=True, text=True, timeout=5
+                )
+                return str(pid) in result.stdout
+            except Exception:
+                return False
+        else:
+            # Unix: signal 0 works
+            try:
+                os.kill(pid, 0)
+                return True
+            except OSError:
+                return False
+
+    @staticmethod
     def get_status() -> Dict:
         """Get daemon status."""
         status = {"running": False, "pid": None, "tasks": {}, "recent_events": []}
@@ -770,12 +956,9 @@ class ContinuousExecutor:
         # Check if running
         if PID_FILE.exists():
             pid = int(PID_FILE.read_text().strip())
-            try:
-                os.kill(pid, 0)
+            if ContinuousExecutor._is_process_running(pid):
                 status["running"] = True
                 status["pid"] = pid
-            except OSError:
-                pass
 
         # Task counts
         conn = sqlite3.connect(DB_PATH)
@@ -821,6 +1004,30 @@ def main():
     args = parser.parse_args()
 
     if args.action == 'start':
+        # Windows: Detach daemon to survive parent process termination
+        if os.name == "nt" and not os.environ.get("CONTINUOUS_EXECUTOR_CHILD"):
+            env = os.environ.copy()
+            env["CONTINUOUS_EXECUTOR_CHILD"] = "1"
+            proc = subprocess.Popen(
+                [sys.executable, str(Path(__file__).resolve()), "start"],
+                cwd=str(DAEMON_DIR),
+                env=env,
+                creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                close_fds=True,
+            )
+            print(f"Daemon started (PID {proc.pid}, detached)")
+            return
+
+        # Debug: Log to file for detached process debugging
+        if os.environ.get("CONTINUOUS_EXECUTOR_CHILD"):
+            debug_log = DAEMON_DIR / "daemon_debug.log"
+            with open(debug_log, "a") as f:
+                f.write(f"\n=== {datetime.now()} PID {os.getpid()} ===\n")
+                f.write("Child process starting\n")
+
         executor = ContinuousExecutor()
         executor.start()
 
