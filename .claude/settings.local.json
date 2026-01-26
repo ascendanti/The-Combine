@@ -99,6 +99,16 @@
             "timeout": 2
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/pre-command-optimize.py 2>nul || echo {\"continue\":true}",
+            "timeout": 2
+          }
+        ]
       }
     ],
     "PostToolUse": [

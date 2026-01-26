@@ -40,6 +40,13 @@ SEED_PATTERNS = [
         "optimization": "sys_path_insert",
         "reason": "Daemon modules need path injection for cross-imports",
         "discovered": "2026-01-26"
+    },
+    {
+        "trigger": "python -c",
+        "condition": "multiline_string",
+        "optimization": "single_line_or_file",
+        "reason": "Multiline strings in python -c cause syntax errors - use semicolons or temp file",
+        "discovered": "2026-01-26"
     }
 ]
 
