@@ -526,6 +526,9 @@ class ContinuousExecutor:
             iteration += 1
             self._debug_log(f"Loop iteration {iteration}, running={self.running}")
             try:
+                # Always try to keep queue filled with approved tasks
+                self._ensure_queue_filled()
+
                 # Check for pending tasks
                 task = self._get_next_task()
                 self._debug_log(f"Got task: {task}")
@@ -534,7 +537,7 @@ class ContinuousExecutor:
                     self._execute_task(task)
                     self.last_activity = datetime.now()
                 else:
-                    # Check if we should run background tasks
+                    # Check if we should run background tasks (generation)
                     idle_time = (datetime.now() - self.last_activity).total_seconds()
                     if idle_time > IDLE_THRESHOLD:
                         self._run_background_tasks()
@@ -919,6 +922,27 @@ class ContinuousExecutor:
         conn.close()
 
         logger.info(f"Queued continuation task {task_id[:8]}")
+
+    def _ensure_queue_filled(self):
+        """Keep the execution queue filled by auto-approving generated tasks."""
+        try:
+            from task_generator import get_pending_tasks, approve_task
+            from task_queue import TaskQueue
+
+            tq = TaskQueue()
+            pending_count = len(tq.get_pending_tasks(limit=10))
+
+            # If queue has fewer than 5 tasks, approve more
+            if pending_count < 5:
+                pending_generated = get_pending_tasks()
+                if pending_generated:
+                    # Approve enough to fill queue to 10
+                    to_approve = min(len(pending_generated), 10 - pending_count)
+                    for task in pending_generated[:to_approve]:
+                        approve_task(task["task_id"])
+                        logger.info(f"Auto-approved: {task['title'][:40]}")
+        except Exception as e:
+            logger.debug(f"Queue fill failed: {e}")
 
     def _run_background_tasks(self):
         """Run background maintenance tasks when idle."""
