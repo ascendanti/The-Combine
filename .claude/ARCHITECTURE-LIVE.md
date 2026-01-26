@@ -20,7 +20,7 @@ PreCompact       → pre-compact-handoff.py
 session-briefing.py        → Architecture awareness + memory_router + unified_spine
 deterministic_router.py    → orchestrator.fast_classify() as Stage 5
 continuous-learning-stop   → emergent.run_emergent_cycle() + feedback_loop analytics
-memory_router.py           → L1 Dragonfly + TWO-STAGE semantic cache (0.5-0.85)
+memory_router.py           → L1 Dragonfly + EMBEDDINGS semantic cache (sentence-transformers, cosine similarity)
 unified_spine.py           → SessionStart trigger + MAPE controller bridge
 strategy_evolution.py      → Auto-wired via unified_spine
 outcome_tracker.py         → Auto-wired via unified_spine
@@ -33,6 +33,11 @@ command_optimizer.py       → NEW - Auto-applies discovered workarounds
 deferred_tasks.py          → NEW - Captures recommendations for later action
 session-briefing.py        → NOW reads DIRECTIVES.md + surfaces deferred tasks
 DIRECTIVES.md              → NEW - Standing user orders (read every session)
+auto-learn-errors.py       → NEW - PostToolUse hook for Bash, auto-captures CLI errors
+pre-create-check.py        → NEW - PreToolUse hook for Write, surfaces directives before creating files
+efficiency_monitor.py      → NEW - Auto-tracks efficiency, alerts on decline (via PostToolUse + Stop hooks)
+unified-post-tool-tracker  → NOW records to efficiency_monitor
+continuous-learning-stop   → NOW runs efficiency analysis at session end
 ```
 
 ### STILL NEEDS WIRING:
@@ -285,8 +290,14 @@ Claude n8n/
 
 ---
 
-**LAST UPDATED:** 2026-01-26 (Session 3 - ENFORCEMENT LAYER)
-**STATUS:** 17 SYSTEMS INTEGRATED. Added knowledge enforcement layer (command_optimizer, deferred_tasks, DIRECTIVES.md).
+**LAST UPDATED:** 2026-01-26 (Session 4 - EFFICIENCY MONITORING)
+**STATUS:** 20 SYSTEMS INTEGRATED. Added automatic efficiency monitoring for emergent development.
+
+**Recent Additions:**
+- auto-learn-errors.py (PostToolUse for Bash - auto-captures CLI errors)
+- pre-create-check.py (PreToolUse for Write - surfaces directives before creating files)
+- memory_router embeddings (cosine similarity via sentence-transformers, fallback to Jaccard)
+- efficiency_monitor.py (auto-tracks tool calls, detects thrashing, alerts on repeated errors)
 
 **Key Capabilities:**
 - Token Savings: Context Router achieves 90%+ on WARM files

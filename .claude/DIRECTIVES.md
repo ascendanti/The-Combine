@@ -8,12 +8,13 @@
 
 ### 1. Auto-Wire Everything (2026-01-26)
 When creating ANY system, module, or fix:
-- Wire it immediately into the architecture
+- Wire it immediately into the architecture (settings.local.json)
+- Update ARCHITECTURE-LIVE.md IMMEDIATELY after creation
 - Don't wait for instructions
-- Update ARCHITECTURE-LIVE.md
 - Test the wiring
 
 **A system that isn't wired doesn't exist.**
+**ARCHITECTURE-LIVE.md must ALWAYS reflect current state.**
 
 ### 2. Institutionalize Discoveries (2026-01-26)
 When discovering a workaround or pattern:
@@ -35,6 +36,21 @@ When user recommends something not immediately acted on:
 - All discoveries stored in memory
 - Session-briefing reads this file
 - Context compaction preserves key learnings
+
+### 5. Monitor Background Tasks (2026-01-26)
+- Do NOT let background tasks run indefinitely
+- Check task status periodically
+- Kill tasks when no longer needed
+- Never leave orphaned processes
+
+### 6. Self-Aware Analytics (2026-01-26)
+When efficiency decreases, ALERT and self-correct:
+- Context bloat (token use increasing without progress)
+- Task completion rate declining
+- Repeated errors (same mistake multiple times)
+- Too many iterations without resolution
+
+**Action:** Stop, review, and adjust approach. Don't continue inefficiently.
 
 ---
 

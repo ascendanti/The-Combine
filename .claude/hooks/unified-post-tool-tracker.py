@@ -22,6 +22,15 @@ from datetime import datetime
 
 DAEMON_DIR = Path(__file__).parent.parent.parent / "daemon"
 TRACKER_DB = DAEMON_DIR / "tool_tracking.db"
+sys.path.insert(0, str(DAEMON_DIR))
+
+# WIRED: efficiency_monitor for automatic efficiency tracking
+try:
+    from efficiency_monitor import record_tool
+    EFFICIENCY_AVAILABLE = True
+except ImportError:
+    EFFICIENCY_AVAILABLE = False
+    record_tool = None
 
 def init_db():
     conn = sqlite3.connect(TRACKER_DB)
@@ -109,6 +118,13 @@ def main():
         output_size=len(output_content),
         cached=tool_output.get("cached", False) if tool_output else False
     )
+
+    # WIRED: Efficiency monitoring - record every tool call
+    if EFFICIENCY_AVAILABLE and record_tool:
+        # Check if there was an error in the output
+        output_str = str(tool_output) if tool_output else ""
+        has_error = any(e in output_str.lower() for e in ["error", "failed", "exception"])
+        record_tool(tool_name, success=not has_error, error=output_str[:200] if has_error else "")
 
     # For Read operations, optionally update KG context
     if tool_name == "Read" and file_path:

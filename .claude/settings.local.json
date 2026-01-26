@@ -89,6 +89,16 @@
             "timeout": 2
           }
         ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/pre-create-check.py 2>nul || echo {\"continue\":true}",
+            "timeout": 2
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -109,6 +119,16 @@
             "type": "command",
             "command": "python .claude/hooks/post-integration-analyze.py 2>nul || echo {\"continue\":true}",
             "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/auto-learn-errors.py 2>nul || echo {\"continue\":true}",
+            "timeout": 3
           }
         ]
       }
@@ -152,7 +172,13 @@
     ]
   },
   "enabledMcpjsonServers": [
-    "knowledge-graph"
+    "knowledge-graph",
+    "token-optimizer",
+    "tooluniverse",
+    "sequential-thinking",
+    "memory",
+    "context7",
+    "dragonfly-cache"
   ],
   "enableAllProjectMcpServers": true
 }

@@ -129,6 +129,34 @@ def trigger_emergent_cycle():
         return None
 
 
+def trigger_efficiency_analysis():
+    """
+    WIRED: Analyze session efficiency and alert on declining performance.
+    Checks for repeated errors, tool thrashing, and context bloat.
+    """
+    try:
+        from daemon.efficiency_monitor import analyze, get_monitor
+        result = analyze()
+
+        if result["alerts"]:
+            print(f"[EfficiencyMonitor] ALERTS: {len(result['alerts'])}", file=sys.stderr)
+            for alert in result["alerts"]:
+                print(f"  - {alert}", file=sys.stderr)
+
+        print(f"[EfficiencyMonitor] Score: {result['efficiency_score']:.2f}", file=sys.stderr)
+
+        # Reset for next session
+        get_monitor().reset_session()
+
+        return result
+    except ImportError as e:
+        print(f"[EfficiencyMonitor] Module not available: {e}", file=sys.stderr)
+        return None
+    except Exception as e:
+        print(f"[EfficiencyMonitor] Error: {e}", file=sys.stderr)
+        return None
+
+
 def trigger_feedback_cycle():
     """
     WIRED: Trigger feedback loop analytics on session stop.
@@ -187,6 +215,16 @@ def main():
         # Analyzes outcomes, updates strategy fitness, stores learnings
         feedback_ran = trigger_feedback_cycle()
         output["feedback_loop"] = feedback_ran
+
+        # WIRED: Run efficiency analysis
+        # Checks for declining performance, repeated errors, tool thrashing
+        efficiency_result = trigger_efficiency_analysis()
+        if efficiency_result:
+            output["efficiency"] = {
+                "score": efficiency_result.get("efficiency_score", 1.0),
+                "alerts": len(efficiency_result.get("alerts", [])),
+                "recommendations": efficiency_result.get("recommendations", [])
+            }
 
         # Output for hook system
         print(f"[ContinuousLearning] Extracted {output['learnings_extracted']} patterns", file=sys.stderr)

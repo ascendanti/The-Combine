@@ -261,6 +261,55 @@ class CommandOptimizer:
             for p in self.patterns
         ]
 
+    def auto_learn_from_error(self, command: str, error_output: str) -> Optional[str]:
+        """
+        Automatically learn from command errors.
+        Called by hooks when commands fail.
+
+        Returns learning ID if stored, None otherwise.
+        """
+        import re
+
+        # Patterns that indicate learnable errors
+        learnable_patterns = [
+            (r'unrecognized arguments?: (.+)', 'cli_args'),
+            (r'invalid choice: [\'"]?(\w+)[\'"]? \(choose from (.+)\)', 'cli_choice'),
+            (r'error: (.+) requires (.+)', 'cli_required'),
+            (r'ModuleNotFoundError: No module named [\'"](.+)[\'"]', 'import_error'),
+            (r'FileNotFoundError: .+[\'"](.+)[\'"]', 'file_not_found'),
+        ]
+
+        for pattern, error_type in learnable_patterns:
+            match = re.search(pattern, error_output, re.IGNORECASE)
+            if match:
+                # Extract the key command (first word or script name)
+                cmd_parts = command.split()
+                key_cmd = cmd_parts[-1] if cmd_parts[-1].endswith('.py') else cmd_parts[0]
+
+                # Create learning entry
+                learning = f"{key_cmd}: {error_output.strip()[:200]}"
+                reason = f"Auto-learned from {error_type} error"
+
+                # Store in optimizer DB
+                self.add_discovery(key_cmd, f"avoid_{error_type}", reason, "always")
+
+                # Also store in memory system
+                try:
+                    from memory import Memory
+                    mem = Memory()
+                    result = mem.store_learning(
+                        content=learning,
+                        context=f"auto-learned {error_type}",
+                        tags=["auto-learned", error_type, "cli-error"]
+                    )
+                    return result.id
+                except Exception:
+                    pass
+
+                return f"local_{key_cmd}_{error_type}"
+
+        return None
+
 
 # =============================================================================
 # CLI Interface

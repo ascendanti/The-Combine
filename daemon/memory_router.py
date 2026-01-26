@@ -32,6 +32,25 @@ try:
 except ImportError:
     REDIS_AVAILABLE = False
 
+# WIRED: Sentence Transformers for true semantic matching
+try:
+    from sentence_transformers import SentenceTransformer
+    import numpy as np
+    EMBEDDINGS_AVAILABLE = True
+    # Load model once at module level (lazy loading)
+    _embedding_model = None
+except ImportError:
+    EMBEDDINGS_AVAILABLE = False
+    _embedding_model = None
+
+
+def _get_embedding_model():
+    """Lazy load embedding model."""
+    global _embedding_model
+    if _embedding_model is None and EMBEDDINGS_AVAILABLE:
+        _embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+    return _embedding_model
+
 KNOWLEDGE_GRAPH_PATH = Path.home() / ".claude" / "memory" / "knowledge-graph.jsonl"
 CACHE_TTL = 300  # 5 minutes for search results
 
@@ -100,7 +119,26 @@ class MemoryRouter:
         return words - stop_words
 
     def _semantic_similarity(self, query1: str, query2: str) -> float:
-        """Calculate Jaccard similarity between queries (lightweight semantic matching)."""
+        """
+        Calculate semantic similarity between queries.
+
+        Uses embeddings if available (cosine similarity), falls back to Jaccard.
+        """
+        # Try embeddings first (true semantic matching)
+        if EMBEDDINGS_AVAILABLE:
+            try:
+                model = _get_embedding_model()
+                if model is not None:
+                    embeddings = model.encode([query1, query2])
+                    # Cosine similarity
+                    cos_sim = np.dot(embeddings[0], embeddings[1]) / (
+                        np.linalg.norm(embeddings[0]) * np.linalg.norm(embeddings[1])
+                    )
+                    return float(cos_sim)
+            except Exception:
+                pass  # Fall through to Jaccard
+
+        # Fallback: Jaccard similarity (word overlap)
         words1 = self._normalize_query(query1)
         words2 = self._normalize_query(query2)
         if not words1 or not words2:

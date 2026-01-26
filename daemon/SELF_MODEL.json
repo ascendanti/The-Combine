@@ -18,11 +18,11 @@
       "upgrade_triggers": ["multi-vector", "graph RAG", "reasoning chains", "better recall"]
     },
     "caching": {
-      "current_method": "Dragonfly L1 + Semantic Cache (Jaccard) + Context Router",
-      "version": "Phase 14",
-      "keywords": ["cache", "memoization", "deduplication", "TTL", "semantic", "HOT/WARM/COLD"],
-      "limitations": ["No cross-session", "No embedding-based similarity"],
-      "upgrade_triggers": ["embedding cache", "compressed cache", "distributed cache"]
+      "current_method": "Dragonfly L1 + Semantic Cache (Embeddings via sentence-transformers) + Context Router",
+      "version": "Phase 15",
+      "keywords": ["cache", "memoization", "deduplication", "TTL", "semantic", "HOT/WARM/COLD", "embeddings", "cosine"],
+      "limitations": ["No cross-session", "Model loading latency on first use"],
+      "upgrade_triggers": ["compressed cache", "distributed cache", "cross-session persistence"]
     },
     "llm_routing": {
       "current_method": "Complexity-based routing (LocalAI < Codex < Claude)",
