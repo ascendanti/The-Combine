@@ -441,6 +441,55 @@ def scan_for_spikes(threshold: float = 2.0, since_hours: int = 24) -> List[Token
     return detect_spikes(all_events, threshold=threshold)
 
 
+def get_current_session_tokens() -> Dict:
+    """Get token usage for current/most recent session.
+
+    Returns dict with:
+    - total_input: Total input tokens
+    - total_output: Total output tokens
+    - total_cache_read: Cache read tokens
+    - total_cache_write: Cache write tokens
+    - total_tokens: Grand total
+    - turn_count: Number of turns
+    - avg_per_turn: Average tokens per turn
+    - cost_usd: Estimated cost
+    """
+    projects_dir = CLAUDE_DIR / "projects"
+    if not projects_dir.exists():
+        return {"total_tokens": 0, "turn_count": 0}
+
+    # Find most recent session file
+    jsonl_files = list(projects_dir.rglob("*.jsonl"))
+    if not jsonl_files:
+        return {"total_tokens": 0, "turn_count": 0}
+
+    # Sort by modification time, get most recent
+    jsonl_files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
+    latest = jsonl_files[0]
+
+    events = parse_session_jsonl(latest)
+    if not events:
+        return {"total_tokens": 0, "turn_count": 0}
+
+    total_input = sum(e.input_tokens for e in events)
+    total_output = sum(e.output_tokens for e in events)
+    total_cache_read = sum(e.cache_read for e in events)
+    total_cache_write = sum(e.cache_write for e in events)
+    total_cost = sum(e.cost_usd for e in events)
+
+    return {
+        "total_input": total_input,
+        "total_output": total_output,
+        "total_cache_read": total_cache_read,
+        "total_cache_write": total_cache_write,
+        "total_tokens": sum(e.total for e in events),
+        "turn_count": len(events),
+        "avg_per_turn": sum(e.total for e in events) / len(events) if events else 0,
+        "cost_usd": total_cost,
+        "session_file": str(latest.name)
+    }
+
+
 def print_spike_report(spikes: List[TokenSpike]):
     """Print spike report to console."""
     if not spikes:

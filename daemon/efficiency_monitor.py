@@ -135,6 +135,22 @@ class EfficiencyMonitor:
         alerts = []
         recommendations = []
 
+        # Get token usage from token_monitor
+        token_stats = self._get_token_stats()
+        total_tokens = token_stats.get("total_tokens", 0)
+        avg_per_turn = token_stats.get("avg_per_turn", 0)
+
+        # Check for token bloat (high avg tokens per turn)
+        if avg_per_turn > 50000:  # 50k tokens per turn is concerning
+            alerts.append(f"TOKEN_BLOAT: {avg_per_turn:.0f} avg tokens/turn (target <30k)")
+            recommendations.append("Consider more focused queries or context pruning")
+
+        # Check cache efficiency
+        cache_read = token_stats.get("total_cache_read", 0)
+        if total_tokens > 100000 and cache_read < total_tokens * 0.3:
+            alerts.append(f"LOW_CACHE_HIT: Only {cache_read/total_tokens*100:.1f}% cache utilization")
+            recommendations.append("Reuse file reads, batch similar operations")
+
         # Check repeated errors
         for pattern, count in self._session_errors.items():
             if count >= REPEATED_ERROR_THRESHOLD:
@@ -160,10 +176,13 @@ class EfficiencyMonitor:
             unique_tools=unique_tools,
             errors_count=sum(self._session_errors.values()),
             repeated_errors=sum(1 for c in self._session_errors.values() if c >= REPEATED_ERROR_THRESHOLD),
-            tokens_used=0,  # Would need integration with API response
+            tokens_used=total_tokens,
             tasks_completed=0,  # Would need integration with task system
             timestamp=datetime.now().isoformat()
         )
+
+        # Persist to efficiency_log
+        self._persist_metrics(metrics, alerts)
 
         return {
             "alerts": alerts,
@@ -171,6 +190,33 @@ class EfficiencyMonitor:
             "recommendations": recommendations,
             "efficiency_score": self._calculate_score(metrics, alerts)
         }
+
+    def _persist_metrics(self, metrics: EfficiencyMetrics, alerts: List[str]):
+        """Persist session metrics to efficiency_log table."""
+        try:
+            import os
+            session_id = os.environ.get("CLAUDE_SESSION_ID", datetime.now().strftime("%Y%m%d_%H%M"))
+            conn = sqlite3.connect(str(DB_PATH))
+            conn.execute("""
+                INSERT INTO efficiency_log
+                (session_id, tool_calls, unique_tools, errors_count, repeated_errors,
+                 tokens_estimate, tasks_completed, alerts, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                session_id,
+                metrics.tool_calls,
+                metrics.unique_tools,
+                metrics.errors_count,
+                metrics.repeated_errors,
+                metrics.tokens_used,
+                metrics.tasks_completed,
+                json.dumps(alerts),
+                metrics.timestamp
+            ))
+            conn.commit()
+            conn.close()
+        except Exception:
+            pass  # Silent failure
 
     def _calculate_score(self, metrics: EfficiencyMetrics, alerts: List[str]) -> float:
         """Calculate efficiency score 0-1."""
@@ -210,6 +256,16 @@ class EfficiencyMonitor:
         """Reset session tracking."""
         self._session_errors = {}
         self._session_tool_calls = []
+
+    def _get_token_stats(self) -> Dict:
+        """Get token usage stats from token_monitor."""
+        try:
+            from token_monitor import get_current_session_tokens
+            return get_current_session_tokens()
+        except ImportError:
+            return {"total_tokens": 0, "avg_per_turn": 0}
+        except Exception:
+            return {"total_tokens": 0, "avg_per_turn": 0}
 
 
 # Singleton instance

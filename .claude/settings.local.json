@@ -57,6 +57,21 @@
           },
           {
             "type": "command",
+            "command": "python .claude/hooks/daemon-autostart.py 2>nul || echo.",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python daemon/mcp_health.py warmup 2>nul || echo.",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "python daemon/init_spine.py 2>nul || echo.",
+            "timeout": 10
+          },
+          {
+            "type": "command",
             "command": "python .claude/hooks/session-briefing.py 2>nul || echo.",
             "timeout": 10
           },
