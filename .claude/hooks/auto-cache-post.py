@@ -3,7 +3,7 @@
 Auto-Cache PostToolUse Hook
 
 Automatically caches outputs from Read, Grep, Glob operations
-for token efficiency. Works with token-optimizer MCP.
+to Dragonfly for token efficiency.
 
 Caches:
 - File reads (by path + mtime)
@@ -13,14 +13,16 @@ Caches:
 
 import sys
 import json
-import hashlib
-import os
 from pathlib import Path
-from datetime import datetime
 
-# Cache settings
-CACHE_DIR = Path.home() / ".token-optimizer-cache" / "auto-cache"
-CACHE_DIR.mkdir(parents=True, exist_ok=True)
+# Add daemon to path for cache_client
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "daemon"))
+
+try:
+    from cache_client import cache, tool_cache_key
+    CACHE_AVAILABLE = True
+except ImportError:
+    CACHE_AVAILABLE = False
 
 # Tools to cache
 CACHEABLE_TOOLS = {"Read", "Grep", "Glob"}
@@ -29,11 +31,11 @@ CACHEABLE_TOOLS = {"Read", "Grep", "Glob"}
 MIN_CACHE_SIZE = 500  # bytes
 MAX_CACHE_SIZE = 100000  # 100KB max per entry
 
-def get_cache_key(tool_name: str, params: dict) -> str:
-    """Generate cache key from tool + params."""
-    # Normalize params
-    key_data = f"{tool_name}:{json.dumps(params, sort_keys=True)}"
-    return hashlib.md5(key_data.encode()).hexdigest()
+# TTL settings (seconds)
+TTL_READ = 3600 * 24  # 24 hours for file reads (mtime checked)
+TTL_GREP = 3600  # 1 hour for grep results
+TTL_GLOB = 3600  # 1 hour for glob results
+
 
 def get_file_mtime(path: str) -> float:
     """Get file modification time for cache invalidation."""
@@ -42,25 +44,12 @@ def get_file_mtime(path: str) -> float:
     except:
         return 0
 
-def cache_result(key: str, result: str, metadata: dict = None):
-    """Store result in cache."""
-    cache_file = CACHE_DIR / f"{key}.json"
-
-    data = {
-        "result": result,
-        "cached_at": datetime.now().isoformat(),
-        "metadata": metadata or {}
-    }
-
-    with open(cache_file, 'w', encoding='utf-8') as f:
-        json.dump(data, f)
 
 def main():
     # Read hook input from stdin
     try:
         hook_input = json.load(sys.stdin)
     except:
-        # No input or invalid JSON
         print(json.dumps({"continue": True}))
         return
 
@@ -73,6 +62,10 @@ def main():
         print(json.dumps({"continue": True}))
         return
 
+    if not CACHE_AVAILABLE:
+        print(json.dumps({"continue": True}))
+        return
+
     # Check size thresholds
     output_size = len(tool_output) if tool_output else 0
     if output_size < MIN_CACHE_SIZE or output_size > MAX_CACHE_SIZE:
@@ -80,21 +73,34 @@ def main():
         return
 
     # Generate cache key
-    cache_key = get_cache_key(tool_name, tool_input)
+    key = tool_cache_key(tool_name, tool_input)
+
+    # Determine TTL
+    ttl = TTL_GREP
+    if tool_name == "Read":
+        ttl = TTL_READ
+    elif tool_name == "Glob":
+        ttl = TTL_GLOB
+
+    # Build cache data
+    cache_data = {
+        "result": tool_output,
+        "tool": tool_name,
+        "size": output_size
+    }
 
     # Add file mtime for Read operations (cache invalidation)
-    metadata = {"tool": tool_name, "size": output_size}
     if tool_name == "Read" and "file_path" in tool_input:
-        metadata["mtime"] = get_file_mtime(tool_input["file_path"])
+        cache_data["mtime"] = str(get_file_mtime(tool_input["file_path"]))
 
-    # Cache the result
+    # Cache to Dragonfly
     try:
-        cache_result(cache_key, tool_output, metadata)
-    except Exception as e:
-        # Don't fail on cache errors
-        pass
+        cache.hset(key, cache_data, ttl=ttl)
+    except Exception:
+        pass  # Don't fail on cache errors
 
     print(json.dumps({"continue": True}))
+
 
 if __name__ == "__main__":
     main()
