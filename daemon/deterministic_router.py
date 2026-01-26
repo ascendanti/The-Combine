@@ -3,9 +3,15 @@
 Deterministic Router
 
 Routes requests without LLM when possible:
-1. atlas_spine (rule-based) → 2. capability registry lookup → 3. LocalAI classifier → 4. Claude
+1. Ultrawork mode detection → 2. Slash commands → 3. atlas_spine (rule-based)
+4. capability registry lookup → 5. Task complexity analysis → 6. Claude
 
 This is the core of the Tripartite Integration - routing 80%+ without LLM.
+
+Integrations:
+- oh-my-opencode: ultrawork/ulw keyword detection
+- create-claude: /commit, /review, /test, etc. commands
+- claude-code-buddy: task complexity scoring and workflow guidance
 """
 
 import os
@@ -13,8 +19,8 @@ import sys
 import json
 import re
 from pathlib import Path
-from typing import Optional, Tuple
-from dataclasses import dataclass
+from typing import Optional, Tuple, Dict, List
+from dataclasses import dataclass, field
 
 PROJECT_ROOT = Path(__file__).parent.parent
 CLAUDE_DIR = PROJECT_ROOT / ".claude"
@@ -25,14 +31,43 @@ CONFIG_DIR = CLAUDE_DIR / "config"
 class RouteResult:
     """Result of routing decision."""
     target: str  # agent, skill, hook, or 'escalate'
-    target_type: str  # 'agent', 'skill', 'hook', 'action', 'escalate'
+    target_type: str  # 'agent', 'skill', 'hook', 'action', 'escalate', 'command'
     confidence: float  # 0.0 - 1.0
     reason: str
-    model_tier: str = "claude"  # localai, codex, claude
+    model_tier: str = "claude"  # localai, codex, claude, haiku
+    mode: str = "normal"  # normal, ultrawork
+    complexity: int = 2  # 1-10 task complexity
+    workflow_hint: str = ""  # Next step suggestion
 
 
 class DeterministicRouter:
     """Routes requests deterministically when possible."""
+
+    # Slash commands (from create-claude)
+    SLASH_COMMANDS = {
+        '/commit': {'target': 'commit', 'type': 'command', 'model': 'haiku', 'complexity': 2},
+        '/explain': {'target': 'explain', 'type': 'command', 'model': 'claude', 'complexity': 3},
+        '/fix': {'target': 'fix', 'type': 'command', 'model': 'claude', 'complexity': 4},
+        '/optimize': {'target': 'optimize', 'type': 'command', 'model': 'claude', 'complexity': 5},
+        '/pr': {'target': 'pr', 'type': 'command', 'model': 'claude', 'complexity': 3},
+        '/review': {'target': 'review', 'type': 'command', 'model': 'claude', 'complexity': 4},
+        '/test': {'target': 'test', 'type': 'command', 'model': 'claude', 'complexity': 3},
+        '/validate': {'target': 'validate', 'type': 'command', 'model': 'claude', 'complexity': 3},
+    }
+
+    # Production agents (from create-claude)
+    PRODUCTION_AGENTS = {
+        'pre-commit': {'triggers': ['before commit', 'validate commit', 'check commit'], 'complexity': 4},
+        'refactor': {'triggers': ['simplify', 'reduce complexity', 'clean up'], 'complexity': 5},
+        'debugger': {'triggers': ['root cause', 'debug error', 'find bug'], 'complexity': 5},
+    }
+
+    # Task complexity keywords (from claude-code-buddy)
+    COMPLEXITY_MODIFIERS = {
+        'simple': -2, 'quick': -2, 'small': -1, 'minor': -1,
+        'complex': 2, 'comprehensive': 2, 'complete': 1, 'full': 1,
+        'architecture': 3, 'system': 2, 'refactor entire': 3,
+    }
 
     # Rule-based patterns (atlas_spine operators)
     OPERATORS = {
@@ -109,29 +144,106 @@ class DeterministicRouter:
         """
         query_lower = query.lower().strip()
 
-        # Stage 1: Rule-based operator matching (highest confidence)
+        # Calculate task complexity
+        complexity = self._calculate_complexity(query_lower)
+
+        # Check for ultrawork mode (from oh-my-opencode)
+        ultrawork_mode = self._detect_ultrawork(query_lower)
+
+        # Stage 0: Slash command detection (from create-claude)
+        result = self._match_slash_command(query_lower)
+        if result:
+            result.complexity = complexity
+            result.mode = "ultrawork" if ultrawork_mode else "normal"
+            return result
+
+        # Stage 1: Production agent matching (from create-claude)
+        result = self._match_production_agent(query_lower)
+        if result and result.confidence >= 0.8:
+            result.complexity = complexity
+            result.mode = "ultrawork" if ultrawork_mode else "normal"
+            return result
+
+        # Stage 2: Rule-based operator matching (highest confidence)
         result = self._match_operator(query_lower)
         if result and result.confidence >= 0.8:
+            result.complexity = complexity
+            result.mode = "ultrawork" if ultrawork_mode else "normal"
             return result
 
-        # Stage 2: Capability registry keyword lookup
+        # Stage 3: Capability registry keyword lookup
         result = self._match_capabilities(query_lower)
         if result and result.confidence >= 0.7:
+            result.complexity = complexity
+            result.mode = "ultrawork" if ultrawork_mode else "normal"
             return result
 
-        # Stage 3: Domain inference
+        # Stage 4: Domain inference
         result = self._infer_domain(query_lower)
         if result and result.confidence >= 0.6:
+            result.complexity = complexity
+            result.mode = "ultrawork" if ultrawork_mode else "normal"
             return result
 
-        # Stage 4: Escalate to LLM classification
+        # Stage 5: Escalate to LLM classification
         return RouteResult(
             target='escalate',
             target_type='escalate',
             confidence=0.0,
             reason='No deterministic match found',
-            model_tier='localai'  # Try LocalAI first for classification
+            model_tier='localai',  # Try LocalAI first for classification
+            complexity=complexity,
+            mode="ultrawork" if ultrawork_mode else "normal"
         )
+
+    def _detect_ultrawork(self, query: str) -> bool:
+        """Detect ultrawork/ulw mode (from oh-my-opencode)."""
+        ultrawork_patterns = [
+            r'\bultrawork\b', r'\bulw\b',
+            r'\bautonomous\b', r'\bkeep going\b',
+            r'\buntil complete\b', r'\bdon\'t stop\b'
+        ]
+        return any(re.search(p, query, re.IGNORECASE) for p in ultrawork_patterns)
+
+    def _calculate_complexity(self, query: str) -> int:
+        """Calculate task complexity 1-10 (from claude-code-buddy)."""
+        base_complexity = 3  # Default moderate complexity
+
+        for keyword, modifier in self.COMPLEXITY_MODIFIERS.items():
+            if keyword in query:
+                base_complexity += modifier
+
+        # Clamp to 1-10 range
+        return max(1, min(10, base_complexity))
+
+    def _match_slash_command(self, query: str) -> Optional[RouteResult]:
+        """Match slash commands (from create-claude)."""
+        for cmd, config in self.SLASH_COMMANDS.items():
+            if query.startswith(cmd):
+                return RouteResult(
+                    target=config['target'],
+                    target_type=config['type'],
+                    confidence=1.0,
+                    reason=f"Slash command: {cmd}",
+                    model_tier=config.get('model', 'claude'),
+                    complexity=config.get('complexity', 3)
+                )
+        return None
+
+    def _match_production_agent(self, query: str) -> Optional[RouteResult]:
+        """Match production agents (from create-claude)."""
+        for agent, config in self.PRODUCTION_AGENTS.items():
+            for trigger in config['triggers']:
+                if trigger in query:
+                    return RouteResult(
+                        target=agent,
+                        target_type='agent',
+                        confidence=0.85,
+                        reason=f"Production agent match: {agent}",
+                        model_tier='claude',
+                        complexity=config.get('complexity', 4)
+                    )
+        return None
 
     def _match_operator(self, query: str) -> Optional[RouteResult]:
         """Match against rule-based operators."""
@@ -232,10 +344,27 @@ class DeterministicRouter:
         return suggestions
 
 
+def get_workflow_hint(target: str, target_type: str) -> str:
+    """Get workflow guidance based on target (from claude-code-buddy)."""
+    hints = {
+        ('commit', 'command'): "After commit, consider pushing or creating a PR",
+        ('review', 'command'): "After review, address findings or commit if clean",
+        ('test', 'command'): "If tests pass, ready for review or commit",
+        ('validate', 'command'): "After validation, fix any issues before commit",
+        ('pre-commit', 'agent'): "Ready for commit if validation passes",
+        ('refactor', 'agent'): "Run tests after refactoring to verify",
+        ('debugger', 'agent'): "Add tests for the bug fix",
+        ('kraken', 'agent'): "Test changes after implementation",
+    }
+    return hints.get((target, target_type), "")
+
+
 def route_query(query: str) -> dict:
     """Route a query and return JSON result."""
     router = DeterministicRouter()
     result = router.route(query)
+
+    workflow_hint = get_workflow_hint(result.target, result.target_type)
 
     return {
         "target": result.target,
@@ -243,7 +372,10 @@ def route_query(query: str) -> dict:
         "confidence": result.confidence,
         "reason": result.reason,
         "model_tier": result.model_tier,
-        "deterministic": result.confidence >= 0.6
+        "deterministic": result.confidence >= 0.6,
+        "mode": result.mode,
+        "complexity": result.complexity,
+        "workflow_hint": workflow_hint
     }
 
 
@@ -275,8 +407,9 @@ def main():
         print(json.dumps(suggestions, indent=2))
 
     elif cmd == "test":
-        # Test cases
+        # Test cases including new patterns
         test_queries = [
+            # Original tests
             "where is the memory.py file",
             "fix the bug in the router",
             "research how GCRL works",
@@ -285,18 +418,38 @@ def main():
             "what files handle authentication",
             "debug the MCP server crash",
             "show me the evolution plan",
+            # Slash commands (create-claude)
+            "/commit add new feature",
+            "/review check security issues",
+            "/test run all tests",
+            "/validate before commit",
+            # Production agents (create-claude)
+            "validate commit before pushing",
+            "simplify this complex function",
+            "find the root cause of this error",
+            # Ultrawork mode (oh-my-opencode)
+            "ultrawork implement the full feature",
+            "ulw refactor the entire module",
+            # Complex tasks (claude-code-buddy)
+            "simple fix for typo",
+            "comprehensive architecture redesign",
         ]
 
         router = DeterministicRouter()
         print("Testing deterministic routing:\n")
+        print("=" * 70)
 
         for query in test_queries:
             result = router.route(query)
             det = "[OK]" if result.confidence >= 0.6 else "[--]"
-            print(f"{det} \"{query}\"")
+            mode = "[ULW]" if result.mode == "ultrawork" else "[NRM]"
+            print(f"{det} {mode} \"{query}\"")
             print(f"   -> {result.target} ({result.target_type}) [{result.confidence:.1%}]")
             print(f"   Reason: {result.reason}")
-            print(f"   Model: {result.model_tier}")
+            print(f"   Model: {result.model_tier} | Complexity: {result.complexity}/10")
+            workflow = get_workflow_hint(result.target, result.target_type)
+            if workflow:
+                print(f"   Workflow: {workflow}")
             print()
 
     else:

@@ -107,8 +107,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/dist/post-edit-diagnostics.mjs 2>nul || echo.",
-            "timeout": 10
+            "command": "python .claude/hooks/post-integration-analyze.py 2>nul || echo {\"continue\":true}",
+            "timeout": 5
           }
         ]
       }
