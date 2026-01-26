@@ -29,6 +29,10 @@ feedback_bridge.py         → MAPE controller in unified_spine
 context_router.py          → NEW - HOT/WARM/COLD tiering (90%+ token savings)
 auto-cache-pre.py          → Uses context_router for file access
 orchestrator.py            → SWARMS multi-agent (run_swarm_workflow, should_use_swarm)
+command_optimizer.py       → NEW - Auto-applies discovered workarounds
+deferred_tasks.py          → NEW - Captures recommendations for later action
+session-briefing.py        → NOW reads DIRECTIVES.md + surfaces deferred tasks
+DIRECTIVES.md              → NEW - Standing user orders (read every session)
 ```
 
 ### STILL NEEDS WIRING:
@@ -281,8 +285,8 @@ Claude n8n/
 
 ---
 
-**LAST UPDATED:** 2026-01-26 (Session 2 - COMPLETE)
-**STATUS:** 14 SYSTEMS INTEGRATED. Core architecture operational.
+**LAST UPDATED:** 2026-01-26 (Session 3 - ENFORCEMENT LAYER)
+**STATUS:** 17 SYSTEMS INTEGRATED. Added knowledge enforcement layer (command_optimizer, deferred_tasks, DIRECTIVES.md).
 
 **Key Capabilities:**
 - Token Savings: Context Router achieves 90%+ on WARM files

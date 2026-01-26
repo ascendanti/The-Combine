@@ -40,6 +40,22 @@ except ImportError:
     ORCHESTRATOR_AVAILABLE = False
     orchestrator_classify = None
 
+# WIRED: Command optimizer for discovered workarounds
+try:
+    from command_optimizer import CommandOptimizer
+    OPTIMIZER_AVAILABLE = True
+except ImportError:
+    OPTIMIZER_AVAILABLE = False
+    CommandOptimizer = None
+
+# WIRED: Deferred task capture
+try:
+    from deferred_tasks import DeferredTaskCapture
+    DEFERRED_AVAILABLE = True
+except ImportError:
+    DEFERRED_AVAILABLE = False
+    DeferredTaskCapture = None
+
 
 @dataclass
 class RouteResult:

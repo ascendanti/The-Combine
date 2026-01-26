@@ -39,6 +39,14 @@ except ImportError:
     UNIFIED_SPINE_AVAILABLE = False
     UnifiedSpine = None
 
+# WIRED: deferred_tasks for surfacing pending recommendations
+try:
+    from deferred_tasks import DeferredTaskCapture
+    DEFERRED_AVAILABLE = True
+except ImportError:
+    DEFERRED_AVAILABLE = False
+    DeferredTaskCapture = None
+
 # Hard limits for token efficiency
 MAX_TASK_LINES = 20
 
@@ -54,6 +62,68 @@ def get_architecture_directive() -> str:
 This file is your brain map - it shows what exists and what's wired.
 Path: .claude/ARCHITECTURE-LIVE.md"""
     return ""
+
+
+def get_directives() -> str:
+    """
+    MANDATORY: Return standing directives from user.
+    These are orders that MUST be followed every session.
+    """
+    directives_file = CLAUDE_DIR / "DIRECTIVES.md"
+    if not directives_file.exists():
+        return ""
+
+    try:
+        content = directives_file.read_text(encoding='utf-8', errors='ignore')
+        # Extract just the core directives section (first 30 lines)
+        lines = content.split('\n')[:30]
+        # Find the "## Core Directives" section
+        in_core = False
+        core_lines = []
+        for line in lines:
+            if "## Core Directives" in line:
+                in_core = True
+                continue
+            if in_core and line.startswith("## "):
+                break
+            if in_core and line.strip():
+                core_lines.append(line)
+
+        if core_lines:
+            return "Standing Orders:\n" + "\n".join(core_lines[:10])  # First 10 lines only
+        return "Read .claude/DIRECTIVES.md for standing orders"
+    except Exception:
+        return ""
+
+
+def get_deferred_tasks() -> str:
+    """
+    WIRED: Surface pending deferred tasks/recommendations.
+    Ensures user recommendations aren't forgotten.
+    """
+    if not DEFERRED_AVAILABLE or DeferredTaskCapture is None:
+        return ""
+
+    try:
+        capture = DeferredTaskCapture()
+        summary = capture.summary()
+
+        if summary["pending"] == 0:
+            return ""
+
+        # Get top priority items
+        pending = capture.get_pending(limit=3)
+        if not pending:
+            return ""
+
+        items = []
+        for task in pending[:3]:
+            priority_mark = "!" * min(task.priority, 3)
+            items.append(f"  {priority_mark} {task.content[:60]}...")
+
+        return f"Pending ({summary['pending']} total, {summary['high_priority']} high-priority):\n" + "\n".join(items)
+    except Exception as e:
+        return ""
 
 
 def get_daemon_status() -> str:
@@ -242,6 +312,16 @@ def main():
     arch = get_architecture_directive()
     if arch:
         parts.append(f"[ARCHITECTURE]\n{arch}")
+
+    # CRITICAL: Standing directives from user (SECOND)
+    directives = get_directives()
+    if directives:
+        parts.append(f"[DIRECTIVES]\n{directives}")
+
+    # CRITICAL: Deferred tasks/recommendations (THIRD)
+    deferred = get_deferred_tasks()
+    if deferred:
+        parts.append(f"[DEFERRED]\n{deferred}")
 
     # Daemon status (quick view of what's wired)
     daemon = get_daemon_status()
