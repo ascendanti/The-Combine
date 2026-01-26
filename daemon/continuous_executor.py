@@ -854,6 +854,23 @@ class ContinuousExecutor:
         """Run background maintenance tasks when idle."""
         logger.debug("Running background tasks...")
 
+        # Generate tasks from detectors if queue is empty
+        try:
+            from task_generator import generate_tasks, get_pending_tasks
+            from task_queue import TaskQueue
+            tq = TaskQueue()
+            if tq.count_pending() == 0:
+                # Check for pending generated tasks first
+                pending = get_pending_tasks()
+                if not pending:
+                    # Run detectors to find opportunities
+                    task_ids = generate_tasks()
+                    if task_ids:
+                        logger.info(f"Generated {len(task_ids)} tasks from detectors")
+                        self.last_activity = datetime.now()
+        except Exception as e:
+            logger.debug(f"Task generation failed: {e}")
+
         # Check execution spine for pending tasks
         try:
             from execution_spine import ExecutionSpine

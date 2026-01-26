@@ -1,0 +1,512 @@
+
+=== 2026-01-26 12:30:31.070342 PID 9068 ===
+Child process starting
+[2026-01-26 12:30:31.521033] start() called, PID=9068
+[2026-01-26 12:30:31.521033] Stale PID file for 21524, continuing
+[2026-01-26 12:30:31.521033] Wrote PID file: 9068
+[2026-01-26 12:30:31.521033] Signal handlers registered
+[2026-01-26 12:30:31.527117] About to enter main loop
+[2026-01-26 12:30:31.527695] Entered _main_loop, self.running=True
+[2026-01-26 12:30:31.527695] Loop iteration 1, running=True
+[2026-01-26 12:30:31.530240] Got task: None
+[2026-01-26 12:30:31.530771] About to sleep 30s
+[2026-01-26 12:31:01.530931] Loop iteration 2, running=True
+[2026-01-26 12:31:01.530931] Got task: None
+[2026-01-26 12:31:01.530931] About to sleep 30s
+[2026-01-26 12:31:31.534260] Loop iteration 3, running=True
+[2026-01-26 12:31:31.535272] Got task: None
+[2026-01-26 12:31:31.535875] About to sleep 30s
+[2026-01-26 12:32:01.536256] Loop iteration 4, running=True
+[2026-01-26 12:32:01.537269] Got task: None
+[2026-01-26 12:32:01.537269] About to sleep 30s
+[2026-01-26 12:32:31.538358] Loop iteration 5, running=True
+[2026-01-26 12:32:31.538358] Got task: None
+[2026-01-26 12:32:31.538358] About to sleep 30s
+[2026-01-26 12:33:01.542666] Loop iteration 6, running=True
+[2026-01-26 12:33:01.544879] Got task: None
+[2026-01-26 12:33:01.544879] About to sleep 30s
+[2026-01-26 12:33:31.545661] Loop iteration 7, running=True
+[2026-01-26 12:33:31.547227] Got task: None
+[2026-01-26 12:33:31.547227] About to sleep 30s
+[2026-01-26 12:34:01.547828] Loop iteration 8, running=True
+[2026-01-26 12:34:01.548463] Got task: None
+[2026-01-26 12:34:01.548463] About to sleep 30s
+[2026-01-26 12:34:31.550000] Loop iteration 9, running=True
+[2026-01-26 12:34:31.550000] Got task: None
+[2026-01-26 12:34:31.550000] About to sleep 30s
+[2026-01-26 12:35:01.552137] Loop iteration 10, running=True
+[2026-01-26 12:35:01.552137] Got task: None
+[2026-01-26 12:35:01.552137] About to sleep 30s
+[2026-01-26 12:35:31.554475] Loop iteration 11, running=True
+[2026-01-26 12:35:31.554475] Got task: None
+[2026-01-26 12:35:34.241638] About to sleep 30s
+[2026-01-26 12:36:04.249723] Loop iteration 12, running=True
+[2026-01-26 12:36:04.250183] Got task: ContinuousTask(id='task_20260126123601_c9a2fde8', prompt='Investigate and fix numpy/MARM version conflict. numpy 1.26.4 breaks marm-mcp-server which requires >=2.1.2. Find compatible version or isolation strategy.', source='user', priority=4, created_at='2026-01-26T12:36:01.250770', status='pending')
+[2026-01-26 12:46:04.315470] About to sleep 30s
+[2026-01-26 12:46:34.317144] Loop iteration 13, running=True
+[2026-01-26 12:46:34.317144] Got task: None
+[2026-01-26 12:46:34.317144] About to sleep 30s
+[2026-01-26 12:47:04.319038] Loop iteration 14, running=True
+[2026-01-26 12:47:04.319038] Got task: None
+[2026-01-26 12:47:04.319038] About to sleep 30s
+[2026-01-26 12:47:34.321000] Loop iteration 15, running=True
+[2026-01-26 12:47:34.323155] Got task: None
+[2026-01-26 12:47:34.323155] About to sleep 30s
+[2026-01-26 12:48:04.324266] Loop iteration 16, running=True
+[2026-01-26 12:48:04.324266] Got task: None
+[2026-01-26 12:48:04.325875] About to sleep 30s
+[2026-01-26 12:48:34.326768] Loop iteration 17, running=True
+[2026-01-26 12:48:34.326768] Got task: None
+[2026-01-26 12:48:34.326768] About to sleep 30s
+[2026-01-26 12:49:04.329119] Loop iteration 18, running=True
+[2026-01-26 12:49:04.329627] Got task: None
+[2026-01-26 12:49:04.329627] About to sleep 30s
+[2026-01-26 12:49:34.332517] Loop iteration 19, running=True
+[2026-01-26 12:49:34.334536] Got task: None
+[2026-01-26 12:49:34.334536] About to sleep 30s
+[2026-01-26 12:50:04.335631] Loop iteration 20, running=True
+[2026-01-26 12:50:04.336213] Got task: None
+[2026-01-26 12:50:04.336213] About to sleep 30s
+[2026-01-26 12:50:34.337853] Loop iteration 21, running=True
+[2026-01-26 12:50:34.337853] Got task: None
+[2026-01-26 12:50:34.337853] About to sleep 30s
+[2026-01-26 12:51:04.339780] Loop iteration 22, running=True
+[2026-01-26 12:51:04.339780] Got task: None
+[2026-01-26 12:51:05.614291] About to sleep 30s
+[2026-01-26 12:51:35.615316] Loop iteration 23, running=True
+[2026-01-26 12:51:35.615316] Got task: None
+[2026-01-26 12:51:36.990673] About to sleep 30s
+[2026-01-26 12:52:06.991419] Loop iteration 24, running=True
+[2026-01-26 12:52:06.992498] Got task: None
+[2026-01-26 12:52:08.340250] About to sleep 30s
+[2026-01-26 12:52:38.340723] Loop iteration 25, running=True
+[2026-01-26 12:52:38.340723] Got task: None
+[2026-01-26 12:52:39.668321] About to sleep 30s
+[2026-01-26 12:53:09.669961] Loop iteration 26, running=True
+[2026-01-26 12:53:09.669961] Got task: None
+[2026-01-26 12:53:10.751160] About to sleep 30s
+[2026-01-26 12:53:40.756679] Loop iteration 27, running=True
+[2026-01-26 12:53:40.756679] Got task: None
+[2026-01-26 12:53:42.094217] About to sleep 30s
+[2026-01-26 12:54:12.094787] Loop iteration 28, running=True
+[2026-01-26 12:54:12.094787] Got task: None
+[2026-01-26 12:54:13.467601] About to sleep 30s
+[2026-01-26 12:54:43.469428] Loop iteration 29, running=True
+[2026-01-26 12:54:43.469428] Got task: None
+[2026-01-26 12:54:44.823602] About to sleep 30s
+[2026-01-26 12:55:14.829671] Loop iteration 30, running=True
+[2026-01-26 12:55:14.830722] Got task: None
+[2026-01-26 12:55:15.957317] About to sleep 30s
+[2026-01-26 12:55:45.961103] Loop iteration 31, running=True
+[2026-01-26 12:55:45.962170] Got task: None
+[2026-01-26 12:55:47.303494] About to sleep 30s
+[2026-01-26 12:56:17.306733] Loop iteration 32, running=True
+[2026-01-26 12:56:17.307746] Got task: None
+[2026-01-26 12:56:18.622310] About to sleep 30s
+[2026-01-26 12:56:48.624311] Loop iteration 33, running=True
+[2026-01-26 12:56:48.624311] Got task: None
+[2026-01-26 12:56:49.929030] About to sleep 30s
+[2026-01-26 12:57:19.932589] Loop iteration 34, running=True
+[2026-01-26 12:57:19.932589] Got task: None
+[2026-01-26 12:57:21.251074] About to sleep 30s
+[2026-01-26 13:00:17.071014] Loop iteration 35, running=True
+[2026-01-26 13:00:17.074807] Got task: None
+[2026-01-26 13:00:20.338998] About to sleep 30s
+[2026-01-26 13:00:50.340217] Loop iteration 36, running=True
+[2026-01-26 13:00:50.342274] Got task: None
+[2026-01-26 13:00:52.372524] About to sleep 30s
+[2026-01-26 13:01:22.375272] Loop iteration 37, running=True
+[2026-01-26 13:01:22.378707] Got task: None
+[2026-01-26 13:01:24.676925] About to sleep 30s
+[2026-01-26 13:01:54.681963] Loop iteration 38, running=True
+[2026-01-26 13:01:54.681963] Got task: None
+[2026-01-26 13:01:56.696464] About to sleep 30s
+[2026-01-26 13:02:26.698780] Loop iteration 39, running=True
+[2026-01-26 13:02:26.698780] Got task: None
+[2026-01-26 13:02:28.727658] About to sleep 30s
+[2026-01-26 13:02:58.731015] Loop iteration 40, running=True
+[2026-01-26 13:02:58.731015] Got task: None
+[2026-01-26 13:03:00.740627] About to sleep 30s
+[2026-01-26 13:03:30.749400] Loop iteration 41, running=True
+[2026-01-26 13:03:30.751245] Got task: None
+[2026-01-26 13:03:32.722116] About to sleep 30s
+[2026-01-26 13:04:02.723746] Loop iteration 42, running=True
+[2026-01-26 13:04:02.726247] Got task: None
+[2026-01-26 13:04:04.684069] About to sleep 30s
+[2026-01-26 13:04:34.687523] Loop iteration 43, running=True
+[2026-01-26 13:04:34.687523] Got task: None
+[2026-01-26 13:04:36.689985] About to sleep 30s
+[2026-01-26 13:05:06.691225] Loop iteration 44, running=True
+[2026-01-26 13:05:06.693402] Got task: None
+[2026-01-26 13:05:08.703094] About to sleep 30s
+[2026-01-26 13:05:38.706379] Loop iteration 45, running=True
+[2026-01-26 13:05:38.708910] Got task: None
+[2026-01-26 13:05:40.745672] About to sleep 30s
+[2026-01-26 13:06:10.746177] Loop iteration 46, running=True
+[2026-01-26 13:06:10.746177] Got task: None
+[2026-01-26 13:06:12.723192] About to sleep 30s
+[2026-01-26 13:06:42.727965] Loop iteration 47, running=True
+[2026-01-26 13:06:42.729984] Got task: None
+[2026-01-26 13:06:44.776187] About to sleep 30s
+[2026-01-26 13:07:14.777064] Loop iteration 48, running=True
+[2026-01-26 13:07:14.777064] Got task: None
+[2026-01-26 13:07:16.734123] About to sleep 30s
+[2026-01-26 13:07:46.735696] Loop iteration 49, running=True
+[2026-01-26 13:07:46.737987] Got task: None
+[2026-01-26 13:07:48.697327] About to sleep 30s
+[2026-01-26 13:08:18.699270] Loop iteration 50, running=True
+[2026-01-26 13:08:18.702540] Got task: None
+[2026-01-26 13:08:20.644434] About to sleep 30s
+[2026-01-26 13:08:50.645749] Loop iteration 51, running=True
+[2026-01-26 13:08:50.648182] Got task: None
+[2026-01-26 13:08:52.535027] About to sleep 30s
+[2026-01-26 13:09:22.535637] Loop iteration 52, running=True
+[2026-01-26 13:09:22.537553] Got task: None
+[2026-01-26 13:09:24.428219] About to sleep 30s
+[2026-01-26 13:09:54.430265] Loop iteration 53, running=True
+[2026-01-26 13:09:54.432777] Got task: None
+[2026-01-26 13:09:56.281741] About to sleep 30s
+[2026-01-26 13:10:26.292576] Loop iteration 54, running=True
+[2026-01-26 13:10:26.294574] Got task: None
+[2026-01-26 13:10:28.159521] About to sleep 30s
+[2026-01-26 13:10:58.160042] Loop iteration 55, running=True
+[2026-01-26 13:10:58.163571] Got task: None
+[2026-01-26 13:11:00.051757] About to sleep 30s
+[2026-01-26 13:11:30.057674] Loop iteration 56, running=True
+[2026-01-26 13:11:30.060389] Got task: None
+[2026-01-26 13:11:31.934647] About to sleep 30s
+[2026-01-26 13:12:01.939316] Loop iteration 57, running=True
+[2026-01-26 13:12:01.939316] Got task: None
+[2026-01-26 13:12:03.875229] About to sleep 30s
+[2026-01-26 13:12:33.878054] Loop iteration 58, running=True
+[2026-01-26 13:12:33.878054] Got task: None
+[2026-01-26 13:12:35.730192] About to sleep 30s
+[2026-01-26 13:13:05.733389] Loop iteration 59, running=True
+[2026-01-26 13:13:05.733389] Got task: None
+[2026-01-26 13:13:07.616372] About to sleep 30s
+[2026-01-26 13:13:37.619146] Loop iteration 60, running=True
+[2026-01-26 13:13:37.621716] Got task: None
+[2026-01-26 13:13:39.490560] About to sleep 30s
+[2026-01-26 13:14:09.500361] Loop iteration 61, running=True
+[2026-01-26 13:14:09.503039] Got task: None
+[2026-01-26 13:14:11.336526] About to sleep 30s
+[2026-01-26 13:14:41.341755] Loop iteration 62, running=True
+[2026-01-26 13:14:41.343843] Got task: None
+[2026-01-26 13:14:43.111579] About to sleep 30s
+[2026-01-26 13:15:13.117212] Loop iteration 63, running=True
+[2026-01-26 13:15:13.117212] Got task: None
+[2026-01-26 13:15:14.905629] About to sleep 30s
+[2026-01-26 13:15:44.908347] Loop iteration 64, running=True
+[2026-01-26 13:15:44.910889] Got task: None
+[2026-01-26 13:15:46.647294] About to sleep 30s
+[2026-01-26 13:16:16.650632] Loop iteration 65, running=True
+[2026-01-26 13:16:16.650632] Got task: None
+[2026-01-26 13:16:18.401127] About to sleep 30s
+[2026-01-26 13:16:48.405129] Loop iteration 66, running=True
+[2026-01-26 13:16:48.405129] Got task: None
+[2026-01-26 13:16:50.172284] About to sleep 30s
+[2026-01-26 13:17:20.175261] Loop iteration 67, running=True
+[2026-01-26 13:17:20.177688] Got task: None
+[2026-01-26 13:17:21.929211] About to sleep 30s
+[2026-01-26 13:17:51.930075] Loop iteration 68, running=True
+[2026-01-26 13:17:51.930655] Got task: None
+[2026-01-26 13:17:53.657193] About to sleep 30s
+[2026-01-26 13:18:23.658401] Loop iteration 69, running=True
+[2026-01-26 13:18:23.658401] Got task: None
+[2026-01-26 13:18:25.392296] About to sleep 30s
+[2026-01-26 13:18:55.393916] Loop iteration 70, running=True
+[2026-01-26 13:18:55.394919] Got task: None
+[2026-01-26 13:18:57.114217] About to sleep 30s
+[2026-01-26 13:19:27.115658] Loop iteration 71, running=True
+[2026-01-26 13:19:27.115658] Got task: None
+[2026-01-26 13:19:28.871270] About to sleep 30s
+[2026-01-26 13:19:58.872399] Loop iteration 72, running=True
+[2026-01-26 13:19:58.873795] Got task: None
+[2026-01-26 13:20:00.631373] About to sleep 30s
+[2026-01-26 13:20:30.634594] Loop iteration 73, running=True
+[2026-01-26 13:20:30.634594] Got task: None
+[2026-01-26 13:20:32.332980] About to sleep 30s
+[2026-01-26 13:21:02.334335] Loop iteration 74, running=True
+[2026-01-26 13:21:02.335395] Got task: None
+[2026-01-26 13:21:04.060801] About to sleep 30s
+[2026-01-26 13:21:34.064712] Loop iteration 75, running=True
+[2026-01-26 13:21:34.064712] Got task: None
+[2026-01-26 13:21:35.790348] About to sleep 30s
+[2026-01-26 13:22:05.790800] Loop iteration 76, running=True
+[2026-01-26 13:22:05.792883] Got task: None
+[2026-01-26 13:22:07.556246] About to sleep 30s
+[2026-01-26 13:22:37.560643] Loop iteration 77, running=True
+[2026-01-26 13:22:37.560643] Got task: None
+[2026-01-26 13:22:39.286931] About to sleep 30s
+[2026-01-26 13:23:09.290277] Loop iteration 78, running=True
+[2026-01-26 13:23:09.292865] Got task: None
+[2026-01-26 13:23:11.245533] About to sleep 30s
+[2026-01-26 13:23:41.249904] Loop iteration 79, running=True
+[2026-01-26 13:23:41.251782] Got task: None
+[2026-01-26 13:23:42.933508] About to sleep 30s
+[2026-01-26 13:24:12.935158] Loop iteration 80, running=True
+[2026-01-26 13:24:12.937796] Got task: None
+[2026-01-26 13:24:14.744883] About to sleep 30s
+[2026-01-26 13:24:44.746137] Loop iteration 81, running=True
+[2026-01-26 13:24:44.746137] Got task: None
+[2026-01-26 13:24:46.454386] About to sleep 30s
+[2026-01-26 13:25:16.461766] Loop iteration 82, running=True
+[2026-01-26 13:25:16.464094] Got task: None
+[2026-01-26 13:25:18.242054] About to sleep 30s
+[2026-01-26 13:25:48.242490] Loop iteration 83, running=True
+[2026-01-26 13:25:48.242490] Got task: None
+[2026-01-26 13:25:49.956427] About to sleep 30s
+[2026-01-26 13:26:19.960040] Loop iteration 84, running=True
+[2026-01-26 13:26:19.962048] Got task: None
+[2026-01-26 13:26:21.692154] About to sleep 30s
+[2026-01-26 13:26:51.693456] Loop iteration 85, running=True
+[2026-01-26 13:26:51.693456] Got task: None
+[2026-01-26 13:26:53.470739] About to sleep 30s
+[2026-01-26 13:27:23.471720] Loop iteration 86, running=True
+[2026-01-26 13:27:23.472313] Got task: None
+[2026-01-26 13:27:25.206621] About to sleep 30s
+[2026-01-26 13:27:55.207382] Loop iteration 87, running=True
+[2026-01-26 13:27:55.210515] Got task: None
+[2026-01-26 13:27:56.961258] About to sleep 30s
+[2026-01-26 13:28:26.963775] Loop iteration 88, running=True
+[2026-01-26 13:28:26.965812] Got task: None
+[2026-01-26 13:28:28.911027] About to sleep 30s
+[2026-01-26 13:28:58.911838] Loop iteration 89, running=True
+[2026-01-26 13:28:58.914305] Got task: None
+[2026-01-26 13:29:00.654231] About to sleep 30s
+[2026-01-26 13:29:30.656160] Loop iteration 90, running=True
+[2026-01-26 13:29:30.662321] Got task: None
+[2026-01-26 13:29:32.393359] About to sleep 30s
+[2026-01-26 13:30:02.394959] Loop iteration 91, running=True
+[2026-01-26 13:30:02.395994] Got task: None
+[2026-01-26 13:30:04.130093] About to sleep 30s
+[2026-01-26 13:30:34.130984] Loop iteration 92, running=True
+[2026-01-26 13:30:34.131991] Got task: None
+[2026-01-26 13:30:35.845346] About to sleep 30s
+[2026-01-26 13:31:05.846841] Loop iteration 93, running=True
+[2026-01-26 13:31:05.846841] Got task: None
+[2026-01-26 13:31:07.539693] About to sleep 30s
+[2026-01-26 13:31:37.546204] Loop iteration 94, running=True
+[2026-01-26 13:31:37.546204] Got task: None
+[2026-01-26 13:31:39.253983] About to sleep 30s
+[2026-01-26 13:32:09.255131] Loop iteration 95, running=True
+[2026-01-26 13:32:09.257143] Got task: None
+[2026-01-26 13:32:11.017485] About to sleep 30s
+[2026-01-26 13:32:41.018443] Loop iteration 96, running=True
+[2026-01-26 13:32:41.020204] Got task: None
+[2026-01-26 13:32:42.737539] About to sleep 30s
+[2026-01-26 13:33:12.738372] Loop iteration 97, running=True
+[2026-01-26 13:33:12.738372] Got task: None
+[2026-01-26 13:33:14.402046] About to sleep 30s
+[2026-01-26 13:33:44.402558] Loop iteration 98, running=True
+[2026-01-26 13:33:44.404569] Got task: None
+[2026-01-26 13:33:46.103099] About to sleep 30s
+[2026-01-26 13:34:16.105158] Loop iteration 99, running=True
+[2026-01-26 13:34:16.106160] Got task: None
+[2026-01-26 13:34:17.823854] About to sleep 30s
+[2026-01-26 13:34:47.824771] Loop iteration 100, running=True
+[2026-01-26 13:34:47.825797] Got task: None
+[2026-01-26 13:34:49.533562] About to sleep 30s
+[2026-01-26 13:35:19.533943] Loop iteration 101, running=True
+[2026-01-26 13:35:19.537473] Got task: None
+[2026-01-26 13:35:21.256857] About to sleep 30s
+[2026-01-26 13:35:51.257282] Loop iteration 102, running=True
+[2026-01-26 13:35:51.259346] Got task: None
+[2026-01-26 13:35:52.931094] About to sleep 30s
+[2026-01-26 13:36:22.932477] Loop iteration 103, running=True
+[2026-01-26 13:36:22.933510] Got task: None
+[2026-01-26 13:36:24.630871] About to sleep 30s
+[2026-01-26 13:36:54.631760] Loop iteration 104, running=True
+[2026-01-26 13:36:54.631760] Got task: None
+[2026-01-26 13:36:56.359466] About to sleep 30s
+[2026-01-26 13:37:26.360910] Loop iteration 105, running=True
+[2026-01-26 13:37:26.363452] Got task: None
+[2026-01-26 13:37:28.064807] About to sleep 30s
+[2026-01-26 13:37:58.067031] Loop iteration 106, running=True
+[2026-01-26 13:37:58.070471] Got task: None
+[2026-01-26 13:37:59.807786] About to sleep 30s
+[2026-01-26 13:38:29.809251] Loop iteration 107, running=True
+[2026-01-26 13:38:29.811782] Got task: None
+[2026-01-26 13:38:31.517257] About to sleep 30s
+[2026-01-26 13:39:01.518152] Loop iteration 108, running=True
+[2026-01-26 13:39:01.519952] Got task: None
+[2026-01-26 13:39:03.214338] About to sleep 30s
+[2026-01-26 13:39:33.218634] Loop iteration 109, running=True
+[2026-01-26 13:39:33.222361] Got task: None
+[2026-01-26 13:39:34.939981] About to sleep 30s
+[2026-01-26 13:40:04.943944] Loop iteration 110, running=True
+[2026-01-26 13:40:04.943944] Got task: None
+[2026-01-26 13:40:06.655420] About to sleep 30s
+[2026-01-26 13:40:36.662650] Loop iteration 111, running=True
+[2026-01-26 13:40:36.662650] Got task: None
+[2026-01-26 13:40:38.388879] About to sleep 30s
+[2026-01-26 13:41:08.390385] Loop iteration 112, running=True
+[2026-01-26 13:41:08.395388] Got task: None
+[2026-01-26 13:41:10.110683] About to sleep 30s
+[2026-01-26 13:41:40.111553] Loop iteration 113, running=True
+[2026-01-26 13:41:40.111553] Got task: None
+[2026-01-26 13:41:41.829422] About to sleep 30s
+[2026-01-26 13:42:11.830813] Loop iteration 114, running=True
+[2026-01-26 13:42:11.833348] Got task: None
+[2026-01-26 13:42:13.610278] About to sleep 30s
+[2026-01-26 13:42:43.611503] Loop iteration 115, running=True
+[2026-01-26 13:42:43.611503] Got task: None
+[2026-01-26 13:42:45.303267] About to sleep 30s
+[2026-01-26 13:43:15.305057] Loop iteration 116, running=True
+[2026-01-26 13:43:15.306082] Got task: None
+[2026-01-26 13:43:16.974525] About to sleep 30s
+[2026-01-26 13:43:46.975858] Loop iteration 117, running=True
+[2026-01-26 13:43:46.977890] Got task: None
+[2026-01-26 13:43:48.660355] About to sleep 30s
+[2026-01-26 13:44:18.661507] Loop iteration 118, running=True
+[2026-01-26 13:44:18.663325] Got task: None
+[2026-01-26 13:44:20.347939] About to sleep 30s
+[2026-01-26 13:44:50.349637] Loop iteration 119, running=True
+[2026-01-26 13:44:50.351640] Got task: None
+[2026-01-26 13:44:52.065351] About to sleep 30s
+[2026-01-26 13:45:22.066023] Loop iteration 120, running=True
+[2026-01-26 13:45:22.067538] Got task: None
+[2026-01-26 13:45:23.677791] About to sleep 30s
+[2026-01-26 13:45:53.679779] Loop iteration 121, running=True
+[2026-01-26 13:45:53.684087] Got task: None
+[2026-01-26 13:45:55.347803] About to sleep 30s
+[2026-01-26 13:46:25.348775] Loop iteration 122, running=True
+[2026-01-26 13:46:25.352526] Got task: None
+[2026-01-26 13:46:26.997173] About to sleep 30s
+[2026-01-26 13:46:56.998495] Loop iteration 123, running=True
+[2026-01-26 13:46:57.000741] Got task: None
+[2026-01-26 13:46:58.661058] About to sleep 30s
+[2026-01-26 13:47:28.662044] Loop iteration 124, running=True
+[2026-01-26 13:47:28.664071] Got task: None
+[2026-01-26 13:47:30.362918] About to sleep 30s
+[2026-01-26 13:48:00.364304] Loop iteration 125, running=True
+[2026-01-26 13:48:00.365311] Got task: None
+[2026-01-26 13:48:02.026185] About to sleep 30s
+[2026-01-26 13:48:32.027235] Loop iteration 126, running=True
+[2026-01-26 13:48:32.029246] Got task: None
+[2026-01-26 13:48:33.692067] About to sleep 30s
+[2026-01-26 13:49:03.693042] Loop iteration 127, running=True
+[2026-01-26 13:49:03.694056] Got task: None
+[2026-01-26 13:49:05.388390] About to sleep 30s
+[2026-01-26 13:49:35.389257] Loop iteration 128, running=True
+[2026-01-26 13:49:35.390502] Got task: None
+[2026-01-26 13:49:37.037137] About to sleep 30s
+[2026-01-26 13:50:07.038562] Loop iteration 129, running=True
+[2026-01-26 13:50:07.039766] Got task: None
+[2026-01-26 13:50:08.719424] About to sleep 30s
+[2026-01-26 13:50:38.720274] Loop iteration 130, running=True
+[2026-01-26 13:50:38.723650] Got task: None
+[2026-01-26 13:50:40.389812] About to sleep 30s
+[2026-01-26 13:51:10.390734] Loop iteration 131, running=True
+[2026-01-26 13:51:10.391765] Got task: None
+[2026-01-26 13:51:12.016460] About to sleep 30s
+[2026-01-26 13:51:42.018837] Loop iteration 132, running=True
+[2026-01-26 13:51:42.021937] Got task: None
+[2026-01-26 13:51:43.705944] About to sleep 30s
+[2026-01-26 13:52:13.707746] Loop iteration 133, running=True
+[2026-01-26 13:52:13.708761] Got task: None
+[2026-01-26 13:52:15.444640] About to sleep 30s
+[2026-01-26 13:52:45.446474] Loop iteration 134, running=True
+[2026-01-26 13:52:45.447491] Got task: None
+[2026-01-26 13:52:47.084262] About to sleep 30s
+[2026-01-26 13:53:17.086319] Loop iteration 135, running=True
+[2026-01-26 13:53:17.088852] Got task: None
+[2026-01-26 13:53:19.068562] About to sleep 30s
+[2026-01-26 13:53:49.069704] Loop iteration 136, running=True
+[2026-01-26 13:53:49.071401] Got task: None
+[2026-01-26 13:53:50.688425] About to sleep 30s
+[2026-01-26 13:54:20.690007] Loop iteration 137, running=True
+[2026-01-26 13:54:20.692576] Got task: None
+[2026-01-26 13:54:22.439951] About to sleep 30s
+[2026-01-26 13:54:52.441259] Loop iteration 138, running=True
+[2026-01-26 13:54:52.442299] Got task: None
+[2026-01-26 13:54:53.936862] About to sleep 30s
+[2026-01-26 13:55:23.938924] Loop iteration 139, running=True
+[2026-01-26 13:55:23.943127] Got task: None
+[2026-01-26 13:55:25.577533] About to sleep 30s
+[2026-01-26 13:55:55.580979] Loop iteration 140, running=True
+[2026-01-26 13:55:55.583531] Got task: None
+[2026-01-26 13:55:56.999394] About to sleep 30s
+[2026-01-26 13:56:27.001255] Loop iteration 141, running=True
+[2026-01-26 13:56:27.003625] Got task: None
+[2026-01-26 13:56:28.473441] About to sleep 30s
+[2026-01-26 13:56:58.474582] Loop iteration 142, running=True
+[2026-01-26 13:56:58.476612] Got task: None
+[2026-01-26 13:56:59.883493] About to sleep 30s
+[2026-01-26 13:57:29.885047] Loop iteration 143, running=True
+[2026-01-26 13:57:29.888026] Got task: None
+[2026-01-26 13:57:31.346631] About to sleep 30s
+[2026-01-26 13:58:01.348189] Loop iteration 144, running=True
+[2026-01-26 13:58:01.349422] Got task: None
+[2026-01-26 13:58:02.758282] About to sleep 30s
+[2026-01-26 13:58:32.760186] Loop iteration 145, running=True
+[2026-01-26 13:58:32.761199] Got task: None
+[2026-01-26 13:58:34.129743] About to sleep 30s
+[2026-01-26 13:59:04.131283] Loop iteration 146, running=True
+[2026-01-26 13:59:04.132291] Got task: None
+[2026-01-26 13:59:05.501836] About to sleep 30s
+[2026-01-26 13:59:35.503686] Loop iteration 147, running=True
+[2026-01-26 13:59:35.506235] Got task: None
+[2026-01-26 13:59:36.870538] About to sleep 30s
+[2026-01-26 14:00:06.872236] Loop iteration 148, running=True
+[2026-01-26 14:00:06.873936] Got task: None
+[2026-01-26 14:00:08.257937] About to sleep 30s
+[2026-01-26 14:00:38.259297] Loop iteration 149, running=True
+[2026-01-26 14:00:38.262181] Got task: None
+[2026-01-26 14:00:39.681512] About to sleep 30s
+[2026-01-26 14:01:09.683871] Loop iteration 150, running=True
+[2026-01-26 14:01:09.685895] Got task: None
+[2026-01-26 14:01:11.131587] About to sleep 30s
+[2026-01-26 14:01:41.133907] Loop iteration 151, running=True
+[2026-01-26 14:01:41.136678] Got task: None
+[2026-01-26 14:01:42.615496] About to sleep 30s
+[2026-01-26 14:02:12.616793] Loop iteration 152, running=True
+[2026-01-26 14:02:12.620799] Got task: None
+[2026-01-26 14:02:14.187332] About to sleep 30s
+[2026-01-26 14:02:44.189417] Loop iteration 153, running=True
+[2026-01-26 14:02:44.190412] Got task: None
+[2026-01-26 14:02:45.656904] About to sleep 30s
+[2026-01-26 14:03:15.658956] Loop iteration 154, running=True
+[2026-01-26 14:03:15.659460] Got task: None
+[2026-01-26 14:03:17.071545] About to sleep 30s
+[2026-01-26 14:03:47.074517] Loop iteration 155, running=True
+[2026-01-26 14:03:47.076546] Got task: None
+[2026-01-26 14:03:48.487759] About to sleep 30s
+[2026-01-26 14:04:18.489500] Loop iteration 156, running=True
+[2026-01-26 14:04:18.490507] Got task: None
+[2026-01-26 14:04:19.883361] About to sleep 30s
+[2026-01-26 14:04:49.885268] Loop iteration 157, running=True
+[2026-01-26 14:04:49.886481] Got task: None
+[2026-01-26 14:04:50.983150] About to sleep 30s
+[2026-01-26 14:05:20.984850] Loop iteration 158, running=True
+[2026-01-26 14:05:20.984850] Got task: None
+[2026-01-26 14:05:21.751892] About to sleep 30s
+[2026-01-26 14:05:51.753293] Loop iteration 159, running=True
+[2026-01-26 14:05:51.753293] Got task: None
+[2026-01-26 14:05:52.507980] About to sleep 30s
+[2026-01-26 14:06:22.510971] Loop iteration 160, running=True
+[2026-01-26 14:06:22.510971] Got task: None
+[2026-01-26 14:06:23.328017] About to sleep 30s
+[2026-01-26 14:06:53.330160] Loop iteration 161, running=True
+[2026-01-26 14:06:53.330160] Got task: None
+[2026-01-26 14:06:54.100451] About to sleep 30s
+[2026-01-26 14:07:24.103510] Loop iteration 162, running=True
+[2026-01-26 14:07:24.103510] Got task: None
+[2026-01-26 14:07:24.884671] About to sleep 30s
+[2026-01-26 14:07:54.895907] Loop iteration 163, running=True
+[2026-01-26 14:07:54.899043] Got task: None
+[2026-01-26 14:07:56.528681] About to sleep 30s
+[2026-01-26 14:08:26.530165] Loop iteration 164, running=True
+[2026-01-26 14:08:26.532212] Got task: None
+[2026-01-26 14:08:28.091680] About to sleep 30s
+[2026-01-26 14:08:58.092876] Loop iteration 165, running=True
+[2026-01-26 14:08:58.095735] Got task: None
+[2026-01-26 14:08:59.661946] About to sleep 30s
+[2026-01-26 14:09:29.664108] Loop iteration 166, running=True
+[2026-01-26 14:09:29.665130] Got task: None
+[2026-01-26 14:09:31.154688] About to sleep 30s
+[2026-01-26 14:10:01.155945] Loop iteration 167, running=True
+[2026-01-26 14:10:01.158089] Got task: None
+[2026-01-26 14:10:02.725581] About to sleep 30s
+[2026-01-26 14:10:32.727624] Loop iteration 168, running=True
+[2026-01-26 14:10:32.751031] Got task: ContinuousTask(id='9a85e9da-be6d-439c-b894-b934bb9fbacf', prompt='Add tests for autonomous_ingest.py\n\nNo test file found for C:\\Users\\New Employee\\Downloads\\Atlas-OS-main\\Claude n8n\\daemon\\autonomous_ingest.py. Consider adding unit tests.', source='shared_queue', priority=0, created_at='2026-01-26T14:10:16.024280', status='pending')

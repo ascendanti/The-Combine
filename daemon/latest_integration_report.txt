@@ -1,0 +1,318 @@
+============================================================
+INTEGRATION ANALYSIS REPORT
+Generated: 2026-01-26T10:00:27.153882
+============================================================
+
+## New Capabilities Detected: 916
+
+### Agents: 149
+  - academic-research-synthesizer
+  - academic-researcher
+  - accessibility-specialist
+  - aegis
+  - agent-expert
+  - agentica-agent
+  - ai-engineer
+  - api-documenter
+  - api-security-audit
+  - arbiter
+  ... and 139 more
+
+### Skills: 404
+  - deep-reading-analyst
+  - handoff
+  - quant-methodology
+  - README
+  - SKILL
+  - SKILL
+  - agent-skills-spec
+  - SKILL
+  - SKILL
+  - API_SPEC
+  ... and 394 more
+
+### Commands: 175
+  - act
+  - add-authentication-system
+  - add-changelog
+  - add-mutation-testing
+  - add-package
+  - add-performance-monitoring
+  - add-property-based-testing
+  - add-to-changelog
+  - all-tools
+  - architecture-review
+  ... and 165 more
+
+### Hooks: 168
+  - CONFIG
+  - CONTINUITY_CLAUDE-open-source-release
+  - README
+  - auto-git-add
+  - build-on-change
+  - change-tracker
+  - dependency-checker
+  - discord-detailed-notifications
+  - discord-error-notifications
+  - discord-notifications
+  ... and 158 more
+
+### Rules: 20
+  - agent-memory-recall
+  - agent-model-selection
+  - auto-link-specs
+  - autonomous-operation
+  - before-acting
+  - claim-verification
+  - cross-terminal-db
+  - destructive-commands
+  - dynamic-recall
+  - evolution-plan-adherence
+  ... and 10 more
+
+## Integration Recommendations: 351
+
+- Auto-applicable: 215
+- Manual review needed: 136
+
+[AUTO] Add agent 'aegis' to routing index with tools: [Read, Bash, Grep, Glob]
+[AUTO] Add agent 'agentica-agent' to routing index with tools: [Bash, Read, Write, Edit, Glob, Grep]
+[AUTO] Add agent 'arbiter' to routing index with tools: [Bash, Read, Write, Glob, Grep]
+[AUTO] Register 'arbitrage-bot' for crypto/trading domain queries
+[AUTO] Add agent 'architect' to routing index with tools: [Read, Bash, Grep, Glob]
+[AUTO] Add agent 'atlas' to routing index with tools: [Bash, Read, Write, Glob, Grep]
+[AUTO] Register 'blockchain-developer' for crypto/trading domain queries
+[AUTO] Add agent 'chronicler' to routing index with tools: [Read, Bash, Grep, Glob]
+[AUTO] Add agent 'critic' to routing index with tools: [Read, Grep, Glob]
+[AUTO] Register 'crypto-analyst' for crypto/trading domain queries
+[AUTO] Register 'crypto-risk-manager' for crypto/trading domain queries
+[AUTO] Register 'crypto-trader' for crypto/trading domain queries
+[AUTO] Register 'defi-strategist' for crypto/trading domain queries
+[AUTO] Register 'episode-orchestrator' for crypto/trading domain queries
+[AUTO] Add agent 'herald' to routing index with tools: [Read, Write, Edit, Bash, Grep, Glob]
+[AUTO] Add agent 'judge' to routing index with tools: [Read, Grep, Glob]
+[AUTO] Add agent 'kraken' to routing index with tools: [Read, Edit, Write, Bash, Grep, Glob]
+[AUTO] Add agent 'liaison' to routing index with tools: [Read, Grep, Glob]
+[AUTO] Add agent 'maestro' to routing index with tools: [Read, Bash, Grep, Glob, Task]
+[AUTO] Register 'mcp-server-architect' for crypto/trading domain queries
+... and 331 more
+
+## Auto-Applied Changes: 215
+
+  [OK] Add agent 'aegis' to routing index with tools: [Read, Bash, Grep, Glob]
+  [OK] Add agent 'agentica-agent' to routing index with tools: [Bash, Read, Write, Edit, Glob, Grep]
+  [OK] Add agent 'arbiter' to routing index with tools: [Bash, Read, Write, Glob, Grep]
+  [OK] Register 'arbitrage-bot' for crypto/trading domain queries
+  [OK] Add agent 'architect' to routing index with tools: [Read, Bash, Grep, Glob]
+  [OK] Add agent 'atlas' to routing index with tools: [Bash, Read, Write, Glob, Grep]
+  [OK] Register 'blockchain-developer' for crypto/trading domain queries
+  [OK] Add agent 'chronicler' to routing index with tools: [Read, Bash, Grep, Glob]
+  [OK] Add agent 'critic' to routing index with tools: [Read, Grep, Glob]
+  [OK] Register 'crypto-analyst' for crypto/trading domain queries
+  [OK] Register 'crypto-risk-manager' for crypto/trading domain queries
+  [OK] Register 'crypto-trader' for crypto/trading domain queries
+  [OK] Register 'defi-strategist' for crypto/trading domain queries
+  [OK] Register 'episode-orchestrator' for crypto/trading domain queries
+  [OK] Add agent 'herald' to routing index with tools: [Read, Write, Edit, Bash, Grep, Glob]
+  [OK] Add agent 'judge' to routing index with tools: [Read, Grep, Glob]
+  [OK] Add agent 'kraken' to routing index with tools: [Read, Edit, Write, Bash, Grep, Glob]
+  [OK] Add agent 'liaison' to routing index with tools: [Read, Grep, Glob]
+  [OK] Add agent 'maestro' to routing index with tools: [Read, Bash, Grep, Glob, Task]
+  [OK] Register 'mcp-server-architect' for crypto/trading domain queries
+  [OK] Add agent 'memory-extractor' to routing index with tools: [Bash, Read]
+  [OK] Add agent 'oracle' to routing index with tools: [Read, Bash, WebSearch]
+  [OK] Add agent 'pathfinder' to routing index with tools: [Read, Bash, Grep, Glob]
+  [OK] Add agent 'phoenix' to routing index with tools: [Read, Bash, Grep, Glob]
+  [OK] Add agent 'plan-reviewer' to routing index with tools: [Read, Grep, Glob]
+  [OK] Add agent 'profiler' to routing index with tools: [Read, Bash, Grep, Glob]
+  [OK] Register 'quant-analyst' for crypto/trading domain queries
+  [OK] Add agent 'scout' to routing index with tools: [Read, Grep, Glob, Bash]
+  [OK] Add agent 'scribe' to routing index with tools: [Read, Write, Glob, Grep]
+  [OK] Add agent 'sleuth' to routing index with tools: [Read, Bash, Grep, Glob]
+  [OK] Add agent 'spark' to routing index with tools: [Read, Edit, Write, Bash, Grep, Glob]
+  [OK] Add agent 'surveyor' to routing index with tools: [Read, Grep, Glob]
+  [OK] Activate document skill 'docx' for file operations
+  [OK] Activate document skill 'pptx' for file operations
+  [OK] Activate document skill 'docx' for file operations
+  [OK] Activate document skill 'pptx' for file operations
+  [OK] Activate document skill 'docx' for file operations
+  [OK] Activate document skill 'pptx' for file operations
+  [OK] Activate document skill 'docx' for file operations
+  [OK] Activate document skill 'pptx' for file operations
+  [OK] Register slash command /act
+  [OK] Register slash command /add-authentication-system
+  [OK] Register slash command /add-changelog
+  [OK] Register slash command /add-mutation-testing
+  [OK] Register slash command /add-package
+  [OK] Register slash command /add-performance-monitoring
+  [OK] Register slash command /add-property-based-testing
+  [OK] Register slash command /add-to-changelog
+  [OK] Register slash command /all-tools
+  [OK] Register slash command /architecture-review
+  [OK] Register slash command /architecture-scenario-explorer
+  [OK] Register slash command /bidirectional-sync
+  [OK] Register slash command /big-features-interview
+  [OK] Register slash command /bug-fix
+  [OK] Register slash command /bulk-import-issues
+  [OK] Register slash command /business-scenario-explorer
+  [OK] Register slash command /changelog-demo-command
+  [OK] Register slash command /check-file
+  [OK] Register slash command /check
+  [OK] Register slash command /ci-setup
+  [OK] Register slash command /clean-branches
+  [OK] Register slash command /clean
+  [OK] Register slash command /code-permutation-tester
+  [OK] Register slash command /code-review
+  [OK] Register slash command /code-to-task
+  [OK] Register slash command /code_analysis
+  [OK] Register slash command /commit-fast
+  [OK] Register slash command /commit
+  [OK] Register slash command /constraint-modeler
+  [OK] Register slash command /containerize-application
+  [OK] Register slash command /context-prime
+  [OK] Register slash command /create-architecture-documentation
+  [OK] Register slash command /create-command
+  [OK] Register slash command /create-database-migrations
+  [OK] Register slash command /create-docs
+  [OK] Register slash command /create-feature
+  [OK] Register slash command /create-jtbd
+  [OK] Register slash command /create-onboarding-guide
+  [OK] Register slash command /create-pr
+  [OK] Register slash command /create-prd
+  [OK] Register slash command /create-prp
+  [OK] Register slash command /create-pull-request
+  [OK] Register slash command /create-worktrees
+  [OK] Register slash command /cross-reference-manager
+  [OK] Register slash command /debug-error
+  [OK] Register slash command /decision-quality-analyzer
+  [OK] Register slash command /decision-tree-explorer
+  [OK] Register slash command /dependency-audit
+  [OK] Register slash command /dependency-mapper
+  [OK] Register slash command /design-database-schema
+  [OK] Register slash command /design-rest-api
+  [OK] Register slash command /digital-twin-creator
+  [OK] Register slash command /directory-deep-dive
+  [OK] Register slash command /doc-api
+  [OK] Register slash command /docs
+  [OK] Register slash command /e2e-setup
+  [OK] Register slash command /estimate-assistant
+  [OK] Register slash command /explain-code
+  [OK] Register slash command /explain-issue-fix
+  [OK] Register slash command /find
+  [OK] Register slash command /five
+  [OK] Register slash command /fix-github-issue
+  [OK] Register slash command /fix-issue
+  [OK] Register slash command /fix-pr
+  [OK] Register slash command /future-scenario-generator
+  [OK] Register slash command /generate-api-documentation
+  [OK] Register slash command /generate-linear-worklog
+  [OK] Register slash command /generate-test-cases
+  [OK] Register slash command /generate-tests
+  [OK] Register slash command /git-status
+  [OK] Register slash command /hotfix-deploy
+  [OK] Register slash command /husky
+  [OK] Register slash command /implement-caching-strategy
+  [OK] Register slash command /implement-graphql-api
+  [OK] Register slash command /init-project
+  [OK] Register slash command /initref
+  [OK] Register slash command /issue-to-linear-task
+  [OK] Register slash command /issue-triage
+  [OK] Register slash command /linear-task-to-issue
+  [OK] Register slash command /load-llms-txt
+  [OK] Register slash command /log
+  [OK] Register slash command /market-response-modeler
+  [OK] Register slash command /memory-spring-cleaning
+  [OK] Register slash command /mermaid
+  [OK] Register slash command /migrate-to-typescript
+  [OK] Register slash command /migration-assistant
+  [OK] Register slash command /migration-guide
+  [OK] Register slash command /milestone-tracker
+  [OK] Register slash command /modernize-deps
+  [OK] Register slash command /move
+  [OK] Register slash command /optimize-build
+  [OK] Register slash command /optimize-bundle-size
+  [OK] Register slash command /optimize-database-performance
+  [OK] Register slash command /optimize
+  [OK] Register slash command /pac-configure
+  [OK] Register slash command /pac-create-epic
+  [OK] Register slash command /pac-create-ticket
+  [OK] Register slash command /pac-update-status
+  [OK] Register slash command /pac-validate
+  [OK] Register slash command /performance-audit
+  [OK] Register slash command /pr-review
+  [OK] Register slash command /prepare-release
+  [OK] Register slash command /prime
+  [OK] Register slash command /project-health-check
+  [OK] Register slash command /project-timeline-simulator
+  [OK] Register slash command /project-to-linear
+  [OK] Register slash command /refactor-code
+  [OK] Register slash command /release
+  [OK] Register slash command /remove
+  [OK] Register slash command /report
+  [OK] Register slash command /repro-issue
+  [OK] Register slash command /resume
+  [OK] Register slash command /retrospective-analyzer
+  [OK] Register slash command /rollback-deploy
+  [OK] Register slash command /rsi
+  [OK] Register slash command /run-ci
+  [OK] Register slash command /security-audit
+  [OK] Register slash command /security-hardening
+  [OK] Register slash command /session-learning-capture
+  [OK] Register slash command /setup-automated-releases
+  [OK] Register slash command /setup-cdn-optimization
+  [OK] Register slash command /setup-comprehensive-testing
+  [OK] Register slash command /setup-development-environment
+  [OK] Register slash command /setup-formatting
+  [OK] Register slash command /setup-kubernetes-deployment
+  [OK] Register slash command /setup-linting
+  [OK] Register slash command /setup-load-testing
+  [OK] Register slash command /setup-monitoring-observability
+  [OK] Register slash command /setup-monorepo
+  [OK] Register slash command /setup-rate-limiting
+  [OK] Register slash command /setup-visual-testing
+  [OK] Register slash command /simulation-calibrator
+  [OK] Register slash command /sprint-planning
+  [OK] Register slash command /standup-report
+  [OK] Register slash command /start
+  [OK] Register slash command /status
+  [OK] Register slash command /svelte-a11y
+  [OK] Register slash command /svelte-component
+  [OK] Register slash command /svelte-debug
+  [OK] Register slash command /svelte-migrate
+  [OK] Register slash command /svelte-optimize
+  [OK] Register slash command /svelte-scaffold
+  [OK] Register slash command /svelte-storybook-migrate
+  [OK] Register slash command /svelte-storybook-mock
+  [OK] Register slash command /svelte-storybook-setup
+  [OK] Register slash command /svelte-storybook-story
+  [OK] Register slash command /svelte-storybook-troubleshoot
+  [OK] Register slash command /svelte-storybook
+  [OK] Register slash command /svelte-test-coverage
+  [OK] Register slash command /svelte-test-fix
+  [OK] Register slash command /svelte-test-setup
+  [OK] Register slash command /svelte-test
+  [OK] Register slash command /sync-automation-setup
+  [OK] Register slash command /sync-conflict-resolver
+  [OK] Register slash command /sync-issues-to-linear
+  [OK] Register slash command /sync-linear-to-issues
+  [OK] Register slash command /sync-pr-to-task
+  [OK] Register slash command /sync-status
+  [OK] Register slash command /sync
+  [OK] Register slash command /system-behavior-simulator
+  [OK] Register slash command /task-from-pr
+  [OK] Register slash command /tdd
+  [OK] Register slash command /team-workload-balancer
+  [OK] Register slash command /test-changelog-automation
+  [OK] Register slash command /test-coverage
+  [OK] Register slash command /testing_plan_integration
+  [OK] Register slash command /timeline-compressor
+  [OK] Register slash command /todo
+  [OK] Register slash command /troubleshooting-guide
+  [OK] Register slash command /ultra-think
+  [OK] Register slash command /unity-project-setup
+  [OK] Register slash command /update-branch-name
+  [OK] Register slash command /update-docs
+  [OK] Register slash command /use-stepper
+  [OK] Register slash command /write-tests
+
+============================================================

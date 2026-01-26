@@ -266,6 +266,21 @@ class TaskQueue:
 
         return affected
 
+    def reset_stale_tasks(self, minutes: int = 30) -> int:
+        """Reset in_progress tasks that have been stuck for too long."""
+        conn = self._get_conn()
+        cursor = conn.execute("""
+            UPDATE tasks
+            SET status = 'pending', started_at = NULL
+            WHERE status = 'in_progress'
+            AND datetime(started_at) < datetime('now', ? || ' minutes')
+        """, (f"-{minutes}",))
+        conn.commit()
+        affected = cursor.rowcount
+        conn.close()
+
+        return affected
+
 
 # CLI interface for manual task management
 if __name__ == "__main__":

@@ -1,11 +1,11 @@
 {
   "scores": {
-    "EVOLUTION-PLAN.md": 6.571236236353417e-05,
+    "EVOLUTION-PLAN.md": 3.219905755813174e-05,
     "task.md": 0.7,
-    "daemon/memory.py": 1.7984650426474064e-08,
-    "daemon/self_improvement.py": 6.468879147499614e-09,
-    "thoughts/handoffs": 0.48999999999999994
+    "daemon/memory.py": 8.81247870897229e-09,
+    "daemon/self_improvement.py": 3.1697507822748107e-09,
+    "thoughts/handoffs": 1.0
   },
-  "turn_count": 110,
-  "last_update": "2026-01-25T19:29:44.798012"
+  "turn_count": 112,
+  "last_update": "2026-01-25T22:47:55.258983"
 }

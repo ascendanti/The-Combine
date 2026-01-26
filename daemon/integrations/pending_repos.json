@@ -1,0 +1,130 @@
+{
+  "pending_integration": [
+    {
+      "url": "https://github.com/inngest/inngest",
+      "purpose": "Event-driven workflow orchestration",
+      "priority": "medium",
+      "added": "2026-01-26"
+    },
+    {
+      "url": "https://github.com/Metaculus/forecasting-tools",
+      "purpose": "Strategy module - forecasting capabilities",
+      "priority": "high",
+      "added": "2026-01-26"
+    },
+    {
+      "url": "https://github.com/clj-commons/manifold",
+      "purpose": "Async programming patterns",
+      "priority": "low",
+      "added": "2026-01-26"
+    },
+    {
+      "url": "https://github.com/frankbria/ralph-claude-code",
+      "purpose": "Intelligent exit detection",
+      "priority": "medium",
+      "added": "2026-01-26"
+    },
+    {
+      "url": "https://github.com/aannoo/hcom",
+      "purpose": "Realtime messaging and context sharing for agents",
+      "priority": "high",
+      "added": "2026-01-26"
+    },
+    {
+      "url": "https://github.com/ccplugins/marketplace",
+      "purpose": "Plugin marketplace for Claude",
+      "priority": "medium",
+      "added": "2026-01-26"
+    },
+    {
+      "url": "https://github.com/dzhng/deep-research",
+      "purpose": "Enhanced research capabilities",
+      "priority": "high",
+      "added": "2026-01-26"
+    },
+    {
+      "url": "https://github.com/Jenscaasen/UniversalLLMFunctionCaller",
+      "purpose": "Universal function calling across LLMs",
+      "priority": "high",
+      "added": "2026-01-26"
+    },
+    {
+      "url": "https://github.com/ariaxhan/kernel-claude",
+      "purpose": "Kernel for Claude orchestration",
+      "priority": "high",
+      "added": "2026-01-26",
+      "compare_with": "pg-dev-claude-code"
+    },
+    {
+      "url": "https://github.com/flyinweb/pg-dev-claude-code",
+      "purpose": "Dev kernel for Claude Code",
+      "priority": "high",
+      "added": "2026-01-26",
+      "compare_with": "kernel-claude"
+    }
+  ],
+  "adopted_for_architecture": [
+    {
+      "url": "https://github.com/GMaN1911/claude-cognitive",
+      "component": "Context Router (HOT/WARM/COLD)",
+      "benefit": "64-95% token reduction",
+      "status": "to_implement"
+    },
+    {
+      "url": "https://github.com/Spacehunterz/Emergent-Learning-Framework_ELF",
+      "component": "Emergent Learning System",
+      "benefit": "Confidence-weighted heuristics that improve over time",
+      "status": "to_implement"
+    },
+    {
+      "url": "https://github.com/Lyellr88/MARM-Systems",
+      "component": "Universal MCP Memory",
+      "benefit": "18 MCP tools, cross-platform memory",
+      "status": "to_install"
+    },
+    {
+      "url": "https://github.com/linggen/linggen",
+      "component": "Design Anchors + LanceDB vectors",
+      "benefit": "Structured codebase understanding",
+      "status": "partial_adopt"
+    },
+    {
+      "url": "https://github.com/ruvnet/claude-flow",
+      "component": "Background Workers + Swarm Coordination",
+      "benefit": "12 workers, 175+ MCP tools, continuous operation",
+      "status": "to_implement"
+    },
+    {
+      "url": "https://github.com/parcadei/Continuous-Claude-v3",
+      "component": "Structured Handoffs + TLDR Layers",
+      "benefit": "95% token savings, compound don't compact",
+      "status": "to_implement"
+    },
+    {
+      "url": "https://github.com/elusznik/mcp-server-code-execution-mode",
+      "component": "Zero-Context MCP Pattern",
+      "benefit": "30K -> 200 tokens overhead",
+      "status": "to_install"
+    },
+    {
+      "url": "https://github.com/shaneholloman/mcp-knowledge-graph",
+      "component": "Entity-Relation Graph",
+      "benefit": "Structured knowledge with deduplication",
+      "status": "merge_with_marm"
+    },
+    {
+      "url": "https://github.com/CaviraOSS/OpenMemory",
+      "component": "5-Sector Cognitive Model",
+      "benefit": "Episodic/Semantic/Procedural/Emotional/Reflective memory",
+      "status": "concepts_only"
+    },
+    {
+      "url": "https://github.com/metacoglabs/unicontext",
+      "component": "Provider-Agnostic Memory Bridge",
+      "benefit": "Cross-layer agent operation",
+      "status": "future"
+    }
+  ],
+  "dragonfly_mcp_created": true,
+  "architecture_doc": ".claude/UNIFIED-MEMORY-ARCHITECTURE.md"
+}

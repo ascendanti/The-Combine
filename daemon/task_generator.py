@@ -464,18 +464,42 @@ def get_pending_tasks() -> List[Dict]:
 
 
 def approve_task(task_id: str) -> bool:
-    """Approve a generated task."""
+    """Approve a generated task and add to execution queue."""
     init_db()
 
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
+    # Get task details first
+    c.execute('''SELECT title, description, priority FROM generated_tasks WHERE task_id = ?''', (task_id,))
+    row = c.fetchone()
+    if not row:
+        conn.close()
+        return False
+
+    title, description, priority = row
+
+    # Mark as approved
     c.execute('''UPDATE generated_tasks SET status = 'approved', reviewed_at = ?
         WHERE task_id = ?''', (datetime.now().isoformat(), task_id))
 
     affected = c.rowcount
     conn.commit()
     conn.close()
+
+    # Add to execution queue
+    if affected > 0:
+        try:
+            from task_queue import TaskQueue, TaskPriority
+            tq = TaskQueue()
+            # Map priority (1-5) to TaskPriority enum
+            pri_map = {1: TaskPriority.URGENT, 2: TaskPriority.HIGH, 3: TaskPriority.NORMAL, 4: TaskPriority.LOW, 5: TaskPriority.LOW}
+            tq.add_task(
+                prompt=f"{title}\n\n{description}",
+                priority=pri_map.get(priority, TaskPriority.NORMAL)
+            )
+        except Exception as e:
+            print(f"Warning: Could not add to task queue: {e}")
 
     return affected > 0
 

@@ -4707,5 +4707,168 @@
       "utf-context-filter",
       "utf-semantic-rag"
     ]
+  },
+  "agents": {
+    "aegis": {
+      "triggers": [
+        "aegis",
+        "aegis"
+      ],
+      "domain": "general"
+    },
+    "agentica-agent": {
+      "triggers": [
+        "agentica agent",
+        "agentica_agent"
+      ],
+      "domain": "general"
+    },
+    "arbiter": {
+      "triggers": [
+        "arbiter",
+        "arbiter"
+      ],
+      "domain": "general"
+    },
+    "architect": {
+      "triggers": [
+        "architect",
+        "architect"
+      ],
+      "domain": "general"
+    },
+    "atlas": {
+      "triggers": [
+        "atlas",
+        "atlas"
+      ],
+      "domain": "general"
+    },
+    "chronicler": {
+      "triggers": [
+        "chronicler",
+        "chronicler"
+      ],
+      "domain": "general"
+    },
+    "critic": {
+      "triggers": [
+        "critic",
+        "critic"
+      ],
+      "domain": "general"
+    },
+    "herald": {
+      "triggers": [
+        "herald",
+        "herald"
+      ],
+      "domain": "general"
+    },
+    "judge": {
+      "triggers": [
+        "judge",
+        "judge"
+      ],
+      "domain": "general"
+    },
+    "kraken": {
+      "triggers": [
+        "kraken",
+        "kraken"
+      ],
+      "domain": "general"
+    },
+    "liaison": {
+      "triggers": [
+        "liaison",
+        "liaison"
+      ],
+      "domain": "general"
+    },
+    "maestro": {
+      "triggers": [
+        "maestro",
+        "maestro"
+      ],
+      "domain": "general"
+    },
+    "memory-extractor": {
+      "triggers": [
+        "memory extractor",
+        "memory_extractor"
+      ],
+      "domain": "general"
+    },
+    "oracle": {
+      "triggers": [
+        "oracle",
+        "oracle"
+      ],
+      "domain": "general"
+    },
+    "pathfinder": {
+      "triggers": [
+        "pathfinder",
+        "pathfinder"
+      ],
+      "domain": "general"
+    },
+    "phoenix": {
+      "triggers": [
+        "phoenix",
+        "phoenix"
+      ],
+      "domain": "general"
+    },
+    "plan-reviewer": {
+      "triggers": [
+        "plan reviewer",
+        "plan_reviewer"
+      ],
+      "domain": "general"
+    },
+    "profiler": {
+      "triggers": [
+        "profiler",
+        "profiler"
+      ],
+      "domain": "general"
+    },
+    "scout": {
+      "triggers": [
+        "scout",
+        "scout"
+      ],
+      "domain": "general"
+    },
+    "scribe": {
+      "triggers": [
+        "scribe",
+        "scribe"
+      ],
+      "domain": "general"
+    },
+    "sleuth": {
+      "triggers": [
+        "sleuth",
+        "sleuth"
+      ],
+      "domain": "general"
+    },
+    "spark": {
+      "triggers": [
+        "spark",
+        "spark"
+      ],
+      "domain": "general"
+    },
+    "surveyor": {
+      "triggers": [
+        "surveyor",
+        "surveyor"
+      ],
+      "domain": "general"
+    }
   }
 }

@@ -40,6 +40,7 @@ import sqlite3
 import json
 import hashlib
 import time
+import sys
 import requests
 import argparse
 from datetime import datetime, timedelta
@@ -340,16 +341,20 @@ def route_request(text: str, use_localai: bool = True) -> Dict:
     # Record decision
     decision_id = f"dec_{datetime.now().strftime('%Y%m%d%H%M%S')}_{hashlib.md5(text.encode()).hexdigest()[:8]}"
 
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute('''INSERT INTO routing_decisions
-        (decision_id, request_hash, request_text, detected_intent, complexity_score,
-         chosen_route, confidence, timestamp)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
-        (decision_id, hashlib.md5(text.encode()).hexdigest(), text[:500],
-         intent, complexity, best_route, confidence, datetime.now().isoformat()))
-    conn.commit()
-    conn.close()
+    try:
+        conn = sqlite3.connect(DB_PATH, timeout=30)
+        conn.execute("PRAGMA journal_mode=WAL")
+        c = conn.cursor()
+        c.execute('''INSERT INTO routing_decisions
+            (decision_id, request_hash, request_text, detected_intent, complexity_score,
+             chosen_route, confidence, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+            (decision_id, hashlib.md5(text.encode()).hexdigest(), text[:500],
+             intent, complexity, best_route, confidence, datetime.now().isoformat()))
+        conn.commit()
+        conn.close()
+    except sqlite3.OperationalError as e:
+        print(f"[autorouter] Warning: Could not record routing decision: {e}", file=sys.stderr)
 
     return {
         "decision_id": decision_id,

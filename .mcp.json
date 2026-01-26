@@ -8,7 +8,8 @@
       ],
       "env": {
         "NODE_ENV": "production"
-      }
+      },
+      "description": "Persistent knowledge graph memory"
     },
     "token-optimizer": {
       "command": "npx",
@@ -19,7 +20,82 @@
       "env": {
         "CACHE_DIR": "C:/Users/New Employee/.claude/cache/token-optimizer",
         "COMPRESSION_LEVEL": "high"
-      }
+      },
+      "description": "Token optimization and compression"
+    },
+    "tooluniverse": {
+      "command": "python",
+      "args": [
+        "-m",
+        "tooluniverse.mcp_server"
+      ],
+      "env": {
+        "TOOLUNIVERSE_CACHE": "C:/Users/New Employee/.claude/cache/tooluniverse",
+        "TOOLUNIVERSE_TOOLS_PATH": "C:/Users/New Employee/Downloads/Atlas-OS-main/ToolUniverse"
+      },
+      "description": "700+ scientific tools (bioinformatics, drug discovery, genomics, literature)"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Chain-of-thought reasoning for complex tasks"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "description": "Persistent memory across sessions"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "description": "Live documentation lookup - always up-to-date docs"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:/Users/New Employee/Downloads/Atlas-OS-main"
+      ],
+      "description": "Filesystem operations for Atlas-OS projects"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub operations - PRs, issues, repos"
+    },
+    "n8n-workflow": {
+      "type": "http",
+      "url": "http://localhost:5678/mcp",
+      "description": "n8n workflow execution and management"
+    },
+    "dragonfly-cache": {
+      "command": "python",
+      "args": [
+        "C:/Users/New Employee/Downloads/Atlas-OS-main/Claude n8n/daemon/dragonfly_mcp_server.py"
+      ],
+      "env": {
+        "DRAGONFLY_HOST": "localhost",
+        "DRAGONFLY_PORT": "6379"
+      },
+      "description": "High-performance Dragonfly cache operations"
     }
+  },
+  "_workflow_config": {
+    "priority_servers": ["knowledge-graph", "memory", "sequential-thinking"],
+    "scientific_servers": ["tooluniverse"],
+    "infrastructure_servers": ["dragonfly-cache", "n8n-workflow", "filesystem"],
+    "development_servers": ["github", "context7"],
+    "optimization_servers": ["token-optimizer"]
+  },
+  "_notes": {
+    "tooluniverse": "Run 'pip install tooluniverse' first. Provides 700+ scientific tools.",
+    "n8n": "Requires n8n running on localhost:5678 with MCP endpoint enabled",
+    "github": "Set GITHUB_TOKEN environment variable for authentication",
+    "dragonfly": "Requires Dragonfly/Redis running on localhost:6379",
+    "localai": "LocalAI (port 1234) is optional - used for local LLM inference, not MCP"
   }
 }

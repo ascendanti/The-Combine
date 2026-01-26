@@ -143,14 +143,14 @@ class UnifiedSpine:
             if success:
                 self.task_queue.mark_completed(task.id, output)
                 record_outcome(decision_id, "success")
-                track_outcome(task.prompt, "success", {"result": output})
+                track_outcome(task.prompt, "success", context=str(output)[:500])
                 self.record_mape_feedback(task.id, True)  # WIRED: MAPE feedback
                 results["tasks_executed"] += 1
                 results["outcomes_recorded"] += 1
             else:
                 self.task_queue.mark_failed(task.id, output)
                 record_outcome(decision_id, "failure")
-                track_outcome(task.prompt, "failure", {"error": output})
+                track_outcome(task.prompt, "failure", context=str(output)[:500])
                 self.record_mape_feedback(task.id, False)  # WIRED: MAPE feedback
 
         return results

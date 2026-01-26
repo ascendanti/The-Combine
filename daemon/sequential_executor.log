@@ -1,0 +1,5 @@
+2026-01-25 19:37:26,973 [INFO] Starting sequential execution: seq_20260125193726
+2026-01-25 19:37:26,978 [INFO] Iteration 1/20
+2026-01-25 19:37:47,151 [WARNING] Got tool_use ID conflict - trying simpler prompt
+2026-01-25 19:37:47,151 [INFO] Iteration 2/20
+2026-01-25 19:37:48,046 [ERROR] CLI error: 
