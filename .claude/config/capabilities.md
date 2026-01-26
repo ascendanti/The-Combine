@@ -1,6 +1,6 @@
 # Capability Registry
 
-*Generated: 2026-01-26 09:53*
+*Generated: 2026-01-26 09:55*
 
 ## Summary
 
@@ -9,7 +9,7 @@
 | agent | 149 |
 | hook | 34 |
 | rule | 20 |
-| skill | 147 |
+| skill | 148 |
 
 ---
 
@@ -167,13 +167,14 @@
 | `visual-analysis-ocr` | general | claude |  |
 | `wordpress-developer` | general | claude |  |
 
-## Skills (147)
+## Skills (148)
 
 | Name | Domain | Model | Description |
 |------|--------|-------|-------------|
 | `README` | general | claude |  |
 | `agent-context-isolation` | general | claude |  |
 | `agent-orchestration` | general | claude |  |
+| `agent-skills-spec` | general | claude |  |
 | `agentic-workflow` | general | claude |  |
 | `agentica-claude-proxy` | general | claude |  |
 | `agentica-infrastructure` | general | claude |  |

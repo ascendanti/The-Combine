@@ -136,6 +136,7 @@
       "wordpress-developer",
       "agent-context-isolation",
       "agent-orchestration",
+      "agent-skills-spec",
       "agentic-workflow",
       "agentica-claude-proxy",
       "agentica-infrastructure",
@@ -526,6 +527,7 @@
     "skill": [
       "agent-context-isolation",
       "agent-orchestration",
+      "agent-skills-spec",
       "agentic-workflow",
       "agentica-claude-proxy",
       "agentica-infrastructure",
@@ -732,20 +734,6 @@
     ]
   },
   "by_keyword": {
-    "framework": [
-      {
-        "name": "architect",
-        "type": "agent"
-      },
-      {
-        "name": "onboard",
-        "type": "agent"
-      },
-      {
-        "name": "phoenix",
-        "type": "agent"
-      }
-    ],
     "extended": [
       {
         "name": "architect",
@@ -756,21 +744,13 @@
         "type": "agent"
       }
     ],
-    "keywords": [
+    "framework": [
       {
-        "name": "learnings-researcher",
+        "name": "architect",
         "type": "agent"
-      }
-    ],
-    "module": [
+      },
       {
-        "name": "learnings-researcher",
-        "type": "agent"
-      }
-    ],
-    "names": [
-      {
-        "name": "learnings-researcher",
+        "name": "phoenix",
         "type": "agent"
       }
     ],
@@ -792,13 +772,35 @@
         "type": "skill"
       }
     ],
-    "task": [
+    "extract": [
       {
         "name": "learnings-researcher",
         "type": "agent"
       }
     ],
-    "strategy": [
+    "names": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      },
+      {
+        "name": "search-tools",
+        "type": "skill"
+      }
+    ],
+    "description": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "identify": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "module": [
       {
         "name": "learnings-researcher",
         "type": "agent"
@@ -810,7 +812,13 @@
         "type": "agent"
       }
     ],
-    "extract": [
+    "keywords": [
+      {
+        "name": "learnings-researcher",
+        "type": "agent"
+      }
+    ],
+    "strategy": [
       {
         "name": "learnings-researcher",
         "type": "agent"
@@ -820,26 +828,10 @@
       {
         "name": "learnings-researcher",
         "type": "agent"
-      }
-    ],
-    "description": [
-      {
-        "name": "learnings-researcher",
-        "type": "agent"
-      }
-    ],
-    "generating": [
-      {
-        "name": "mcp-registry-navigator",
-        "type": "agent"
       },
       {
-        "name": "podcast-transcriber",
+        "name": "onboard",
         "type": "agent"
-      },
-      {
-        "name": "changelog-generator",
-        "type": "skill"
       }
     ],
     "capabilities": [
@@ -848,22 +840,60 @@
         "type": "agent"
       },
       {
-        "name": "agentica-sdk",
-        "type": "skill"
-      },
-      {
         "name": "help",
         "type": "skill"
       }
     ],
-    "servers": [
+    "with": [
       {
         "name": "mcp-registry-navigator",
         "type": "agent"
       },
       {
-        "name": "mcp-builder",
+        "name": "ocr-grammar-fixer",
+        "type": "agent"
+      },
+      {
+        "name": "podcast-trend-scout",
+        "type": "agent"
+      },
+      {
+        "name": "react-performance-optimization",
+        "type": "agent"
+      },
+      {
+        "name": "agentica-sdk",
         "type": "skill"
+      },
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      },
+      {
+        "name": "competitive-ads-extractor",
+        "type": "skill"
+      },
+      {
+        "name": "content-research-writer",
+        "type": "skill"
+      },
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      },
+      {
+        "name": "json-canvas",
+        "type": "skill"
+      },
+      {
+        "name": "obsidian-markdown",
+        "type": "skill"
+      }
+    ],
+    "configurations": [
+      {
+        "name": "mcp-registry-navigator",
+        "type": "agent"
       }
     ],
     "searching": [
@@ -882,9 +912,39 @@
         "type": "agent"
       }
     ],
-    "trustworthiness": [
+    "specific": [
       {
         "name": "mcp-registry-navigator",
+        "type": "agent"
+      },
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "publishing": [
+      {
+        "name": "mcp-registry-navigator",
+        "type": "agent"
+      }
+    ],
+    "servers": [
+      {
+        "name": "mcp-registry-navigator",
+        "type": "agent"
+      },
+      {
+        "name": "mcp-builder",
+        "type": "skill"
+      }
+    ],
+    "generating": [
+      {
+        "name": "mcp-registry-navigator",
+        "type": "agent"
+      },
+      {
+        "name": "podcast-transcriber",
         "type": "agent"
       }
     ],
@@ -892,84 +952,6 @@
       {
         "name": "mcp-registry-navigator",
         "type": "agent"
-      }
-    ],
-    "with": [
-      {
-        "name": "mcp-registry-navigator",
-        "type": "agent"
-      },
-      {
-        "name": "ocr-grammar-fixer",
-        "type": "agent"
-      },
-      {
-        "name": "react-performance-optimization",
-        "type": "agent"
-      },
-      {
-        "name": "agentica-sdk",
-        "type": "skill"
-      },
-      {
-        "name": "agentica-server",
-        "type": "skill"
-      },
-      {
-        "name": "build",
-        "type": "skill"
-      },
-      {
-        "name": "competitive-ads-extractor",
-        "type": "skill"
-      },
-      {
-        "name": "content-research-writer",
-        "type": "skill"
-      },
-      {
-        "name": "developer-growth-analysis",
-        "type": "skill"
-      },
-      {
-        "name": "hook-developer",
-        "type": "skill"
-      },
-      {
-        "name": "json-canvas",
-        "type": "skill"
-      },
-      {
-        "name": "obsidian-bases",
-        "type": "skill"
-      },
-      {
-        "name": "obsidian-markdown",
-        "type": "skill"
-      },
-      {
-        "name": "pptx",
-        "type": "skill"
-      },
-      {
-        "name": "skill-share",
-        "type": "skill"
-      }
-    ],
-    "configurations": [
-      {
-        "name": "mcp-registry-navigator",
-        "type": "agent"
-      }
-    ],
-    "specific": [
-      {
-        "name": "mcp-registry-navigator",
-        "type": "agent"
-      },
-      {
-        "name": "remember",
-        "type": "skill"
       }
     ],
     "implementing": [
@@ -992,18 +974,6 @@
         "type": "agent"
       }
     ],
-    "typical": [
-      {
-        "name": "ocr-grammar-fixer",
-        "type": "agent"
-      }
-    ],
-    "correcting": [
-      {
-        "name": "ocr-grammar-fixer",
-        "type": "agent"
-      }
-    ],
     "artifacts": [
       {
         "name": "ocr-grammar-fixer",
@@ -1014,43 +984,25 @@
         "type": "skill"
       }
     ],
-    "processed": [
+    "correcting": [
       {
         "name": "ocr-grammar-fixer",
         "type": "agent"
-      }
-    ],
-    "copy": [
-      {
-        "name": "ocr-grammar-fixer",
-        "type": "agent"
-      },
-      {
-        "name": "competitive-ads-extractor",
-        "type": "skill"
       }
     ],
     "business": [
       {
         "name": "ocr-grammar-fixer",
         "type": "agent"
-      },
-      {
-        "name": "invoice-organizer",
-        "type": "skill"
-      },
-      {
-        "name": "lead-research-assistant",
-        "type": "skill"
       }
     ],
-    "scanned": [
+    "processed": [
       {
         "name": "ocr-grammar-fixer",
         "type": "agent"
       }
     ],
-    "recognition": [
+    "documents": [
       {
         "name": "ocr-grammar-fixer",
         "type": "agent"
@@ -1062,9 +1014,21 @@
         "type": "agent"
       }
     ],
-    "template": [
+    "typical": [
       {
-        "name": "onboard",
+        "name": "ocr-grammar-fixer",
+        "type": "agent"
+      }
+    ],
+    "marketing": [
+      {
+        "name": "ocr-grammar-fixer",
+        "type": "agent"
+      }
+    ],
+    "scanned": [
+      {
+        "name": "ocr-grammar-fixer",
         "type": "agent"
       }
     ],
@@ -1086,6 +1050,10 @@
         "type": "skill"
       },
       {
+        "name": "skill-share",
+        "type": "skill"
+      },
+      {
         "name": "video-downloader",
         "type": "skill"
       },
@@ -1104,27 +1072,37 @@
         "type": "skill"
       },
       {
+        "name": "search-tools",
+        "type": "skill"
+      },
+      {
         "name": "workflow-router",
         "type": "skill"
       }
     ],
-    "markdown": [
+    "test": [
       {
         "name": "onboard",
         "type": "agent"
       },
       {
-        "name": "plan-agent",
+        "name": "tdd",
         "type": "skill"
       }
     ],
-    "session": [
+    "constraints": [
       {
         "name": "onboard",
         "type": "agent"
       }
     ],
-    "contributing": [
+    "detected": [
+      {
+        "name": "onboard",
+        "type": "agent"
+      }
+    ],
+    "command": [
       {
         "name": "onboard",
         "type": "agent"
@@ -1140,16 +1118,18 @@
         "type": "agent"
       }
     ],
-    "stated": [
+    "patterns": [
       {
         "name": "onboard",
         "type": "agent"
-      }
-    ],
-    "descriptions": [
+      },
       {
-        "name": "podcast-metadata-specialist",
+        "name": "research-synthesizer",
         "type": "agent"
+      },
+      {
+        "name": "repo-research-analyst",
+        "type": "skill"
       }
     ],
     "titles": [
@@ -1158,13 +1138,39 @@
         "type": "agent"
       }
     ],
-    "platforms": [
+    "social": [
       {
         "name": "podcast-metadata-specialist",
         "type": "agent"
+      },
+      {
+        "name": "social-media-copywriter",
+        "type": "agent"
+      },
+      {
+        "name": "image-enhancer",
+        "type": "skill"
+      },
+      {
+        "name": "raffle-winner-picker",
+        "type": "skill"
       }
     ],
-    "optimized": [
+    "media": [
+      {
+        "name": "podcast-metadata-specialist",
+        "type": "agent"
+      },
+      {
+        "name": "podcast-transcriber",
+        "type": "agent"
+      },
+      {
+        "name": "social-media-copywriter",
+        "type": "agent"
+      }
+    ],
+    "descriptions": [
       {
         "name": "podcast-metadata-specialist",
         "type": "agent"
@@ -1184,39 +1190,7 @@
         "type": "skill"
       }
     ],
-    "media": [
-      {
-        "name": "podcast-metadata-specialist",
-        "type": "agent"
-      },
-      {
-        "name": "podcast-transcriber",
-        "type": "agent"
-      },
-      {
-        "name": "social-media-copywriter",
-        "type": "agent"
-      },
-      {
-        "name": "image-enhancer",
-        "type": "skill"
-      },
-      {
-        "name": "raffle-winner-picker",
-        "type": "skill"
-      }
-    ],
-    "posts": [
-      {
-        "name": "podcast-metadata-specialist",
-        "type": "agent"
-      },
-      {
-        "name": "image-enhancer",
-        "type": "skill"
-      }
-    ],
-    "formatted": [
+    "timestamps": [
       {
         "name": "podcast-metadata-specialist",
         "type": "agent"
@@ -1236,7 +1210,27 @@
         "type": "agent"
       }
     ],
-    "timestamps": [
+    "posts": [
+      {
+        "name": "podcast-metadata-specialist",
+        "type": "agent"
+      },
+      {
+        "name": "content-research-writer",
+        "type": "skill"
+      },
+      {
+        "name": "image-enhancer",
+        "type": "skill"
+      }
+    ],
+    "optimized": [
+      {
+        "name": "podcast-metadata-specialist",
+        "type": "agent"
+      }
+    ],
+    "platforms": [
       {
         "name": "podcast-metadata-specialist",
         "type": "agent"
@@ -1256,30 +1250,6 @@
         "type": "agent"
       }
     ],
-    "converting": [
-      {
-        "name": "podcast-transcriber",
-        "type": "agent"
-      }
-    ],
-    "files": [
-      {
-        "name": "podcast-transcriber",
-        "type": "agent"
-      },
-      {
-        "name": "file-organizer",
-        "type": "skill"
-      },
-      {
-        "name": "plan-agent",
-        "type": "skill"
-      },
-      {
-        "name": "search-tools",
-        "type": "skill"
-      }
-    ],
     "identifying": [
       {
         "name": "podcast-transcriber",
@@ -1287,24 +1257,6 @@
       },
       {
         "name": "research-synthesizer",
-        "type": "agent"
-      },
-      {
-        "name": "competitive-ads-extractor",
-        "type": "skill"
-      },
-      {
-        "name": "lead-research-assistant",
-        "type": "skill"
-      },
-      {
-        "name": "meeting-insights-analyzer",
-        "type": "skill"
-      }
-    ],
-    "transcription": [
-      {
-        "name": "podcast-transcriber",
         "type": "agent"
       }
     ],
@@ -1314,7 +1266,7 @@
         "type": "agent"
       }
     ],
-    "speakers": [
+    "converting": [
       {
         "name": "podcast-transcriber",
         "type": "agent"
@@ -1326,47 +1278,57 @@
         "type": "agent"
       }
     ],
-    "developments": [
+    "speakers": [
+      {
+        "name": "podcast-transcriber",
+        "type": "agent"
+      }
+    ],
+    "transcript": [
+      {
+        "name": "podcast-transcriber",
+        "type": "agent"
+      }
+    ],
+    "data": [
+      {
+        "name": "podcast-transcriber",
+        "type": "agent"
+      }
+    ],
+    "aligned": [
       {
         "name": "podcast-trend-scout",
         "type": "agent"
       }
     ],
-    "trends": [
+    "planning": [
       {
         "name": "podcast-trend-scout",
         "type": "agent"
       }
     ],
-    "areas": [
+    "suggesting": [
       {
         "name": "podcast-trend-scout",
         "type": "agent"
       }
     ],
-    "researching": [
-      {
-        "name": "podcast-trend-scout",
-        "type": "agent"
-      }
-    ],
-    "finding": [
+    "content": [
       {
         "name": "podcast-trend-scout",
         "type": "agent"
       },
       {
-        "name": "domain-name-brainstormer",
-        "type": "skill"
-      }
-    ],
-    "breaking": [
+        "name": "seo-podcast-optimizer",
+        "type": "agent"
+      },
       {
-        "name": "podcast-trend-scout",
+        "name": "social-media-copywriter",
         "type": "agent"
       }
     ],
-    "timely": [
+    "breaking": [
       {
         "name": "podcast-trend-scout",
         "type": "agent"
@@ -1378,15 +1340,19 @@
         "type": "agent"
       }
     ],
-    "focus": [
+    "current": [
       {
         "name": "podcast-trend-scout",
         "type": "agent"
+      },
+      {
+        "name": "plan-agent",
+        "type": "skill"
       }
     ],
-    "orchestrating": [
+    "trends": [
       {
-        "name": "project-supervisor-orchestrator",
+        "name": "podcast-trend-scout",
         "type": "agent"
       }
     ],
@@ -1396,47 +1362,19 @@
         "type": "agent"
       }
     ],
-    "detecting": [
+    "information": [
+      {
+        "name": "project-supervisor-orchestrator",
+        "type": "agent"
+      }
+    ],
+    "orchestrating": [
       {
         "name": "project-supervisor-orchestrator",
         "type": "agent"
       }
     ],
     "pipelines": [
-      {
-        "name": "project-supervisor-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "incomplete": [
-      {
-        "name": "project-supervisor-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "sophisticated": [
-      {
-        "name": "project-supervisor-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "multi": [
-      {
-        "name": "project-supervisor-orchestrator",
-        "type": "agent"
-      },
-      {
-        "name": "agentica-sdk",
-        "type": "skill"
-      }
-    ],
-    "managing": [
-      {
-        "name": "project-supervisor-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "information": [
       {
         "name": "project-supervisor-orchestrator",
         "type": "agent"
@@ -1452,7 +1390,11 @@
         "type": "agent"
       },
       {
-        "name": "react-performance-optimization",
+        "name": "report-generator",
+        "type": "agent"
+      },
+      {
+        "name": "research-orchestrator",
         "type": "agent"
       },
       {
@@ -1480,23 +1422,37 @@
         "type": "skill"
       },
       {
-        "name": "agentica-server",
-        "type": "skill"
-      },
-      {
         "name": "sub-agents",
         "type": "skill"
       }
     ],
-    "prompts": [
+    "managing": [
       {
-        "name": "prompt-engineer",
+        "name": "project-supervisor-orchestrator",
         "type": "agent"
       }
     ],
-    "improving": [
+    "sophisticated": [
       {
-        "name": "prompt-engineer",
+        "name": "project-supervisor-orchestrator",
+        "type": "agent"
+      }
+    ],
+    "multi": [
+      {
+        "name": "project-supervisor-orchestrator",
+        "type": "agent"
+      }
+    ],
+    "detecting": [
+      {
+        "name": "project-supervisor-orchestrator",
+        "type": "agent"
+      }
+    ],
+    "incomplete": [
+      {
+        "name": "project-supervisor-orchestrator",
         "type": "agent"
       }
     ],
@@ -1514,9 +1470,17 @@
       {
         "name": "prompt-engineer",
         "type": "agent"
-      },
+      }
+    ],
+    "features": [
       {
-        "name": "react-performance-optimization",
+        "name": "prompt-engineer",
+        "type": "agent"
+      }
+    ],
+    "prompts": [
+      {
+        "name": "prompt-engineer",
         "type": "agent"
       }
     ],
@@ -1526,7 +1490,7 @@
         "type": "agent"
       }
     ],
-    "features": [
+    "improving": [
       {
         "name": "prompt-engineer",
         "type": "agent"
@@ -1536,51 +1500,135 @@
       {
         "name": "prompt-engineer",
         "type": "agent"
+      }
+    ],
+    "when": [
+      {
+        "name": "react-performance-optimization",
+        "type": "agent"
+      },
+      {
+        "name": "report-generator",
+        "type": "agent"
+      },
+      {
+        "name": "research-orchestrator",
+        "type": "agent"
+      },
+      {
+        "name": "search-specialist",
+        "type": "agent"
+      },
+      {
+        "name": "seo-podcast-optimizer",
+        "type": "agent"
+      },
+      {
+        "name": "social-media-copywriter",
+        "type": "agent"
+      },
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      },
+      {
+        "name": "canvas-design",
+        "type": "skill"
+      },
+      {
+        "name": "developer-growth-analysis",
+        "type": "skill"
+      },
+      {
+        "name": "domain-name-brainstormer",
+        "type": "skill"
+      },
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      },
+      {
+        "name": "meeting-insights-analyzer",
+        "type": "skill"
+      },
+      {
+        "name": "pptx",
+        "type": "skill"
       },
       {
         "name": "remember",
         "type": "skill"
       },
       {
-        "name": "resume_handoff",
+        "name": "repo-research-analyst",
         "type": "skill"
       },
       {
-        "name": "sub-agents",
+        "name": "skill-creator",
+        "type": "skill"
+      },
+      {
+        "name": "skill-share",
+        "type": "skill"
+      },
+      {
+        "name": "video-downloader",
+        "type": "skill"
+      },
+      {
+        "name": "workflow-router",
         "type": "skill"
       }
     ],
-    "scores": [
-      {
-        "name": "react-performance-optimization",
-        "type": "agent"
-      }
-    ],
-    "applications": [
-      {
-        "name": "react-performance-optimization",
-        "type": "agent"
-      }
-    ],
-    "poor": [
-      {
-        "name": "react-performance-optimization",
-        "type": "agent"
-      }
-    ],
-    "sizes": [
-      {
-        "name": "react-performance-optimization",
-        "type": "agent"
-      }
-    ],
-    "including": [
+    "memory": [
       {
         "name": "react-performance-optimization",
         "type": "agent"
       }
     ],
     "vitals": [
+      {
+        "name": "react-performance-optimization",
+        "type": "agent"
+      }
+    ],
+    "leaks": [
+      {
+        "name": "react-performance-optimization",
+        "type": "agent"
+      }
+    ],
+    "large": [
+      {
+        "name": "react-performance-optimization",
+        "type": "agent"
+      },
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "interactions": [
+      {
+        "name": "react-performance-optimization",
+        "type": "agent"
+      }
+    ],
+    "slow": [
+      {
+        "name": "react-performance-optimization",
+        "type": "agent"
+      }
+    ],
+    "loading": [
       {
         "name": "react-performance-optimization",
         "type": "agent"
@@ -1596,7 +1644,35 @@
         "type": "skill"
       }
     ],
-    "need": [
+    "report": [
+      {
+        "name": "report-generator",
+        "type": "agent"
+      }
+    ],
+    "final": [
+      {
+        "name": "report-generator",
+        "type": "agent"
+      }
+    ],
+    "well": [
+      {
+        "name": "report-generator",
+        "type": "agent"
+      }
+    ],
+    "into": [
+      {
+        "name": "report-generator",
+        "type": "agent"
+      },
+      {
+        "name": "pptx",
+        "type": "skill"
+      }
+    ],
+    "comprehensive": [
       {
         "name": "report-generator",
         "type": "agent"
@@ -1604,7 +1680,303 @@
       {
         "name": "research-orchestrator",
         "type": "agent"
+      }
+    ],
+    "transform": [
+      {
+        "name": "report-generator",
+        "type": "agent"
+      }
+    ],
+    "coordinate": [
+      {
+        "name": "research-orchestrator",
+        "type": "agent"
+      }
+    ],
+    "project": [
+      {
+        "name": "research-orchestrator",
+        "type": "agent"
       },
+      {
+        "name": "domain-name-brainstormer",
+        "type": "skill"
+      },
+      {
+        "name": "internal-comms",
+        "type": "skill"
+      },
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
+    "agents": [
+      {
+        "name": "research-orchestrator",
+        "type": "agent"
+      }
+    ],
+    "that": [
+      {
+        "name": "research-orchestrator",
+        "type": "agent"
+      },
+      {
+        "name": "agentica-prompts",
+        "type": "skill"
+      },
+      {
+        "name": "competitive-ads-extractor",
+        "type": "skill"
+      },
+      {
+        "name": "developer-growth-analysis",
+        "type": "skill"
+      },
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      },
+      {
+        "name": "lead-research-assistant",
+        "type": "skill"
+      },
+      {
+        "name": "prove",
+        "type": "skill"
+      },
+      {
+        "name": "remember",
+        "type": "skill"
+      },
+      {
+        "name": "skill-share",
+        "type": "skill"
+      }
+    ],
+    "requires": [
+      {
+        "name": "research-orchestrator",
+        "type": "agent"
+      }
+    ],
+    "specialized": [
+      {
+        "name": "research-orchestrator",
+        "type": "agent"
+      }
+    ],
+    "working": [
+      {
+        "name": "research-orchestrator",
+        "type": "agent"
+      },
+      {
+        "name": "json-canvas",
+        "type": "skill"
+      },
+      {
+        "name": "obsidian-markdown",
+        "type": "skill"
+      }
+    ],
+    "insights": [
+      {
+        "name": "research-synthesizer",
+        "type": "agent"
+      }
+    ],
+    "complex": [
+      {
+        "name": "research-synthesizer",
+        "type": "agent"
+      },
+      {
+        "name": "artifacts-builder",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      },
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "perspectives": [
+      {
+        "name": "research-synthesizer",
+        "type": "agent"
+      }
+    ],
+    "research": [
+      {
+        "name": "research-synthesizer",
+        "type": "agent"
+      },
+      {
+        "name": "search-specialist",
+        "type": "agent"
+      },
+      {
+        "name": "competitive-ads-extractor",
+        "type": "skill"
+      }
+    ],
+    "merging": [
+      {
+        "name": "research-synthesizer",
+        "type": "agent"
+      }
+    ],
+    "consistency": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "check": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "enhancement": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "ensure": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "vault": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "cross": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "work": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      },
+      {
+        "name": "remember",
+        "type": "skill"
+      }
+    ],
+    "across": [
+      {
+        "name": "review-agent",
+        "type": "agent"
+      }
+    ],
+    "protection": [
+      {
+        "name": "risk-manager",
+        "type": "agent"
+      }
+    ],
+    "portfolio": [
+      {
+        "name": "risk-manager",
+        "type": "agent"
+      }
+    ],
+    "proactively": [
+      {
+        "name": "risk-manager",
+        "type": "agent"
+      }
+    ],
+    "risk": [
+      {
+        "name": "risk-manager",
+        "type": "agent"
+      }
+    ],
+    "tracking": [
+      {
+        "name": "risk-manager",
+        "type": "agent"
+      }
+    ],
+    "trade": [
+      {
+        "name": "risk-manager",
+        "type": "agent"
+      }
+    ],
+    "assessment": [
+      {
+        "name": "risk-manager",
+        "type": "agent"
+      }
+    ],
+    "using": [
+      {
+        "name": "search-specialist",
+        "type": "agent"
+      }
+    ],
+    "advanced": [
+      {
+        "name": "search-specialist",
+        "type": "agent"
+      }
+    ],
+    "search": [
+      {
+        "name": "search-specialist",
+        "type": "agent"
+      },
+      {
+        "name": "seo-podcast-optimizer",
+        "type": "agent"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "expert": [
+      {
+        "name": "search-specialist",
+        "type": "agent"
+      }
+    ],
+    "synthesis": [
+      {
+        "name": "search-specialist",
+        "type": "agent"
+      }
+    ],
+    "need": [
       {
         "name": "search-specialist",
         "type": "agent"
@@ -1626,371 +1998,13 @@
         "type": "skill"
       },
       {
-        "name": "skill-share",
-        "type": "skill"
-      },
-      {
-        "name": "workflow-router",
-        "type": "skill"
-      }
-    ],
-    "final": [
-      {
-        "name": "report-generator",
-        "type": "agent"
-      }
-    ],
-    "into": [
-      {
-        "name": "report-generator",
-        "type": "agent"
-      }
-    ],
-    "transform": [
-      {
-        "name": "report-generator",
-        "type": "agent"
-      }
-    ],
-    "well": [
-      {
-        "name": "report-generator",
-        "type": "agent"
-      }
-    ],
-    "research": [
-      {
-        "name": "report-generator",
-        "type": "agent"
-      },
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      },
-      {
-        "name": "research-synthesizer",
-        "type": "agent"
-      },
-      {
-        "name": "search-specialist",
-        "type": "agent"
-      }
-    ],
-    "report": [
-      {
-        "name": "report-generator",
-        "type": "agent"
-      }
-    ],
-    "synthesized": [
-      {
-        "name": "report-generator",
-        "type": "agent"
-      }
-    ],
-    "requires": [
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "project": [
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      },
-      {
-        "name": "reference-sdk",
-        "type": "skill"
-      }
-    ],
-    "working": [
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      },
-      {
-        "name": "confidence-check",
-        "type": "skill"
-      },
-      {
-        "name": "json-canvas",
-        "type": "skill"
-      },
-      {
-        "name": "obsidian-bases",
-        "type": "skill"
-      },
-      {
-        "name": "obsidian-markdown",
-        "type": "skill"
-      }
-    ],
-    "agents": [
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "coordinate": [
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "that": [
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      },
-      {
-        "name": "agentica-prompts",
-        "type": "skill"
-      },
-      {
-        "name": "lead-research-assistant",
-        "type": "skill"
-      },
-      {
-        "name": "prove",
-        "type": "skill"
-      },
-      {
-        "name": "remember",
-        "type": "skill"
-      }
-    ],
-    "multiple": [
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "specialized": [
-      {
-        "name": "research-orchestrator",
-        "type": "agent"
-      }
-    ],
-    "perspectives": [
-      {
-        "name": "research-synthesizer",
-        "type": "agent"
-      }
-    ],
-    "insights": [
-      {
-        "name": "research-synthesizer",
-        "type": "agent"
-      }
-    ],
-    "patterns": [
-      {
-        "name": "research-synthesizer",
-        "type": "agent"
-      },
-      {
-        "name": "compound-learnings",
-        "type": "skill"
-      },
-      {
-        "name": "reference-sdk",
-        "type": "skill"
-      },
-      {
-        "name": "repo-research-analyst",
-        "type": "skill"
-      }
-    ],
-    "merging": [
-      {
-        "name": "research-synthesizer",
-        "type": "agent"
-      }
-    ],
-    "diverse": [
-      {
-        "name": "research-synthesizer",
-        "type": "agent"
-      }
-    ],
-    "cross": [
-      {
-        "name": "review-agent",
-        "type": "agent"
-      }
-    ],
-    "check": [
-      {
-        "name": "review-agent",
-        "type": "agent"
-      }
-    ],
-    "work": [
-      {
-        "name": "review-agent",
-        "type": "agent"
-      }
-    ],
-    "across": [
-      {
-        "name": "review-agent",
-        "type": "agent"
-      }
-    ],
-    "enhancement": [
-      {
-        "name": "review-agent",
-        "type": "agent"
-      }
-    ],
-    "consistency": [
-      {
-        "name": "review-agent",
-        "type": "agent"
-      }
-    ],
-    "ensure": [
-      {
-        "name": "review-agent",
-        "type": "agent"
-      }
-    ],
-    "vault": [
-      {
-        "name": "review-agent",
-        "type": "agent"
-      }
-    ],
-    "risk": [
-      {
-        "name": "risk-manager",
-        "type": "agent"
-      }
-    ],
-    "proactively": [
-      {
-        "name": "risk-manager",
-        "type": "agent"
-      }
-    ],
-    "trade": [
-      {
-        "name": "risk-manager",
-        "type": "agent"
-      }
-    ],
-    "tracking": [
-      {
-        "name": "risk-manager",
-        "type": "agent"
-      },
-      {
-        "name": "meeting-insights-analyzer",
-        "type": "skill"
-      }
-    ],
-    "protection": [
-      {
-        "name": "risk-manager",
-        "type": "agent"
-      }
-    ],
-    "portfolio": [
-      {
-        "name": "risk-manager",
-        "type": "agent"
-      },
-      {
-        "name": "domain-name-brainstormer",
-        "type": "skill"
-      }
-    ],
-    "assessment": [
-      {
-        "name": "risk-manager",
-        "type": "agent"
-      },
-      {
-        "name": "confidence-check",
+        "name": "search-tools",
         "type": "skill"
       }
     ],
     "techniques": [
       {
         "name": "search-specialist",
-        "type": "agent"
-      }
-    ],
-    "expert": [
-      {
-        "name": "search-specialist",
-        "type": "agent"
-      }
-    ],
-    "advanced": [
-      {
-        "name": "search-specialist",
-        "type": "agent"
-      },
-      {
-        "name": "build",
-        "type": "skill"
-      }
-    ],
-    "using": [
-      {
-        "name": "search-specialist",
-        "type": "agent"
-      }
-    ],
-    "synthesis": [
-      {
-        "name": "search-specialist",
-        "type": "agent"
-      }
-    ],
-    "when": [
-      {
-        "name": "search-specialist",
-        "type": "agent"
-      },
-      {
-        "name": "seo-podcast-optimizer",
-        "type": "agent"
-      },
-      {
-        "name": "social-media-copywriter",
-        "type": "agent"
-      },
-      {
-        "name": "agentica-claude-proxy",
-        "type": "skill"
-      },
-      {
-        "name": "canvas-design",
-        "type": "skill"
-      },
-      {
-        "name": "repo-research-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "skill-creator",
-        "type": "skill"
-      },
-      {
-        "name": "video-downloader",
-        "type": "skill"
-      }
-    ],
-    "search": [
-      {
-        "name": "search-specialist",
-        "type": "agent"
-      },
-      {
-        "name": "seo-podcast-optimizer",
         "type": "agent"
       }
     ],
@@ -2006,20 +2020,6 @@
         "type": "agent"
       }
     ],
-    "content": [
-      {
-        "name": "seo-podcast-optimizer",
-        "type": "agent"
-      },
-      {
-        "name": "social-media-copywriter",
-        "type": "agent"
-      },
-      {
-        "name": "sub-agents",
-        "type": "skill"
-      }
-    ],
     "optimize": [
       {
         "name": "seo-podcast-optimizer",
@@ -2032,20 +2032,6 @@
         "type": "agent"
       }
     ],
-    "social": [
-      {
-        "name": "social-media-copywriter",
-        "type": "agent"
-      },
-      {
-        "name": "image-enhancer",
-        "type": "skill"
-      },
-      {
-        "name": "raffle-winner-picker",
-        "type": "skill"
-      }
-    ],
     "create": [
       {
         "name": "social-media-copywriter",
@@ -2056,7 +2042,7 @@
         "type": "skill"
       }
     ],
-    "agentica": [
+    "skill": [
       {
         "name": "agentica-claude-proxy",
         "type": "skill"
@@ -2067,54 +2053,6 @@
       },
       {
         "name": "agentica-server",
-        "type": "skill"
-      },
-      {
-        "name": "agentica-spawn",
-        "type": "skill"
-      }
-    ],
-    "developing": [
-      {
-        "name": "agentica-claude-proxy",
-        "type": "skill"
-      }
-    ],
-    "debugging": [
-      {
-        "name": "agentica-claude-proxy",
-        "type": "skill"
-      },
-      {
-        "name": "tldr-deep",
-        "type": "skill"
-      }
-    ],
-    "proxy": [
-      {
-        "name": "agentica-claude-proxy",
-        "type": "skill"
-      },
-      {
-        "name": "agentica-server",
-        "type": "skill"
-      }
-    ],
-    "integration": [
-      {
-        "name": "agentica-claude-proxy",
-        "type": "skill"
-      }
-    ],
-    "claude": [
-      {
-        "name": "agentica-claude-proxy",
-        "type": "skill"
-      }
-    ],
-    "skill": [
-      {
-        "name": "agentica-claude-proxy",
         "type": "skill"
       },
       {
@@ -2130,11 +2068,39 @@
         "type": "skill"
       },
       {
+        "name": "changelog-generator",
+        "type": "skill"
+      },
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      },
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      },
+      {
+        "name": "content-research-writer",
+        "type": "skill"
+      },
+      {
+        "name": "image-enhancer",
+        "type": "skill"
+      },
+      {
         "name": "json-canvas",
         "type": "skill"
       },
       {
+        "name": "mcp-builder",
+        "type": "skill"
+      },
+      {
         "name": "obsidian-markdown",
+        "type": "skill"
+      },
+      {
+        "name": "raffle-winner-picker",
         "type": "skill"
       },
       {
@@ -2150,19 +2116,113 @@
         "type": "skill"
       }
     ],
+    "proxy": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "agentica": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-spawn",
+        "type": "skill"
+      }
+    ],
+    "claude": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      }
+    ],
+    "integration": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      }
+    ],
+    "debugging": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-deep",
+        "type": "skill"
+      }
+    ],
+    "developing": [
+      {
+        "name": "agentica-claude-proxy",
+        "type": "skill"
+      },
+      {
+        "name": "developer-growth-analysis",
+        "type": "skill"
+      }
+    ],
     "should": [
       {
         "name": "agentica-prompts",
         "type": "skill"
       },
       {
-        "name": "compound-learnings",
+        "name": "workflow-router",
         "type": "skill"
       }
     ],
     "persist": [
       {
         "name": "agentica-prompts",
+        "type": "skill"
+      }
+    ],
+    "returns": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      }
+    ],
+    "behavior": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      }
+    ],
+    "code": [
+      {
+        "name": "agentica-sdk",
+        "type": "skill"
+      },
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      },
+      {
+        "name": "dead-code",
+        "type": "skill"
+      },
+      {
+        "name": "remember",
+        "type": "skill"
+      },
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      },
+      {
+        "name": "search-tools",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-deep",
         "type": "skill"
       }
     ],
@@ -2176,59 +2236,41 @@
         "type": "skill"
       }
     ],
-    "quick": [
-      {
-        "name": "agentica-sdk",
-        "type": "skill"
-      }
-    ],
-    "agentic": [
-      {
-        "name": "agentica-sdk",
-        "type": "skill"
-      }
-    ],
     "function": [
       {
         "name": "agentica-sdk",
         "type": "skill"
+      }
+    ],
+    "environment": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "connection": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
+      }
+    ],
+    "starting": [
+      {
+        "name": "agentica-server",
+        "type": "skill"
       },
       {
-        "name": "search-tools",
+        "name": "domain-name-brainstormer",
         "type": "skill"
       }
     ],
-    "8080": [
+    "inference_endpoint_url": [
       {
         "name": "agentica-server",
         "type": "skill"
       }
     ],
-    "access": [
-      {
-        "name": "agentica-server",
-        "type": "skill"
-      }
-    ],
-    "client": [
-      {
-        "name": "agentica-server",
-        "type": "skill"
-      }
-    ],
-    "fresh": [
-      {
-        "name": "agentica-server",
-        "type": "skill"
-      }
-    ],
-    "localhost": [
-      {
-        "name": "agentica-server",
-        "type": "skill"
-      }
-    ],
-    "chat": [
+    "development": [
       {
         "name": "agentica-server",
         "type": "skill"
@@ -2240,37 +2282,35 @@
         "type": "skill"
       }
     ],
-    "after": [
-      {
-        "name": "agentica-spawn",
-        "type": "skill"
-      }
-    ],
     "selects": [
       {
         "name": "agentica-spawn",
         "type": "skill"
       }
     ],
-    "components": [
+    "after": [
+      {
+        "name": "agentica-spawn",
+        "type": "skill"
+      }
+    ],
+    "shadcn": [
       {
         "name": "artifacts-builder",
         "type": "skill"
       }
     ],
-    "requiring": [
+    "simple": [
       {
         "name": "artifacts-builder",
+        "type": "skill"
+      },
+      {
+        "name": "reference-sdk",
         "type": "skill"
       }
     ],
     "html": [
-      {
-        "name": "artifacts-builder",
-        "type": "skill"
-      }
-    ],
-    "single": [
       {
         "name": "artifacts-builder",
         "type": "skill"
@@ -2286,49 +2326,45 @@
       {
         "name": "artifacts-builder",
         "type": "skill"
+      },
+      {
+        "name": "plan-agent",
+        "type": "skill"
       }
     ],
-    "shadcn": [
+    "single": [
+      {
+        "name": "artifacts-builder",
+        "type": "skill"
+      },
+      {
+        "name": "pptx",
+        "type": "skill"
+      }
+    ],
+    "requiring": [
       {
         "name": "artifacts-builder",
         "type": "skill"
       }
     ],
-    "simple": [
+    "file": [
       {
         "name": "artifacts-builder",
         "type": "skill"
-      }
-    ],
-    "management": [
+      },
       {
-        "name": "artifacts-builder",
+        "name": "plan-agent",
         "type": "skill"
       }
     ],
-    "human": [
+    "plan": [
       {
         "name": "build",
         "type": "skill"
       },
       {
         "name": "implement_plan",
-        "type": "skill"
-      }
-    ],
-    "verification": [
-      {
-        "name": "build",
-        "type": "skill"
-      },
-      {
-        "name": "implement_plan",
-        "type": "skill"
-      }
-    ],
-    "decision": [
-      {
-        "name": "build",
         "type": "skill"
       },
       {
@@ -2336,45 +2372,67 @@
         "type": "skill"
       },
       {
-        "name": "search-tools",
+        "name": "resume_handoff",
+        "type": "skill"
+      },
+      {
+        "name": "workflow-router",
         "type": "skill"
       }
     ],
-    "verify": [
+    "interview": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "last": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "purpose": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "checkpoints": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "greenfield": [
+      {
+        "name": "build",
+        "type": "skill"
+      }
+    ],
+    "works": [
       {
         "name": "build",
         "type": "skill"
       },
       {
-        "name": "pptx",
+        "name": "competitive-ads-extractor",
+        "type": "skill"
+      }
+    ],
+    "implement": [
+      {
+        "name": "build",
         "type": "skill"
       },
       {
-        "name": "prove",
+        "name": "resume_handoff",
         "type": "skill"
       }
     ],
-    "acknowledge": [
+    "phase": [
       {
         "name": "build",
-        "type": "skill"
-      }
-    ],
-    "commit": [
-      {
-        "name": "build",
-        "type": "skill"
-      }
-    ],
-    "approve": [
-      {
-        "name": "build",
-        "type": "skill"
-      }
-    ],
-    "static": [
-      {
-        "name": "canvas-design",
         "type": "skill"
       }
     ],
@@ -2388,13 +2446,7 @@
         "type": "skill"
       }
     ],
-    "poster": [
-      {
-        "name": "canvas-design",
-        "type": "skill"
-      }
-    ],
-    "other": [
+    "static": [
       {
         "name": "canvas-design",
         "type": "skill"
@@ -2412,19 +2464,93 @@
         "type": "skill"
       }
     ],
+    "other": [
+      {
+        "name": "canvas-design",
+        "type": "skill"
+      }
+    ],
+    "poster": [
+      {
+        "name": "canvas-design",
+        "type": "skill"
+      }
+    ],
+    "release": [
+      {
+        "name": "changelog-generator",
+        "type": "skill"
+      }
+    ],
+    "does": [
+      {
+        "name": "changelog-generator",
+        "type": "skill"
+      },
+      {
+        "name": "competitive-ads-extractor",
+        "type": "skill"
+      },
+      {
+        "name": "content-research-writer",
+        "type": "skill"
+      },
+      {
+        "name": "domain-name-brainstormer",
+        "type": "skill"
+      },
+      {
+        "name": "file-organizer",
+        "type": "skill"
+      },
+      {
+        "name": "image-enhancer",
+        "type": "skill"
+      },
+      {
+        "name": "invoice-organizer",
+        "type": "skill"
+      },
+      {
+        "name": "lead-research-assistant",
+        "type": "skill"
+      },
+      {
+        "name": "math-unified",
+        "type": "skill"
+      },
+      {
+        "name": "meeting-insights-analyzer",
+        "type": "skill"
+      },
+      {
+        "name": "raffle-winner-picker",
+        "type": "skill"
+      }
+    ],
+    "changelog": [
+      {
+        "name": "changelog-generator",
+        "type": "skill"
+      }
+    ],
+    "submissions": [
+      {
+        "name": "changelog-generator",
+        "type": "skill"
+      },
+      {
+        "name": "raffle-winner-picker",
+        "type": "skill"
+      }
+    ],
     "entries": [
       {
         "name": "changelog-generator",
         "type": "skill"
       }
     ],
-    "weekly": [
-      {
-        "name": "changelog-generator",
-        "type": "skill"
-      }
-    ],
-    "changelog": [
+    "monthly": [
       {
         "name": "changelog-generator",
         "type": "skill"
@@ -2444,67 +2570,29 @@
         "type": "skill"
       }
     ],
-    "notes": [
-      {
-        "name": "changelog-generator",
-        "type": "skill"
-      },
-      {
-        "name": "obsidian-bases",
-        "type": "skill"
-      }
-    ],
-    "summaries": [
-      {
-        "name": "changelog-generator",
-        "type": "skill"
-      },
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "resume_handoff",
-        "type": "skill"
-      }
-    ],
-    "store": [
-      {
-        "name": "changelog-generator",
-        "type": "skill"
-      }
-    ],
-    "page": [
-      {
-        "name": "changelog-generator",
-        "type": "skill"
-      }
-    ],
     "public": [
       {
         "name": "changelog-generator",
         "type": "skill"
       }
     ],
-    "campaigns": [
+    "notifications": [
       {
-        "name": "competitive-ads-extractor",
+        "name": "changelog-generator",
         "type": "skill"
       }
     ],
-    "successful": [
+    "finding": [
       {
         "name": "competitive-ads-extractor",
         "type": "skill"
-      }
-    ],
-    "proven": [
+      },
       {
-        "name": "competitive-ads-extractor",
+        "name": "domain-name-brainstormer",
+        "type": "skill"
+      },
+      {
+        "name": "lead-research-assistant",
         "type": "skill"
       }
     ],
@@ -2522,37 +2610,47 @@
         "type": "skill"
       }
     ],
-    "strategies": [
+    "concepts": [
+      {
+        "name": "competitive-ads-extractor",
+        "type": "skill"
+      },
+      {
+        "name": "pptx",
+        "type": "skill"
+      }
+    ],
+    "inform": [
       {
         "name": "competitive-ads-extractor",
         "type": "skill"
       }
     ],
-    "original": [
+    "copying": [
       {
         "name": "competitive-ads-extractor",
         "type": "skill"
       }
     ],
-    "designs": [
-      {
-        "name": "competitive-ads-extractor",
-        "type": "skill"
-      }
-    ],
-    "compound": [
+    "skills": [
       {
         "name": "compound-learnings",
         "type": "skill"
       }
     ],
-    "asked": [
+    "learn": [
       {
         "name": "compound-learnings",
         "type": "skill"
       }
     ],
-    "rules": [
+    "improve": [
+      {
+        "name": "compound-learnings",
+        "type": "skill"
+      }
+    ],
+    "learnings": [
       {
         "name": "compound-learnings",
         "type": "skill"
@@ -2564,71 +2662,31 @@
         "type": "skill"
       }
     ],
-    "skills": [
-      {
-        "name": "compound-learnings",
-        "type": "skill"
-      },
-      {
-        "name": "developer-growth-analysis",
-        "type": "skill"
-      },
-      {
-        "name": "meeting-insights-analyzer",
-        "type": "skill"
-      },
-      {
-        "name": "skill-share",
-        "type": "skill"
-      }
-    ],
-    "what": [
-      {
-        "name": "compound-learnings",
-        "type": "skill"
-      },
-      {
-        "name": "help",
-        "type": "skill"
-      },
-      {
-        "name": "math-help",
-        "type": "skill"
-      },
-      {
-        "name": "plan-agent",
-        "type": "skill"
-      },
-      {
-        "name": "tldr-code",
-        "type": "skill"
-      }
-    ],
-    "learnings": [
+    "sessions": [
       {
         "name": "compound-learnings",
         "type": "skill"
       }
     ],
-    "cause": [
+    "setup": [
       {
-        "name": "confidence-check",
+        "name": "compound-learnings",
         "type": "skill"
       }
     ],
-    "official": [
+    "asked": [
       {
-        "name": "confidence-check",
-        "type": "skill"
-      }
-    ],
-    "reviewed": [
-      {
-        "name": "confidence-check",
+        "name": "compound-learnings",
         "type": "skill"
       }
     ],
     "found": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "cause": [
       {
         "name": "confidence-check",
         "type": "skill"
@@ -2640,7 +2698,29 @@
         "type": "skill"
       }
     ],
-    "verified": [
+    "official": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "exist": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      }
+    ],
+    "task": [
+      {
+        "name": "confidence-check",
+        "type": "skill"
+      },
+      {
+        "name": "obsidian-bases",
+        "type": "skill"
+      }
+    ],
+    "duplicate": [
       {
         "name": "confidence-check",
         "type": "skill"
@@ -2652,7 +2732,17 @@
         "type": "skill"
       }
     ],
-    "articles": [
+    "newsletters": [
+      {
+        "name": "content-research-writer",
+        "type": "skill"
+      },
+      {
+        "name": "internal-comms",
+        "type": "skill"
+      }
+    ],
+    "technical": [
       {
         "name": "content-research-writer",
         "type": "skill"
@@ -2660,15 +2750,13 @@
       {
         "name": "developer-growth-analysis",
         "type": "skill"
-      }
-    ],
-    "references": [
+      },
       {
-        "name": "content-research-writer",
+        "name": "plan-agent",
         "type": "skill"
       }
     ],
-    "while": [
+    "tutorials": [
       {
         "name": "content-research-writer",
         "type": "skill"
@@ -2688,45 +2776,27 @@
         "type": "skill"
       }
     ],
-    "getting": [
+    "references": [
+      {
+        "name": "content-research-writer",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "feedback": [
       {
         "name": "content-research-writer",
         "type": "skill"
       },
       {
         "name": "meeting-insights-analyzer",
-        "type": "skill"
-      }
-    ],
-    "section": [
-      {
-        "name": "content-research-writer",
-        "type": "skill"
-      },
-      {
-        "name": "pptx",
-        "type": "skill"
-      }
-    ],
-    "citations": [
-      {
-        "name": "content-research-writer",
-        "type": "skill"
-      }
-    ],
-    "producing": [
-      {
-        "name": "content-research-writer",
-        "type": "skill"
-      },
-      {
-        "name": "debug-hooks",
-        "type": "skill"
-      }
-    ],
-    "pieces": [
-      {
-        "name": "content-research-writer",
         "type": "skill"
       }
     ],
@@ -2748,14 +2818,6 @@
       {
         "name": "create_handoff",
         "type": "skill"
-      },
-      {
-        "name": "file-organizer",
-        "type": "skill"
-      },
-      {
-        "name": "invoice-organizer",
-        "type": "skill"
       }
     ],
     "handoff": [
@@ -2768,39 +2830,9 @@
         "type": "skill"
       }
     ],
-    "code": [
-      {
-        "name": "dead-code",
-        "type": "skill"
-      },
-      {
-        "name": "tldr-code",
-        "type": "skill"
-      },
-      {
-        "name": "tldr-deep",
-        "type": "skill"
-      }
-    ],
-    "unreachable": [
-      {
-        "name": "dead-code",
-        "type": "skill"
-      }
-    ],
     "unused": [
       {
         "name": "dead-code",
-        "type": "skill"
-      }
-    ],
-    "dead": [
-      {
-        "name": "dead-code",
-        "type": "skill"
-      },
-      {
-        "name": "tldr-code",
         "type": "skill"
       }
     ],
@@ -2828,13 +2860,19 @@
         "type": "skill"
       }
     ],
-    "behaving": [
+    "unreachable": [
       {
-        "name": "debug-hooks",
+        "name": "dead-code",
         "type": "skill"
       }
     ],
-    "wrong": [
+    "dead": [
+      {
+        "name": "dead-code",
+        "type": "skill"
+      }
+    ],
+    "unexpectedly": [
       {
         "name": "debug-hooks",
         "type": "skill"
@@ -2850,6 +2888,12 @@
         "type": "skill"
       }
     ],
+    "firing": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      }
+    ],
     "aren": [
       {
         "name": "debug-hooks",
@@ -2860,7 +2904,7 @@
         "type": "skill"
       }
     ],
-    "firing": [
+    "behaving": [
       {
         "name": "debug-hooks",
         "type": "skill"
@@ -2876,13 +2920,19 @@
         "type": "skill"
       }
     ],
-    "unexpectedly": [
+    "producing": [
       {
         "name": "debug-hooks",
         "type": "skill"
       }
     ],
-    "application": [
+    "wrong": [
+      {
+        "name": "debug-hooks",
+        "type": "skill"
+      }
+    ],
+    "conciseness": [
       {
         "name": "deep-reading-analyst",
         "type": "skill"
@@ -2892,7 +2942,7 @@
         "type": "skill"
       }
     ],
-    "they": [
+    "thinking": [
       {
         "name": "deep-reading-analyst",
         "type": "skill"
@@ -2900,39 +2950,151 @@
       {
         "name": "deep-reading-analyst",
         "type": "skill"
+      }
+    ],
+    "helped": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
       },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "apply": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "signals": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "unpack": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "sources": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "main": [
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      },
+      {
+        "name": "deep-reading-analyst",
+        "type": "skill"
+      }
+    ],
+    "quality": [
       {
         "name": "developer-growth-analysis",
         "type": "skill"
       },
       {
-        "name": "file-organizer",
-        "type": "skill"
-      },
-      {
-        "name": "slack-gif-creator",
+        "name": "image-enhancer",
         "type": "skill"
       }
     ],
-    "models": [
+    "reviews": [
       {
-        "name": "deep-reading-analyst",
+        "name": "developer-growth-analysis",
         "type": "skill"
       },
       {
-        "name": "deep-reading-analyst",
+        "name": "meeting-insights-analyzer",
+        "type": "skill"
+      }
+    ],
+    "their": [
+      {
+        "name": "developer-growth-analysis",
+        "type": "skill"
+      },
+      {
+        "name": "meeting-insights-analyzer",
+        "type": "skill"
+      }
+    ],
+    "understand": [
+      {
+        "name": "developer-growth-analysis",
+        "type": "skill"
+      },
+      {
+        "name": "explore",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "which": [
+      {
+        "name": "developer-growth-analysis",
+        "type": "skill"
+      },
+      {
+        "name": "math-help",
+        "type": "skill"
+      },
+      {
+        "name": "math-unified",
+        "type": "skill"
+      }
+    ],
+    "learning": [
+      {
+        "name": "developer-growth-analysis",
+        "type": "skill"
+      }
+    ],
+    "changes": [
+      {
+        "name": "docx",
+        "type": "skill"
+      }
+    ],
+    "tracked": [
+      {
+        "name": "docx",
+        "type": "skill"
+      }
+    ],
+    "your": [
+      {
+        "name": "docx",
         "type": "skill"
       }
     ],
     "first": [
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
       {
         "name": "domain-name-brainstormer",
         "type": "skill"
@@ -2950,123 +3112,9 @@
         "type": "skill"
       }
     ],
-    "frameworks": [
+    "rebranding": [
       {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      }
-    ],
-    "model": [
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "sub-agents",
-        "type": "skill"
-      }
-    ],
-    "mentions": [
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "workflow-router",
-        "type": "skill"
-      }
-    ],
-    "apply": [
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      }
-    ],
-    "play": [
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      },
-      {
-        "name": "deep-reading-analyst",
-        "type": "skill"
-      }
-    ],
-    "focused": [
-      {
-        "name": "developer-growth-analysis",
-        "type": "skill"
-      },
-      {
-        "name": "implement_plan",
-        "type": "skill"
-      }
-    ],
-    "week": [
-      {
-        "name": "developer-growth-analysis",
-        "type": "skill"
-      }
-    ],
-    "address": [
-      {
-        "name": "developer-growth-analysis",
-        "type": "skill"
-      }
-    ],
-    "recurring": [
-      {
-        "name": "developer-growth-analysis",
-        "type": "skill"
-      }
-    ],
-    "improvement": [
-      {
-        "name": "developer-growth-analysis",
-        "type": "skill"
-      },
-      {
-        "name": "meeting-insights-analyzer",
-        "type": "skill"
-      }
-    ],
-    "their": [
-      {
-        "name": "developer-growth-analysis",
-        "type": "skill"
-      }
-    ],
-    "tracked": [
-      {
-        "name": "docx",
-        "type": "skill"
-      }
-    ],
-    "your": [
-      {
-        "name": "docx",
-        "type": "skill"
-      }
-    ],
-    "changes": [
-      {
-        "name": "docx",
+        "name": "domain-name-brainstormer",
         "type": "skill"
       }
     ],
@@ -3080,79 +3128,9 @@
         "type": "skill"
       }
     ],
-    "available": [
+    "side": [
       {
         "name": "domain-name-brainstormer",
-        "type": "skill"
-      }
-    ],
-    "personal": [
-      {
-        "name": "domain-name-brainstormer",
-        "type": "skill"
-      }
-    ],
-    "registering": [
-      {
-        "name": "domain-name-brainstormer",
-        "type": "skill"
-      }
-    ],
-    "site": [
-      {
-        "name": "domain-name-brainstormer",
-        "type": "skill"
-      }
-    ],
-    "company": [
-      {
-        "name": "domain-name-brainstormer",
-        "type": "skill"
-      }
-    ],
-    "explore": [
-      {
-        "name": "explore",
-        "type": "skill"
-      },
-      {
-        "name": "tldr-code",
-        "type": "skill"
-      },
-      {
-        "name": "workflow-router",
-        "type": "skill"
-      }
-    ],
-    "layers": [
-      {
-        "name": "explore",
-        "type": "skill"
-      }
-    ],
-    "understand": [
-      {
-        "name": "explore",
-        "type": "skill"
-      },
-      {
-        "name": "tldr-code",
-        "type": "skill"
-      }
-    ],
-    "analyze": [
-      {
-        "name": "explore",
-        "type": "skill"
-      },
-      {
-        "name": "tldr-code",
-        "type": "skill"
-      }
-    ],
-    "codebase": [
-      {
-        "name": "explore",
         "type": "skill"
       }
     ],
@@ -3166,15 +3144,29 @@
         "type": "skill"
       }
     ],
-    "call": [
+    "layers": [
       {
         "name": "explore",
+        "type": "skill"
+      }
+    ],
+    "analyze": [
+      {
+        "name": "explore",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
         "type": "skill"
       }
     ],
     "architecture": [
       {
         "name": "explore",
+        "type": "skill"
+      },
+      {
+        "name": "tldr-code",
         "type": "skill"
       }
     ],
@@ -3184,47 +3176,113 @@
         "type": "skill"
       }
     ],
+    "codebase": [
+      {
+        "name": "explore",
+        "type": "skill"
+      }
+    ],
+    "call": [
+      {
+        "name": "explore",
+        "type": "skill"
+      }
+    ],
+    "explore": [
+      {
+        "name": "explore",
+        "type": "skill"
+      },
+      {
+        "name": "workflow-router",
+        "type": "skill"
+      }
+    ],
+    "mess": [
+      {
+        "name": "file-organizer",
+        "type": "skill"
+      }
+    ],
+    "make": [
+      {
+        "name": "file-organizer",
+        "type": "skill"
+      }
+    ],
+    "cleaning": [
+      {
+        "name": "file-organizer",
+        "type": "skill"
+      },
+      {
+        "name": "image-enhancer",
+        "type": "skill"
+      }
+    ],
+    "better": [
+      {
+        "name": "file-organizer",
+        "type": "skill"
+      }
+    ],
     "space": [
       {
         "name": "file-organizer",
         "type": "skill"
       }
     ],
-    "everywhere": [
+    "organization": [
       {
         "name": "file-organizer",
         "type": "skill"
       }
     ],
-    "have": [
+    "doesn": [
+      {
+        "name": "file-organizer",
+        "type": "skill"
+      }
+    ],
+    "structure": [
       {
         "name": "file-organizer",
         "type": "skill"
       },
       {
-        "name": "pptx",
-        "type": "skill"
-      }
-    ],
-    "archiving": [
-      {
-        "name": "file-organizer",
+        "name": "plan-agent",
         "type": "skill"
       },
       {
-        "name": "invoice-organizer",
+        "name": "remember",
         "type": "skill"
       }
     ],
-    "because": [
+    "keyword1": [
       {
-        "name": "file-organizer",
+        "name": "help",
         "type": "skill"
       }
     ],
-    "projects": [
+    "what": [
       {
-        "name": "file-organizer",
+        "name": "help",
+        "type": "skill"
+      },
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "help": [
+      {
+        "name": "help",
+        "type": "skill"
+      }
+    ],
+    "keyword2": [
+      {
+        "name": "help",
         "type": "skill"
       }
     ],
@@ -3238,29 +3296,13 @@
         "type": "skill"
       }
     ],
-    "keyword2": [
-      {
-        "name": "help",
-        "type": "skill"
-      }
-    ],
-    "help": [
-      {
-        "name": "help",
-        "type": "skill"
-      },
-      {
-        "name": "math-help",
-        "type": "skill"
-      }
-    ],
-    "keyword1": [
-      {
-        "name": "help",
-        "type": "skill"
-      }
-    ],
     "schemas": [
+      {
+        "name": "hook-developer",
+        "type": "skill"
+      }
+    ],
+    "correct": [
       {
         "name": "hook-developer",
         "type": "skill"
@@ -3282,29 +3324,15 @@
       {
         "name": "hook-developer",
         "type": "skill"
-      },
-      {
-        "name": "slack-gif-creator",
-        "type": "skill"
       }
     ],
-    "correct": [
-      {
-        "name": "hook-developer",
-        "type": "skill"
-      }
-    ],
-    "sharing": [
+    "images": [
       {
         "name": "image-enhancer",
         "type": "skill"
-      },
-      {
-        "name": "skill-share",
-        "type": "skill"
       }
     ],
-    "blog": [
+    "presentations": [
       {
         "name": "image-enhancer",
         "type": "skill"
@@ -3316,55 +3344,21 @@
         "type": "skill"
       }
     ],
-    "upscaling": [
+    "preparing": [
       {
         "name": "image-enhancer",
         "type": "skill"
       }
     ],
-    "cleaning": [
-      {
-        "name": "image-enhancer",
-        "type": "skill"
-      }
-    ],
-    "sharpening": [
-      {
-        "name": "image-enhancer",
-        "type": "skill"
-      }
-    ],
-    "quality": [
-      {
-        "name": "image-enhancer",
-        "type": "skill"
-      }
-    ],
-    "testing": [
+    "pause": [
       {
         "name": "implement_plan",
         "type": "skill"
       }
     ],
-    "preservation": [
+    "manual": [
       {
         "name": "implement_plan",
-        "type": "skill"
-      }
-    ],
-    "below": [
-      {
-        "name": "implement_plan",
-        "type": "skill"
-      }
-    ],
-    "ready": [
-      {
-        "name": "implement_plan",
-        "type": "skill"
-      },
-      {
-        "name": "skill-share",
         "type": "skill"
       }
     ],
@@ -3374,7 +3368,17 @@
         "type": "skill"
       }
     ],
-    "know": [
+    "plans": [
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      },
+      {
+        "name": "internal-comms",
+        "type": "skill"
+      }
+    ],
+    "quick": [
       {
         "name": "implement_plan",
         "type": "skill"
@@ -3386,7 +3390,25 @@
         "type": "skill"
       }
     ],
+    "recommended": [
+      {
+        "name": "implement_plan",
+        "type": "skill"
+      }
+    ],
+    "handoffs": [
+      {
+        "name": "implement_task",
+        "type": "skill"
+      }
+    ],
     "reading": [
+      {
+        "name": "implement_task",
+        "type": "skill"
+      }
+    ],
+    "previous": [
       {
         "name": "implement_task",
         "type": "skill"
@@ -3398,15 +3420,15 @@
         "type": "skill"
       }
     ],
-    "handoffs": [
+    "communications": [
       {
-        "name": "implement_task",
+        "name": "internal-comms",
         "type": "skill"
       }
     ],
-    "previous": [
+    "incident": [
       {
-        "name": "implement_task",
+        "name": "internal-comms",
         "type": "skill"
       }
     ],
@@ -3422,31 +3444,7 @@
         "type": "skill"
       }
     ],
-    "responses": [
-      {
-        "name": "internal-comms",
-        "type": "skill"
-      }
-    ],
-    "incident": [
-      {
-        "name": "internal-comms",
-        "type": "skill"
-      }
-    ],
-    "progress": [
-      {
-        "name": "internal-comms",
-        "type": "skill"
-      }
-    ],
-    "sort": [
-      {
-        "name": "internal-comms",
-        "type": "skill"
-      }
-    ],
-    "updates": [
+    "status": [
       {
         "name": "internal-comms",
         "type": "skill"
@@ -3458,41 +3456,45 @@
         "type": "skill"
       },
       {
+        "name": "meeting-insights-analyzer",
+        "type": "skill"
+      },
+      {
         "name": "search-tools",
         "type": "skill"
       }
     ],
-    "newsletters": [
-      {
-        "name": "internal-comms",
-        "type": "skill"
-      }
-    ],
-    "messy": [
+    "reimbursement": [
       {
         "name": "invoice-organizer",
         "type": "skill"
       }
     ],
-    "vendors": [
+    "organized": [
       {
         "name": "invoice-organizer",
         "type": "skill"
       }
     ],
-    "accountants": [
+    "financial": [
       {
         "name": "invoice-organizer",
         "type": "skill"
       }
     ],
-    "year": [
+    "season": [
       {
         "name": "invoice-organizer",
         "type": "skill"
       }
     ],
-    "reconciling": [
+    "email": [
+      {
+        "name": "invoice-organizer",
+        "type": "skill"
+      }
+    ],
+    "bookkeeping": [
       {
         "name": "invoice-organizer",
         "type": "skill"
@@ -3508,15 +3510,37 @@
         "type": "skill"
       }
     ],
+    "accountants": [
+      {
+        "name": "invoice-organizer",
+        "type": "skill"
+      }
+    ],
     "editing": [
       {
         "name": "json-canvas",
         "type": "skill"
       }
     ],
-    "potential": [
+    "target": [
       {
         "name": "lead-research-assistant",
+        "type": "skill"
+      }
+    ],
+    "activities": [
+      {
+        "name": "lead-research-assistant",
+        "type": "skill"
+      }
+    ],
+    "list": [
+      {
+        "name": "lead-research-assistant",
+        "type": "skill"
+      },
+      {
+        "name": "obsidian-bases",
         "type": "skill"
       }
     ],
@@ -3526,21 +3550,33 @@
         "type": "skill"
       }
     ],
-    "sales": [
+    "match": [
       {
         "name": "lead-research-assistant",
         "type": "skill"
       }
     ],
-    "clients": [
+    "guide": [
       {
-        "name": "lead-research-assistant",
+        "name": "math-help",
         "type": "skill"
       }
     ],
-    "reach": [
+    "example": [
       {
-        "name": "lead-research-assistant",
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "tool": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
+    "tutorial": [
+      {
+        "name": "math-help",
         "type": "skill"
       }
     ],
@@ -3551,28 +3587,6 @@
       },
       {
         "name": "math-router",
-        "type": "skill"
-      },
-      {
-        "name": "math-unified",
-        "type": "skill"
-      }
-    ],
-    "which": [
-      {
-        "name": "math-help",
-        "type": "skill"
-      }
-    ],
-    "equations": [
-      {
-        "name": "math-help",
-        "type": "skill"
-      }
-    ],
-    "guide": [
-      {
-        "name": "math-help",
         "type": "skill"
       }
     ],
@@ -3586,31 +3600,39 @@
         "type": "skill"
       }
     ],
+    "equations": [
+      {
+        "name": "math-help",
+        "type": "skill"
+      }
+    ],
     "tools": [
       {
         "name": "math-help",
         "type": "skill"
       }
     ],
-    "sympy_compute": [
+    "integrate": [
       {
-        "name": "math-help",
+        "name": "math-router",
+        "type": "skill"
+      },
+      {
+        "name": "math-unified",
+        "type": "skill"
+      },
+      {
+        "name": "mcp-builder",
         "type": "skill"
       }
     ],
-    "tutorial": [
-      {
-        "name": "math-help",
-        "type": "skill"
-      }
-    ],
-    "compute": [
+    "calculate": [
       {
         "name": "math-router",
         "type": "skill"
       }
     ],
-    "calculate": [
+    "derivative": [
       {
         "name": "math-router",
         "type": "skill"
@@ -3622,25 +3644,19 @@
         "type": "skill"
       }
     ],
-    "router": [
+    "plot": [
       {
         "name": "math-router",
         "type": "skill"
       }
     ],
-    "derivative": [
+    "convert": [
       {
         "name": "math-router",
         "type": "skill"
       },
       {
         "name": "math-unified",
-        "type": "skill"
-      }
-    ],
-    "plot": [
-      {
-        "name": "math-router",
         "type": "skill"
       }
     ],
@@ -3654,43 +3670,7 @@
         "type": "skill"
       }
     ],
-    "equation": [
-      {
-        "name": "math-unified",
-        "type": "skill"
-      }
-    ],
-    "differential": [
-      {
-        "name": "math-unified",
-        "type": "skill"
-      }
-    ],
-    "explain": [
-      {
-        "name": "math-unified",
-        "type": "skill"
-      }
-    ],
     "unit": [
-      {
-        "name": "math-unified",
-        "type": "skill"
-      }
-    ],
-    "limit": [
-      {
-        "name": "math-unified",
-        "type": "skill"
-      }
-    ],
-    "matrix": [
-      {
-        "name": "math-unified",
-        "type": "skill"
-      }
-    ],
-    "simplify": [
       {
         "name": "math-unified",
         "type": "skill"
@@ -3702,37 +3682,31 @@
         "type": "skill"
       }
     ],
-    "typescript": [
+    "explain": [
       {
-        "name": "mcp-builder",
+        "name": "math-unified",
         "type": "skill"
       }
     ],
-    "whether": [
+    "simplify": [
       {
-        "name": "mcp-builder",
+        "name": "math-unified",
         "type": "skill"
       }
     ],
-    "python": [
+    "factor": [
       {
-        "name": "mcp-builder",
+        "name": "math-unified",
         "type": "skill"
       }
     ],
-    "node": [
+    "series": [
       {
-        "name": "mcp-builder",
+        "name": "math-unified",
         "type": "skill"
       }
     ],
-    "external": [
-      {
-        "name": "mcp-builder",
-        "type": "skill"
-      }
-    ],
-    "fastmcp": [
+    "apis": [
       {
         "name": "mcp-builder",
         "type": "skill"
@@ -3744,19 +3718,31 @@
         "type": "skill"
       }
     ],
-    "apis": [
+    "node": [
       {
         "name": "mcp-builder",
         "type": "skill"
       }
     ],
-    "difficult": [
+    "typescript": [
       {
-        "name": "meeting-insights-analyzer",
+        "name": "mcp-builder",
         "type": "skill"
       }
     ],
-    "time": [
+    "python": [
+      {
+        "name": "mcp-builder",
+        "type": "skill"
+      }
+    ],
+    "fastmcp": [
+      {
+        "name": "mcp-builder",
+        "type": "skill"
+      }
+    ],
+    "members": [
       {
         "name": "meeting-insights-analyzer",
         "type": "skill"
@@ -3768,71 +3754,61 @@
         "type": "skill"
       }
     ],
-    "database": [
-      {
-        "name": "obsidian-bases",
-        "type": "skill"
-      }
-    ],
-    "filtering": [
-      {
-        "name": "obsidian-bases",
-        "type": "skill"
-      }
-    ],
-    "card": [
-      {
-        "name": "obsidian-bases",
-        "type": "skill"
-      }
-    ],
-    "fields": [
-      {
-        "name": "obsidian-bases",
-        "type": "skill"
-      }
-    ],
-    "table": [
-      {
-        "name": "obsidian-bases",
-        "type": "skill"
-      }
-    ],
     "calculated": [
       {
         "name": "obsidian-bases",
         "type": "skill"
       }
     ],
-    "choices": [
+    "tags": [
       {
-        "name": "plan-agent",
-        "type": "skill"
-      },
-      {
-        "name": "remember",
+        "name": "obsidian-bases",
         "type": "skill"
       }
     ],
-    "current": [
+    "dashboards": [
+      {
+        "name": "obsidian-bases",
+        "type": "skill"
+      }
+    ],
+    "views": [
+      {
+        "name": "obsidian-bases",
+        "type": "skill"
+      }
+    ],
+    "like": [
+      {
+        "name": "obsidian-bases",
+        "type": "skill"
+      }
+    ],
+    "database": [
+      {
+        "name": "obsidian-bases",
+        "type": "skill"
+      }
+    ],
+    "formula": [
+      {
+        "name": "obsidian-bases",
+        "type": "skill"
+      }
+    ],
+    "path": [
       {
         "name": "plan-agent",
         "type": "skill"
       }
     ],
-    "feature": [
+    "exists": [
       {
         "name": "plan-agent",
         "type": "skill"
       }
     ],
-    "brief": [
-      {
-        "name": "plan-agent",
-        "type": "skill"
-      }
-    ],
-    "category": [
+    "analysis": [
       {
         "name": "plan-agent",
         "type": "skill"
@@ -3844,25 +3820,13 @@
         "type": "skill"
       }
     ],
-    "people": [
+    "count": [
       {
         "name": "pptx",
         "type": "skill"
       }
     ],
-    "topic": [
-      {
-        "name": "pptx",
-        "type": "skill"
-      }
-    ],
-    "emphasis": [
-      {
-        "name": "pptx",
-        "type": "skill"
-      }
-    ],
-    "image": [
+    "force": [
       {
         "name": "pptx",
         "type": "skill"
@@ -3874,9 +3838,27 @@
         "type": "skill"
       }
     ],
-    "layouts": [
+    "will": [
       {
         "name": "pptx",
+        "type": "skill"
+      }
+    ],
+    "image": [
+      {
+        "name": "pptx",
+        "type": "skill"
+      }
+    ],
+    "placeholders": [
+      {
+        "name": "pptx",
+        "type": "skill"
+      }
+    ],
+    "verify": [
+      {
+        "name": "prove",
         "type": "skill"
       }
     ],
@@ -3892,17 +3874,7 @@
         "type": "skill"
       }
     ],
-    "distribution": [
-      {
-        "name": "raffle-winner-picker",
-        "type": "skill"
-      },
-      {
-        "name": "skill-share",
-        "type": "skill"
-      }
-    ],
-    "fair": [
+    "choosing": [
       {
         "name": "raffle-winner-picker",
         "type": "skill"
@@ -3914,37 +3886,35 @@
         "type": "skill"
       }
     ],
-    "events": [
+    "distribution": [
+      {
+        "name": "raffle-winner-picker",
+        "type": "skill"
+      },
+      {
+        "name": "skill-share",
+        "type": "skill"
+      }
+    ],
+    "spots": [
       {
         "name": "raffle-winner-picker",
         "type": "skill"
       }
     ],
-    "participants": [
+    "selecting": [
       {
         "name": "raffle-winner-picker",
         "type": "skill"
       }
     ],
-    "tests": [
+    "randomly": [
       {
         "name": "raffle-winner-picker",
         "type": "skill"
       }
     ],
-    "contest": [
-      {
-        "name": "raffle-winner-picker",
-        "type": "skill"
-      }
-    ],
-    "giveaways": [
-      {
-        "name": "raffle-winner-picker",
-        "type": "skill"
-      }
-    ],
-    "websearch": [
+    "glob": [
       {
         "name": "reference-sdk",
         "type": "skill"
@@ -3957,18 +3927,6 @@
       },
       {
         "name": "repo-research-analyst",
-        "type": "skill"
-      }
-    ],
-    "glob": [
-      {
-        "name": "reference-sdk",
-        "type": "skill"
-      }
-    ],
-    "lookups": [
-      {
-        "name": "reference-sdk",
         "type": "skill"
       }
     ],
@@ -3996,19 +3954,29 @@
         "type": "skill"
       }
     ],
+    "lookups": [
+      {
+        "name": "reference-sdk",
+        "type": "skill"
+      }
+    ],
     "error": [
       {
         "name": "remember",
         "type": "skill"
+      },
+      {
+        "name": "search-tools",
+        "type": "skill"
       }
     ],
-    "resolutions": [
+    "architectural_decision": [
       {
         "name": "remember",
         "type": "skill"
       }
     ],
-    "solutions": [
+    "claude_opc_dir": [
       {
         "name": "remember",
         "type": "skill"
@@ -4020,13 +3988,7 @@
         "type": "skill"
       }
     ],
-    "architectural_decision": [
-      {
-        "name": "remember",
-        "type": "skill"
-      }
-    ],
-    "default": [
+    "execution": [
       {
         "name": "remember",
         "type": "skill"
@@ -4038,7 +4000,25 @@
         "type": "skill"
       }
     ],
-    "atlas": [
+    "repository": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "minor": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "tweaks": [
+      {
+        "name": "resume_handoff",
+        "type": "skill"
+      }
+    ],
+    "migrations": [
       {
         "name": "resume_handoff",
         "type": "skill"
@@ -4054,79 +4034,31 @@
         "type": "skill"
       }
     ],
-    "scanning": [
-      {
-        "name": "resume_handoff",
-        "type": "skill"
-      }
-    ],
-    "kraken": [
-      {
-        "name": "resume_handoff",
-        "type": "skill"
-      }
-    ],
-    "repository": [
-      {
-        "name": "resume_handoff",
-        "type": "skill"
-      }
-    ],
-    "migrations": [
-      {
-        "name": "resume_handoff",
-        "type": "skill"
-      }
-    ],
-    "sleuth": [
-      {
-        "name": "resume_handoff",
-        "type": "skill"
-      }
-    ],
-    "scout": [
-      {
-        "name": "resume_handoff",
-        "type": "skill"
-      }
-    ],
-    "compact": [
+    "embedding": [
       {
         "name": "search-tools",
         "type": "skill"
       }
     ],
-    "rate": [
+    "indexes": [
       {
         "name": "search-tools",
         "type": "skill"
       }
     ],
-    "comparison": [
+    "redirects": [
       {
         "name": "search-tools",
         "type": "skill"
       }
     ],
-    "__init__": [
-      {
-        "name": "search-tools",
-        "type": "skill"
-      }
-    ],
-    "literal": [
-      {
-        "name": "search-tools",
-        "type": "skill"
-      }
-    ],
-    "contains": [
+    "distance": [
       {
         "name": "shapely-compute",
         "type": "skill"
       }
     ],
-    "hull": [
+    "polygon": [
       {
         "name": "shapely-compute",
         "type": "skill"
@@ -4144,19 +4076,31 @@
         "type": "skill"
       }
     ],
-    "convex": [
-      {
-        "name": "shapely-compute",
-        "type": "skill"
-      }
-    ],
     "area": [
       {
         "name": "shapely-compute",
         "type": "skill"
       }
     ],
-    "intersection": [
+    "contains": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "between": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "convex": [
+      {
+        "name": "shapely-compute",
+        "type": "skill"
+      }
+    ],
+    "hull": [
       {
         "name": "shapely-compute",
         "type": "skill"
@@ -4168,15 +4112,15 @@
         "type": "skill"
       }
     ],
-    "geometry": [
+    "also": [
       {
-        "name": "shapely-compute",
+        "name": "skill-share",
         "type": "skill"
       }
     ],
-    "polygon": [
+    "pipeline": [
       {
-        "name": "shapely-compute",
+        "name": "skill-share",
         "type": "skill"
       }
     ],
@@ -4186,7 +4130,7 @@
         "type": "skill"
       }
     ],
-    "notification": [
+    "automating": [
       {
         "name": "skill-share",
         "type": "skill"
@@ -4198,19 +4142,37 @@
         "type": "skill"
       }
     ],
-    "says": [
+    "ready": [
       {
         "name": "skill-share",
         "type": "skill"
       }
     ],
-    "toolkit": [
+    "numpy": [
+      {
+        "name": "slack-gif-creator",
+        "type": "skill"
+      }
+    ],
+    "dependencies": [
       {
         "name": "slack-gif-creator",
         "type": "skill"
       }
     ],
     "already": [
+      {
+        "name": "slack-gif-creator",
+        "type": "skill"
+      }
+    ],
+    "they": [
+      {
+        "name": "slack-gif-creator",
+        "type": "skill"
+      }
+    ],
+    "toolkit": [
       {
         "name": "slack-gif-creator",
         "type": "skill"
@@ -4228,25 +4190,49 @@
         "type": "skill"
       }
     ],
-    "pillow": [
-      {
-        "name": "slack-gif-creator",
-        "type": "skill"
-      }
-    ],
     "imageio": [
       {
         "name": "slack-gif-creator",
         "type": "skill"
       }
     ],
-    "numpy": [
+    "these": [
       {
         "name": "slack-gif-creator",
         "type": "skill"
       }
     ],
+    "haiku": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "opus": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "inherits": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
     "inherit": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "sonnet": [
+      {
+        "name": "sub-agents",
+        "type": "skill"
+      }
+    ],
+    "here": [
       {
         "name": "sub-agents",
         "type": "skill"
@@ -4264,37 +4250,19 @@
         "type": "skill"
       }
     ],
-    "inherits": [
-      {
-        "name": "sub-agents",
-        "type": "skill"
-      }
-    ],
-    "optional": [
-      {
-        "name": "sub-agents",
-        "type": "skill"
-      }
-    ],
     "read": [
       {
         "name": "sub-agents",
         "type": "skill"
       }
     ],
-    "driven": [
-      {
-        "name": "tdd",
-        "type": "skill"
-      }
-    ],
-    "test": [
-      {
-        "name": "tdd",
-        "type": "skill"
-      }
-    ],
     "green": [
+      {
+        "name": "tdd",
+        "type": "skill"
+      }
+    ],
+    "driven": [
       {
         "name": "tdd",
         "type": "skill"
@@ -4306,7 +4274,13 @@
         "type": "skill"
       }
     ],
-    "data": [
+    "complexity": [
+      {
+        "name": "tldr-code",
+        "type": "skill"
+      }
+    ],
+    "flow": [
       {
         "name": "tldr-code",
         "type": "skill"
@@ -4336,13 +4310,19 @@
         "type": "skill"
       }
     ],
-    "videos": [
+    "save": [
       {
         "name": "video-downloader",
         "type": "skill"
       }
     ],
-    "save": [
+    "grab": [
+      {
+        "name": "video-downloader",
+        "type": "skill"
+      }
+    ],
+    "videos": [
       {
         "name": "video-downloader",
         "type": "skill"
@@ -4360,25 +4340,7 @@
         "type": "skill"
       }
     ],
-    "grab": [
-      {
-        "name": "video-downloader",
-        "type": "skill"
-      }
-    ],
-    "selection": [
-      {
-        "name": "workflow-router",
-        "type": "skill"
-      }
-    ],
-    "complex": [
-      {
-        "name": "workflow-router",
-        "type": "skill"
-      }
-    ],
-    "orchestrate": [
+    "wanting": [
       {
         "name": "workflow-router",
         "type": "skill"
@@ -4529,6 +4491,7 @@
       "wordpress-developer",
       "agent-context-isolation",
       "agent-orchestration",
+      "agent-skills-spec",
       "agentic-workflow",
       "agentica-claude-proxy",
       "agentica-infrastructure",

@@ -1,9 +1,9 @@
 {
-  "generated": "2026-01-26T09:53:15.131304",
-  "total": 350,
+  "generated": "2026-01-26T09:55:22.485543",
+  "total": 351,
   "counts": {
     "agents": 149,
-    "skills": 147,
+    "skills": 148,
     "rules": 20,
     "hooks": 34
   },
@@ -135,8 +135,8 @@
       "description": "",
       "domain": "planning",
       "triggers": [
-        "framework",
-        "extended"
+        "extended",
+        "framework"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -678,16 +678,16 @@
       "description": "",
       "domain": "research",
       "triggers": [
-        "keywords",
-        "module",
-        "names",
         "from",
-        "task",
-        "strategy",
-        "efficient",
         "extract",
-        "step",
-        "description"
+        "names",
+        "description",
+        "identify",
+        "module",
+        "efficient",
+        "keywords",
+        "strategy",
+        "step"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -789,16 +789,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "generating",
         "capabilities",
-        "servers",
-        "searching",
-        "assessing",
-        "trustworthiness",
-        "registries",
         "with",
         "configurations",
-        "specific"
+        "searching",
+        "assessing",
+        "specific",
+        "publishing",
+        "servers",
+        "generating",
+        "registries"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -923,16 +923,16 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "typical",
-        "correcting",
-        "artifacts",
-        "processed",
-        "copy",
-        "business",
-        "scanned",
         "with",
-        "recognition",
-        "text"
+        "artifacts",
+        "correcting",
+        "business",
+        "processed",
+        "documents",
+        "text",
+        "typical",
+        "marketing",
+        "scanned"
       ],
       "model_tier": "codex",
       "risk_level": "medium"
@@ -954,16 +954,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "template",
         "user",
         "build",
-        "framework",
-        "markdown",
-        "session",
-        "from",
-        "contributing",
+        "test",
+        "constraints",
+        "detected",
+        "command",
         "tech",
-        "stated"
+        "step",
+        "patterns",
+        "from"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1015,8 +1015,8 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "framework",
-        "extended"
+        "extended",
+        "framework"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1068,16 +1068,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "descriptions",
         "titles",
-        "platforms",
-        "optimized",
-        "creating",
+        "social",
         "media",
-        "posts",
-        "formatted",
+        "descriptions",
+        "creating",
+        "timestamps",
         "podcast",
-        "timestamps"
+        "posts",
+        "optimized",
+        "platforms"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1089,16 +1089,16 @@
       "description": "",
       "domain": "documentation",
       "triggers": [
-        "structured",
-        "converting",
-        "files",
-        "identifying",
-        "generating",
         "media",
-        "transcription",
+        "structured",
+        "identifying",
         "timestamped",
+        "converting",
+        "generating",
+        "segments",
         "speakers",
-        "segments"
+        "transcript",
+        "data"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1110,16 +1110,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "developments",
-        "trends",
-        "tech",
-        "areas",
-        "researching",
-        "finding",
+        "aligned",
+        "with",
+        "planning",
+        "suggesting",
+        "content",
         "breaking",
-        "timely",
         "podcasts",
-        "focus"
+        "tech",
+        "current",
+        "trends"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1141,16 +1141,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "orchestrating",
         "processes",
-        "detecting",
+        "information",
+        "orchestrating",
         "pipelines",
-        "incomplete",
+        "agent",
+        "managing",
         "sophisticated",
         "multi",
-        "managing",
-        "information",
-        "agent"
+        "detecting",
+        "incomplete"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1162,14 +1162,14 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "prompts",
-        "improving",
         "building",
         "performance",
-        "crafting",
+        "agent",
         "features",
-        "system",
-        "agent"
+        "prompts",
+        "crafting",
+        "improving",
+        "system"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1221,16 +1221,16 @@
       "description": "Use this agent when dealing with React performance issues including slow loading applications, janky user interactions, large bundle sizes, memory leaks, poor Core Web Vitals scores, or performance re",
       "domain": "research",
       "triggers": [
-        "scores",
-        "applications",
-        "poor",
-        "user",
-        "with",
-        "sizes",
-        "agent",
-        "including",
+        "when",
+        "memory",
         "vitals",
-        "performance"
+        "leaks",
+        "user",
+        "large",
+        "interactions",
+        "with",
+        "slow",
+        "loading"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1242,16 +1242,16 @@
       "description": "Use this agent when you need to transform synthesized research findings into a comprehensive, well-structured final report. This should be used after research has been completed and findings have been",
       "domain": "research",
       "triggers": [
-        "structured",
+        "when",
         "findings",
-        "need",
-        "final",
-        "into",
-        "transform",
-        "well",
-        "research",
         "report",
-        "synthesized"
+        "final",
+        "structured",
+        "agent",
+        "well",
+        "into",
+        "comprehensive",
+        "transform"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1293,16 +1293,16 @@
       "description": "Use this agent when you need to coordinate a comprehensive research project that requires multiple specialized agents working in sequence. This agent manages the entire research workflow from initial ",
       "domain": "research",
       "triggers": [
-        "requires",
-        "need",
-        "project",
-        "working",
-        "agents",
+        "when",
         "coordinate",
+        "project",
+        "agents",
         "that",
-        "research",
-        "multiple",
-        "specialized"
+        "requires",
+        "agent",
+        "specialized",
+        "comprehensive",
+        "working"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1314,16 +1314,16 @@
       "description": "",
       "domain": "research",
       "triggers": [
+        "from",
+        "insights",
+        "complex",
         "structured",
         "identifying",
         "creating",
         "perspectives",
-        "from",
-        "insights",
         "research",
-        "patterns",
         "merging",
-        "diverse"
+        "patterns"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1335,15 +1335,15 @@
       "description": "Use this agent to cross-check enhancement work and ensure consistency across the vault. This agent should be used after other enhancement agents have completed their work to validate outputs and maint",
       "domain": "analysis",
       "triggers": [
-        "cross",
-        "check",
-        "work",
-        "across",
-        "enhancement",
         "consistency",
+        "check",
+        "enhancement",
+        "agent",
         "ensure",
         "vault",
-        "agent"
+        "cross",
+        "work",
+        "across"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1355,13 +1355,13 @@
       "description": "Use this agent proactively for risk assessment, trade tracking, or portfolio protection. Apply when you need to monitor portfolio risk, calculate R-multiples, assess position limits, create hedging st",
       "domain": "general",
       "triggers": [
-        "risk",
-        "proactively",
-        "agent",
-        "trade",
-        "tracking",
         "protection",
         "portfolio",
+        "agent",
+        "proactively",
+        "risk",
+        "tracking",
+        "trade",
         "assessment"
       ],
       "model_tier": "claude",
@@ -1424,16 +1424,16 @@
       "description": "Use this agent when you need expert web research using advanced search techniques and synthesis. Apply for competitive analysis, fact-checking, historical research, trend analysis, or when you need to",
       "domain": "research",
       "triggers": [
-        "need",
-        "techniques",
-        "expert",
-        "advanced",
-        "using",
-        "research",
-        "synthesis",
         "when",
+        "using",
+        "advanced",
         "search",
-        "agent"
+        "expert",
+        "agent",
+        "synthesis",
+        "research",
+        "need",
+        "techniques"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1455,15 +1455,15 @@
       "description": "Use this agent when you need to optimize podcast episode content for search engines. This includes creating SEO-friendly titles, meta descriptions, and identifying relevant long-tail keywords for tech",
       "domain": "research",
       "triggers": [
-        "need",
+        "when",
         "episode",
         "engines",
-        "search",
-        "podcast",
         "content",
-        "when",
-        "optimize",
-        "agent"
+        "search",
+        "agent",
+        "podcast",
+        "need",
+        "optimize"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1505,15 +1505,15 @@
       "description": "Use this agent when you need to create social media content for podcast episodes. This includes generating Twitter/X threads, LinkedIn posts, and Instagram captions from episode information. The agent",
       "domain": "documentation",
       "triggers": [
-        "episodes",
-        "need",
-        "social",
-        "media",
         "when",
-        "podcast",
+        "media",
+        "social",
         "content",
+        "episodes",
+        "agent",
         "create",
-        "agent"
+        "podcast",
+        "need"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1719,6 +1719,16 @@
       "risk_level": "low"
     },
     {
+      "name": "agent-skills-spec",
+      "type": "skill",
+      "path": ".claude\\skills\\agent-skills-spec\\agent-skills-spec.md",
+      "description": "",
+      "domain": "general",
+      "triggers": [],
+      "model_tier": "claude",
+      "risk_level": "low"
+    },
+    {
       "name": "agentic-workflow",
       "type": "skill",
       "path": ".claude\\skills\\agentic-workflow\\SKILL.md",
@@ -1735,14 +1745,14 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "agentica",
-        "developing",
-        "debugging",
-        "proxy",
-        "integration",
         "when",
+        "skill",
+        "proxy",
+        "agentica",
         "claude",
-        "skill"
+        "integration",
+        "debugging",
+        "developing"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1764,10 +1774,10 @@
       "description": "",
       "domain": "general",
       "triggers": [
+        "that",
         "findings",
         "should",
-        "persist",
-        "that"
+        "persist"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1779,16 +1789,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "implementing",
-        "agentica",
-        "multi",
-        "with",
+        "when",
+        "returns",
+        "behavior",
+        "code",
         "start",
-        "agent",
-        "quick",
-        "agentic",
+        "with",
+        "implementing",
+        "skill",
         "function",
-        "capabilities"
+        "agent"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1800,16 +1810,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "agentica",
+        "when",
+        "environment",
         "proxy",
-        "8080",
+        "connection",
+        "code",
         "with",
-        "access",
-        "client",
-        "agent",
-        "fresh",
-        "localhost",
-        "chat"
+        "starting",
+        "skill",
+        "inference_endpoint_url",
+        "development"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1821,12 +1831,12 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "agentica",
-        "pattern",
         "skill",
+        "pattern",
         "user",
-        "after",
-        "selects"
+        "agentica",
+        "selects",
+        "after"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1838,16 +1848,16 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "components",
-        "requiring",
-        "html",
-        "single",
+        "shadcn",
         "artifacts",
+        "complex",
+        "simple",
+        "html",
         "routing",
         "state",
-        "shadcn",
-        "simple",
-        "management"
+        "single",
+        "requiring",
+        "file"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -1921,16 +1931,16 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "human",
-        "verification",
-        "decision",
-        "advanced",
-        "verify",
-        "acknowledge",
-        "commit",
-        "with",
+        "plan",
+        "interview",
+        "last",
+        "purpose",
+        "checkpoints",
+        "greenfield",
         "build",
-        "approve"
+        "works",
+        "implement",
+        "phase"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -1942,16 +1952,16 @@
       "description": "",
       "domain": "planning",
       "triggers": [
-        "static",
-        "asks",
-        "poster",
         "when",
-        "user",
-        "other",
+        "asks",
+        "static",
         "piece",
-        "create",
+        "skill",
         "design",
-        "skill"
+        "other",
+        "create",
+        "user",
+        "poster"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -1963,16 +1973,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "entries",
-        "weekly",
+        "release",
+        "does",
         "changelog",
+        "submissions",
+        "entries",
+        "monthly",
         "product",
-        "notes",
-        "summaries",
-        "store",
-        "page",
-        "generating",
-        "public"
+        "public",
+        "skill",
+        "notifications"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2014,16 +2024,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "campaigns",
-        "identifying",
-        "successful",
-        "proven",
+        "that",
+        "does",
+        "finding",
         "understanding",
-        "strategies",
-        "original",
-        "copy",
-        "with",
-        "designs"
+        "works",
+        "concepts",
+        "inform",
+        "research",
+        "copying",
+        "with"
       ],
       "model_tier": "localai",
       "risk_level": "low"
@@ -2055,16 +2065,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "compound",
-        "asked",
-        "should",
-        "rules",
-        "json",
-        "skills",
         "from",
-        "what",
+        "skills",
+        "learn",
+        "improve",
         "learnings",
-        "patterns"
+        "skill",
+        "json",
+        "sessions",
+        "setup",
+        "asked"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2076,16 +2086,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "implementing",
-        "cause",
-        "official",
-        "reviewed",
         "found",
+        "cause",
         "confidence",
-        "working",
-        "verified",
-        "compliance",
-        "assessment"
+        "official",
+        "exist",
+        "task",
+        "implementing",
+        "duplicate",
+        "skill",
+        "compliance"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2097,16 +2107,16 @@
       "description": "",
       "domain": "research",
       "triggers": [
-        "articles",
-        "references",
-        "while",
+        "does",
+        "newsletters",
+        "technical",
+        "tutorials",
+        "posts",
         "leadership",
-        "getting",
-        "section",
+        "references",
         "with",
-        "citations",
-        "producing",
-        "pieces"
+        "feedback",
+        "skill"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2156,12 +2166,12 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "code",
-        "unreachable",
         "unused",
-        "dead",
         "refactor",
-        "cleanup"
+        "cleanup",
+        "unreachable",
+        "code",
+        "dead"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -2183,14 +2193,14 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "behaving",
-        "wrong",
-        "hooks",
-        "aren",
-        "firing",
-        "output",
         "unexpectedly",
-        "producing"
+        "hooks",
+        "firing",
+        "aren",
+        "behaving",
+        "output",
+        "producing",
+        "wrong"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -2202,16 +2212,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "application",
-        "they",
-        "models",
-        "first",
-        "frameworks",
-        "model",
-        "summaries",
-        "mentions",
+        "conciseness",
+        "complex",
+        "thinking",
+        "helped",
         "apply",
-        "play"
+        "signals",
+        "references",
+        "unpack",
+        "sources",
+        "main"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2223,16 +2233,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "application",
-        "they",
-        "models",
-        "first",
-        "frameworks",
-        "model",
-        "summaries",
-        "mentions",
+        "conciseness",
+        "complex",
+        "thinking",
+        "helped",
         "apply",
-        "play"
+        "signals",
+        "references",
+        "unpack",
+        "sources",
+        "main"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2264,16 +2274,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "articles",
-        "focused",
-        "they",
-        "week",
-        "skills",
-        "address",
-        "recurring",
-        "improvement",
+        "when",
+        "quality",
+        "reviews",
         "their",
-        "with"
+        "understand",
+        "which",
+        "that",
+        "developing",
+        "technical",
+        "learning"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2295,9 +2305,9 @@
       "description": "",
       "domain": "documentation",
       "triggers": [
+        "changes",
         "tracked",
-        "your",
-        "changes"
+        "your"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2309,16 +2319,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "service",
+        "when",
         "first",
-        "product",
-        "available",
-        "personal",
-        "registering",
-        "site",
-        "portfolio",
+        "rebranding",
+        "does",
         "finding",
-        "company"
+        "service",
+        "product",
+        "project",
+        "side",
+        "starting"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2350,15 +2360,15 @@
       "description": "",
       "domain": "research",
       "triggers": [
-        "explore",
+        "graph",
         "layers",
         "understand",
         "analyze",
-        "codebase",
-        "graph",
-        "call",
         "architecture",
-        "brownfield"
+        "brownfield",
+        "codebase",
+        "call",
+        "explore"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2370,16 +2380,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
+        "mess",
+        "make",
+        "does",
+        "cleaning",
+        "better",
         "space",
-        "they",
+        "organization",
+        "doesn",
         "need",
-        "folder",
-        "everywhere",
-        "have",
-        "archiving",
-        "because",
-        "projects",
-        "files"
+        "structure"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2452,11 +2462,11 @@
       "domain": "general",
       "triggers": [
         "capabilities",
-        "show",
-        "keyword2",
+        "keyword1",
         "what",
         "help",
-        "keyword1"
+        "keyword2",
+        "show"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2468,15 +2478,15 @@
       "description": "",
       "domain": "general",
       "triggers": [
+        "with",
         "schemas",
-        "write",
-        "input",
         "hooks",
-        "only",
         "cleanup",
         "output",
-        "with",
-        "correct"
+        "correct",
+        "write",
+        "input",
+        "only"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2508,16 +2518,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "media",
-        "sharing",
-        "social",
-        "blog",
-        "screenshot",
-        "upscaling",
-        "cleaning",
-        "sharpening",
         "quality",
-        "posts"
+        "social",
+        "does",
+        "cleaning",
+        "posts",
+        "skill",
+        "images",
+        "presentations",
+        "screenshot",
+        "preparing"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2529,16 +2539,16 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "testing",
-        "focused",
-        "preservation",
-        "below",
-        "human",
-        "verification",
-        "ready",
+        "when",
+        "plan",
+        "pause",
+        "manual",
         "please",
-        "know",
-        "proceed"
+        "plans",
+        "that",
+        "quick",
+        "proceed",
+        "recommended"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -2560,10 +2570,10 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "reading",
-        "approach",
         "handoffs",
-        "previous"
+        "reading",
+        "previous",
+        "approach"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -2585,16 +2595,16 @@
       "description": "To write internal communications, use this skill for:",
       "domain": "documentation",
       "triggers": [
-        "faqs",
-        "leadership",
-        "problems",
-        "responses",
+        "communications",
         "incident",
-        "progress",
-        "sort",
-        "updates",
+        "faqs",
+        "plans",
+        "newsletters",
+        "problems",
+        "status",
+        "leadership",
         "communication",
-        "newsletters"
+        "project"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2606,16 +2616,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "messy",
-        "need",
-        "vendors",
-        "folder",
-        "archiving",
-        "business",
+        "reimbursement",
+        "organized",
+        "financial",
+        "season",
+        "email",
+        "bookkeeping",
+        "does",
+        "organizing",
         "accountants",
-        "year",
-        "reconciling",
-        "organizing"
+        "need"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2627,11 +2637,11 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "working",
-        "editing",
-        "creating",
         "with",
-        "skill"
+        "skill",
+        "creating",
+        "editing",
+        "working"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2643,16 +2653,16 @@
       "description": "",
       "domain": "research",
       "triggers": [
-        "identifying",
-        "service",
-        "product",
-        "potential",
-        "accounts",
-        "business",
-        "sales",
-        "clients",
+        "target",
+        "activities",
         "that",
-        "reach"
+        "does",
+        "finding",
+        "service",
+        "list",
+        "product",
+        "accounts",
+        "match"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2694,16 +2704,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "solve",
+        "guide",
+        "example",
+        "tool",
+        "tutorial",
         "which",
+        "solve",
+        "math",
         "equations",
         "what",
-        "guide",
-        "math",
-        "tools",
-        "sympy_compute",
-        "help",
-        "tutorial"
+        "tools"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2715,15 +2725,15 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "solve",
-        "compute",
-        "calculate",
-        "requests",
         "first",
-        "router",
-        "derivative",
-        "plot",
+        "integrate",
+        "calculate",
         "math",
+        "solve",
+        "derivative",
+        "requests",
+        "plot",
+        "convert",
         "prove"
       ],
       "model_tier": "claude",
@@ -2736,16 +2746,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "equation",
-        "solve",
-        "derivative",
-        "differential",
-        "explain",
+        "integrate",
+        "which",
+        "does",
         "unit",
-        "limit",
-        "matrix",
+        "unsure",
+        "explain",
         "simplify",
-        "unsure"
+        "factor",
+        "series",
+        "convert"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2757,16 +2767,16 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "servers",
-        "typescript",
-        "whether",
+        "integrate",
+        "apis",
         "building",
-        "python",
-        "node",
-        "external",
-        "fastmcp",
+        "skill",
         "services",
-        "apis"
+        "node",
+        "typescript",
+        "servers",
+        "python",
+        "fastmcp"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -2798,16 +2808,16 @@
       "description": "",
       "domain": "analysis",
       "triggers": [
-        "identifying",
-        "difficult",
+        "when",
+        "reviews",
+        "their",
+        "does",
         "understanding",
-        "time",
-        "getting",
-        "leadership",
-        "skills",
-        "tracking",
+        "members",
         "avoid",
-        "improvement"
+        "communication",
+        "leadership",
+        "feedback"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2909,16 +2919,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
+        "calculated",
+        "tags",
+        "dashboards",
+        "views",
+        "like",
         "database",
-        "filtering",
-        "notes",
-        "with",
-        "card",
         "organizing",
-        "working",
-        "fields",
-        "table",
-        "calculated"
+        "formula",
+        "list",
+        "task"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -2930,9 +2940,9 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "skill",
+        "with",
         "working",
-        "with"
+        "skill"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3014,16 +3024,16 @@
       "description": "",
       "domain": "planning",
       "triggers": [
-        "decision",
-        "choices",
+        "plan",
+        "path",
         "current",
-        "feature",
-        "brief",
-        "files",
-        "markdown",
-        "category",
-        "rationale",
-        "what"
+        "technical",
+        "file",
+        "structure",
+        "exists",
+        "analysis",
+        "state",
+        "rationale"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3035,16 +3045,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "people",
-        "topic",
-        "emphasis",
-        "image",
-        "section",
-        "verify",
+        "when",
+        "count",
+        "force",
         "placeholder",
-        "have",
-        "layouts",
-        "with"
+        "will",
+        "image",
+        "single",
+        "into",
+        "concepts",
+        "placeholders"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3066,12 +3076,12 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "true",
-        "show",
         "verify",
         "that",
+        "true",
+        "formalize",
         "prove",
-        "formalize"
+        "show"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3113,16 +3123,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "distribution",
-        "fair",
-        "raffle",
-        "events",
-        "media",
-        "participants",
-        "tests",
-        "contest",
         "social",
-        "giveaways"
+        "choosing",
+        "raffle",
+        "does",
+        "submissions",
+        "distribution",
+        "spots",
+        "selecting",
+        "skill",
+        "randomly"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3174,16 +3184,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "websearch",
-        "documentation",
-        "project",
         "glob",
-        "lookups",
+        "project",
+        "documentation",
+        "simple",
         "grep",
-        "patterns",
         "questions",
+        "specific",
         "docs",
-        "instead"
+        "instead",
+        "lookups"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3205,16 +3215,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "choices",
+        "when",
         "error",
-        "system",
-        "resolutions",
-        "solutions",
-        "worked",
-        "architectural_decision",
         "that",
-        "default",
-        "specific"
+        "architectural_decision",
+        "code",
+        "work",
+        "claude_opc_dir",
+        "worked",
+        "structure",
+        "execution"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3226,11 +3236,11 @@
       "description": "",
       "domain": "research",
       "triggers": [
+        "when",
         "documentation",
-        "searching",
         "recent",
-        "patterns",
-        "when"
+        "searching",
+        "patterns"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3282,16 +3292,16 @@
       "description": "",
       "domain": "memory",
       "triggers": [
-        "atlas",
-        "summaries",
-        "refactoring",
-        "system",
-        "scanning",
-        "kraken",
+        "plan",
+        "complex",
         "repository",
+        "code",
+        "minor",
+        "implement",
+        "tweaks",
+        "large",
         "migrations",
-        "sleuth",
-        "scout"
+        "refactoring"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3343,16 +3353,16 @@
       "description": "",
       "domain": "research",
       "triggers": [
-        "decision",
-        "refactoring",
-        "compact",
-        "rate",
-        "files",
-        "function",
-        "comparison",
+        "embedding",
+        "error",
+        "indexes",
+        "build",
+        "redirects",
+        "code",
+        "need",
         "communication",
-        "__init__",
-        "literal"
+        "refactoring",
+        "names"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3374,16 +3384,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "contains",
-        "hull",
+        "distance",
+        "polygon",
         "centroid",
         "points",
-        "convex",
         "area",
-        "intersection",
-        "buffer",
-        "geometry",
-        "polygon"
+        "contains",
+        "between",
+        "convex",
+        "hull",
+        "buffer"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3428,16 +3438,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "distribution",
+        "when",
+        "also",
+        "pipeline",
+        "that",
         "collaborative",
-        "need",
-        "ready",
-        "notification",
-        "skills",
+        "user",
+        "automating",
         "metadata",
-        "says",
-        "sharing",
-        "with"
+        "distribution",
+        "ready"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3459,16 +3469,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "they",
-        "toolkit",
-        "only",
-        "aren",
+        "numpy",
+        "dependencies",
         "already",
+        "they",
+        "aren",
+        "toolkit",
         "present",
         "bash",
-        "pillow",
         "imageio",
-        "numpy"
+        "these"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3490,15 +3500,15 @@
       "description": "",
       "domain": "general",
       "triggers": [
+        "haiku",
+        "opus",
+        "inherits",
         "inherit",
-        "model",
+        "sonnet",
+        "agent",
+        "here",
         "edit",
         "20251101",
-        "system",
-        "agent",
-        "inherits",
-        "content",
-        "optional",
         "read"
       ],
       "model_tier": "claude",
@@ -3521,11 +3531,11 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "driven",
+        "green",
         "first",
-        "test",
         "refactor",
-        "green"
+        "driven",
+        "test"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3579,16 +3589,16 @@
       "description": "",
       "domain": "code",
       "triggers": [
-        "calls",
-        "explore",
-        "code",
-        "understand",
-        "analyze",
-        "dead",
-        "refactor",
         "graph",
-        "what",
-        "data"
+        "calls",
+        "complexity",
+        "understand",
+        "complex",
+        "refactor",
+        "flow",
+        "analyze",
+        "search",
+        "architecture"
       ],
       "model_tier": "codex",
       "risk_level": "low"
@@ -3601,9 +3611,9 @@
       "domain": "general",
       "triggers": [
         "debugging",
-        "code",
+        "understanding",
         "deeply",
-        "understanding"
+        "code"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3669,15 +3679,15 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "videos",
+        "when",
         "asks",
         "save",
-        "youtube",
-        "user",
-        "when",
-        "download",
         "skill",
-        "grab"
+        "grab",
+        "user",
+        "videos",
+        "youtube",
+        "download"
       ],
       "model_tier": "claude",
       "risk_level": "low"
@@ -3709,16 +3719,16 @@
       "description": "",
       "domain": "general",
       "triggers": [
-        "need",
+        "when",
+        "plan",
         "first",
-        "selection",
-        "build",
-        "user",
-        "mentions",
         "complex",
-        "start",
-        "orchestrate",
-        "explore"
+        "wanting",
+        "user",
+        "build",
+        "should",
+        "explore",
+        "start"
       ],
       "model_tier": "claude",
       "risk_level": "low"
