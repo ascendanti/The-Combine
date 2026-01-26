@@ -7,9 +7,9 @@
 
 ### ACTIVE (Wired into hooks):
 ```
-SessionStart     → cleanup-mcp.py, session-briefing.py (NOW WITH ARCHITECTURE AWARENESS), self_continue.py
+SessionStart     → cleanup-mcp.py, daemon-autostart.py, mcp_health.py warmup, init_spine.py, session-briefing.py, self_continue.py
 UserPromptSubmit → deterministic_router.py (NOW WIRED TO orchestrator.fast_classify!)
-PreToolUse       → auto-cache-pre.py, pre-create-check.py (Write)
+PreToolUse       → auto-cache-pre.py, pre-create-check.py (Write), pre-command-optimize.py (Bash)
 PostToolUse      → unified-post-tool-tracker.py, post-integration-analyze.py, auto-learn-errors.py (Bash)
 SubagentStart    → subagent-start.js (AGENTICA: 11 multi-agent patterns)
 SubagentStop     → subagent-stop.js (agent completion + pattern coordination)
@@ -50,8 +50,17 @@ session-end-cleanup.js     → Stop: orphan agent cleanup for Agentica patterns
 ```
 metacognition.py           - Self-awareness (DEFER - nice to have)
 coherence.py               - Goal alignment (DEFER - nice to have)
-continuous_executor.py     - Long-running tasks (DEFER - complex)
 vector_store.py            - Embeddings (needs MARM first)
+```
+
+### NEWLY WIRED (2026-01-26 session):
+```
+daemon-autostart.py        → SessionStart: Auto-starts continuous_executor daemon
+mcp_health.py warmup       → SessionStart: Pre-warm MCP servers (cold-start fix)
+init_spine.py              → SessionStart: Initialize Atlas infrastructure
+pre-command-optimize.py    → PreToolUse (Bash): Apply command_optimizer workarounds
+efficiency_monitor.py      → NOW PERSISTS to efficiency_log + token tracking
+token_monitor.py           → get_current_session_tokens() for efficiency integration
 ```
 
 **DO NOT propose building systems that duplicate these. WIRE THEM IN instead.**
