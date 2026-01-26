@@ -3,14 +3,49 @@
 ## Objective
 Evolve Claude instance to become all-powerful in service to business, publications, networks, wealth, knowledge, insight, foresight, social media, and strategy.
 
-## Status: Phase 15.5 COMPLETE - Central Orchestrator Wired
+## Status: Phase 15.6 IN PROGRESS - Continuous Execution + Critical Fixes
 
-### Session Summary (2026-01-25)
-- Fixed hook blocking issue (smart-tool-redirect now logs, doesn't block)
-- 8/8 subsystems operational
-- 163 LocalAI calls saved $0.42 vs Claude
-- 3 strategies at 0.85 fitness
-- Module registry tracking 23 modules from 8 repos
+### Session Summary (2026-01-25 Evening)
+- Fixed continuous executor daemon (CLI flags, session persistence)
+- Daemon running (PID 34096) for autonomous task execution
+- Consolidated post-tool trackers into unified-post-tool-tracker.py
+- Created error_handler.py for consistent error handling
+- Fixed Windows `|| true` -> `|| echo.` compatibility
+
+### Critical Issues (from Telegram) - IN PROGRESS
+| # | Issue | Status |
+|---|-------|--------|
+| 1 | SQLite schema drift | DONE (schema_migrations.py) |
+| 2 | MCP server instability | DONE (mcp_health.py) |
+| 3 | Context window bloat | TODO |
+| 4 | Inconsistent error handling | DONE (error_handler.py) |
+| 5 | Hard-coded paths | DONE (config.py) |
+| 6 | Missing type hints | TODO (incremental) |
+| 7 | No intent classification | DONE (orchestrator.py) |
+| 8 | No cross-paper synthesis | TODO |
+| 9 | No proactive task generation | PARTIAL (task_generator.py) |
+| 10 | Agent communication serial | TODO |
+| 11 | Obsidian sync one-way | TODO |
+| 12 | GitHub PR integration | TODO |
+| 13 | No API documentation | TODO |
+| 14 | Incomplete descriptions | TODO |
+| 15 | Handoff format unstandardized | TODO |
+
+### New Files Created This Session
+- `daemon/schema_migrations.py` - Versioned database migrations (6 applied)
+- `daemon/config.py` - Central configuration with env support
+- `daemon/mcp_health.py` - MCP server health checks and warmup
+- `daemon/continuous_executor.py` - Autonomous execution daemon (working)
+- `daemon/autonomous_executor.py` - API-based executor (requires API key)
+- `daemon/error_handler.py` - Unified error handling with DB tracking
+- `.claude/hooks/unified-post-tool-tracker.py` - Consolidated post-tool tracking
+
+### Continuous Executor Status
+- **Simple tasks**: WORKING (reasoning, math, text generation)
+- **File operations**: NOT WORKING (CLI tool_use ID conflict bug)
+- **Workaround**: Use main Claude session for file operations
+- **Caching**: Dragonfly + SQLite dual-layer cache enabled
+- **Retry logic**: Auto-retry on transient errors
 
 ---
 
