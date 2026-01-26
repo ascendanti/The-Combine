@@ -1,129 +1,127 @@
 #!/usr/bin/env python3
 """
-Session Briefing Hook
+Session Briefing Hook - Token-Efficient Version
 
-Loads essential documents into context on session start.
-Outputs condensed briefing to be injected into Claude's context.
+Outputs MINIMAL briefing on session start.
+Follows context engineering principles:
+- Just-in-time context loading (pointers over content)
+- Minimal footprint (identifiers, not full text)
+- Progressive disclosure (load on demand)
 """
 
-import sys
 import json
 from pathlib import Path
 from datetime import datetime
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
-def read_truncated(filepath: Path, max_lines: int = 50) -> str:
-    """Read file, truncate to max lines."""
+# Hard limits for token efficiency
+MAX_TASK_LINES = 20  # Reduced from 60
+MAX_STATUS_LINES = 15  # Just the highlights
+
+
+def extract_phase_and_progress(evolution_path: Path) -> str:
+    """Extract ONLY phase number and key metrics, not full status."""
+    if not evolution_path.exists():
+        return ""
     try:
-        lines = filepath.read_text(encoding='utf-8', errors='ignore').split('\n')
-        if len(lines) > max_lines:
-            return '\n'.join(lines[:max_lines]) + f"\n... ({len(lines) - max_lines} more lines)"
-        return '\n'.join(lines)
+        content = evolution_path.read_text(encoding='utf-8', errors='ignore')
+        lines = content.split('\n')
+
+        # Find current phase
+        phase_line = ""
+        in_progress_count = 0
+        for line in lines:
+            if 'Phase' in line and ('IN PROGRESS' in line or 'COMPLETE' in line):
+                phase_line = line.strip()
+            if 'IN PROGRESS' in line:
+                in_progress_count += 1
+
+        if phase_line:
+            return f"{phase_line} | {in_progress_count} active items"
+        return ""
     except Exception:
         return ""
 
 
-def extract_current_status(evolution_plan: str) -> str:
-    """Extract just the Current Status section from evolution plan."""
-    lines = evolution_plan.split('\n')
-    in_status = False
-    status_lines = []
-
-    for line in lines:
-        if '## Current Status' in line:
-            in_status = True
-            status_lines.append(line)
-            continue
-        if in_status:
-            if line.startswith('## ') and 'Current Status' not in line:
-                break
-            status_lines.append(line)
-
-    return '\n'.join(status_lines) if status_lines else ""
-
-
-def extract_task_summary(task_md: str) -> str:
-    """Extract objective and status from task.md."""
-    lines = task_md.split('\n')
-    summary_lines = []
-    line_count = 0
-
-    for line in lines:
-        summary_lines.append(line)
-        line_count += 1
-        if line_count > 60:  # First 60 lines
-            summary_lines.append("... (truncated)")
-            break
-
-    return '\n'.join(summary_lines)
-
-
-def get_pending_tasks() -> str:
-    """Get pending tasks from task generator."""
+def extract_task_objective(task_path: Path) -> str:
+    """Extract just objective + current focus, not full task."""
+    if not task_path.exists():
+        return ""
     try:
-        sys.path.insert(0, str(PROJECT_ROOT / "daemon"))
-        from task_generator import TaskGenerator
-        gen = TaskGenerator()
-        pending = gen.get_pending_tasks(limit=5)
-        if pending:
-            return "Pending auto-generated tasks:\n" + '\n'.join([f"- {t['description'][:80]}" for t in pending])
+        lines = task_path.read_text(encoding='utf-8', errors='ignore').split('\n')
+        result = []
+        line_count = 0
+
+        for line in lines:
+            result.append(line)
+            line_count += 1
+            # Stop at first section break after getting header
+            if line_count > MAX_TASK_LINES:
+                break
+            if line_count > 5 and line.startswith('## '):
+                break
+
+        return '\n'.join(result).strip()
     except Exception:
-        pass
+        return ""
+
+
+def get_handoff_pointer() -> str:
+    """Return pointer to latest handoff, not content."""
+    handoffs_dir = PROJECT_ROOT / "thoughts" / "handoffs"
+    if not handoffs_dir.exists():
+        return ""
+
+    files = sorted(handoffs_dir.glob("*.yaml"), key=lambda f: f.stat().st_mtime, reverse=True)
+    if files:
+        latest = files[0]
+        age_hours = (datetime.now().timestamp() - latest.stat().st_mtime) / 3600
+        return f"Latest: {latest.name} ({age_hours:.0f}h ago) - Read if resuming work"
     return ""
+
+
+def get_capability_summary() -> str:
+    """One-line capability count."""
+    caps_path = PROJECT_ROOT / ".claude" / "config" / "capabilities.json"
+    if not caps_path.exists():
+        return ""
+    try:
+        with open(caps_path) as f:
+            caps = json.load(f)
+        c = caps['counts']
+        return f"A:{c['agents']} S:{c['skills']} R:{c['rules']} H:{c['hooks']}"
+    except Exception:
+        return ""
 
 
 def main():
     output = {"continue": True}
-    briefing_parts = []
+    parts = []
 
-    # 1. Evolution Plan - Current Status only
-    evolution_path = PROJECT_ROOT / "EVOLUTION-PLAN.md"
-    if evolution_path.exists():
-        content = evolution_path.read_text(encoding='utf-8', errors='ignore')
-        status = extract_current_status(content)
-        if status:
-            briefing_parts.append("=== EVOLUTION STATUS ===\n" + status)
+    # 1. Phase progress (one line)
+    phase = extract_phase_and_progress(PROJECT_ROOT / "EVOLUTION-PLAN.md")
+    if phase:
+        parts.append(f"[PHASE] {phase}")
 
-    # 2. Task.md - Summary
-    task_path = PROJECT_ROOT / "task.md"
-    if task_path.exists():
-        content = task_path.read_text(encoding='utf-8', errors='ignore')
-        summary = extract_task_summary(content)
-        if summary:
-            briefing_parts.append("=== CURRENT TASK ===\n" + summary)
+    # 2. Current task objective (minimal)
+    task = extract_task_objective(PROJECT_ROOT / "task.md")
+    if task:
+        parts.append(f"[TASK]\n{task}")
 
-    # 3. Latest handoff (if exists)
-    handoffs_dir = PROJECT_ROOT / "thoughts" / "handoffs"
-    if handoffs_dir.exists():
-        files = sorted(handoffs_dir.glob("*.yaml"), key=lambda f: f.stat().st_mtime, reverse=True)
-        if files:
-            latest = files[0]
-            content = read_truncated(latest, 30)
-            briefing_parts.append(f"=== LATEST HANDOFF ({latest.name}) ===\n" + content)
+    # 3. Handoff pointer (not content)
+    handoff = get_handoff_pointer()
+    if handoff:
+        parts.append(f"[HANDOFF] {handoff}")
 
-    # 4. Capability counts
-    caps_path = PROJECT_ROOT / ".claude" / "config" / "capabilities.json"
-    if caps_path.exists():
-        try:
-            with open(caps_path) as f:
-                caps = json.load(f)
-            briefing_parts.append(
-                f"=== CAPABILITIES LOADED ===\n"
-                f"Agents: {caps['counts']['agents']} | Skills: {caps['counts']['skills']} | "
-                f"Rules: {caps['counts']['rules']} | Hooks: {caps['counts']['hooks']}"
-            )
-        except Exception:
-            pass
+    # 4. Capability summary (one line)
+    caps = get_capability_summary()
+    if caps:
+        parts.append(f"[CAPS] {caps}")
 
-    # 5. Pending tasks
-    pending = get_pending_tasks()
-    if pending:
-        briefing_parts.append("=== PENDING TASKS ===\n" + pending)
-
-    # Compose output
-    if briefing_parts:
-        output["message"] = "\n\n".join(briefing_parts)
+    # Compose compact output
+    if parts:
+        output["message"] = "\n".join(parts)
 
     print(json.dumps(output))
 
