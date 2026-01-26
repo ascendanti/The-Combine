@@ -259,6 +259,8 @@ class ContinuousExecutor:
         self.running = False
         self.current_task: Optional[ContinuousTask] = None
         self.last_activity = datetime.now()
+        self._child_processes: Dict[int, subprocess.Popen] = {}
+        self._child_lock = threading.Lock()
         self._tool_registry = {
             "bash": self._tool_bash,
             "read_file": self._tool_read_file,
@@ -570,6 +572,7 @@ class ContinuousExecutor:
 
     def _cleanup(self):
         """Cleanup on exit."""
+        self._terminate_all_children()
         if PID_FILE.exists():
             PID_FILE.unlink()
         self._log_event("daemon_stop", None, {})
@@ -677,20 +680,71 @@ class ContinuousExecutor:
             prompt,
         ]
 
-        # On Windows, suppress console window creation
-        creation_flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+        creation_flags = 0
+        if os.name == "nt":
+            creation_flags |= subprocess.CREATE_NO_WINDOW
+            creation_flags |= subprocess.CREATE_NEW_PROCESS_GROUP
 
-        return subprocess.run(
+        proc = subprocess.Popen(
             cmd,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            timeout=MAX_TASK_DURATION,
             cwd=temp_dir,
             encoding="utf-8",
             errors="replace",
             env=run_env,
             creationflags=creation_flags,
+            start_new_session=(os.name != "nt"),
         )
+        self._register_child_process(proc)
+        try:
+            stdout, stderr = proc.communicate(timeout=MAX_TASK_DURATION)
+        except subprocess.TimeoutExpired:
+            self._terminate_process(proc, reason="timeout")
+            raise
+        finally:
+            self._unregister_child_process(proc)
+
+        return subprocess.CompletedProcess(cmd, proc.returncode, stdout, stderr)
+
+    def _register_child_process(self, proc: subprocess.Popen):
+        with self._child_lock:
+            self._child_processes[proc.pid] = proc
+
+    def _unregister_child_process(self, proc: subprocess.Popen):
+        with self._child_lock:
+            self._child_processes.pop(proc.pid, None)
+
+    def _terminate_process(self, proc: subprocess.Popen, reason: str):
+        if proc.poll() is not None:
+            return
+        logger.warning("Terminating Claude subprocess PID %s due to %s", proc.pid, reason)
+        if os.name == "nt":
+            try:
+                proc.terminate()
+                proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                subprocess.run(
+                    ["taskkill", "/PID", str(proc.pid), "/T", "/F"],
+                    capture_output=True,
+                    text=True,
+                )
+        else:
+            try:
+                os.killpg(proc.pid, signal.SIGTERM)
+            except ProcessLookupError:
+                return
+            try:
+                proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                os.killpg(proc.pid, signal.SIGKILL)
+
+    def _terminate_all_children(self):
+        with self._child_lock:
+            children = list(self._child_processes.values())
+        for proc in children:
+            self._terminate_process(proc, reason="shutdown")
 
     def _extract_json_payload(self, text: str) -> Optional[Dict[str, Any]]:
         """Extract JSON object from model output."""
