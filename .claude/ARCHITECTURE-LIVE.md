@@ -9,9 +9,11 @@
 ```
 SessionStart     → cleanup-mcp.py, session-briefing.py (NOW WITH ARCHITECTURE AWARENESS), self_continue.py
 UserPromptSubmit → deterministic_router.py (NOW WIRED TO orchestrator.fast_classify!)
-PreToolUse       → auto-cache-pre.py
-PostToolUse      → unified-post-tool-tracker.py, post-integration-analyze.py
-Stop             → pool-extractor.py, stop-memory-sync.py, memory-store-stop.py, continuous-learning-stop.py (NOW TRIGGERS emergent.run_emergent_cycle!)
+PreToolUse       → auto-cache-pre.py, pre-create-check.py (Write)
+PostToolUse      → unified-post-tool-tracker.py, post-integration-analyze.py, auto-learn-errors.py (Bash)
+SubagentStart    → subagent-start.js (AGENTICA: 11 multi-agent patterns)
+SubagentStop     → subagent-stop.js (agent completion + pattern coordination)
+Stop             → stop-swarm-coordinator.js, pool-extractor.py, stop-memory-sync.py, memory-store-stop.py, continuous-learning-stop.py, session-end-cleanup-swarms.js
 PreCompact       → pre-compact-handoff.py
 ```
 
@@ -38,6 +40,10 @@ pre-create-check.py        → NEW - PreToolUse hook for Write, surfaces directi
 efficiency_monitor.py      → NEW - Auto-tracks efficiency, alerts on decline (via PostToolUse + Stop hooks)
 unified-post-tool-tracker  → NOW records to efficiency_monitor
 continuous-learning-stop   → NOW runs efficiency analysis at session end
+subagent-start.js          → SubagentStart: Agentica 11-pattern orchestration (swarm, jury, hierarchical, etc.)
+subagent-stop.js           → SubagentStop: agent completion tracking + pattern-specific coordination
+stop-swarm-coordinator.js  → Stop: blocks session end until all swarm agents complete
+session-end-cleanup.js     → Stop: orphan agent cleanup for Agentica patterns
 ```
 
 ### STILL NEEDS WIRING:
@@ -290,8 +296,8 @@ Claude n8n/
 
 ---
 
-**LAST UPDATED:** 2026-01-26 (Session 4 - EFFICIENCY MONITORING)
-**STATUS:** 20 SYSTEMS INTEGRATED. Added automatic efficiency monitoring for emergent development.
+**LAST UPDATED:** 2026-01-26 (Session 5 - AGENTICA MULTI-AGENT WIRING)
+**STATUS:** 24 SYSTEMS INTEGRATED. Added Agentica multi-agent pattern hooks (11 patterns), Windows daemon launcher.
 
 **Recent Additions:**
 - auto-learn-errors.py (PostToolUse for Bash - auto-captures CLI errors)

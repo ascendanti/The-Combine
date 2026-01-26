@@ -138,6 +138,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node .claude/hooks/dist/stop-swarm-coordinator.js 2>nul || echo {\"continue\":true}",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": "python .claude/scripts/pool-extractor.py 2>nul || echo.",
             "timeout": 5
           },
@@ -155,6 +160,11 @@
             "type": "command",
             "command": "python .claude/hooks/continuous-learning-stop.py 2>nul || echo.",
             "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/dist/session-end-cleanup-swarms.js 2>nul || echo {\"continue\":true}",
+            "timeout": 5
           }
         ]
       }
@@ -166,6 +176,28 @@
             "type": "command",
             "command": "python .claude/hooks/pre-compact-handoff.py 2>nul || echo.",
             "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/dist/subagent-start.js 2>nul || echo {\"continue\":true}",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/dist/subagent-stop.js 2>nul || echo {\"continue\":true}",
+            "timeout": 5
           }
         ]
       }
