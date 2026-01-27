@@ -44,6 +44,9 @@ subagent-start.js          → SubagentStart: Agentica 11-pattern orchestration 
 subagent-stop.js           → SubagentStop: agent completion tracking + pattern-specific coordination
 stop-swarm-coordinator.js  → Stop: blocks session end until all swarm agents complete
 session-end-cleanup.js     → Stop: orphan agent cleanup for Agentica patterns
+claude_review_bridge.py    → WIRED: Queues findings for Claude review (feedback_loop → Claude)
+cd-auto-init.py            → PostToolUse (Bash): Auto-init when cd'ing to project
+post-write-auto-index.py   → PostToolUse (Write): Auto-index new files to ARCHITECTURE-LIVE.md
 ```
 
 ### STILL NEEDS WIRING:
@@ -85,6 +88,7 @@ token_monitor.py           → get_current_session_tokens() for efficiency integ
 | `memory.py` | PARTIAL | SQLite persistence | Via memory_router |
 | `emergent.py` | **WIRED** | Pattern detection, task gen, learning | **Via Stop hook (continuous-learning-stop.py)** |
 | `vector_store.py` | UNUSED | Vector embeddings | Via memory_router |
+| `claude_review_bridge.py` | **WIRED** | Queue findings for Claude review | **Via feedback_loop + session-briefing** |
 
 ### STRATEGY & EVOLUTION
 | File | Status | Purpose | Wire Point |
@@ -205,19 +209,59 @@ token_monitor.py           → get_current_session_tokens() for efficiency integ
 
 ---
 
-## Layer 6: Databases (daemon/*.db)
+## Layer 6: Database Consolidation (daemon/consolidated/)
 
-| Database | Purpose | Used By |
-|----------|---------|---------|
-| `strategies.db` | Strategy storage | strategy_evolution |
-| `outcomes.db` | Outcome tracking | outcome_tracker |
-| `memory.db` | Learnings/decisions | memory.py |
-| `coherence.db` | Goal alignment | coherence.py |
-| `decisions.db` | Decision records | decisions.py |
-| `emergent.db` | Patterns/tasks | emergent.py |
-| `metacognition.db` | Self-assessment | metacognition.py |
-| `orchestrator.db` | Routing decisions | orchestrator.py |
-| `tasks.db` | Task queue | task_queue.py |
+**STATUS: 7 consolidated DBs active, 7,243+ rows migrated**
+
+### Consolidated Database Structure
+
+| Consolidated DB | Legacy DBs Merged | Modules Using |
+|-----------------|-------------------|---------------|
+| `learning.db` | strategies, outcomes, decisions, emergent, bisimulation, gcrl | outcome_tracker, decisions, emergent, strategy_evolution, bisim_integration |
+| `execution.db` | tasks, generated_tasks, continuous_executor, approvals | task_queue, continuous_executor, task_generator |
+| `memory.db` | memory, cross_session_memory, handoffs, continue | memory.py, memory_router |
+| `knowledge.db` | utf_knowledge, synthesis, ingest, books | utf_extractor, synthesis modules |
+| `routing.db` | router, orchestrator, context_router, prompt_cache | orchestrator, context_router, model_router |
+| `analytics.db` | analytics, efficiency, token_monitor, tool_tracking, errors | feedback_loop, efficiency_monitor |
+| `integrations.db` | telegram, claude_review_queue, scheduler | telegram_notify, claude_review_bridge |
+
+### How to Access Consolidated DBs
+
+```python
+# In any daemon module:
+from config import get_db
+
+# By category name (recommended)
+db = get_db('learning')     # -> consolidated/learning.db
+db = get_db('execution')    # -> consolidated/execution.db
+
+# Legacy names auto-route
+db = get_db('tasks')        # -> consolidated/execution.db
+db = get_db('outcomes')     # -> consolidated/learning.db
+db = get_db('emergent')     # -> consolidated/learning.db
+```
+
+### Modules Wired to Consolidated DBs
+
+| Module | Consolidated DB | Status |
+|--------|-----------------|--------|
+| `bisim_integration.py` | learning | WIRED |
+| `outcome_tracker.py` | learning | WIRED |
+| `decisions.py` | learning | WIRED |
+| `orchestrator.py` | routing | WIRED |
+| `context_router.py` | routing | WIRED |
+| `continuous_executor.py` | execution | WIRED |
+| `task_queue.py` | execution | WIRED |
+| `memory.py` | memory | WIRED |
+| `emergent.py` | learning | WIRED |
+| `feedback_loop.py` | analytics | WIRED |
+
+### Benefits
+
+- **Single source of truth** - No more scattered DBs
+- **Atomic operations** - Related data in same DB
+- **Easier backups** - 7 files vs 56
+- **Better indexing** - Cross-table queries possible
 
 ---
 
@@ -305,8 +349,19 @@ Claude n8n/
 
 ---
 
-**LAST UPDATED:** 2026-01-26 (Session 5 - AGENTICA MULTI-AGENT WIRING)
-**STATUS:** 24 SYSTEMS INTEGRATED. Added Agentica multi-agent pattern hooks (11 patterns), Windows daemon launcher.
+## Reference Documents (daemon/)
+
+| File | Purpose | Last Updated |
+|------|---------|--------------|
+| `UTF-V2-SPEC.md` | Auto-indexed | 2026-01-27 |
+| `CONTEXT-PERSISTENCE-RESEARCH.md` | Auto-indexed | 2026-01-27 |
+| `FREE-API-MODELS.md` | Free OpenRouter models for fallback/cost optimization | 2026-01-27 |
+| `CLAUDE.md` | Daemon architecture documentation | 2026-01-27 |
+
+---
+
+**LAST UPDATED:** 2026-01-27 (Session 8 - AUTONOMOUS INGEST FIXES + AUTO-INDEXING)
+**STATUS:** 26+ SYSTEMS INTEGRATED. Database consolidation complete (7 DBs, 7,243+ rows). 10 modules wired to consolidated DBs.
 
 **Recent Additions:**
 - auto-learn-errors.py (PostToolUse for Bash - auto-captures CLI errors)
