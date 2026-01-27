@@ -1,0 +1,34 @@
+name: mistral-fast-latency
+backend: llama-cpp
+parameters:
+  model: Mistral-7B-Instruct-v0.3.Q4_K_M.gguf
+  # Latency-first CPU settings
+  threads: 6
+  batch: 64
+  n_batch: 64
+  # Keep context modest to reduce KV cache pressure
+  context_size: 2048
+  # Memory/bandwidth optimizations
+  f16_kv: true
+  mmap: true
+  mlock: true
+  # Disable features not needed for extraction
+  rope_scaling: ""
+  rope_freq_base: 0
+  rope_freq_scale: 0
+
+# Simple template for extraction tasks
+template:
+  completion: "{{.Input}}"
+  chat: "{{.Input}}"
+  chat_message: |-
+    {{if eq .RoleName "user" -}}
+    [INST] {{.Content}} [/INST]
+    {{- else -}}
+    {{.Content}}
+    {{- end -}}
+
+stopwords:
+  - "</s>"
+  - "[/INST]"
+  - "<|im_end|>"
