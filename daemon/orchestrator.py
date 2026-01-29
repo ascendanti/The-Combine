@@ -40,6 +40,19 @@ except ImportError:
     SequentialWorkflow = None
     ConcurrentWorkflow = None
 
+# WIRED (2026-01-28): Token compression for LLM responses
+try:
+    from headroom_optimizer import compress_tool_output
+    HEADROOM_AVAILABLE = True
+except ImportError:
+    HEADROOM_AVAILABLE = False
+
+try:
+    from toonify_optimizer import toonify_data, estimate_savings
+    TOONIFY_AVAILABLE = True
+except ImportError:
+    TOONIFY_AVAILABLE = False
+
 DB_PATH = DAEMON_DIR / "orchestrator.db"
 
 # ============================================================================
@@ -263,11 +276,22 @@ class Orchestrator:
         # Step 6: Check if optimization needed
         self._maybe_optimize()
 
+        # WIRED (2026-01-28): Compress result before returning to save tokens
+        compressed_result = result
+        if HEADROOM_AVAILABLE and isinstance(result, dict) and result.get("response"):
+            try:
+                response_text = result.get("response", "")
+                if len(response_text) > 2000:
+                    compressed = compress_tool_output({"response": response_text}, max_items=20)
+                    compressed_result = {**result, "response": compressed.get("response", response_text)}
+            except Exception:
+                pass  # Keep original on error
+
         return {
             "decision_id": decision_id,
             "classification": classification,
             "strategy": strategy,
-            "result": result,
+            "result": compressed_result,
             "memories": memories,
             "latency_ms": latency
         }

@@ -16,6 +16,7 @@ Features:
 - AST extraction for WARM tier
 
 WIRING (2026-01-26): Integrated into PreToolUse hook for auto-cache.
+WIRING (2026-01-28): Added headroom compression for WARM tier content.
 """
 
 import json
@@ -26,6 +27,17 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, asdict
 import re
+import sys
+
+# Ensure daemon is in path
+sys.path.insert(0, str(Path(__file__).parent))
+
+# WIRED (2026-01-28): Token compression for WARM tier
+try:
+    from headroom_optimizer import compress_tool_output
+    HEADROOM_AVAILABLE = True
+except ImportError:
+    HEADROOM_AVAILABLE = False
 
 DB_PATH = Path(__file__).parent / "context_router.db"
 
@@ -281,15 +293,26 @@ class ContextRouter:
 
             # Extract based on file type
             if path.endswith('.py'):
-                return self._extract_python_signatures(content, path)
+                extracted = self._extract_python_signatures(content, path)
             elif path.endswith(('.js', '.ts', '.tsx')):
-                return self._extract_js_signatures(content, path)
+                extracted = self._extract_js_signatures(content, path)
             elif path.endswith('.md'):
-                return self._extract_markdown_headers(content, path)
+                extracted = self._extract_markdown_headers(content, path)
             else:
                 # Generic: first 50 lines
                 lines = content.split('\n')[:50]
-                return f"[WARM: {path}]\n" + '\n'.join(lines)
+                extracted = f"[WARM: {path}]\n" + '\n'.join(lines)
+
+            # WIRED (2026-01-28): Apply headroom compression if content still large
+            if HEADROOM_AVAILABLE and len(extracted) > 3000:
+                try:
+                    compressed = compress_tool_output({"content": extracted}, max_items=25)
+                    if isinstance(compressed, dict) and "content" in compressed:
+                        return compressed["content"]
+                except Exception:
+                    pass
+
+            return extracted
 
         except:
             return f"[WARM: {path} - unavailable]"

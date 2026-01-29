@@ -66,6 +66,19 @@ except ImportError:
     FEEDBACK_BRIDGE_AVAILABLE = False
     FeedbackBridge = None
 
+# WIRED (2026-01-28): Token compression for task outputs
+try:
+    from headroom_optimizer import compress_tool_output
+    HEADROOM_AVAILABLE = True
+except ImportError:
+    HEADROOM_AVAILABLE = False
+
+try:
+    from toonify_optimizer import toonify_data, estimate_savings
+    TOONIFY_AVAILABLE = True
+except ImportError:
+    TOONIFY_AVAILABLE = False
+
 
 # =============================================================================
 # UNIFIED SPINE
@@ -182,14 +195,20 @@ class UnifiedSpine:
                 if self.router.localai.available():
                     result = self.router.route(task=task.prompt, content="", force_provider="localai")
                     if result.get("response"):
-                        return True, result["response"]
+                        response = result["response"]
+                        # WIRED (2026-01-28): Compress large responses
+                        response = self._compress_output(response)
+                        return True, response
 
             # Codex (cheap)
             if route == "codex":
                 if self.router.openai_client.available():
                     result = self.router.route(task=task.prompt, content="", force_provider="codex")
                     if result.get("response"):
-                        return True, result["response"]
+                        response = result["response"]
+                        # WIRED (2026-01-28): Compress large responses
+                        response = self._compress_output(response)
+                        return True, response
 
             # Claude (complex reasoning)
             # Return None to signal external execution needed
@@ -198,6 +217,35 @@ class UnifiedSpine:
         except Exception as e:
             logger.error(f"Execution error: {e}")
             return False, str(e)
+
+    def _compress_output(self, output: str) -> str:
+        """WIRED (2026-01-28): Compress large outputs to save tokens."""
+        if not output or len(output) < 2000:
+            return output
+
+        # Try headroom compression first (smarter, keeps important content)
+        if HEADROOM_AVAILABLE:
+            try:
+                compressed = compress_tool_output({"content": output}, max_items=20)
+                if isinstance(compressed, dict) and "content" in compressed:
+                    return compressed["content"]
+            except Exception:
+                pass
+
+        # Fallback: toonify for structured data
+        if TOONIFY_AVAILABLE:
+            try:
+                # Check if output looks like JSON
+                import json
+                if output.strip().startswith('{') or output.strip().startswith('['):
+                    parsed = json.loads(output)
+                    result = estimate_savings(parsed)
+                    if result.savings_pct >= 30:
+                        return result.toon_str
+            except (json.JSONDecodeError, Exception):
+                pass
+
+        return output
 
     def record_mape_feedback(self, task_id: str, success: bool, metrics: dict = None):
         """
