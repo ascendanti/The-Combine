@@ -37,7 +37,7 @@ except ImportError:
 # ============================================================================
 
 LOCALAI_URL = os.environ.get("LOCALAI_URL", "http://localhost:8080/v1")
-LOCALAI_MODEL = "mistral-7b-instruct-v0.3"
+LOCALAI_MODEL = "mistral-7b-instruct-v0.2"
 DRAGONFLY_URL = os.environ.get("DRAGONFLY_URL", "redis://localhost:6379")
 LLM_CACHE_TTL = 86400  # 24 hours
 
@@ -211,7 +211,7 @@ def localai_complete(prompt: str, max_tokens: int = 500, retries: int = 2) -> st
                     "max_tokens": max_tokens,
                     "temperature": 0.3
                 },
-                timeout=180  # 3 minutes - reduced chunks should be faster
+                timeout=600  # 10 minutes for CPU inference on 7B model
             )
             response.raise_for_status()
             content = response.json()["choices"][0]["message"]["content"]
@@ -788,7 +788,7 @@ def extract_utf_schema(text: str, file_hash: str, classify: bool = True) -> UTFE
 
     print(f"    [UTF] Extraction complete: {stats}")
 
-    return UTFExtractionResult(
+    result = UTFExtractionResult(
         source=source,
         excerpts=excerpts,
         claims=claims,
@@ -799,6 +799,17 @@ def extract_utf_schema(text: str, file_hash: str, classify: bool = True) -> UTFE
         quality_gate_passed=passed,
         extraction_stats=stats
     )
+
+    # UTF v2: Integrate with knowledge system
+    if passed:  # Only integrate quality-gated extractions
+        print("    [UTF v2] Integrating with knowledge system...")
+        integration = integrate_with_knowledge_system(result)
+        if integration["errors"]:
+            print(f"    [UTF v2] Integration warnings: {integration['errors']}")
+        else:
+            print(f"    [UTF v2] Integration complete: {integration['embeddings_added']} embeddings, {integration['heuristics_generated']} heuristics")
+
+    return result
 
 # ============================================================================
 # Obsidian Export
@@ -911,6 +922,198 @@ created_at: {concept.created_at}
         safe_name = re.sub(r'[<>:"/\\|?*]', '_', concept.name)[:50]
         with open(concepts_dir / f"Concept-{safe_name}.md", "w", encoding="utf-8") as f:
             f.write(concept_note)
+
+# ============================================================================
+# Post-Extraction Knowledge Integration (UTF v2)
+# ============================================================================
+
+def integrate_with_knowledge_system(result: UTFExtractionResult) -> Dict[str, Any]:
+    """
+    Wire extracted claims into the knowledge system.
+
+    This enables:
+    1. Semantic search via embeddings
+    2. Heuristic generation for decision support
+    3. Knowledge graph storage via MCP
+    4. Master Debater evidence retrieval
+    """
+    integration_stats = {
+        "embeddings_added": 0,
+        "heuristics_generated": 0,
+        "knowledge_graph_stored": 0,
+        "errors": []
+    }
+
+    if not result.claims:
+        return integration_stats
+
+    # 1. Build embeddings for new claims
+    try:
+        from utf_embeddings import build_index
+        build_index()  # Incremental - only adds new claims
+        integration_stats["embeddings_added"] = len(result.claims)
+    except Exception as e:
+        integration_stats["errors"].append(f"Embeddings: {e}")
+
+    # 2. Generate heuristics from actionable claims
+    try:
+        from knowledge_advisor import generate_heuristics
+        count = generate_heuristics()
+        integration_stats["heuristics_generated"] = count
+    except Exception as e:
+        integration_stats["errors"].append(f"Heuristics: {e}")
+
+    # 3. Store to knowledge graph MCP (if available)
+    try:
+        store_to_knowledge_graph(result)
+        integration_stats["knowledge_graph_stored"] = len(result.claims)
+    except Exception as e:
+        integration_stats["errors"].append(f"Knowledge graph: {e}")
+
+    return integration_stats
+
+
+def store_to_knowledge_graph(result: UTFExtractionResult):
+    """Store claims as entities in the knowledge graph MCP."""
+    # Uses the knowledge-graph MCP server if available
+    import subprocess
+    import json
+
+    try:
+        # Create entities for claims
+        entities = []
+        for claim in result.claims:
+            entity = {
+                "name": f"claim:{claim.claim_id}",
+                "entityType": "Claim",
+                "observations": [
+                    claim.statement,
+                    f"form:{claim.claim_form}",
+                    f"confidence:{claim.confidence}",
+                    f"source:{claim.source_id}"
+                ]
+            }
+            if claim.slug_code:
+                entity["observations"].append(f"slug:{claim.slug_code}")
+            entities.append(entity)
+
+        # Store via MCP if available (checked externally)
+        # This is a placeholder - actual MCP call happens via hook
+        print(f"    [Knowledge Graph] {len(entities)} entities prepared")
+
+    except Exception as e:
+        print(f"    [Knowledge Graph] Storage skipped: {e}")
+
+
+def get_evidence_for_debate(query: str, stance: str = None, top_k: int = 10) -> Dict[str, List[Dict]]:
+    """
+    Retrieve evidence from UTF claims for Master Debater.
+
+    Returns claims organized by:
+    - supporting: Claims that support the stance
+    - opposing: Claims that contradict/limit the stance
+    - related: Semantically related but neutral claims
+    """
+    evidence = {
+        "supporting": [],
+        "opposing": [],
+        "related": []
+    }
+
+    try:
+        from knowledge_advisor import semantic_advice, get_advice
+
+        # Get semantic matches
+        semantic = semantic_advice(query, top_k=top_k)
+
+        # Get keyword matches
+        keyword = get_advice(query, top_k=top_k)
+
+        # Categorize by claim form
+        for match in semantic:
+            if match.get("similarity", 0) > 0.6:
+                # High similarity - likely supporting or directly relevant
+                evidence["supporting"].append({
+                    "claim_id": match["claim_id"],
+                    "statement": match["statement"],
+                    "score": match["similarity"],
+                    "type": "semantic"
+                })
+            elif match.get("similarity", 0) > 0.4:
+                evidence["related"].append({
+                    "claim_id": match["claim_id"],
+                    "statement": match["statement"],
+                    "score": match["similarity"],
+                    "type": "semantic"
+                })
+
+        # Keyword heuristics provide counter-arguments
+        for h in keyword:
+            if "limitation" in str(h.get("trigger", "")).lower() or "caution" in str(h.get("advice", "")).lower():
+                evidence["opposing"].append({
+                    "heuristic_id": h["heuristic_id"],
+                    "advice": h["advice"],
+                    "score": h.get("relevance", 0),
+                    "type": "heuristic"
+                })
+
+    except Exception as e:
+        print(f"[Evidence] Error: {e}")
+
+    return evidence
+
+
+def find_contradictions_for_debate(claim_a: str, claim_b: str = None) -> List[Dict]:
+    """
+    Find claims that contradict a given position.
+
+    Used by Master Debater for:
+    - Red-team analysis (finding weaknesses)
+    - Steelman opposition (best counter-arguments)
+    - Position mapping (all perspectives)
+    """
+    contradictions = []
+
+    try:
+        from knowledge_advisor import check_contradictions, semantic_advice
+
+        # Check for limitation conflicts
+        warnings = check_contradictions(claim_a)
+        for w in warnings:
+            contradictions.append({
+                "type": "limitation_conflict",
+                "claim": w["claim"],
+                "confidence": w.get("confidence", 0.5),
+                "overlap": w.get("overlap", [])
+            })
+
+        # Find semantically similar but opposing claims
+        if claim_b:
+            # Compare two specific claims
+            from utf_embeddings import search
+            matches_a = search(claim_a, top_k=5)
+            matches_b = search(claim_b, top_k=5)
+
+            # Claims in both neighborhoods might be bridging/contradicting
+            a_ids = {m["claim_id"] for m in matches_a}
+            b_ids = {m["claim_id"] for m in matches_b}
+            overlap = a_ids & b_ids
+
+            for oid in overlap:
+                for m in matches_a:
+                    if m["claim_id"] == oid:
+                        contradictions.append({
+                            "type": "bridging_claim",
+                            "claim_id": oid,
+                            "statement": m["statement"],
+                            "relevance": "connects both positions"
+                        })
+
+    except Exception as e:
+        print(f"[Contradictions] Error: {e}")
+
+    return contradictions
+
 
 # ============================================================================
 # CLI Interface

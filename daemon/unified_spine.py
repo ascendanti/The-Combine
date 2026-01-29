@@ -128,6 +128,12 @@ class UnifiedSpine:
 
         # 3. Process pending tasks
         pending = self.task_queue.get_pending_tasks(limit=5)
+        # WIRED 2026-01-28: Get active strategy for feedback loop
+        active_strategies = self.strategy_evolver.get_active_strategies()
+        strategy_context = ""
+        if active_strategies:
+            strategy_context = f" strategy={active_strategies[0].name}"
+
         for task in pending:
             # Route via LocalAI (FREE classification)
             routing = route_request(task.prompt, use_localai=False)
@@ -140,17 +146,20 @@ class UnifiedSpine:
             # Execute based on route
             success, output = self._execute_routed_task(task, route)
 
+            # Build context with strategy info for feedback loop
+            outcome_context = f"{str(output)[:400]}{strategy_context}"
+
             if success:
                 self.task_queue.mark_completed(task.id, output)
                 record_outcome(decision_id, "success")
-                track_outcome(task.prompt, "success", context=str(output)[:500])
+                track_outcome(task.prompt, "success", context=outcome_context)
                 self.record_mape_feedback(task.id, True)  # WIRED: MAPE feedback
                 results["tasks_executed"] += 1
                 results["outcomes_recorded"] += 1
             else:
                 self.task_queue.mark_failed(task.id, output)
                 record_outcome(decision_id, "failure")
-                track_outcome(task.prompt, "failure", context=str(output)[:500])
+                track_outcome(task.prompt, "failure", context=outcome_context)
                 self.record_mape_feedback(task.id, False)  # WIRED: MAPE feedback
 
         return results

@@ -22,16 +22,17 @@ services:
       retries: 3
 
   localai:
-    image: localai/localai:latest
+    image: localai/localai:latest-cpu
     container_name: localai
     ports:
       - "8080:8080"
     volumes:
-      - localai_models:/models
+      - ./daemon/models:/models
     environment:
       - THREADS=10
       - CONTEXT_SIZE=2048
-      - DEBUG=false
+      - DEBUG=true
+      - MODELS_PATH=/models
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
@@ -92,6 +93,7 @@ services:
       - OBSIDIAN_VAULT=/obsidian
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     depends_on:
       localai:
         condition: service_healthy

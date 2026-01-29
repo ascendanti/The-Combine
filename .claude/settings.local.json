@@ -52,6 +52,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python .claude/hooks/telegram-inbox.py --hook 2>nul || echo.",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": "python .claude/hooks/cleanup-mcp.py 2>nul || echo.",
             "timeout": 5
           },
@@ -88,6 +93,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python .claude/hooks/utf-query-injection.py 2>nul || echo.",
+            "timeout": 3
+          },
+          {
+            "type": "command",
             "command": "python daemon/deterministic_router.py route 2>nul || echo.",
             "timeout": 3
           }
@@ -95,6 +105,16 @@
       }
     ],
     "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/utf-context-filter.py 2>nul || echo.",
+            "timeout": 3
+          }
+        ]
+      },
       {
         "matcher": "Read|Grep|Glob",
         "hooks": [
@@ -127,6 +147,16 @@
       }
     ],
     "PostToolUse": [
+      {
+        "matcher": "TaskCreate",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/task-sync-post.py 2>nul || echo.",
+            "timeout": 2
+          }
+        ]
+      },
       {
         "matcher": "Read|Grep|Glob|Edit|Write",
         "hooks": [
@@ -235,7 +265,8 @@
     "sequential-thinking",
     "memory",
     "context7",
-    "dragonfly-cache"
+    "dragonfly-cache",
+    "utf-knowledge"
   ],
   "enableAllProjectMcpServers": true
 }

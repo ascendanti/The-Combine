@@ -1,0 +1,6 @@
+name: mistral-7b-instruct-v0.2
+backend: llama-cpp
+parameters:
+  model: mistral-7b-instruct-v0.2.Q4_K_M.gguf
+  threads: 10
+  context_size: 2048

@@ -155,7 +155,62 @@ def record_outcome(
     # Update patterns
     update_patterns(action)
 
+    # WIRED 2026-01-28: Update strategy fitness if strategy was used
+    _update_strategy_feedback(action, result, context, duration_ms, tokens_used)
+
     return outcome.outcome_id
+
+
+def _update_strategy_feedback(action: str, result: str, context: str, duration_ms: int, tokens_used: int):
+    """Update strategy fitness based on outcome.
+
+    WIRED: Closes the feedback loop between outcomes and strategy evolution.
+    """
+    try:
+        from strategy_evolution import record_performance, get_strategy, evolve_strategies
+
+        # Check if action contains strategy reference (e.g., "strategy:optimize_queries")
+        strategy_name = None
+        if action.startswith("strategy:"):
+            strategy_name = action.replace("strategy:", "")
+        elif "strategy=" in context:
+            # Extract from context like "strategy=optimize_queries"
+            import re
+            match = re.search(r'strategy=(\w+)', context)
+            if match:
+                strategy_name = match.group(1)
+
+        if strategy_name:
+            # Map result to quality score
+            quality_map = {"success": 1.0, "partial": 0.5, "failure": 0.0}
+            quality = quality_map.get(result, 0.5)
+
+            record_performance(
+                strategy_name=strategy_name,
+                result=result,
+                context=context[:500],
+                duration_ms=duration_ms,
+                tokens_used=tokens_used,
+                quality_score=quality
+            )
+
+            # Check if evolution should be triggered (every 10 outcomes)
+            from strategy_evolution import DB_PATH as STRATEGY_DB
+            import sqlite3
+            conn = sqlite3.connect(STRATEGY_DB)
+            c = conn.cursor()
+            c.execute('SELECT COUNT(*) FROM performance')
+            perf_count = c.fetchone()[0]
+            conn.close()
+
+            if perf_count > 0 and perf_count % 10 == 0:
+                # Trigger evolution
+                evolve_strategies(generation=1, population_size=3)
+
+    except ImportError:
+        pass  # strategy_evolution not available
+    except Exception:
+        pass  # Don't fail outcome recording if strategy update fails
 
 
 def update_patterns(action: str):

@@ -14,6 +14,7 @@ Based on:
 """
 
 import os
+import sys
 import json
 import sqlite3
 from datetime import datetime, timedelta
@@ -21,6 +22,10 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, asdict
 from collections import defaultdict
+
+# Ensure daemon directory is in path for imports
+DAEMON_DIR = Path(__file__).parent
+sys.path.insert(0, str(DAEMON_DIR))
 
 # Database paths
 DB_PATH = Path(__file__).parent / "emergent.db"
@@ -361,7 +366,8 @@ Steps:
 
 
 def store_generated_task(task: GeneratedTask):
-    """Store a generated task."""
+    """Store a generated task and push to execution queue."""
+    # Store in emergent.db for tracking
     conn = init_db()
     c = conn.cursor()
 
@@ -375,6 +381,27 @@ def store_generated_task(task: GeneratedTask):
 
     conn.commit()
     conn.close()
+
+    # WIRED 2026-01-28: Also push to task_generator's queue for execution
+    try:
+        from task_generator import add_generated_task
+        # Map priority strings to numbers (1=highest)
+        pri_map = {"urgent": 1, "high": 2, "medium": 3, "low": 4}
+        add_generated_task(
+            category=task.category,
+            title=task.title,
+            description=task.description,
+            rationale=f"Emergent pattern: {task.source_pattern}",
+            priority=pri_map.get(task.priority, 3),
+            effort="medium",
+            source="emergent"
+        )
+    except ImportError:
+        pass  # task_generator not available
+    except Exception as e:
+        # Don't fail if task_generator has issues
+        import logging
+        logging.getLogger(__name__).debug(f"Failed to push to task_generator: {e}")
 
 
 def get_pending_generated_tasks() -> List[Dict]:

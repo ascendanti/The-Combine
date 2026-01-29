@@ -1,7 +1,7 @@
 name: mistral-optimized
 backend: llama-cpp
 parameters:
-  model: Mistral-7B-Instruct-v0.3.Q4_K_M.gguf
+  model: mistral-7b-instruct-v0.2.Q4_K_M.gguf
   # CPU optimization settings
   threads: 10
   batch: 512

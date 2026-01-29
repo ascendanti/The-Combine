@@ -129,6 +129,43 @@ def check_dependencies():
     return len(missing) == 0
 
 
+def init_unified_spine():
+    """Initialize UnifiedSpine - the backbone coordinator.
+
+    WIRED: 2026-01-28 - Connects:
+    - TaskQueue (tasks.db)
+    - LocalAI AutoRouter
+    - ModelRouter
+    - OutcomeTracker
+    - StrategyEvolver
+    - FeedbackBridge (MAPE controller)
+    """
+    print("  Initializing UnifiedSpine...")
+
+    try:
+        from unified_spine import UnifiedSpine
+
+        # Instantiate - this wires all systems together
+        spine = UnifiedSpine()
+
+        # Get status to verify connections
+        status = spine.get_status()
+
+        pending = status.get('task_queue', {}).get('pending', 0)
+        strategies = status.get('strategies', {}).get('active', 0)
+        localai = status.get('routing', {}).get('localai_available', False)
+
+        print(f"    Tasks: {pending} pending")
+        print(f"    Strategies: {strategies} active")
+        print(f"    LocalAI: {'available' if localai else 'unavailable'}")
+        print(f"  UnifiedSpine: Connected")
+
+        return True
+    except Exception as e:
+        print(f"  UnifiedSpine error: {e}")
+        return False
+
+
 def main():
     """Run full initialization."""
     print("=" * 50)
@@ -140,6 +177,7 @@ def main():
         'analytics': init_analytics(),
         'playbooks': validate_playbooks(),
         'dependencies': check_dependencies(),
+        'unified_spine': init_unified_spine(),  # WIRED: 2026-01-28
     }
 
     success = all(results.values())

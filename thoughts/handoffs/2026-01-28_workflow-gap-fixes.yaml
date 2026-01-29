@@ -1,0 +1,88 @@
+session_id: workflow-gap-fixes-2026-01-28
+created: 2026-01-28T15:00:00Z
+status: complete
+
+summary: |
+  Fixed top 5 critical workflow gaps identified by scout agent analysis.
+  System now has complete wiring for autonomous operation.
+
+completed:
+  1. Enable UTF-Knowledge MCP Server:
+     - Added "utf-knowledge" to enabledMcpjsonServers in settings.local.json
+     - MCP server provides 4 tools: search_claims, get_evidence, neighbors, semantic_search
+     - 195 claims with embeddings now accessible
+
+  2. Wire Unified Spine to SessionStart:
+     - Added init_unified_spine() function to daemon/init_spine.py
+     - UnifiedSpine now instantiated on every session start
+     - Connects: TaskQueue, LocalAI AutoRouter, ModelRouter, OutcomeTracker, StrategyEvolver, FeedbackBridge
+     - Verified: LocalAI available, all systems connected
+
+  3. Connect Task Generator to Execution Loop:
+     - Verified already wired (completed in previous sprint)
+     - continuous_executor._ensure_queue_filled() auto-approves tasks
+     - continuous_executor._run_background_tasks() generates from detectors
+     - Stats: 816 completed, 574 completions in last hour
+
+  4. Connect Emergent Patterns to Task Generation:
+     - Added sys.path setup to emergent.py for imports
+     - Modified store_generated_task() to also push to task_generator queue
+     - Tasks now flow: emergent.py -> generated_tasks.db -> TaskQueue -> continuous_executor
+     - Verified: emergent tasks appear in task_generator queue with source='emergent'
+
+  5. Wire Strategy Evolution Feedback Loop:
+     - Added _update_strategy_feedback() to outcome_tracker.py
+     - Extracts strategy from context (strategy=<name> pattern)
+     - Calls strategy_evolution.record_performance() to update fitness
+     - Triggers evolve_strategies() every 10 outcomes
+     - Modified unified_spine.py to include strategy context in track_outcome calls
+     - Verified: fitness updates (0.9992 -> 0.8339), 6 evolved strategies created
+
+key_files_modified:
+  - .claude/settings.local.json (utf-knowledge enabled)
+  - daemon/init_spine.py (init_unified_spine added)
+  - daemon/emergent.py (sys.path + task_generator wiring)
+  - daemon/outcome_tracker.py (_update_strategy_feedback added)
+  - daemon/unified_spine.py (strategy context in outcomes)
+
+verification_results:
+  init_spine:
+    - Map: 3504 files indexed
+    - Analytics: Ready
+    - Playbooks: 4 valid
+    - Dependencies: All present
+    - UnifiedSpine: Connected
+    - LocalAI: available
+
+  continuous_executor:
+    running: true
+    pid: 3160
+    tasks:
+      complete: 816
+      failed: 21
+      pending: 6
+    last_hour:
+      task_start: 718
+      task_complete: 574
+      task_timeout: 2
+
+  strategy_evolution:
+    performance_records: 13
+    fitness_updating: true
+    evolution_triggered: true
+    evolved_strategies: 6
+
+remaining_gaps:
+  - Database Consolidation (20 modules still use old paths)
+  - Knowledge Advisor Feedback Loop (advice_id tracking)
+  - Context Router for Grep/Glob (only Read uses tiering)
+  - Master Debater UTF Evidence (not wired to skills)
+
+next_priorities:
+  1. Monitor autonomous execution (continuous_executor)
+  2. Run emergent cycle periodically (generates tasks from patterns)
+  3. Review evolved strategies for quality
+  4. Continue with lower-priority gap fixes
+
+sprint_status: COMPLETE
+tasks_completed: 5
