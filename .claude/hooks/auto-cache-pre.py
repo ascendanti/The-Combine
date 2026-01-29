@@ -38,6 +38,14 @@ except ImportError:
     CONTEXT_ROUTER_AVAILABLE = False
     ContextRouter = None
 
+# WIRED (2026-01-28): Token compression for Grep/Glob results
+try:
+    from headroom_optimizer import compress_search_results
+    HEADROOM_AVAILABLE = True
+except ImportError:
+    HEADROOM_AVAILABLE = False
+    compress_search_results = None
+
 # Tools to check cache for
 CACHEABLE_TOOLS = {"Read", "Grep", "Glob"}
 
@@ -117,6 +125,19 @@ def main():
         # Cache hit!
         cached_result = cached.get("result", "")
         cached_size = len(cached_result)
+
+        # WIRED (2026-01-28): Compress large Grep/Glob results
+        if tool_name in {"Grep", "Glob"} and HEADROOM_AVAILABLE and cached_size > 3000:
+            try:
+                import json as json_mod
+                # Try to parse as JSON for structured compression
+                if cached_result.strip().startswith(('[', '{')):
+                    parsed = json_mod.loads(cached_result)
+                    compressed = compress_search_results(parsed, max_results=20)
+                    cached_result = json_mod.dumps(compressed) if isinstance(compressed, (dict, list)) else str(compressed)
+                    cached_size = len(cached_result)
+            except Exception:
+                pass  # Keep original on error
 
         if cached_size > 2000:
             # Large cache - suggest retrieval

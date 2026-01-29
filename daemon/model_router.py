@@ -40,6 +40,14 @@ try:
 except ImportError:
     REDIS_AVAILABLE = False
 
+# WIRED (2026-01-28): Token compression for context building
+try:
+    from headroom_optimizer import compress_tool_output
+    HEADROOM_AVAILABLE = True
+except ImportError:
+    HEADROOM_AVAILABLE = False
+    compress_tool_output = None
+
 ROUTER_DB = Path(__file__).parent / "router.db"
 
 # ============================================================================
@@ -240,6 +248,15 @@ class ContextBuilder:
               recall_items: List[str] = None,
               recent_files: List[str] = None) -> Dict[str, Any]:
         """Build optimized context."""
+
+        # WIRED (2026-01-28): Compress large content before building context
+        if HEADROOM_AVAILABLE and len(content) > 5000:
+            try:
+                compressed = compress_tool_output({"content": content}, max_items=30)
+                if isinstance(compressed, dict) and "content" in compressed:
+                    content = compressed["content"]
+            except Exception:
+                pass  # Keep original on error
 
         context = {
             "task": task,

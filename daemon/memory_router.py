@@ -43,6 +43,14 @@ except ImportError:
     EMBEDDINGS_AVAILABLE = False
     _embedding_model = None
 
+# WIRED (2026-01-28): Token compression for cached results
+try:
+    from headroom_optimizer import compress_search_results
+    HEADROOM_AVAILABLE = True
+except ImportError:
+    HEADROOM_AVAILABLE = False
+    compress_search_results = None
+
 
 def _get_embedding_model():
     """Lazy load embedding model."""
@@ -228,7 +236,15 @@ class MemoryRouter:
         if not self._cache:
             return
         try:
-            self._cache.setex(key, ttl, json.dumps(results))
+            # WIRED (2026-01-28): Compress large result sets before caching
+            cache_data = results
+            if HEADROOM_AVAILABLE and len(results) > 15:
+                try:
+                    cache_data = compress_search_results(results, max_results=20)
+                except Exception:
+                    pass  # Keep original on compression error
+
+            self._cache.setex(key, ttl, json.dumps(cache_data))
             # Store metadata for semantic matching
             if query:
                 meta_key = f"{key}:meta"
