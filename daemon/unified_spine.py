@@ -13,11 +13,9 @@ Architecture:
 WIRING (2026-01-26): Now callable from hooks via absolute imports.
 """
 
-import sqlite3
 import sys
 from pathlib import Path
-from datetime import datetime
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any
 import logging
 
 DAEMON_DIR = Path(__file__).parent
@@ -26,41 +24,57 @@ DAEMON_DIR = Path(__file__).parent
 sys.path.insert(0, str(DAEMON_DIR))
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 # =============================================================================
 # MANDATORY IMPORTS - NO TRY/EXCEPT, FIX IF BROKEN
 # =============================================================================
 
-from task_queue import TaskQueue, TaskStatus, TaskPriority
-from local_autorouter import route_request, record_outcome, get_best_agent
+from task_queue import TaskQueue, TaskPriority
+from local_autorouter import route_request, record_outcome
 from model_router import ModelRouter
-from outcome_tracker import record_outcome as track_outcome, get_stats as outcome_stats
-from execution_spine import ExecutionSpine, RetrievalPolicy
+from outcome_tracker import record_outcome as track_outcome
+from execution_spine import RetrievalPolicy
 
 # These might not exist yet - create stubs if needed
 try:
     from task_generator import generate_from_strategies, get_pending_generated
 except ImportError:
-    def generate_from_strategies(): return []
-    def get_pending_generated(): return []
+
+    def generate_from_strategies():
+        return []
+
+    def get_pending_generated():
+        return []
+
 
 try:
     from strategy_evolution import StrategyEvolver
 except ImportError:
+
     class StrategyEvolver:
-        def get_active_strategies(self): return []
+        def get_active_strategies(self):
+            return []
+
 
 try:
     from self_continue import check_pending_handoff, resume_from_handoff
 except ImportError:
-    def check_pending_handoff(): return None
-    def resume_from_handoff(h): pass
+
+    def check_pending_handoff():
+        return None
+
+    def resume_from_handoff(h):
+        pass
+
 
 # WIRED: MAPE controller bridge for adaptive decision-making
 try:
     from feedback_bridge import FeedbackBridge
+
     FEEDBACK_BRIDGE_AVAILABLE = True
 except ImportError:
     FEEDBACK_BRIDGE_AVAILABLE = False
@@ -69,12 +83,14 @@ except ImportError:
 # WIRED (2026-01-28): Token compression for task outputs
 try:
     from headroom_optimizer import compress_tool_output
+
     HEADROOM_AVAILABLE = True
 except ImportError:
     HEADROOM_AVAILABLE = False
 
 try:
     from toonify_optimizer import toonify_data, estimate_savings
+
     TOONIFY_AVAILABLE = True
 except ImportError:
     TOONIFY_AVAILABLE = False
@@ -83,6 +99,7 @@ except ImportError:
 # =============================================================================
 # UNIFIED SPINE
 # =============================================================================
+
 
 class UnifiedSpine:
     """
@@ -123,7 +140,7 @@ class UnifiedSpine:
             "tasks_generated": 0,
             "tasks_routed": 0,
             "tasks_executed": 0,
-            "outcomes_recorded": 0
+            "outcomes_recorded": 0,
         }
 
         # 1. Check for pending handoffs
@@ -167,6 +184,7 @@ class UnifiedSpine:
                 record_outcome(decision_id, "success")
                 track_outcome(task.prompt, "success", context=outcome_context)
                 self.record_mape_feedback(task.id, True)  # WIRED: MAPE feedback
+                self._notify_clawdbot(task.id, output, True)  # WIRED: Clawdbot webhook
                 results["tasks_executed"] += 1
                 results["outcomes_recorded"] += 1
             else:
@@ -174,6 +192,7 @@ class UnifiedSpine:
                 record_outcome(decision_id, "failure")
                 track_outcome(task.prompt, "failure", context=outcome_context)
                 self.record_mape_feedback(task.id, False)  # WIRED: MAPE feedback
+                self._notify_clawdbot(task.id, output, False)  # WIRED: Clawdbot webhook
 
         return results
 
@@ -193,7 +212,9 @@ class UnifiedSpine:
             # LocalAI (FREE)
             if route == "localai":
                 if self.router.localai.available():
-                    result = self.router.route(task=task.prompt, content="", force_provider="localai")
+                    result = self.router.route(
+                        task=task.prompt, content="", force_provider="localai"
+                    )
                     if result.get("response"):
                         response = result["response"]
                         # WIRED (2026-01-28): Compress large responses
@@ -203,7 +224,9 @@ class UnifiedSpine:
             # Codex (cheap)
             if route == "codex":
                 if self.router.openai_client.available():
-                    result = self.router.route(task=task.prompt, content="", force_provider="codex")
+                    result = self.router.route(
+                        task=task.prompt, content="", force_provider="codex"
+                    )
                     if result.get("response"):
                         response = result["response"]
                         # WIRED (2026-01-28): Compress large responses
@@ -237,7 +260,8 @@ class UnifiedSpine:
             try:
                 # Check if output looks like JSON
                 import json
-                if output.strip().startswith('{') or output.strip().startswith('['):
+
+                if output.strip().startswith("{") or output.strip().startswith("["):
                     parsed = json.loads(output)
                     result = estimate_savings(parsed)
                     if result.savings_pct >= 30:
@@ -265,13 +289,37 @@ class UnifiedSpine:
             metric = Metric(
                 type=MetricType.COMPREHENSION,
                 value=comprehension,
-                context={"task_id": task_id, "success": success}
+                context={"task_id": task_id, "success": success},
             )
 
             self.feedback_bridge.controller.monitor([metric])
             logger.info(f"MAPE feedback recorded for task {task_id[:8]}")
         except Exception as e:
             logger.warning(f"MAPE feedback failed: {e}")
+
+    def _notify_clawdbot(self, task_id: str, result: str, success: bool):
+        """
+        WIRED: Notify Clawdbot supervisor when a task completes.
+
+        This webhook enables Clawdbot to:
+        - Track task outcomes across Atlas sessions
+        - Provide oversight and intervention when needed
+        - Aggregate metrics for the supervisor dashboard
+        """
+        if not self.router.clawdbot:
+            return
+
+        try:
+            notified = self.router.clawdbot.notify_task_complete(
+                task_id=task_id,
+                result=str(result),
+                success=success
+            )
+            if notified:
+                logger.info(f"Clawdbot notified for task {task_id[:8]}")
+        except Exception as e:
+            # Non-critical - don't fail the task on webhook error
+            logger.debug(f"Clawdbot notification failed: {e}")
 
     def get_status(self) -> Dict[str, Any]:
         """Get current spine status."""
@@ -288,14 +336,16 @@ class UnifiedSpine:
             },
             "routing": {
                 "localai_available": self.router.localai.available(),
-                "openai_available": self.router.openai_client.available()
-            }
+                "openai_available": self.router.openai_client.available(),
+                "clawdbot_available": self.router.clawdbot.available() if self.router.clawdbot else False,
+            },
         }
 
 
 # =============================================================================
 # DAEMON MODE
 # =============================================================================
+
 
 def run_daemon(interval_seconds: int = 60):
     """Run the unified spine as a daemon."""
@@ -304,6 +354,7 @@ def run_daemon(interval_seconds: int = 60):
     logger.info(f"UnifiedSpine daemon starting (interval: {interval_seconds}s)")
 
     import time
+
     while True:
         try:
             results = spine.run_cycle()
@@ -320,6 +371,7 @@ def run_daemon(interval_seconds: int = 60):
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser(description="Unified Spine")
     parser.add_argument("action", choices=["status", "cycle", "daemon"])
     parser.add_argument("--interval", type=int, default=60)
@@ -329,6 +381,7 @@ if __name__ == "__main__":
     if args.action == "status":
         spine = UnifiedSpine()
         import json
+
         print(json.dumps(spine.get_status(), indent=2))
 
     elif args.action == "cycle":

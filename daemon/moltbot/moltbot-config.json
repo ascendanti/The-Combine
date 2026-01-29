@@ -1,0 +1,39 @@
+{
+  "gateway": {
+    "port": 8080,
+    "host": "127.0.0.1",
+    "verbose": true
+  },
+  "agent": {
+    "model": "anthropic/claude-opus-4-5",
+    "fallback_models": [
+      "openai/gpt-4o",
+      "xai/grok-2"
+    ]
+  },
+  "oauth": {
+    "_note": "OAuth allows using subscription-based access (Claude Pro, ChatGPT Pro, Grok Super) instead of API keys",
+    "claude_pro": {
+      "enabled": false,
+      "_setup": "Run 'moltbot onboard' to configure OAuth"
+    },
+    "chatgpt_pro": {
+      "enabled": false,
+      "_setup": "Run 'moltbot onboard' to configure OAuth"
+    },
+    "grok_super": {
+      "enabled": false,
+      "_setup": "Run 'moltbot onboard' to configure OAuth"
+    }
+  },
+  "tailscale": {
+    "serve_port": 8080,
+    "funnel": false,
+    "_note": "serve = tailnet only (private), funnel = public internet (avoid)"
+  },
+  "atlas_integration": {
+    "enabled": true,
+    "forward_to": "http://localhost:8080",
+    "wire_point": "model_router.py"
+  }
+}
