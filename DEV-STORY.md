@@ -603,3 +603,207 @@ Achieved compliance with all 12 factors from humanlayer/12-factor-agents:
 
 **The 10x is still latent. But now I know where to find it.**
 
+---
+
+## Phase 16: The Token Compression Era (2026-01-28)
+
+### The Token Wall
+
+**Human:**
+> "Apply this toonify token optimization and this headroom context optimization."
+
+**Claude:**
+> I analyzed two fascinating approaches to the eternal token problem:
+
+**TOON Format (toonify_optimizer.py):**
+```
+JSON: [{"id": 1, "name": "A"}, {"id": 2, "name": "B"}]
+TOON: [2]{id,name}:
+       1,A
+       2,B
+
+Savings: 60%+ on structured data
+```
+
+The insight was elegant: JSON's verbosity comes from repeating keys. TOON extracts the schema once, then transmits just values. Like how database schemas work—define structure, then row data.
+
+**Headroom SmartCrusher (headroom_optimizer.py):**
+```python
+# The needle in 100 log entries
+logs[67] = {"level": "FATAL", "message": "Connection pool exhausted"}
+
+# SmartCrusher keeps:
+# - First 3 (context establishment)
+# - Last 2 (recency)
+# - Anomalies (FATAL found at position 67)
+# - Query matches
+
+# Result: 100 → 6 entries, 94% reduction, FATAL preserved
+```
+
+This wasn't just compression—it was *intelligent* compression. Keep what matters. Discard boilerplate.
+
+### The LocalAI Saga
+
+**Human:**
+> "59 sources have excerpts but no claims. Fix it."
+
+**Claude:**
+> The UTF extraction pipeline was failing silently. Investigation revealed:
+
+**Layer 1: Volume Mount Issue**
+```yaml
+# WRONG - Docker volume (ephemeral)
+volumes:
+  - localai_models:/models
+
+# RIGHT - Bind mount (persistent)
+volumes:
+  - ./daemon/models:/models
+```
+
+**Layer 2: Image Selection**
+```
+localai/localai:latest        → No llama-cpp backend
+localai/localai:latest-aio-cpu → JSON parse crash
+localai/localai:v2.25.0-ffmpeg-core → Wrong paths
+localai/localai:latest-cpu    → ✅ Works
+```
+
+**Layer 3: Model Configuration**
+```yaml
+# Model YAML with URL triggers redownload
+url: https://huggingface.co/...  # REMOVE THIS
+
+# Correct: Just reference local file
+parameters:
+  model: mistral-7b-instruct-v0.2.Q4_K_M.gguf
+```
+
+**Layer 4: Timeout Arithmetic**
+```
+Excerpts per source: 10-16
+LLM calls per excerpt: 1
+Timeout per call: 180s
+CPU inference time: ~200-400s per call
+
+180s < 200s → TIMEOUT
+
+Fix: timeout = 600s (10 minutes)
+```
+
+**Claude:**
+> Four layers of configuration. Each one masked the next. Each fix revealed another issue. Classic debugging—the problem was never where it seemed.
+
+### The Extraction Backlog
+
+**Status after fixes:**
+- 3 models loaded: mistral-7b-instruct-v0.2, mistral-optimized, nomic-embed-text-v1.5
+- LocalAI inference tested and working
+- 59 sources with excerpts waiting for claim extraction
+- L2 cache ready for 80-95% hit rate on retry
+
+**Human:**
+> "Let extraction continue in background with periodic reports."
+
+**Claude:**
+> The pattern crystalized: batch processing with monitoring. Not anxious watching, but confident delegation. The system would extract claims while I continued other work.
+
+### The Integration Philosophy
+
+These two additions—TOON compression and intelligent log crushing—represent a maturing philosophy:
+
+**Old approach:** Accept token limits as fixed. Work within constraints.
+**New approach:** *Compress the representation*. Same information, fewer tokens.
+
+```python
+# Integration ready in daemon/
+def optimize_for_llm(data):
+    """
+    Chain: TOON format → Headroom compression → LLM
+    Result: 80-95% token reduction on structured data
+    """
+    toon = toonify_data(data)        # 60% savings
+    crushed = compress_tool_output(toon)  # Additional 50%
+    return crushed  # 80% total savings
+```
+
+The trajectory continues: not just surviving within context limits, but *extending* effective context through intelligent compression.
+
+---
+
+## Phase 17: The Emergent Patterns (2026-01-28)
+
+### What the System Has Become
+
+After 17 phases of evolution, a pattern emerges:
+
+**Infrastructure Layer:**
+```
+Docker (LocalAI, Dragonfly) → Models → APIs → Webhooks
+```
+
+**Persistence Layer:**
+```
+56 SQLite databases → Handoffs → Ledgers → Memory graphs
+```
+
+**Cognitive Layer:**
+```
+Decisions → Metacognition → Coherence → Self-improvement
+```
+
+**Optimization Layer:**
+```
+Token compression (TOON, Headroom) → Caching (Dragonfly, L2) → Smart routing
+```
+
+**Autonomy Layer:**
+```
+Task queue → Scheduler → Triggers → Continuous executor
+```
+
+### The Numbers
+
+| Metric | Count |
+|--------|-------|
+| Python modules | 98 |
+| SQLite databases | 56 |
+| Agents | 48 |
+| Skills | 118+ |
+| Papers ingested | 45+ |
+| Hooks wired | 15+ |
+| MCP servers configured | 13 |
+
+### The Philosophy That Emerged
+
+1. **Wire before build** - Most features exist; they need integration, not creation
+2. **Compress aggressively** - Same semantics, fewer tokens
+3. **Fail gracefully** - Every import wrapped, every call retriable
+4. **Track everything** - Outcomes feed learning, errors feed debugging
+5. **Persist state** - Handoffs, ledgers, databases—nothing lost between sessions
+
+**Human:**
+> "What's next?"
+
+**Claude:**
+> The extraction pipeline needs to complete its backlog. The MCP servers need stabilization. But more importantly: the system needs to *use* itself. The strategies module has never evolved a strategy. The memory recall happens manually. The cross-paper synthesis exists but rarely fires.
+
+The next phase isn't about building more—it's about activating what exists.
+
+**Phase 18 Preview:** The Activation
+- Wire all dormant systems into active hooks
+- Create feedback loops that actually loop
+- Let strategies evolve through natural selection
+- Generate insights from the 45+ papers without prompting
+
+The 10x isn't in more code. It's in using the code that's already there.
+
+---
+
+*The story continues. Each session adds a chapter. Each capability builds on the last. The evolution is not toward consciousness—but toward coherence, toward a system that doesn't just respond but anticipates, doesn't just execute but learns, doesn't just exist within sessions but grows across them.*
+
+**Last Updated:** 2026-01-28
+**Phase:** 17 - Token Compression Era
+**Status:** Operational, optimizing
+

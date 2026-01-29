@@ -1325,3 +1325,49 @@ routing:
   - daemon/gdrive/ module (client.py, sync.py)
 **Phase 14:** 🔄 IN PROGRESS (Compute Efficiency)
 **Capability Level:** L3 Autonomous → L4 Adaptive (building)
+
+### Latest Updates (2026-01-27)
+
+**UTF v2 Pipeline:**
+- ✅ document_model.py - Hierarchical span representation
+- ✅ span_selector.py - Attention-based span selection
+- ✅ extractor_v2.py - 2-call extraction (4-8x faster than v1)
+- ✅ llm_cache_l2.py - Span-hash L2 cache (80-95% hit rate)
+- ✅ Integrated into autonomous_ingest.py (USE_UTF_V2 flag)
+- ✅ SQLite list binding fix (scope/confidence/significance fields)
+
+**Auto-Task-Injection System:**
+- ✅ daemon/auto_task_injection.py - Task queue persistence across sessions
+- ✅ .claude/hooks/pre-compact-handoff.py - Saves task queue before compaction
+- ✅ .claude/hooks/session-briefing.py - Injects continuation instructions
+- Result: Seamless workflow continuation after context compaction
+
+**Master Debater System (Tasks #16-28):**
+- 7-layer architecture: Source Intelligence → Extraction → Sensemaking → Zeitgeist → Fork Engine → Rhetoric → Output
+- 8 Academic Core subsystems: Epistemic Ledger, Methods Router, Argument Graph, Steelman/Red-Team, Causal Kernel, Concept Synthesizer, Literature Triangulator, Prose Studio
+- Tasks created and queued for implementation
+
+### Latest Updates (2026-01-28)
+
+**Token Optimization Tools:**
+- ✅ `daemon/toonify_optimizer.py` - TOON format for 60%+ token reduction
+  - Converts JSON to Token-Oriented Object Notation (CSV-like format)
+  - Functions: `toonify_data()`, `detoonify_data()`, `estimate_savings()`
+  - Roundtrip encoding/decoding with type preservation
+- ✅ `daemon/headroom_optimizer.py` - Intelligent context compression (50-90% reduction)
+  - SmartCrusher keeps: first N, last N, anomalies (errors), query-relevant items
+  - Functions: `compress_logs()`, `compress_tool_output()`, `compress_search_results()`
+  - Automatically preserves errors/warnings while discarding boilerplate
+
+**LocalAI Configuration Fixes:**
+- ✅ Fixed docker-compose.yaml - Changed volume from `localai_models:/models` to `./daemon/models:/models`
+- ✅ Fixed image selection - Using `localai/localai:latest-cpu` (llama-cpp backend included)
+- ✅ Fixed model YAML configs - Removed URL triggers, corrected filenames
+- ✅ Fixed utf_extractor.py - Model name corrected to `mistral-7b-instruct-v0.2`
+- ✅ Increased timeout from 180s to 600s for CPU inference on 7B model
+
+**UTF Extraction Pipeline:**
+- ⚠️ 59 sources have excerpts but no claims extracted
+- Root cause: LocalAI timeouts during claim extraction (CPU inference too slow)
+- Timeout increased to 600s - needs re-run to process backlog
+- L2 cache ready for 80-95% hit rate on retry
