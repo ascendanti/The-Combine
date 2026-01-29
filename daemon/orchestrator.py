@@ -278,12 +278,27 @@ class Orchestrator:
 
         # WIRED (2026-01-28): Compress result before returning to save tokens
         compressed_result = result
+        compression_applied = False
+
+        # Try headroom first (smarter, keeps important content)
         if HEADROOM_AVAILABLE and isinstance(result, dict) and result.get("response"):
             try:
                 response_text = result.get("response", "")
                 if len(response_text) > 2000:
                     compressed = compress_tool_output({"response": response_text}, max_items=20)
                     compressed_result = {**result, "response": compressed.get("response", response_text)}
+                    compression_applied = True
+            except Exception:
+                pass  # Keep original on error
+
+        # Fallback: toonify for structured data (if headroom didn't apply)
+        if not compression_applied and TOONIFY_AVAILABLE and isinstance(result, dict):
+            try:
+                result_str = str(result)
+                if len(result_str) > 3000:
+                    savings = estimate_savings(result)
+                    if savings.savings_pct >= 30:  # Only if significant savings
+                        compressed_result = {"toon_result": savings.toon_str, "original_keys": list(result.keys())}
             except Exception:
                 pass  # Keep original on error
 

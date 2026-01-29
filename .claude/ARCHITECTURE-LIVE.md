@@ -66,6 +66,20 @@ efficiency_monitor.py      → NOW PERSISTS to efficiency_log + token tracking
 token_monitor.py           → get_current_session_tokens() for efficiency integration
 ```
 
+### NEWLY WIRED (2026-01-28 - TOKEN OPTIMIZATION PIPELINE):
+```
+headroom_optimizer.py      → SmartCrusher compression (50-90% savings)
+toonify_optimizer.py       → TOON format conversion (60%+ savings on structured data)
+auto-cache-post.py         → PostToolUse: Compresses tool outputs before caching
+auto-cache-pre.py          → PreToolUse: Compresses Grep/Glob cache hits (Gap #7 fix)
+context_router.py          → WARM tier content compression via headroom
+orchestrator.py            → Compresses LLM responses before returning
+unified_spine.py           → Compresses task outputs via _compress_output()
+model_router.py            → Compresses large content in ContextBuilder.build()
+memory_router.py           → Compresses large result sets in _cache_set()
+self_evolving_agent.py     → NEW: EvoAgentX patterns (TextGrad + AFlow)
+```
+
 **DO NOT propose building systems that duplicate these. WIRE THEM IN instead.**
 
 ---
@@ -310,6 +324,54 @@ Layer 4: memory_router.py → Unified memory with L1 Dragonfly cache
          ↳ Caches search results for 5 minutes
 ```
 
+### TOKEN OPTIMIZATION PIPELINE (2026-01-28):
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    TOKEN COMPRESSION FLOW                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  INPUT STAGE                                                     │
+│  ┌─────────────┐    ┌──────────────────┐                        │
+│  │ Tool Call   │───►│ auto-cache-pre   │ Grep/Glob compression  │
+│  └─────────────┘    └──────────────────┘                        │
+│                              │                                   │
+│  PROCESSING STAGE            ▼                                   │
+│  ┌─────────────┐    ┌──────────────────┐                        │
+│  │ File Read   │───►│ context_router   │ WARM tier + headroom   │
+│  └─────────────┘    └──────────────────┘                        │
+│                              │                                   │
+│  ┌─────────────┐    ┌──────────────────┐                        │
+│  │ Context     │───►│ model_router     │ Large content compress │
+│  │ Building    │    │ ContextBuilder   │                        │
+│  └─────────────┘    └──────────────────┘                        │
+│                              │                                   │
+│  EXECUTION STAGE             ▼                                   │
+│  ┌─────────────┐    ┌──────────────────┐                        │
+│  │ Task Exec   │───►│ unified_spine    │ _compress_output()     │
+│  └─────────────┘    └──────────────────┘                        │
+│                              │                                   │
+│  ┌─────────────┐    ┌──────────────────┐                        │
+│  │ LLM Call    │───►│ orchestrator     │ Response compression   │
+│  └─────────────┘    └──────────────────┘                        │
+│                              │                                   │
+│  OUTPUT STAGE                ▼                                   │
+│  ┌─────────────┐    ┌──────────────────┐                        │
+│  │ Tool Output │───►│ auto-cache-post  │ headroom + toonify     │
+│  └─────────────┘    └──────────────────┘                        │
+│                              │                                   │
+│  ┌─────────────┐    ┌──────────────────┐                        │
+│  │ Cache Store │───►│ memory_router    │ Result set compression │
+│  └─────────────┘    └──────────────────┘                        │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+
+COMPRESSION MODULES:
+  - headroom_optimizer.py: SmartCrusher (keeps first/last/anomalies/query-relevant)
+  - toonify_optimizer.py: TOON format (60%+ on structured JSON/lists)
+
+ESTIMATED SAVINGS: 50-90% token reduction on large outputs
+```
+
 ### IMMEDIATE (Next to wire):
 1. Install MARM (`pip install marm-mcp-server`) as backend #3
 2. Integrate Swarms patterns into orchestrator.py
@@ -360,20 +422,28 @@ Claude n8n/
 
 ---
 
-**LAST UPDATED:** 2026-01-27 (Session 8 - AUTONOMOUS INGEST FIXES + AUTO-INDEXING)
-**STATUS:** 26+ SYSTEMS INTEGRATED. Database consolidation complete (7 DBs, 7,243+ rows). 10 modules wired to consolidated DBs.
+**LAST UPDATED:** 2026-01-28 (Session - TOKEN OPTIMIZATION PIPELINE WIRING)
+**STATUS:** 30+ SYSTEMS INTEGRATED. Database consolidation complete (7 DBs, 7,243+ rows). Token optimization pipeline fully wired.
 
-**Recent Additions:**
+**Recent Additions (2026-01-28):**
+- headroom_optimizer.py: SmartCrusher compression (50-90% savings)
+- toonify_optimizer.py: TOON format for structured data (60%+ savings)
+- self_evolving_agent.py: EvoAgentX patterns (TextGrad + AFlow)
+- Token compression wired to: auto-cache-pre/post, context_router, orchestrator, unified_spine, model_router, memory_router
+
+**Previous Additions:**
 - auto-learn-errors.py (PostToolUse for Bash - auto-captures CLI errors)
 - pre-create-check.py (PreToolUse for Write - surfaces directives before creating files)
 - memory_router embeddings (cosine similarity via sentence-transformers, fallback to Jaccard)
 - efficiency_monitor.py (auto-tracks tool calls, detects thrashing, alerts on repeated errors)
 
 **Key Capabilities:**
-- Token Savings: Context Router achieves 90%+ on WARM files
-- Semantic Cache: Two-stage matching (high/gray-zone/low)
+- Token Savings: Complete pipeline - 50-90% reduction across all layers
+- Context Tiering: HOT/WARM/COLD with headroom compression
+- Semantic Cache: Two-stage matching (high/gray-zone/low) + result compression
 - Multi-Agent: Swarms sequential/concurrent workflows
+- Self-Evolution: TextGrad prompt refinement + AFlow workflow optimization
 - Feedback Loop: MAPE controller + emergent learning
 
-**Active Systems:** unified_spine, memory_router, context_router, orchestrator, emergent, feedback_loop, swarms
+**Active Systems:** unified_spine, memory_router, context_router, orchestrator, emergent, feedback_loop, swarms, token_optimizer, headroom_optimizer, toonify_optimizer, self_evolving_agent
 **Known Issues:** See .claude/KNOWN-ISSUES.md (MARM numpy conflict)
