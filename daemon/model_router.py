@@ -554,6 +554,22 @@ class ClawdbotClient:
         except:
             return False  # Non-critical, don't fail on webhook error
 
+    def chat(self, message: str, model: str = "default") -> str:
+        """
+        Send a chat message to Clawdbot and get response.
+
+        Simple wrapper around /v1/chat/completions for conversational updates.
+        Used for task notifications and supervisor communication.
+        """
+        try:
+            return self.complete(
+                messages=[{"role": "user", "content": message}],
+                max_tokens=500,
+                model=model
+            )
+        except Exception as e:
+            return None  # Non-critical for notifications
+
 
 # ============================================================================
 # Main Router

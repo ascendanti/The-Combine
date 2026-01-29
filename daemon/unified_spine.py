@@ -301,24 +301,21 @@ class UnifiedSpine:
         """
         WIRED: Notify Clawdbot supervisor when a task completes.
 
-        This webhook enables Clawdbot to:
-        - Track task outcomes across Atlas sessions
-        - Provide oversight and intervention when needed
-        - Aggregate metrics for the supervisor dashboard
+        Uses OpenAI-compatible /v1/chat/completions API for conversational updates.
+        Clawdbot can then track outcomes, intervene, or dispatch follow-up tasks.
         """
         if not self.router.clawdbot:
             return
 
         try:
-            notified = self.router.clawdbot.notify_task_complete(
-                task_id=task_id,
-                result=str(result),
-                success=success
-            )
-            if notified:
-                logger.info(f"Clawdbot notified for task {task_id[:8]}")
+            status = "✅ SUCCESS" if success else "❌ FAILED"
+            message = f"[Atlas Task Report]\nTask: {task_id[:8]}\nStatus: {status}\nResult: {str(result)[:400]}"
+
+            response = self.router.clawdbot.chat(message)
+            if response:
+                logger.info(f"Clawdbot notified for task {task_id[:8]}: {response[:50]}...")
         except Exception as e:
-            # Non-critical - don't fail the task on webhook error
+            # Non-critical - don't fail the task on notification error
             logger.debug(f"Clawdbot notification failed: {e}")
 
     def get_status(self) -> Dict[str, Any]:
