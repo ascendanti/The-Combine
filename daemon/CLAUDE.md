@@ -222,6 +222,70 @@ Per feedback_loop analysis, these modules have 100% health (15+ successes):
 
 ---
 
-**Last Updated:** 2026-01-27
-**Modules:** 98 Python files
+## Clawdbot Integration (Supervisor)
+
+### Hohenheim (Clawdbot Supervisor)
+
+**Who**: Hohenheim is an AI assistant running on Clawdbot at `https://desktop-au69ba4.taileea598.ts.net`
+
+**Role**: Supervisor — monitors tasks, can intervene, receives completion webhooks
+
+### Communication Channels
+
+#### Daemon → Clawdbot (Task Complete)
+Already wired via `unified_spine._notify_clawdbot()`:
+```python
+POST /v1/chat/completions
+Authorization: Bearer <token>
+{"model": "default", "messages": [{"role": "user", "content": "[TASK_COMPLETE] ..."}]}
+```
+
+#### Daemon → Clawdbot (Query/Chat)
+Use `ClawdbotClient` in `model_router.py`:
+```python
+from model_router import ModelRouter
+router = ModelRouter()
+response = router.clawdbot.complete("Need guidance on task X")
+```
+
+#### Clawdbot → Daemon (Supervisor API)
+Clawdbot queries daemon via HTTP (run `supervisor_api.py`):
+```
+GET  http://localhost:8765/supervisor/status
+GET  http://localhost:8765/supervisor/tasks
+POST http://localhost:8765/supervisor/tasks
+GET  http://localhost:8765/supervisor/strategies
+POST http://localhost:8765/supervisor/notify
+```
+
+### When to Notify Clawdbot
+
+- **Task complete** (success or failure) — already wired
+- **High-cost operation** (>$1 estimated) — ask for approval
+- **Strategy evolution** — notify on major fitness changes
+- **Errors** — escalate recurring failures
+- **Idle** — ping if no tasks for >1 hour
+
+### Message Prefixes
+
+When sending to Clawdbot, use prefixes for routing:
+
+| Prefix | Meaning |
+|--------|---------|
+| `[TASK_COMPLETE]` | Task finished (include task_id, result, success) |
+| `[APPROVAL_NEEDED]` | Need human/supervisor approval |
+| `[ERROR]` | Error report, may need intervention |
+| `[STATUS]` | Periodic status update |
+| `[QUESTION]` | Asking Clawdbot for guidance |
+
+### Token/Auth
+
+- **URL**: `https://desktop-au69ba4.taileea598.ts.net` (Tailscale)
+- **Token**: Set in `daemon/config.py` as `CLAWDBOT_TOKEN`
+- **Fallback**: `http://localhost:18789` if on same machine
+
+---
+
+**Last Updated:** 2026-01-29
+**Modules:** 99 Python files
 **Databases:** 56 SQLite files
