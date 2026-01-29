@@ -133,7 +133,9 @@ def main():
                 # Try to parse as JSON for structured compression
                 if cached_result.strip().startswith(('[', '{')):
                     parsed = json_mod.loads(cached_result)
-                    compressed = compress_search_results(parsed, max_results=20)
+                    # Get query from tool_input for relevance scoring
+                    query_context = tool_input.get("pattern", tool_input.get("query", ""))
+                    compressed = compress_search_results(parsed, query=query_context, max_results=20)
                     cached_result = json_mod.dumps(compressed) if isinstance(compressed, (dict, list)) else str(compressed)
                     cached_size = len(cached_result)
             except Exception:

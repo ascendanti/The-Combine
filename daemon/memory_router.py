@@ -240,7 +240,7 @@ class MemoryRouter:
             cache_data = results
             if HEADROOM_AVAILABLE and len(results) > 15:
                 try:
-                    cache_data = compress_search_results(results, max_results=20)
+                    cache_data = compress_search_results(results, query=query, max_results=20)
                 except Exception:
                     pass  # Keep original on compression error
 
