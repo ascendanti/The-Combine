@@ -1,0 +1,450 @@
+# Plugin Wiring Configuration
+# WIRED: 2026-01-30 - International Student Handbook Plugin System
+#
+# This file defines the event-driven wiring between plugins.
+# Each plugin can:
+#   - subscribes: Events that trigger this plugin
+#   - emits: Events this plugin produces
+#   - triggers: Plugins to activate after this one completes
+#
+# PLATO Architecture Tiers:
+#   II.A  - Orchestrator
+#   II.C  - SCX (Context Management)
+#   II.D  - Self-Analytics
+#   III.A - Book Manager
+#   III.D - Retrieval
+#   IV.B  - Media/Newsroom
+#   V.B   - Skills
+
+# =============================================================================
+# Metadata
+# =============================================================================
+version: "1.0.0"
+name: "International Student Handbook Plugin System"
+description: "Event-driven plugin wiring for document processing and publishing"
+
+# =============================================================================
+# Budget Defaults
+# =============================================================================
+budgets:
+  # Document processing (higher budget for extraction)
+  document:
+    tokens: 8000
+    tools: 20
+    timeout: 300
+
+  # Publishing (substantial content generation)
+  publish:
+    tokens: 8000
+    tools: 15
+    timeout: 300
+
+  # Memory operations (lightweight)
+  memory:
+    tokens: 2000
+    tools: 5
+    timeout: 60
+
+  # Design generation
+  design:
+    tokens: 4000
+    tools: 10
+    timeout: 180
+
+  # Code quality
+  code:
+    tokens: 6000
+    tools: 15
+    timeout: 240
+
+  # Orchestration (lightweight coordination)
+  orchestration:
+    tokens: 2000
+    tools: 10
+    timeout: 120
+
+  # Analytics (processing intensive)
+  analytics:
+    tokens: 4000
+    tools: 10
+    timeout: 180
+
+# =============================================================================
+# Plugin Wiring
+# =============================================================================
+wiring:
+
+  # ---------------------------------------------------------------------------
+  # Group A: Document Lifecycle (Handbook Core)
+  # ---------------------------------------------------------------------------
+
+  document-skills:
+    # PLATO Tier: III.A (Book Manager)
+    # Source: @anthropics/anthropic-agent-skills/document-skills
+    subscribes:
+      - ingest.extracted
+      - task.started
+    emits:
+      - document.parsed
+      - document.structured
+      - document.extracted
+    triggers:
+      - claude-mem
+      - book-writer
+    budget: document
+
+  claude-mem:
+    # PLATO Tier: III.D (Retrieval)
+    # Source: @thedotmack/thedotmack/claude-mem
+    subscribes:
+      - document.parsed
+      - document.extracted
+      - ingest.extracted
+    emits:
+      - memory.stored
+      - memory.indexed
+      - memory.retrieved
+    triggers: []
+    budget: memory
+
+  context-management:
+    # PLATO Tier: II.C (SCX)
+    # Source: @wshobson/claude-code-workflows/context-management
+    subscribes:
+      - memory.stored
+      - memory.indexed
+      - task.started
+    emits:
+      - context.packed
+      - context.trimmed
+    triggers:
+      - book-writer
+    budget: memory
+
+  book-writer:
+    # PLATO Tier: IV.B (Newsroom)
+    # Source: @imehr/imehr-marketplace/book-writer
+    subscribes:
+      - document.structured
+      - context.packed
+    emits:
+      - publish.draft_created
+      - publish.chapter_completed
+    triggers:
+      - frontend-design
+      - canvas-design
+      - weasyprint-publisher
+    budget: publish
+
+  ralph-wiggum:
+    # PLATO Tier: IV.B (Newsroom)
+    # Source: plugins/ralph-wiggum
+    # Purpose: Publishing/Output enhancement and finalization
+    subscribes:
+      - document.structured
+      - publish.draft_created
+    emits:
+      - publish.enhanced
+      - publish.finalized
+    triggers:
+      - frontend-design
+      - weasyprint-publisher
+    budget: publish
+
+  weasyprint-publisher:
+    # PLATO Tier: IV.B (Newsroom)
+    # Source: Internal - WeasyPrint integration
+    # Purpose: PDF generation using WeasyPrint
+    # Reference: https://github.com/Kozea/WeasyPrint
+    # Samples: https://github.com/CourtBouillon/weasyprint-samples
+    subscribes:
+      - publish.draft_created
+      - publish.chapter_completed
+      - publish.finalized
+    emits:
+      - publish.pdf_generated
+      - design.asset_created
+    triggers: []
+    budget: publish
+
+  # ---------------------------------------------------------------------------
+  # Group B: Visual/Design
+  # ---------------------------------------------------------------------------
+
+  frontend-design:
+    # PLATO Tier: V.B (Skills)
+    # Source: @anthropics/claude-code-plugins/frontend-design
+    subscribes:
+      - publish.chapter_completed
+      - publish.finalized
+    emits:
+      - design.generated
+    triggers:
+      - canvas-design
+      - frontend-excellence
+    budget: design
+
+  ui-designer:
+    # PLATO Tier: V.B (Skills)
+    # Source: @ananddtyagi/claude-code-marketplace/ui-designer
+    subscribes:
+      - task.started
+      - design.generated
+    emits:
+      - design.generated
+      - design.asset_created
+    triggers:
+      - frontend-excellence
+    budget: design
+
+  canvas-design:
+    # PLATO Tier: IV.B (Media)
+    # Source: @theflysurfer/julien-skills-marketplace/canvas-design
+    subscribes:
+      - design.generated
+      - publish.chapter_completed
+    emits:
+      - design.asset_created
+    triggers: []
+    budget: design
+
+  frontend-excellence:
+    # PLATO Tier: V.B (Skills)
+    # Source: plugins/frontend-excellence
+    subscribes:
+      - design.generated
+    emits:
+      - ui.polished
+      - ui.accessibility_checked
+    triggers: []
+    budget: design
+
+  # ---------------------------------------------------------------------------
+  # Group C: Code Quality
+  # ---------------------------------------------------------------------------
+
+  compound-engineering:
+    # PLATO Tier: V.B (Skills)
+    # Source: @EveryInc/every-marketplace/compound-engineering
+    subscribes:
+      - task.started
+      - dev.accelerated
+    emits:
+      - task.completed
+    triggers:
+      - insight-engine
+    budget: code
+
+  code-refactoring:
+    # PLATO Tier: V.B (Skills)
+    # Source: @wshobson/claude-code-workflows/code-refactoring
+    subscribes:
+      - task.started
+    emits:
+      - task.completed
+    triggers:
+      - insight-engine
+    budget: code
+
+  dev-accelerator:
+    # PLATO Tier: V.B (Skills)
+    # Source: plugins/dev-accelerator
+    subscribes:
+      - task.started
+    emits:
+      - dev.accelerated
+      - dev.scaffold_created
+    triggers:
+      - compound-engineering
+    budget: code
+
+  # ---------------------------------------------------------------------------
+  # Group D: Orchestration & Analytics (Control Plane)
+  # ---------------------------------------------------------------------------
+
+  cognitive-orchestration:
+    # PLATO Tier: II.A (Orchestrator)
+    # Source: dotclaude/cognitive-orchestration
+    subscribes:
+      - task.created
+      - system.started
+      - learning.pattern_detected
+    emits:
+      - task.routed
+      - task.dispatched
+    triggers:
+      - queue-orchestrator
+    budget: orchestration
+
+  queue-orchestrator:
+    # PLATO Tier: II.A (Orchestrator)
+    # Source: plugins/queue-orchestrator
+    subscribes:
+      - task.routed
+      - task.checkpoint
+    emits:
+      - queue.enqueued
+      - queue.processed
+    triggers: []
+    budget: orchestration
+
+  insight-engine:
+    # PLATO Tier: II.D (Self-Analytics)
+    # Source: plugins/insight-engine
+    subscribes:
+      - task.completed
+      - plugin.completed
+      - plugin.failed
+    emits:
+      - insight.generated
+      - insight.metrics_aggregated
+    triggers:
+      - adaptive-learning
+    budget: analytics
+
+  adaptive-learning:
+    # PLATO Tier: II.D (Self-Analytics)
+    # Source: dotclaude/adaptive-learning
+    subscribes:
+      - insight.generated
+      - task.failed
+      - plugin.failed
+    emits:
+      - learning.captured
+      - learning.pattern_detected
+    triggers:
+      - cognitive-orchestration  # Feedback loop
+    budget: analytics
+
+  # ---------------------------------------------------------------------------
+  # Group E: Writer Suite (Unified Writing Pipeline)
+  # ---------------------------------------------------------------------------
+
+  writer-suite:
+    # PLATO Tier: IV.B (Newsroom)
+    # Source: Internal - Writer capability facade
+    # Purpose: Unified entry point for all writing capabilities
+    # Token-efficient: lazy loading, stage cleanup, MCP pooling
+    subscribes:
+      - task.write
+      - task.research
+      - task.quality
+    emits:
+      - writer.stage_started
+      - writer.stage_completed
+      - writer.pipeline_done
+    triggers:
+      - book-writer
+      - ralph-wiggum
+      - weasyprint-publisher
+    budget: publish
+
+  # External Tool Adapters (lazy-loaded by writer-suite)
+
+  proselint-adapter:
+    # Purpose: Prose quality checking (local subprocess)
+    # No MCP required
+    subscribes:
+      - writer.quality_started
+      - publish.draft_created
+    emits:
+      - quality.lint_completed
+    triggers: []
+    budget: memory  # Small budget (500 tokens)
+
+  tapestry-adapter:
+    # Purpose: Content extraction from YouTube/articles
+    # No MCP required
+    subscribes:
+      - writer.research_started
+    emits:
+      - research.content_extracted
+    triggers:
+      - content-rw-adapter
+    budget: memory
+
+  cortex-adapter:
+    # Purpose: Claude Cortex brain-like memory
+    # MCP required (claude-cortex)
+    subscribes:
+      - writer.stage_completed
+      - context.packed
+    emits:
+      - memory.cortex_stored
+      - memory.cortex_retrieved
+    triggers: []
+    budget: memory
+
+  ace-adapter:
+    # Purpose: Agentic Context Engine self-improvement
+    # No MCP required
+    subscribes:
+      - task.completed
+      - task.failed
+    emits:
+      - learning.ace_captured
+    triggers:
+      - adaptive-learning
+    budget: analytics
+
+  content-rw-adapter:
+    # Purpose: Content Research Writer skill
+    # No MCP required
+    subscribes:
+      - research.content_extracted
+      - writer.write_started
+    emits:
+      - write.draft_ready
+    triggers:
+      - book-writer
+    budget: publish
+
+  skill-seekers-adapter:
+    # Purpose: Convert docs/repos/PDFs to skills
+    # No MCP required
+    subscribes:
+      - task.analyze_docs
+      - task.analyze_repo
+    emits:
+      - skills.generated
+      - conflicts.detected
+    triggers: []
+    budget: document
+
+# =============================================================================
+# Event Flow Diagram
+# =============================================================================
+#
+#                     [INGEST]
+#                        |
+#                        v
+#                 [document-skills]
+#                    /         \
+#                   v           v
+#           [claude-mem]    [book-writer]
+#                |              |
+#                v              v
+#        [context-management]  [ralph-wiggum]
+#                |              |
+#                +------+-------+
+#                       |
+#                       v
+#              [weasyprint-publisher]  ------> [PDF OUTPUT]
+#                       |
+#                       v
+#              [frontend-design]
+#                    /    \
+#                   v      v
+#          [canvas-design] [frontend-excellence]
+#                              |
+#                              v
+#                         [UI OUTPUT]
+#
+# Orchestration Layer (parallel):
+#   [cognitive-orchestration] <--> [queue-orchestrator]
+#                |
+#                v
+#         [insight-engine] --> [adaptive-learning]
+#                                    |
+#                                    +--- (feedback to cognitive-orchestration)
+#

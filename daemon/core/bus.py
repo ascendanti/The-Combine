@@ -15,12 +15,10 @@ import json
 import queue
 import threading
 from datetime import datetime
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import Any, Callable, Dict, List, Optional
 from dataclasses import asdict
 import sqlite3
 from pathlib import Path
-
-from .base import Signal, Action, Outcome, Learning
 
 
 class MessageBus:
@@ -40,6 +38,7 @@ class MessageBus:
         if mode == "redis" and redis_url:
             try:
                 import redis
+
                 self.redis = redis.from_url(redis_url)
                 self.pubsub = self.redis.pubsub()
                 self._start_redis_listener()
@@ -54,6 +53,7 @@ class MessageBus:
 
     def _start_memory_listener(self):
         """Start background thread for in-memory message processing."""
+
         def worker():
             while self._running:
                 try:
@@ -69,11 +69,12 @@ class MessageBus:
 
     def _start_redis_listener(self):
         """Start background thread for Redis pub/sub."""
+
         def worker():
             for message in self.pubsub.listen():
-                if message['type'] == 'pmessage':
-                    pattern = message['pattern'].decode()
-                    data = json.loads(message['data'])
+                if message["type"] == "pmessage":
+                    pattern = message["pattern"].decode()
+                    data = json.loads(message["data"])
                     self._dispatch(pattern, data)
 
         self._thread = threading.Thread(target=worker, daemon=True)
@@ -83,11 +84,13 @@ class MessageBus:
         """Dispatch message to matching handlers."""
         with self.lock:
             # Log message
-            self.message_log.append({
-                "channel": channel,
-                "data": data,
-                "timestamp": datetime.now().isoformat()
-            })
+            self.message_log.append(
+                {
+                    "channel": channel,
+                    "data": data,
+                    "timestamp": datetime.now().isoformat(),
+                }
+            )
             # Keep only last 1000 messages
             if len(self.message_log) > 1000:
                 self.message_log = self.message_log[-1000:]
@@ -117,10 +120,14 @@ class MessageBus:
             message: Signal, Action, Outcome, or any serializable object
         """
         # Convert dataclass to dict if needed
-        if hasattr(message, 'to_dict'):
+        if hasattr(message, "to_dict"):
             data = message.to_dict()
-        elif hasattr(message, '__dict__'):
-            data = asdict(message) if hasattr(message, '__dataclass_fields__') else message.__dict__
+        elif hasattr(message, "__dict__"):
+            data = (
+                asdict(message)
+                if hasattr(message, "__dataclass_fields__")
+                else message.__dict__
+            )
         else:
             data = message
 
@@ -153,13 +160,17 @@ class MessageBus:
         with self.lock:
             if pattern in self.handlers:
                 if handler:
-                    self.handlers[pattern] = [h for h in self.handlers[pattern] if h != handler]
+                    self.handlers[pattern] = [
+                        h for h in self.handlers[pattern] if h != handler
+                    ]
                 else:
                     del self.handlers[pattern]
                     if self.mode == "redis":
                         self.pubsub.punsubscribe(pattern)
 
-    def get_recent_messages(self, channel_filter: str = None, limit: int = 100) -> List[Dict]:
+    def get_recent_messages(
+        self, channel_filter: str = None, limit: int = 100
+    ) -> List[Dict]:
         """Get recent messages from log.
 
         Args:
@@ -168,7 +179,11 @@ class MessageBus:
         """
         with self.lock:
             if channel_filter:
-                messages = [m for m in self.message_log if self._matches(channel_filter, m["channel"])]
+                messages = [
+                    m
+                    for m in self.message_log
+                    if self._matches(channel_filter, m["channel"])
+                ]
             else:
                 messages = self.message_log.copy()
             return messages[-limit:]
@@ -176,14 +191,16 @@ class MessageBus:
     def shutdown(self):
         """Gracefully shutdown the bus."""
         self._running = False
-        if hasattr(self, '_thread'):
+        if hasattr(self, "_thread"):
             self._thread.join(timeout=1.0)
 
 
 class PersistentMessageBus(MessageBus):
     """Message bus with SQLite persistence for durability."""
 
-    def __init__(self, db_path: Path = None, mode: str = "memory", redis_url: str = None):
+    def __init__(
+        self, db_path: Path = None, mode: str = "memory", redis_url: str = None
+    ):
         super().__init__(mode, redis_url)
         self.db_path = db_path or Path(__file__).parent.parent / "message_bus.db"
         self._init_db()
@@ -193,15 +210,17 @@ class PersistentMessageBus(MessageBus):
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
 
-        c.execute('''CREATE TABLE IF NOT EXISTS messages (
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS messages (
             message_id TEXT PRIMARY KEY,
             channel TEXT NOT NULL,
             data TEXT NOT NULL,
             timestamp TEXT NOT NULL
-        )''')
+        )"""
+        )
 
-        c.execute('''CREATE INDEX IF NOT EXISTS idx_channel ON messages(channel)''')
-        c.execute('''CREATE INDEX IF NOT EXISTS idx_timestamp ON messages(timestamp)''')
+        c.execute("""CREATE INDEX IF NOT EXISTS idx_channel ON messages(channel)""")
+        c.execute("""CREATE INDEX IF NOT EXISTS idx_timestamp ON messages(timestamp)""")
 
         conn.commit()
         conn.close()
@@ -209,10 +228,14 @@ class PersistentMessageBus(MessageBus):
     def publish(self, channel: str, message: Any):
         """Publish and persist message."""
         # Convert to dict
-        if hasattr(message, 'to_dict'):
+        if hasattr(message, "to_dict"):
             data = message.to_dict()
-        elif hasattr(message, '__dict__'):
-            data = asdict(message) if hasattr(message, '__dataclass_fields__') else message.__dict__
+        elif hasattr(message, "__dict__"):
+            data = (
+                asdict(message)
+                if hasattr(message, "__dataclass_fields__")
+                else message.__dict__
+            )
         else:
             data = message
 
@@ -222,9 +245,11 @@ class PersistentMessageBus(MessageBus):
 
         message_id = f"msg_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
 
-        c.execute('''INSERT INTO messages (message_id, channel, data, timestamp)
-            VALUES (?, ?, ?, ?)''',
-            (message_id, channel, json.dumps(data), datetime.now().isoformat()))
+        c.execute(
+            """INSERT INTO messages (message_id, channel, data, timestamp)
+            VALUES (?, ?, ?, ?)""",
+            (message_id, channel, json.dumps(data), datetime.now().isoformat()),
+        )
 
         conn.commit()
         conn.close()
@@ -232,7 +257,9 @@ class PersistentMessageBus(MessageBus):
         # Then publish normally
         super().publish(channel, message)
 
-    def replay_messages(self, since: str = None, channel_filter: str = None) -> List[Dict]:
+    def replay_messages(
+        self, since: str = None, channel_filter: str = None
+    ) -> List[Dict]:
         """Replay messages from persistence.
 
         Args:
@@ -262,11 +289,9 @@ class PersistentMessageBus(MessageBus):
 
         messages = []
         for row in c.fetchall():
-            messages.append({
-                "channel": row[0],
-                "data": json.loads(row[1]),
-                "timestamp": row[2]
-            })
+            messages.append(
+                {"channel": row[0], "data": json.loads(row[1]), "timestamp": row[2]}
+            )
 
         conn.close()
         return messages
@@ -299,10 +324,110 @@ def subscribe(pattern: str, handler: Callable):
 
 # Standard channel prefixes
 CHANNELS = {
-    "signal": "signal.*",      # Observations, detections
-    "action": "action.*",      # Requested operations
-    "outcome": "outcome.*",    # Results
+    "signal": "signal.*",  # Observations, detections
+    "action": "action.*",  # Requested operations
+    "outcome": "outcome.*",  # Results
     "learning": "learning.*",  # Extracted patterns
-    "alert": "alert.*",        # Urgent notifications
-    "query": "query.*",        # Information requests
+    "alert": "alert.*",  # Urgent notifications
+    "query": "query.*",  # Information requests
+    # Plugin lifecycle (WIRED: 2026-01-30)
+    "plugin": "plugin.*",  # Plugin events
+    "document": "document.*",  # Document processing
+    "publish": "publish.*",  # Publishing pipeline
+    "memory": "memory.*",  # Memory operations
+    "design": "design.*",  # Design generation
+    "context": "context.*",  # Context management
+    "queue": "queue.*",  # Queue orchestration
+    "insight": "insight.*",  # Analytics insights
+    "task": "task.*",  # Task lifecycle
+    "system": "system.*",  # System events
+    "dev": "dev.*",  # Development acceleration
+    "ui": "ui.*",  # UI/Frontend events
+    "writer": "writer.*",  # Writer Suite events
+    "quality": "quality.*",  # Quality checking events
+    "research": "research.*",  # Research/extraction events
+    "write": "write.*",  # Writing stage events
+    "skills": "skills.*",  # Skill generation events
+    "conflicts": "conflicts.*",  # Conflict detection events
 }
+
+
+# Plugin Event Types (WIRED: 2026-01-30 - International Student Handbook)
+class PluginEventType:
+    """Standard event types for plugin communication."""
+
+    # Plugin lifecycle
+    PLUGIN_ACTIVATED = "plugin.activated"
+    PLUGIN_COMPLETED = "plugin.completed"  # CRITICAL: End-after-task signal
+    PLUGIN_FAILED = "plugin.failed"
+    PLUGIN_TIMEOUT = "plugin.timeout"
+
+    # Document skills
+    DOC_PARSED = "document.parsed"
+    DOC_STRUCTURED = "document.structured"
+    DOC_EXTRACTED = "document.extracted"
+
+    # Publishing (book-writer, ralph-wiggum)
+    DRAFT_CREATED = "publish.draft_created"
+    CHAPTER_COMPLETED = "publish.chapter_completed"
+    PUBLISH_ENHANCED = "publish.enhanced"
+    PUBLISH_FINALIZED = "publish.finalized"
+
+    # Memory (claude-mem)
+    MEM_STORED = "memory.stored"
+    MEM_RETRIEVED = "memory.retrieved"
+    MEM_INDEXED = "memory.indexed"
+
+    # Context management
+    CONTEXT_PACKED = "context.packed"
+    CONTEXT_TRIMMED = "context.trimmed"
+
+    # Design (frontend-design, ui-designer, canvas-design)
+    DESIGN_GENERATED = "design.generated"
+    ASSET_CREATED = "design.asset_created"
+    UI_POLISHED = "ui.polished"
+    ACCESSIBILITY_CHECKED = "ui.accessibility_checked"
+
+    # Orchestration (cognitive-orchestration, queue-orchestrator)
+    TASK_ROUTED = "task.routed"
+    TASK_DISPATCHED = "task.dispatched"
+    TASK_CREATED = "task.created"
+    TASK_STARTED = "task.started"
+    TASK_COMPLETED = "task.completed"
+    TASK_CHECKPOINT = "task.checkpoint"
+    QUEUE_ENQUEUED = "queue.enqueued"
+    QUEUE_PROCESSED = "queue.processed"
+
+    # Analytics (insight-engine)
+    INSIGHT_GENERATED = "insight.generated"
+    METRICS_AGGREGATED = "insight.metrics_aggregated"
+
+    # Learning (adaptive-learning)
+    LEARNING_CAPTURED = "learning.captured"
+    PATTERN_DETECTED = "learning.pattern_detected"
+
+    # Development (dev-accelerator)
+    DEV_ACCELERATED = "dev.accelerated"
+    SCAFFOLD_CREATED = "dev.scaffold_created"
+
+    # System
+    SYSTEM_STARTED = "system.started"
+    INGEST_EXTRACTED = "ingest.extracted"
+
+    # Writer Suite (unified writing pipeline)
+    WRITER_STAGE_STARTED = "writer.stage_started"
+    WRITER_STAGE_COMPLETED = "writer.stage_completed"
+    WRITER_PIPELINE_DONE = "writer.pipeline_done"
+    WRITER_RESEARCH_STARTED = "writer.research_started"
+    WRITER_WRITE_STARTED = "writer.write_started"
+    WRITER_QUALITY_STARTED = "writer.quality_started"
+
+    # External Adapters
+    QUALITY_LINT_COMPLETED = "quality.lint_completed"
+    RESEARCH_CONTENT_EXTRACTED = "research.content_extracted"
+    WRITE_DRAFT_READY = "write.draft_ready"
+    MEMORY_CORTEX_STORED = "memory.cortex_stored"
+    MEMORY_CORTEX_RETRIEVED = "memory.cortex_retrieved"
+    LEARNING_ACE_CAPTURED = "learning.ace_captured"
+    SKILLS_GENERATED = "skills.generated"
+    CONFLICTS_DETECTED = "conflicts.detected"
